@@ -7,7 +7,11 @@ export const Route = createFileRoute("/services/water-heaters")({
   head: () => ({
     meta: [
       { title: "Water Heater Repair & Install Seattle — Tank & Tankless" },
-      { name: "description", content: "Same-day water heater repair, replacement, and tankless installation across Greater Seattle." },
+      {
+        name: "description",
+        content:
+          "Same-day water heater repair, replacement, and tankless installation across Greater Seattle.",
+      },
       { property: "og:title", content: "Water Heaters — All Phase Plumbing" },
       { property: "og:description", content: "Tank and tankless water heater experts." },
     ],

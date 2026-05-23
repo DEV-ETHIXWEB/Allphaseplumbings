@@ -41,8 +41,8 @@ export interface WPService {
   excerpt: WPRenderedField;
   content: WPRenderedField;
   meta: {
-    service_number?: string;    // "01", "02", "03" …
-    service_icon?: string;      // lucide icon name e.g. "Wrench"
+    service_number?: string; // "01", "02", "03" …
+    service_icon?: string; // lucide icon name e.g. "Wrench"
     service_page_slug?: string; // "/services/plumbing"
   };
   _embedded?: {
@@ -65,11 +65,11 @@ export interface ServiceCard {
 export interface WPTeamMember {
   id: number;
   slug: string;
-  title: WPRenderedField;   // member name
+  title: WPRenderedField; // member name
   content: WPRenderedField; // bio
   meta: {
-    team_role?: string;     // "Master Plumber"
-    team_years?: string;    // "Since 1989"
+    team_role?: string; // "Master Plumber"
+    team_years?: string; // "Since 1989"
   };
   _embedded?: {
     "wp:featuredmedia"?: WPMedia[];
@@ -80,11 +80,11 @@ export interface WPTeamMember {
 
 export interface WPHeroStat {
   number: string; // "35+"
-  label: string;  // "Years Experience"
+  label: string; // "Years Experience"
 }
 
 export interface WPWhyUsReason {
-  icon: string;   // lucide icon name
+  icon: string; // lucide icon name
   title: string;
   desc: string;
 }
@@ -94,8 +94,8 @@ export interface WPWhyUsReason {
 
 export interface WPSiteOptions {
   // Contact
-  phone?: string;           // "(206) 772-6077"
-  phone_href?: string;      // "tel:+12067726077"
+  phone?: string; // "(206) 772-6077"
+  phone_href?: string; // "tel:+12067726077"
   email?: string;
   address_line1?: string;
   address_city?: string;
@@ -129,5 +129,5 @@ export interface WPSiteOptions {
   cta_heading?: string;
   cta_subheading?: string;
   cta_body?: string;
-  dispatch_message?: string;  // "Dispatching certified local technicians …"
+  dispatch_message?: string; // "Dispatching certified local technicians …"
 }

@@ -26,7 +26,7 @@ export function WhyUs() {
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-14">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#6B9FE4] mb-3">
+          <span className="inline-block text-[14.4px] font-bold uppercase tracking-widest text-[#6B9FE4] mb-3">
             {opts.why_us_eyebrow}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">

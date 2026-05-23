@@ -22,10 +22,7 @@ export function useWpServices(): { cards: ServiceCard[]; isLoading: boolean } {
     retry: 1,
   });
 
-  const cards =
-    data?.services && data.services.length > 0
-      ? data.services
-      : DEFAULT_SERVICES;
+  const cards = data?.services && data.services.length > 0 ? data.services : DEFAULT_SERVICES;
 
   return { cards, isLoading };
 }

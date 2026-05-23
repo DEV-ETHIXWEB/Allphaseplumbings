@@ -7,7 +7,11 @@ export const Route = createFileRoute("/services/sewer-services")({
   head: () => ({
     meta: [
       { title: "Sewer Repair & Trenchless Sewer Seattle — All Phase Plumbing" },
-      { name: "description", content: "Sewer line repair, replacement, and trenchless solutions across Greater Seattle. Free camera inspection with qualifying work." },
+      {
+        name: "description",
+        content:
+          "Sewer line repair, replacement, and trenchless solutions across Greater Seattle. Free camera inspection with qualifying work.",
+      },
       { property: "og:title", content: "Sewer Services — All Phase Plumbing" },
       { property: "og:description", content: "Sewer repair and trenchless replacement." },
     ],

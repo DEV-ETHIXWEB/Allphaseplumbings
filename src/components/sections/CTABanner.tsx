@@ -30,11 +30,13 @@ export function CTABanner() {
       ([entry]) => {
         if (entry.isIntersecting) setIsAnimated(true);
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     const current = sectionRef.current;
     if (current) observer.observe(current);
-    return () => { if (current) observer.unobserve(current); };
+    return () => {
+      if (current) observer.unobserve(current);
+    };
   }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
@@ -75,14 +77,13 @@ export function CTABanner() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-end">
-
           {/* Left Column — van slides in from left, sits flush against the form */}
           <div className="lg:col-span-3 flex flex-col justify-end items-center lg:items-end relative select-none">
             <div
               className={`w-full ml-auto transition-opacity duration-300
                           mb-[-28px] sm:mb-[-30px] md:mb-[-32px] ${
-                isAnimated ? "animate-van-slide opacity-100" : "opacity-0"
-              }`}
+                            isAnimated ? "animate-van-slide opacity-100" : "opacity-0"
+                          }`}
               style={{ willChange: "transform, opacity" }}
             >
               <img
@@ -93,7 +94,6 @@ export function CTABanner() {
                 decoding="async"
               />
             </div>
-
           </div>
 
           {/* Right Column — contact card */}
@@ -105,58 +105,81 @@ export function CTABanner() {
                 style={{ background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)" }}
               >
                 <h2 className="text-[45px] font-bold text-white text-center">{opts.cta_heading}</h2>
-                <p className="text-[#FFB800] font-semibold text-[27px] mt-1.5 text-center">{opts.cta_subheading}</p>
+                <p className="text-[#FFB800] font-semibold text-[27px] mt-1.5 text-center">
+                  {opts.cta_subheading}
+                </p>
               </div>
 
               <div className="p-10">
-              <p className="text-gray-600 text-[24px] mb-6">{opts.cta_body}</p>
+                <p className="text-gray-600 text-[24px] mb-6">{opts.cta_body}</p>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text" name="name" placeholder="Full Name"
-                  value={form.name} onChange={handleChange}
-                  className={inputCls} required
-                />
-                <div className="grid grid-cols-2 gap-3">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <input
-                    type="email" name="email" placeholder="Email"
-                    value={form.email} onChange={handleChange}
-                    className={inputCls} required
-                  />
-                  <input
-                    type="tel" name="phone" placeholder="Phone"
-                    value={form.phone} onChange={handleChange}
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={form.name}
+                    onChange={handleChange}
                     className={inputCls}
+                    required
                   />
-                </div>
-                <select
-                  name="service" value={form.service} onChange={handleChange}
-                  className={`${inputCls} text-gray-500`} required
-                >
-                  <option value="" disabled>Service Needed</option>
-                  {SERVICE_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} className="text-gray-900">{opt}</option>
-                  ))}
-                </select>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={form.email}
+                      onChange={handleChange}
+                      className={inputCls}
+                      required
+                    />
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      className={inputCls}
+                    />
+                  </div>
+                  <select
+                    name="service"
+                    value={form.service}
+                    onChange={handleChange}
+                    className={`${inputCls} text-gray-500`}
+                    required
+                  >
+                    <option value="" disabled>
+                      Service Needed
+                    </option>
+                    {SERVICE_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt} className="text-gray-900">
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
 
-                <p className="text-[17px] text-gray-400 leading-relaxed">
-                  By submitting this form you consent to receive messages from All Phase
-                  Plumbing. Msg &amp; data rates may apply. Reply STOP to unsubscribe.
-                </p>
+                  <p className="text-[17px] text-gray-400 leading-relaxed">
+                    By submitting this form you consent to receive messages from All Phase Plumbing.
+                    Msg &amp; data rates may apply. Reply STOP to unsubscribe.
+                  </p>
 
-                <StarBorder
-                  type="submit"
-                  className="block w-full active:scale-[0.98] transition-all"
-                  innerClassName="text-[24px] font-bold text-white tracking-widest w-full"
-                  innerStyle={{ background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)", border: "none", padding: "16px 24px" }}
-                >
-                  CONTACT US TODAY
-                </StarBorder>
-              </form>
+                  <StarBorder
+                    type="submit"
+                    className="block w-full active:scale-[0.98] transition-all"
+                    innerClassName="text-[24px] font-bold text-white tracking-widest w-full"
+                    innerStyle={{
+                      background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)",
+                      border: "none",
+                      padding: "16px 24px",
+                    }}
+                  >
+                    CONTACT US TODAY
+                  </StarBorder>
+                </form>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

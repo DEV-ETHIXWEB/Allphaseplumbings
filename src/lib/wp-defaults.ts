@@ -24,26 +24,48 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   hero_eyebrow: "Seattle's Trusted Plumber",
   hero_title: "Your Home's Plumbing,",
   hero_italic: "Done Right.",
-  hero_subtitle:
-    "Serving Tukwila & the Greater Seattle Area with expert care since 1989.",
+  hero_subtitle: "Serving Tukwila & the Greater Seattle Area with expert care since 1989.",
   hero_stats: [
-    { number: "35+",  label: "Years Experience" },
+    { number: "35+", label: "Years Experience" },
     { number: "10k+", label: "Homes Served" },
     { number: "24/7", label: "Emergency Available" },
   ],
 
   // Why Us
-  why_us_eyebrow:
-    "Why Homeowners Across Greater Seattle Trust All Phase Plumbing",
+  why_us_eyebrow: "Why Homeowners Across Greater Seattle Trust All Phase Plumbing",
   why_us_heading: "Six reasons your neighbors",
   why_us_italic: "keep calling.",
   why_us_reasons: [
-    { icon: "Award",       title: "Licensed Technicians",   desc: "Every tech is licensed, bonded, and background-checked." },
-    { icon: "Clock",       title: "24/7 Emergency Service", desc: "Burst pipe at midnight? We answer when you call." },
-    { icon: "DollarSign",  title: "Upfront Honest Pricing", desc: "Flat-rate quotes before any work begins. No surprises." },
-    { icon: "ShieldCheck", title: "Guaranteed Workmanship", desc: "Every repair backed by our written guarantee." },
-    { icon: "Home",        title: "Locally Owned",          desc: "Family-owned in Tukwila, serving neighbors since 1989." },
-    { icon: "Layers",      title: "All Under One Roof",     desc: "Plumbing, drains, sewer, water heaters — one call does it." },
+    {
+      icon: "Award",
+      title: "Licensed Technicians",
+      desc: "Every tech is licensed, bonded, and background-checked.",
+    },
+    {
+      icon: "Clock",
+      title: "24/7 Emergency Service",
+      desc: "Burst pipe at midnight? We answer when you call.",
+    },
+    {
+      icon: "DollarSign",
+      title: "Upfront Honest Pricing",
+      desc: "Flat-rate quotes before any work begins. No surprises.",
+    },
+    {
+      icon: "ShieldCheck",
+      title: "Guaranteed Workmanship",
+      desc: "Every repair backed by our written guarantee.",
+    },
+    {
+      icon: "Home",
+      title: "Locally Owned",
+      desc: "Family-owned in Tukwila, serving neighbors since 1989.",
+    },
+    {
+      icon: "Layers",
+      title: "All Under One Roof",
+      desc: "Plumbing, drains, sewer, water heaters — one call does it.",
+    },
   ],
 
   // Team section
@@ -60,18 +82,33 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
 
   // Service area
   service_area_cities: [
-    "Seattle", "Tacoma", "Auburn", "Bellevue", "Kirkland",
-    "Redmond", "Renton", "Kent", "Mercer Island", "Federal Way",
-    "Des Moines", "Bonney Lake", "Puyallup", "South Hill", "Spanaway",
-    "Summit", "Fife", "Lakewood", "Summit View", "Bothell",
+    "Seattle",
+    "Tacoma",
+    "Auburn",
+    "Bellevue",
+    "Kirkland",
+    "Redmond",
+    "Renton",
+    "Kent",
+    "Mercer Island",
+    "Federal Way",
+    "Des Moines",
+    "Bonney Lake",
+    "Puyallup",
+    "South Hill",
+    "Spanaway",
+    "Summit",
+    "Fife",
+    "Lakewood",
+    "Summit View",
+    "Bothell",
   ],
 
   // CTA banner
   cta_heading: "Contact Us Today",
   cta_subheading: "Same Day Service",
   cta_body: "Plumbing and Drain Cleaning — When booked before 2pm, Mon–Fri",
-  dispatch_message:
-    "⚡ Dispatching certified local technicians near Tukwila WA...",
+  dispatch_message: "⚡ Dispatching certified local technicians near Tukwila WA...",
 };
 
 // ── Default services (used when WP CPT returns nothing) ───────────────────────
@@ -89,24 +126,21 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
     number: "02",
     iconName: "Droplets",
     title: "Drain Cleaning",
-    description:
-      "Clogs cleared fast with hydro-jetting and camera inspection for lasting results.",
+    description: "Clogs cleared fast with hydro-jetting and camera inspection for lasting results.",
     href: "/services/drain-cleaning",
   },
   {
     number: "03",
     iconName: "Flame",
     title: "Water Heaters",
-    description:
-      "Tank and tankless install, repair, and replacement — same-day in most cases.",
+    description: "Tank and tankless install, repair, and replacement — same-day in most cases.",
     href: "/services/water-heaters",
   },
   {
     number: "04",
     iconName: "Pipette",
     title: "Sewer Services",
-    description:
-      "Sewer line repair, replacement, and trenchless solutions across Greater Seattle.",
+    description: "Sewer line repair, replacement, and trenchless solutions across Greater Seattle.",
     href: "/services/sewer-services",
   },
 ];

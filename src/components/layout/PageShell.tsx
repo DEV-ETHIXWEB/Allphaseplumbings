@@ -32,12 +32,9 @@ export function PageHero({
           </span>
         )}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
-          {title}{" "}
-          {italic && <span className="font-display-italic text-accent">{italic}</span>}
+          {title} {italic && <span className="font-display-italic text-accent">{italic}</span>}
         </h1>
-        {subtitle && (
-          <p className="mt-5 text-lg text-muted-foreground max-w-2xl">{subtitle}</p>
-        )}
+        {subtitle && <p className="mt-5 text-lg text-muted-foreground max-w-2xl">{subtitle}</p>}
       </div>
     </section>
   );

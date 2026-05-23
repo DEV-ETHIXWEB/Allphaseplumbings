@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface GlareHoverProps {
   width?: string;
@@ -18,25 +18,25 @@ interface GlareHoverProps {
 }
 
 const GlareHover = ({
-  width = '500px',
-  height = '500px',
-  background = '#000',
-  borderRadius = '10px',
-  borderColor = '#333',
+  width = "500px",
+  height = "500px",
+  background = "#000",
+  borderRadius = "10px",
+  borderColor = "#333",
   children,
-  glareColor = '#ffffff',
+  glareColor = "#ffffff",
   glareOpacity = 0.5,
   glareAngle = -45,
   glareSize = 250,
   transitionDuration = 650,
   playOnce = false,
-  className = '',
+  className = "",
   style = {},
 }: GlareHoverProps) => {
   const idRef = useRef(`gh-${Math.random().toString(36).slice(2, 8)}`);
   const id = idRef.current;
 
-  const hex = glareColor.replace('#', '');
+  const hex = glareColor.replace("#", "");
   let rgba = glareColor;
   if (/^[0-9A-Fa-f]{6}$/.test(hex)) {
     const r = parseInt(hex.slice(0, 2), 16);
@@ -54,7 +54,7 @@ const GlareHover = ({
     const styleId = `glare-hover-styles-${id}`;
     if (document.getElementById(styleId)) return;
 
-    const tag = document.createElement('style');
+    const tag = document.createElement("style");
     tag.id = styleId;
     tag.textContent = `
       .${id}::before {
@@ -90,22 +90,22 @@ const GlareHover = ({
   }, [id]);
 
   const cssVars = {
-    '--gh-angle': `${glareAngle}deg`,
-    '--gh-duration': `${transitionDuration}ms`,
-    '--gh-size': `${glareSize}%`,
-    '--gh-rgba': rgba,
+    "--gh-angle": `${glareAngle}deg`,
+    "--gh-duration": `${transitionDuration}ms`,
+    "--gh-size": `${glareSize}%`,
+    "--gh-rgba": rgba,
   } as React.CSSProperties;
 
   return (
     <div
       className={[
         id,
-        playOnce ? 'play-once' : '',
-        'relative overflow-hidden grid place-items-center cursor-pointer',
+        playOnce ? "play-once" : "",
+        "relative overflow-hidden grid place-items-center cursor-pointer",
         className,
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       style={{
         width,
         height,

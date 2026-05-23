@@ -46,11 +46,11 @@ function stripHtml(html: string): string {
 /** Transform a raw WPService into the flat ServiceCard the UI consumes. */
 export function wpServiceToCard(s: WPService): ServiceCard {
   return {
-    number:      s.meta?.service_number      ?? String(s.menu_order || s.id),
-    iconName:    s.meta?.service_icon        ?? "Wrench",
-    title:       stripHtml(s.title.rendered),
+    number: s.meta?.service_number ?? String(s.menu_order || s.id),
+    iconName: s.meta?.service_icon ?? "Wrench",
+    title: stripHtml(s.title.rendered),
     description: stripHtml(s.excerpt.rendered),
-    href:        s.meta?.service_page_slug   ?? `/services/${s.slug}`,
+    href: s.meta?.service_page_slug ?? `/services/${s.slug}`,
   };
 }
 

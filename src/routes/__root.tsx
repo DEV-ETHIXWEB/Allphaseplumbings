@@ -73,10 +73,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "All Phase Plumbing" },
-      { name: "description", content: "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle. Same-day service, licensed since 1989." },
+      {
+        name: "description",
+        content:
+          "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle. Same-day service, licensed since 1989.",
+      },
       { name: "author", content: "All Phase Plumbing" },
       { property: "og:title", content: "All Phase Plumbing" },
-      { property: "og:description", content: "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle." },
+      {
+        property: "og:description",
+        content:
+          "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

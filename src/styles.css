@@ -1,12 +1,27 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
 /* ── Global font ── */
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Inter", sans-serif !important;
+}
+
+/* ── Phone CTA button hover ── */
+.phone-cta-btn:hover .phone-cta-inner {
+  background: linear-gradient(135deg, #2d5fa8 0%, #8fc0f8 100%) !important;
+  box-shadow: 0 10px 22px -6px rgba(30, 58, 110, 0.55) !important;
+  filter: brightness(1.05);
+}
+
+/* ── Site-wide: no rounded corners ── */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
 }
 
 /*
@@ -77,18 +92,18 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.205 0.04 260);
   /* Brand: dark navy #1E3A6E */
-  --primary: oklch(0.30 0.091 258);
+  --primary: oklch(0.3 0.091 258);
   --primary-foreground: oklch(0.99 0 0);
   /* Section alternate bg: light grey #F4F6F8 */
   --secondary: oklch(0.97 0.004 243);
-  --secondary-foreground: oklch(0.30 0.091 258);
+  --secondary-foreground: oklch(0.3 0.091 258);
   --muted: oklch(0.97 0.005 243);
-  --muted-foreground: oklch(0.50 0.02 257);
+  --muted-foreground: oklch(0.5 0.02 257);
   /* Accent: yellow #F5C842 */
   --accent: oklch(0.851 0.154 90);
   /* Brand tokens */
-  --medium-blue: oklch(0.70 0.115 252);  /* #6B9FE4 */
-  --gold: oklch(0.80 0.190 79);           /* #FFB800 */
+  --medium-blue: oklch(0.7 0.115 252); /* #6B9FE4 */
+  --gold: oklch(0.8 0.19 79); /* #FFB800 */
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
@@ -147,9 +162,17 @@
 
 /* ─── Van slide-in animation (CTABanner) ───────────────────────────────── */
 @keyframes vanSlide {
-  0%   { transform: translateX(-110%) translateY(0); opacity: 0; }
-  12%  { opacity: 1; }
-  100% { transform: translateX(0%)    translateY(0); opacity: 1; }
+  0% {
+    transform: translateX(-110%) translateY(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0%) translateY(0);
+    opacity: 1;
+  }
 }
 .animate-van-slide {
   animation: vanSlide 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -157,8 +180,13 @@
 
 /* ─── Headlight pulse (CTABanner SVG) ──────────────────────────────────── */
 @keyframes vanHeadlight {
-  0%, 100% { opacity: 0.25; }
-  50%       { opacity: 0.75; }
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.75;
+  }
 }
 .animate-van-headlight {
   animation: vanHeadlight 2.2s ease-in-out infinite;
@@ -166,8 +194,12 @@
 
 /* ─── Road dashed-lane scroll ───────────────────────────────────────────── */
 @keyframes infinite-scroll {
-  0%   { transform: translateX(0);    }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Custom scrollbar — navy brand colors */
@@ -179,7 +211,7 @@
   background: oklch(0.96 0.01 250);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E3A6E;
+  background: #1e3a6e;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -187,7 +219,7 @@
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1E3A6E oklch(0.96 0.01 250);
+  scrollbar-color: #1e3a6e oklch(0.96 0.01 250);
 }
 
 @layer base {
@@ -198,22 +230,32 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family:
+      "Inter",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-size: 18px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: "Merriweather", Georgia, serif;
     letter-spacing: -0.02em;
     line-height: 1.15;
   }
 
   .font-display-italic {
-    font-family: "Playfair Display", Georgia, serif;
-    font-style: italic;
-    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 800;
     letter-spacing: -0.01em;
   }
 }
@@ -256,7 +298,8 @@
 }
 
 @keyframes headlightGlow {
-  0%, 70% {
+  0%,
+  70% {
     opacity: 0;
   }
   100% {
@@ -265,7 +308,8 @@
 }
 
 @keyframes lightPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.85;
   }
   50% {
@@ -284,37 +328,72 @@
 }
 
 .animate-van-headlight {
-  animation: headlightGlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-             lightPulse 4s ease-in-out infinite 2.2s;
+  animation:
+    headlightGlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    lightPulse 4s ease-in-out infinite 2.2s;
 }
 
 /* ─── Leaflet z-index containment — prevent map from escaping sticky header ── */
 /* The outer div uses isolation:isolate which already scopes things, but these  */
 /* explicit overrides act as a second guard.                                     */
-.leaflet-pane          { z-index: 4  !important; }
-.leaflet-tile-pane     { z-index: 2  !important; }
-.leaflet-overlay-pane  { z-index: 4  !important; }
-.leaflet-shadow-pane   { z-index: 5  !important; }
-.leaflet-marker-pane   { z-index: 6  !important; }
-.leaflet-tooltip-pane  { z-index: 7  !important; }
-.leaflet-popup-pane    { z-index: 8  !important; }
+.leaflet-pane {
+  z-index: 4 !important;
+}
+.leaflet-tile-pane {
+  z-index: 2 !important;
+}
+.leaflet-overlay-pane {
+  z-index: 4 !important;
+}
+.leaflet-shadow-pane {
+  z-index: 5 !important;
+}
+.leaflet-marker-pane {
+  z-index: 6 !important;
+}
+.leaflet-tooltip-pane {
+  z-index: 7 !important;
+}
+.leaflet-popup-pane {
+  z-index: 8 !important;
+}
 .leaflet-top,
-.leaflet-bottom        { z-index: 9  !important; }
+.leaflet-bottom {
+  z-index: 9 !important;
+}
 
 /* ─── Global rounded-corners boost ─────────────────────────────────────── */
 /* Every explicit rounded-2xl or rounded-xl gets slightly rounder edges    */
-.rounded-xl  { border-radius: 1rem   !important; }
-.rounded-2xl { border-radius: 1.25rem !important; }
-.rounded-lg  { border-radius: 0.75rem !important; }
+.rounded-xl {
+  border-radius: 1rem !important;
+}
+.rounded-2xl {
+  border-radius: 1.25rem !important;
+}
+.rounded-lg {
+  border-radius: 0.75rem !important;
+}
 
 /* ─── Plumbing tool slide-in (CustomerQuote) ────────────────────────────── */
 @keyframes toolSlideLeft {
-  from { transform: translateY(-50%) translateX(-140px); opacity: 0; }
-  to   { transform: translateY(-50%) translateX(0);      opacity: 1; }
+  from {
+    transform: translateY(-50%) translateX(-140px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+  }
 }
 @keyframes toolSlideRight {
-  from { transform: translateY(-50%) translateX(140px);  opacity: 0; }
-  to   { transform: translateY(-50%) translateX(0);      opacity: 1; }
+  from {
+    transform: translateY(-50%) translateX(140px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-50%) translateX(0);
+    opacity: 1;
+  }
 }
 
 /* Road Styling Utilities */
@@ -340,4 +419,3 @@
   transform: translateY(-50%);
   opacity: 0.75;
 }
-

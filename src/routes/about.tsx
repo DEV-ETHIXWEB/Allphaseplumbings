@@ -8,9 +8,16 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About All Phase Plumbing — Seattle Family-Owned Since 1989" },
-      { name: "description", content: "Family-owned plumbing company in Tukwila, WA. Licensed technicians serving Greater Seattle for over 35 years." },
+      {
+        name: "description",
+        content:
+          "Family-owned plumbing company in Tukwila, WA. Licensed technicians serving Greater Seattle for over 35 years.",
+      },
       { property: "og:title", content: "About All Phase Plumbing" },
-      { property: "og:description", content: "Family-owned plumbing serving Greater Seattle since 1989." },
+      {
+        property: "og:description",
+        content: "Family-owned plumbing serving Greater Seattle since 1989.",
+      },
     ],
   }),
   component: AboutPage,

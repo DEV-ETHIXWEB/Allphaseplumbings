@@ -32,12 +32,11 @@ export function Coupons() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center gap-4 mb-12">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+            <span className="inline-block text-[14.4px] font-semibold uppercase tracking-widest text-accent mb-3">
               Homeowner Coupons
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
-              Save more on your{" "}
-              <span className="font-display-italic text-accent">next visit.</span>
+              Save more on your <span className="font-display-italic text-accent">next visit.</span>
             </h2>
           </div>
           <Link
@@ -73,11 +72,10 @@ export function Coupons() {
                 glareSize={300}
                 transitionDuration={650}
                 className="flex-1 shadow-md hover:shadow-[0_8px_30px_rgba(30,58,110,0.25)] hover:-translate-y-1 transition-all duration-300"
-                style={{ border: '2px solid #1E3A7B', borderRadius: '0.75rem' }}
+                style={{ border: "2px solid #1E3A7B", borderRadius: "0.75rem" }}
               >
                 {/* Ticket row — self-stretch overrides GlareHover's grid place-items-center so all cards fill the fixed height equally */}
                 <div className="w-full h-full flex self-stretch">
-
                   {/* Left stub — navy, 30% width */}
                   <div className="flex flex-col items-center justify-center w-[30%] bg-[#1E3A6E] px-3 border-r-2 border-dashed border-white/40 shrink-0 self-stretch">
                     <c.icon className="size-7 text-white mb-2" />
@@ -100,7 +98,6 @@ export function Coupons() {
                       CLAIM OFFER <ArrowRight className="size-3.5" />
                     </Link>
                   </div>
-
                 </div>
               </GlareHover>
             </div>

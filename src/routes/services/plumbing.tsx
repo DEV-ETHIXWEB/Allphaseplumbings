@@ -7,7 +7,11 @@ export const Route = createFileRoute("/services/plumbing")({
   head: () => ({
     meta: [
       { title: "Plumbing Repair Seattle — All Phase Plumbing" },
-      { name: "description", content: "Leaks, fixtures, pipes, water pressure — diagnosed and repaired by licensed Seattle plumbers." },
+      {
+        name: "description",
+        content:
+          "Leaks, fixtures, pipes, water pressure — diagnosed and repaired by licensed Seattle plumbers.",
+      },
       { property: "og:title", content: "Plumbing Repair Seattle" },
       { property: "og:description", content: "Licensed plumbing repair across Greater Seattle." },
     ],

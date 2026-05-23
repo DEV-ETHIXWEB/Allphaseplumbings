@@ -40,14 +40,11 @@ function ServiceMap() {
       mapInstanceRef.current = map;
 
       /* ── Tile layer (CartoDB light — crisp & neutral) ── */
-      L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-          maxZoom: 19,
-        }
-      ).addTo(map);
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19,
+      }).addTo(map);
 
       /* ── Service-area polygon (King + southern Pierce) in navy blue ── */
       const serviceAreaCoords: [number, number][] = [
@@ -57,7 +54,7 @@ function ServiceMap() {
         [47.77, -122.05],
         // East: Redmond, Bellevue, Renton
         [47.68, -122.04],
-        [47.60, -121.97],
+        [47.6, -121.97],
         [47.49, -122.03],
         // South: Auburn, Federal Way, Tacoma
         [47.32, -122.03],
@@ -106,7 +103,7 @@ function ServiceMap() {
             All Phase Plumbing<br>
             <span style="font-weight:400;color:#555;font-size:12px">Tukwila, WA · (206) 772-6077</span>
           </div>`,
-          { maxWidth: 220 }
+          { maxWidth: 220 },
         )
         .openPopup();
 
@@ -123,11 +120,7 @@ function ServiceMap() {
   }, []);
 
   return (
-    <div
-      ref={mapRef}
-      className="w-full"
-      style={{ minHeight: 480, height: "100%", zIndex: 0 }}
-    />
+    <div ref={mapRef} className="w-full" style={{ minHeight: 480, height: "100%", zIndex: 0 }} />
   );
 }
 
@@ -138,7 +131,9 @@ export function ServiceArea() {
   return (
     <section
       className="py-20 relative overflow-hidden"
-      style={{ background: "linear-gradient(135deg, #0f2246 0%, #1E3A6E 40%, #2d5fa8 75%, #4A7BC4 100%)" }}
+      style={{
+        background: "linear-gradient(135deg, #0f2246 0%, #1E3A6E 40%, #2d5fa8 75%, #4A7BC4 100%)",
+      }}
     >
       {/* Subtle dot pattern overlay */}
       <div
@@ -151,10 +146,9 @@ export function ServiceArea() {
       />
 
       <div className="relative z-10 container mx-auto px-4">
-
         {/* Heading — white text on gradient bg */}
         <div className="text-center mb-10">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#F5C842] mb-3">
+          <span className="inline-block text-[14.4px] font-bold uppercase tracking-widest text-[#F5C842] mb-3">
             Service Area
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white">
@@ -162,13 +156,13 @@ export function ServiceArea() {
             <span className="font-display-italic text-[#F5C842]">Seattle Area.</span>
           </h2>
           <p className="mt-4 text-lg text-white/75 max-w-2xl mx-auto">
-            Licensed plumbers dispatched same-day across King &amp; Pierce counties. If you're in any of these areas, we can be there today.
+            Licensed plumbers dispatched same-day across King &amp; Pierce counties. If you're in
+            any of these areas, we can be there today.
           </p>
         </div>
 
         {/* Two-column layout: map LEFT, city list RIGHT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-
           {/* ── LEFT: Map — isolation:isolate keeps Leaflet z-indexes contained ── */}
           <div
             className="rounded-2xl overflow-hidden border-2 border-white/25 shadow-2xl bg-white order-2 lg:order-1 h-full"
@@ -205,13 +199,18 @@ export function ServiceArea() {
                 href="tel:+12067726077"
                 className="inline-block transition-all"
                 innerClassName="text-base font-bold text-[#1E3A6E]"
-                innerStyle={{ background: "white", border: "none", padding: "12px 24px", color: "#1E3A6E", whiteSpace: "nowrap" }}
+                innerStyle={{
+                  background: "white",
+                  border: "none",
+                  padding: "12px 24px",
+                  color: "#1E3A6E",
+                  whiteSpace: "nowrap",
+                }}
               >
                 Book Online
               </StarBorder>
             </div>
           </div>
-
         </div>
       </div>
     </section>

@@ -1,12 +1,15 @@
-import { useEffect, useRef } from 'react';
-import './Particles.css';
+import { useEffect, useRef } from "react";
+import "./Particles.css";
 
-const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
+const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
 
 const hexToRgb = (hex: string): [number, number, number] => {
-  hex = hex.replace(/^#/, '');
+  hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
-    hex = hex.split('').map(c => c + c).join('');
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
   const int = parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
@@ -109,7 +112,7 @@ const Particles = ({
   cameraDistance = 20,
   disableRotation = false,
   pixelRatio = 1,
-  className = '',
+  className = "",
 }: ParticlesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -121,7 +124,7 @@ const Particles = ({
     let renderer: any, gl: any, camera: any, geometry: any, program: any, particles: any;
     let animationFrameId: number;
 
-    import('ogl').then(({ Renderer, Camera, Geometry, Program, Mesh }) => {
+    import("ogl").then(({ Renderer, Camera, Geometry, Program, Mesh }) => {
       renderer = new Renderer({ dpr: pixelRatio, depth: false, alpha: true });
       gl = renderer.gl;
       container.appendChild(gl.canvas);
@@ -136,7 +139,7 @@ const Particles = ({
         renderer.setSize(width, height);
         camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
       };
-      window.addEventListener('resize', resize, false);
+      window.addEventListener("resize", resize, false);
       resize();
 
       const handleMouseMove = (e: MouseEvent) => {
@@ -147,7 +150,7 @@ const Particles = ({
       };
 
       if (moveParticlesOnHover) {
-        container.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener("mousemove", handleMouseMove);
       }
 
       const count = particleCount;
@@ -230,9 +233,9 @@ const Particles = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
       const resize = (container as any)._particleResize;
-      if (resize) window.removeEventListener('resize', resize);
+      if (resize) window.removeEventListener("resize", resize);
       const mouseMove = (container as any)._particleMouseMove;
-      if (mouseMove) container.removeEventListener('mousemove', mouseMove);
+      if (mouseMove) container.removeEventListener("mousemove", mouseMove);
       if (gl?.canvas && container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }

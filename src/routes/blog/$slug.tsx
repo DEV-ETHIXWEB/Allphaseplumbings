@@ -32,7 +32,10 @@ function BlogPost() {
     <PageShell>
       <article className="py-12 sm:py-16 bg-background">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Link to="/blog" className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary mb-8">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary mb-8"
+          >
             <ArrowLeft className="size-4" /> Back to blog
           </Link>
 
@@ -46,17 +49,27 @@ function BlogPost() {
           ) : !post ? (
             <div className="py-16 text-center">
               <h1 className="text-2xl font-bold text-primary mb-3">Article not found</h1>
-              <p className="text-muted-foreground">This post may have been moved or is no longer available.</p>
+              <p className="text-muted-foreground">
+                This post may have been moved or is no longer available.
+              </p>
             </div>
           ) : (
             <>
-              {cat && <span className="inline-block text-xs font-semibold uppercase tracking-wider text-accent mb-3">{cat}</span>}
+              {cat && (
+                <span className="inline-block text-xs font-semibold uppercase tracking-wider text-accent mb-3">
+                  {cat}
+                </span>
+              )}
               <h1
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-6"
                 dangerouslySetInnerHTML={{ __html: post.title.rendered }}
               />
               {img && (
-                <img src={img} alt="" className="w-full aspect-[16/10] object-cover rounded-2xl mb-8 border border-border" />
+                <img
+                  src={img}
+                  alt=""
+                  className="w-full aspect-[16/10] object-cover rounded-2xl mb-8 border border-border"
+                />
               )}
               <div
                 className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-accent"

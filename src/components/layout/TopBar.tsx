@@ -1,9 +1,31 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Star, Ticket, CalendarCheck } from "lucide-react";
+import { ChevronDown, Star } from "lucide-react";
+import { CouponBookCard } from "./CouponBookCard";
+import { SocialIcons } from "./SocialIcons";
 
-const CITIES_COL1 = ["Auburn","Bellevue","Bonney Lake","Des Moines","Federal Way","Fife","Kent","Lakewood","Mercer Island"];
-const CITIES_COL2 = ["Puyallup","Renton","Seattle","South Hill","Spanaway","Summit","Summit View","Tacoma","Tukwila"];
+const CITIES_COL1 = [
+  "Auburn",
+  "Bellevue",
+  "Bonney Lake",
+  "Des Moines",
+  "Federal Way",
+  "Fife",
+  "Kent",
+  "Lakewood",
+  "Mercer Island",
+];
+const CITIES_COL2 = [
+  "Puyallup",
+  "Renton",
+  "Seattle",
+  "South Hill",
+  "Spanaway",
+  "Summit",
+  "Summit View",
+  "Tacoma",
+  "Tukwila",
+];
 
 export function TopBar() {
   const [nearMeOpen, setNearMeOpen] = useState(false);
@@ -20,29 +42,30 @@ export function TopBar() {
   }, []);
 
   return (
-    <div className="relative z-50 w-full">
-      <div className="flex w-full text-sm font-semibold">
-
+    <div className="relative z-50 w-full bg-[#6B9EF8]">
+      <div className="grid w-full text-sm font-normal items-start grid-cols-[1fr_auto_1fr]">
         {/* ── LEFT — Read Our Reviews ── */}
         <a
           href="https://www.google.com/search?q=All+Phase+Plumbing+Tukwila+WA+reviews"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 items-center justify-center gap-2 py-4 bg-[#6399ED] text-white hover:bg-[#5088dc] transition-colors duration-200 whitespace-nowrap"
+          className="flex items-center justify-end gap-4 pt-[13px] pb-[9px] pr-6 bg-[#6B9EF8] text-white hover:bg-[#5088dc] transition-colors duration-200 whitespace-nowrap"
         >
-          <div className="flex gap-0.5">
+          <div className="flex gap-0.5 mr-[10%]">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="size-4 fill-[#FFB800] text-[#FFB800]" />
+              <Star key={i} className="size-[17px] fill-[#FFC533] text-[#FFC533]" />
             ))}
           </div>
-          <span className="hidden sm:inline tracking-wide text-[21px] font-bold">Read Our Reviews ›</span>
+          <span className="hidden sm:inline tracking-wide text-[17px] font-normal mr-[10%]">
+            Read Our Reviews ›
+          </span>
         </a>
 
         {/* ── CENTER — Find All Phase Near Me ── */}
         <div ref={dropRef} className="relative shrink-0">
           <button
             onClick={() => setNearMeOpen((p) => !p)}
-            className="flex items-center justify-center gap-2 w-full h-full px-6 py-4 bg-[#1E3A6E] text-white hover:bg-[#162e58] transition-colors duration-200 tracking-wide font-semibold text-[21px] whitespace-nowrap"
+            className="flex items-center justify-center gap-2 w-full h-full px-[94px] pt-[13px] pb-[9px] bg-[#1E3A8A] text-white hover:bg-[#162e58] transition-colors duration-200 tracking-wide font-normal text-[17px] whitespace-nowrap"
           >
             <span>Find All Phase Near Me</span>
             <ChevronDown
@@ -60,7 +83,7 @@ export function TopBar() {
                       key={city}
                       to="/service-area"
                       onClick={() => setNearMeOpen(false)}
-                      className="border-b border-[#1E3A7B]/15 py-2.5 px-1 font-bold text-[#1E3A6E] hover:text-[#F5C842] hover:pl-3 transition-all duration-200 flex justify-between items-center"
+                      className="border-b border-[#1E3A7B]/15 pt-[13px] pb-[9px] px-1 font-bold text-[#1E3A6E] hover:text-[#F5C842] hover:pl-3 transition-all duration-200 flex justify-between items-center"
                     >
                       <span>{city}</span>
                       <span className="text-gray-300 text-xs font-normal">WA</span>
@@ -73,7 +96,7 @@ export function TopBar() {
                       key={city}
                       to="/service-area"
                       onClick={() => setNearMeOpen(false)}
-                      className="border-b border-[#1E3A7B]/15 py-2.5 px-1 font-bold text-[#1E3A6E] hover:text-[#F5C842] hover:pl-3 transition-all duration-200 flex justify-between items-center"
+                      className="border-b border-[#1E3A7B]/15 pt-[13px] pb-[9px] px-1 font-bold text-[#1E3A6E] hover:text-[#F5C842] hover:pl-3 transition-all duration-200 flex justify-between items-center"
                     >
                       <span>{city}</span>
                       <span className="text-gray-300 text-xs font-normal">WA</span>
@@ -96,24 +119,18 @@ export function TopBar() {
           )}
         </div>
 
-        {/* ── RIGHT — Coupons | Book Online Now ── */}
-        <div className="flex flex-1 items-stretch bg-[#8BB8F5] divide-x divide-[#1E3A6E]/20">
-          <Link
-            to="/coupons"
-            className="flex items-center justify-center gap-2 flex-1 px-6 py-4 text-[#1E3A6E] font-bold hover:bg-[#1E3A6E]/15 transition-colors duration-200 whitespace-nowrap text-[21px]"
-          >
-            <Ticket className="size-4 shrink-0" />
-            <span className="hidden sm:inline">Coupons</span>
-          </Link>
-          <a
-            href="tel:+12067726077"
-            className="flex items-center justify-center gap-2 flex-1 px-6 py-4 text-[#1E3A6E] font-bold hover:bg-[#1E3A6E]/15 transition-colors duration-200 whitespace-nowrap text-[21px]"
-          >
-            <CalendarCheck className="size-4 shrink-0" />
-            <span className="hidden sm:inline">Book Online Now</span>
-          </a>
+        {/* RIGHT — Coupons | Book Online Now (overlaid absolutely so it does NOT push row height) + Social icons */}
+        <div className="relative flex items-stretch bg-[#6B9EF8] self-stretch">
+          <div className="hidden md:block absolute top-0 left-0 z-20">
+            <CouponBookCard />
+          </div>
+          {/* invisible spacer matching card width so social icons sit right after it */}
+          <div className="hidden md:block shrink-0 w-[340px]" aria-hidden="true" />
+          <div className="hidden md:flex shrink-0 items-stretch">
+            <SocialIcons />
+          </div>
+          <div className="flex-1" />
         </div>
-
       </div>
     </div>
   );

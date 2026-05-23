@@ -8,7 +8,6 @@ export function TeamSection() {
 
   return (
     <section className="relative py-24 overflow-hidden bg-white">
-
       {/* Subtle diagonal accent strip behind right column */}
       <div
         className="absolute right-0 top-0 bottom-0 w-[45%] pointer-events-none"
@@ -31,15 +30,14 @@ export function TeamSection() {
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-14 items-center">
-
           {/* ── LEFT: text ── */}
           <div>
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#4A7BC4] mb-3">
+            <span className="inline-block text-[14.4px] font-bold uppercase tracking-widest text-[#4A7BC4] mb-3">
               {opts.team_eyebrow}
             </span>
 
             <h2
-              className="text-4xl sm:text-5xl font-black text-[#1E3A6E] leading-tight"
+              className="text-[43.2px] sm:text-[57.6px] font-black text-[#1E3A6E] leading-tight"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               {opts.team_heading}{" "}
@@ -79,7 +77,6 @@ export function TeamSection() {
 
           {/* ── RIGHT: styled slideshow ── */}
           <div className="relative flex items-center justify-center">
-
             {/* Outer decorative frame — offset navy border */}
             <div
               className="absolute inset-0 rounded-2xl border-2 border-[#1E3A6E]/25"
@@ -120,7 +117,6 @@ export function TeamSection() {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, MapPin, Mail, Clock } from "lucide-react";
-import logo from "@/assets/app-logo.png";
+import logo from "@/assets/app-logo.svg";
 import { StarBorder } from "@/components/ui/StarBorder";
 
 const QUICK_LINKS = [
@@ -23,7 +23,6 @@ const SERVICE_LINKS = [
 export function Footer() {
   return (
     <footer className="relative bg-[#1E3A6E] text-white overflow-hidden">
-
       {/* Subtle city skyline backdrop */}
       <svg
         className="absolute bottom-0 left-0 w-full h-[280px] pointer-events-none opacity-[0.05] select-none z-0 fill-white"
@@ -37,11 +36,14 @@ export function Footer() {
       {/* Main grid */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
           {/* Column 1 — Logo + tagline + phone */}
           <div className="flex flex-col gap-5 lg:col-span-1">
             <Link to="/" className="inline-block">
-              <img src={logo} alt="All Phase Plumbing" className="h-14 w-auto brightness-0 invert" />
+              <img
+                src={logo}
+                alt="All Phase Plumbing"
+                className="h-14 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-sm text-white/65 leading-relaxed max-w-[200px]">
               Providing reliable residential and commercial plumbing solutions since 1989.
@@ -51,7 +53,11 @@ export function Footer() {
               href="tel:+12067726077"
               className="inline-block transition-all"
               innerClassName="flex items-center gap-2 font-bold text-white text-base"
-              innerStyle={{ background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)", border: "none", padding: "10px 16px" }}
+              innerStyle={{
+                background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)",
+                border: "none",
+                padding: "10px 16px",
+              }}
             >
               <Phone className="size-4" />
               (206) 772-6077
@@ -60,14 +66,16 @@ export function Footer() {
 
           {/* Column 2 — Quick Links */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-black uppercase tracking-widest text-white border-b border-white/15 pb-3">
+            <h3 className="text-sm font-normal uppercase tracking-widest text-white border-b border-white/15 pb-3">
               Quick Links
             </h3>
             <ul className="space-y-2.5">
               {QUICK_LINKS.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to}
-                    className="text-sm text-white/70 font-medium hover:text-[#F5C842] hover:translate-x-1 transition-all inline-block">
+                  <Link
+                    to={l.to}
+                    className="text-sm text-white/70 font-normal hover:text-[#F5C842] hover:translate-x-1 transition-all inline-block"
+                  >
                     › {l.label}
                   </Link>
                 </li>
@@ -77,14 +85,16 @@ export function Footer() {
 
           {/* Column 3 — Services */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-black uppercase tracking-widest text-white border-b border-white/15 pb-3">
+            <h3 className="text-sm font-normal uppercase tracking-widest text-white border-b border-white/15 pb-3">
               Our Services
             </h3>
             <ul className="space-y-2.5">
               {SERVICE_LINKS.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to}
-                    className="text-sm text-white/70 font-medium hover:text-[#F5C842] hover:translate-x-1 transition-all inline-block">
+                  <Link
+                    to={l.to}
+                    className="text-sm text-white/70 font-normal hover:text-[#F5C842] hover:translate-x-1 transition-all inline-block"
+                  >
                     › {l.label}
                   </Link>
                 </li>
@@ -94,7 +104,7 @@ export function Footer() {
 
           {/* Column 4 — Contact Us */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-sm font-black uppercase tracking-widest text-white border-b border-white/15 pb-3">
+            <h3 className="text-sm font-normal uppercase tracking-widest text-white border-b border-white/15 pb-3">
               Contact Us
             </h3>
             <ul className="space-y-4 text-sm text-white/70">
@@ -102,19 +112,26 @@ export function Footer() {
                 <MapPin className="size-4 shrink-0 text-[#F5C842] mt-0.5" />
                 <address className="not-italic leading-relaxed">
                   14101 Interurban Ave S<br />
-                  Unit 78-A<br />
+                  Unit 78-A
+                  <br />
                   Tukwila, WA 98168
                 </address>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="size-4 shrink-0 text-[#F5C842]" />
-                <a href="tel:+12067726077" className="font-semibold text-white hover:text-[#F5C842] transition-colors">
+                <a
+                  href="tel:+12067726077"
+                  className="font-semibold text-white hover:text-[#F5C842] transition-colors"
+                >
                   (206) 772-6077
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="size-4 shrink-0 text-[#F5C842]" />
-                <a href="mailto:info@allphaseplumbing.com" className="hover:text-[#F5C842] transition-colors break-all">
+                <a
+                  href="mailto:info@allphaseplumbing.com"
+                  className="hover:text-[#F5C842] transition-colors break-all"
+                >
                   info@allphaseplumbing.com
                 </a>
               </li>
@@ -123,23 +140,20 @@ export function Footer() {
                 <div className="leading-relaxed">
                   <p>Mon–Fri: 7am – 7pm</p>
                   <p>Sat–Sun: 8am – 5pm</p>
-                  <p className="text-[#F5C842] font-semibold mt-1">24/7 Emergency</p>
+                  <p className="text-[#F5C842] font-normal mt-1">24/7 Emergency</p>
                 </div>
               </li>
             </ul>
           </div>
-
         </div>
       </div>
 
-
       {/* Copyright bar */}
       <div className="relative z-10 bg-[#152a55] border-t border-white/10 py-4 text-center">
-        <p className="text-xs font-semibold tracking-widest text-white/50 uppercase">
+        <p className="text-xs font-normal tracking-widest text-white/50 uppercase">
           © {new Date().getFullYear()} All Phase Plumbing · All Rights Reserved · Tukwila, WA
         </p>
       </div>
-
     </footer>
   );
 }

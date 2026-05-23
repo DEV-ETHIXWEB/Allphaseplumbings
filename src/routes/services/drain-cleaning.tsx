@@ -7,7 +7,11 @@ export const Route = createFileRoute("/services/drain-cleaning")({
   head: () => ({
     meta: [
       { title: "Drain Cleaning Seattle — Hydro-Jetting & Camera" },
-      { name: "description", content: "Fast, lasting drain cleaning across Greater Seattle. Hydro-jetting, snaking, and camera inspection by licensed plumbers." },
+      {
+        name: "description",
+        content:
+          "Fast, lasting drain cleaning across Greater Seattle. Hydro-jetting, snaking, and camera inspection by licensed plumbers.",
+      },
       { property: "og:title", content: "Drain Cleaning Seattle" },
       { property: "og:description", content: "Hydro-jetting, snaking, and camera inspection." },
     ],
