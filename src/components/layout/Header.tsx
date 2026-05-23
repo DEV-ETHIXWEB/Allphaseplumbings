@@ -140,13 +140,13 @@ export function Header() {
 
       {/* Logo · badge · phone */}
       <div className="bg-white">
-        <div className="w-full px-10">
+        <div className="w-full px-4 sm:px-6 lg:px-10">
           <div className="flex items-center gap-6 py-2">
             <Link to="/" className="shrink-0">
               <img
                 src={logo}
                 alt="All Phase Plumbing"
-                className="h-[132px] w-auto object-contain"
+                className="h-14 sm:h-[132px] w-auto object-contain"
               />
             </Link>
 
@@ -160,22 +160,24 @@ export function Header() {
             </div>
 
             <div className="flex items-center gap-3">
-              <StarBorder
-                as="a"
-                href={opts.phone_href}
-                className="phone-cta-btn hidden md:inline-block active:scale-[0.98] hover:scale-[1.04] hover:-translate-y-0.5 transition-all duration-300"
-                innerClassName="phone-cta-inner flex items-center justify-center font-extrabold text-white whitespace-nowrap"
-                innerStyle={{
-                  background: "linear-gradient(135deg,#1E3A6E 0%,#6B9FE4 100%)",
-                  border: "4px solid #1E3A6E",
-                  padding: "8px 19px",
-                  fontSize: "29px",
-                  boxShadow: "0 6px 16px -4px rgba(30,58,110,0.45)",
-                  transition: "background 300ms ease, box-shadow 300ms ease, filter 300ms ease",
-                }}
-              >
-                {opts.phone}
-              </StarBorder>
+              <div className="hidden md:block">
+                <StarBorder
+                  as="a"
+                  href={opts.phone_href}
+                  className="phone-cta-btn active:scale-[0.98] hover:scale-[1.04] hover:-translate-y-0.5 transition-all duration-300"
+                  innerClassName="phone-cta-inner flex items-center justify-center font-extrabold text-white whitespace-nowrap"
+                  innerStyle={{
+                    background: "linear-gradient(135deg,#1E3A6E 0%,#6B9FE4 100%)",
+                    border: "4px solid #1E3A6E",
+                    padding: "8px 19px",
+                    fontSize: "29px",
+                    boxShadow: "0 6px 16px -4px rgba(30,58,110,0.45)",
+                    transition: "background 300ms ease, box-shadow 300ms ease, filter 300ms ease",
+                  }}
+                >
+                  {opts.phone}
+                </StarBorder>
+              </div>
 
               <button
                 type="button"
@@ -193,7 +195,7 @@ export function Header() {
 
       {/* ── Desktop nav bar ── */}
       <div className="hidden lg:block border-t-[4px] border-[#1E3A6E] bg-white relative">
-        <div className="w-full px-10">
+        <div className="w-full px-4 sm:px-6 lg:px-10">
           <nav className="flex items-center justify-between gap-2 pt-1.5 pb-0">
             {NAV.map((item) => (
               <div

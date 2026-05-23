@@ -36,6 +36,7 @@ function ServiceMap() {
         zoom: 10,
         scrollWheelZoom: false,
         zoomControl: true,
+        attributionControl: false,
       });
       mapInstanceRef.current = map;
 
@@ -120,7 +121,11 @@ function ServiceMap() {
   }, []);
 
   return (
-    <div ref={mapRef} className="w-full" style={{ minHeight: 480, height: "100%", zIndex: 0 }} />
+    <div
+      ref={mapRef}
+      className="w-full h-full min-h-[160px] lg:min-h-[480px]"
+      style={{ zIndex: 0 }}
+    />
   );
 }
 
@@ -162,10 +167,10 @@ export function ServiceArea() {
         </div>
 
         {/* Two-column layout: map LEFT, city list RIGHT */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+        <div className="grid grid-cols-2 gap-3 lg:gap-6 items-stretch">
           {/* ── LEFT: Map — isolation:isolate keeps Leaflet z-indexes contained ── */}
           <div
-            className="rounded-2xl overflow-hidden border-2 border-white/25 shadow-2xl bg-white order-2 lg:order-1 h-full"
+            className="rounded-2xl overflow-hidden border-2 border-white/25 shadow-2xl bg-white aspect-square order-1 h-full"
             style={{ isolation: "isolate", position: "relative" }}
           >
             <ServiceMap />
@@ -173,24 +178,24 @@ export function ServiceArea() {
 
           {/* ── RIGHT: City list ── */}
           <div
-            className="rounded-2xl border border-white/20 p-8 order-1 lg:order-2"
+            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 aspect-square flex flex-col justify-start overflow-y-auto"
             style={{ background: "rgba(255,255,255,0.10)", backdropFilter: "blur(12px)" }}
           >
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+            <div className="grid grid-cols-1 gap-y-1">
               {cities.map((city) => (
                 <Link
                   key={city}
                   to="/service-area"
-                  className="flex items-center gap-2 py-3 border-b border-white/15 text-white font-semibold text-base hover:text-[#F5C842] transition-colors group"
+                  className="flex items-center gap-1.5 py-1.5 sm:py-3 border-b border-white/15 text-white font-semibold text-[11px] sm:text-base hover:text-[#F5C842] transition-colors group"
                 >
-                  <MapPin className="size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />
+                  <MapPin className="size-3 sm:size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />
                   {city}, WA
                 </Link>
               ))}
             </div>
 
-            {/* CTA row */}
-            <div className="mt-8 pt-6 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            {/* CTA row — hidden on mobile to fit the square */}
+            <div className="mt-8 pt-6 border-t border-white/20 hidden sm:flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <p className="text-base text-white/65 italic">
                 Don't see your city? Call us — we likely serve your area.
               </p>

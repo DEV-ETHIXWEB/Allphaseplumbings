@@ -262,10 +262,10 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
     >
       {/* Icon area */}
       <div
-        className="flex items-center justify-center bg-[#f0f5ff] px-8 pt-10 pb-6
+        className="flex items-center justify-center bg-[#f0f5ff] px-4 pt-6 pb-4 sm:px-8 sm:pt-10 sm:pb-6
                       group-hover:bg-[#e8effc] transition-colors duration-300"
       >
-        <div className="w-36 h-36 drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
+        <div className="w-20 h-20 sm:w-36 sm:h-36 drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
           <svc.Icon />
         </div>
       </div>
@@ -274,14 +274,14 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
       <div className="h-[3px] bg-[#1E3A6E]" />
 
       {/* Content */}
-      <div className="px-6 py-6 flex flex-col flex-1">
-        <h3 className="text-[22px] font-extrabold text-[#1E3A6E] leading-snug">{svc.title}</h3>
-        <p className="text-gray-500 mt-2 text-[16px] leading-relaxed flex-1">{svc.description}</p>
+      <div className="p-3 sm:p-6 flex flex-col flex-1">
+        <h3 className="text-base sm:text-[22px] font-extrabold text-[#1E3A6E] leading-snug">{svc.title}</h3>
+        <p className="text-gray-500 mt-1 sm:mt-2 text-xs sm:text-[16px] leading-relaxed flex-1">{svc.description}</p>
         <span
-          className="inline-flex items-center gap-1.5 text-[#1E3A6E] font-bold text-[16px]
-                         group-hover:gap-3 group-hover:text-[#4A7BC4] transition-all duration-200 mt-5"
+          className="inline-flex items-center gap-1.5 text-[#1E3A6E] font-bold text-xs sm:text-[16px]
+                         group-hover:gap-3 group-hover:text-[#4A7BC4] transition-all duration-200 mt-3 sm:mt-5"
         >
-          Learn More <ArrowRight className="size-4" />
+          Learn More <ArrowRight className="size-3 sm:size-4" />
         </span>
       </div>
     </Link>
@@ -305,7 +305,7 @@ export function Services() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7">
           {SERVICES.map((svc) => (
             <ServiceCard key={svc.href} svc={svc} />
           ))}

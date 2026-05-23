@@ -50,7 +50,7 @@ export function CustomerQuote() {
 
       {/* ── Left: Wrench PNG — slides in from left ── */}
       <div
-        className="absolute bottom-4 pointer-events-none select-none z-10"
+        className="absolute bottom-4 pointer-events-none select-none z-10 hidden sm:block"
         style={{
           left: "12%",
           transform: `translateX(${visible ? "0px" : "-220px"})`,
@@ -70,7 +70,7 @@ export function CustomerQuote() {
 
       {/* ── Right: Pipe PNG — slides in from right ── */}
       <div
-        className="absolute bottom-4 pointer-events-none select-none z-10"
+        className="absolute bottom-4 pointer-events-none select-none z-10 hidden sm:block"
         style={{
           right: "12%",
           transform: `translateX(${visible ? "0px" : "220px"})`,

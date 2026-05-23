@@ -48,7 +48,7 @@ export function Hero() {
             </span>
 
             <h1
-              className="mt-3 text-4xl sm:text-5xl lg:text-[50px] text-[#1E3A6E] leading-[1.15] whitespace-nowrap"
+              className="mt-3 text-4xl sm:text-5xl lg:text-[50px] text-[#1E3A6E] leading-[1.15] lg:whitespace-nowrap"
               style={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 900,
@@ -171,7 +171,7 @@ export function Hero() {
               </h2>
 
               <form onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-7 gap-3 items-stretch">
                   <input
                     type="text"
                     placeholder="FIRST NAME*"
