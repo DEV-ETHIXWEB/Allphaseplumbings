@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import './Masonry.css';
 
@@ -261,6 +262,42 @@ export function Masonry({
     }
   };
 
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (activeImageIndex === null) return;
+    setActiveImageIndex(prev => (prev === 0 ? items.length - 1 : prev! - 1));
+  };
+
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (activeImageIndex === null) return;
+    setActiveImageIndex(prev => (prev === items.length - 1 ? 0 : prev! + 1));
+  };
+
+  const handleClose = () => {
+    setActiveImageIndex(null);
+  };
+
+  useEffect(() => {
+    if (activeImageIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+      else if (e.key === 'ArrowLeft') handlePrev();
+      else if (e.key === 'ArrowRight') handleNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activeImageIndex]);
+
   // Dynamic height calculation to prevent relative-container collapse
   const containerHeight = useMemo(() => {
     if (grid.length === 0) return 0;
@@ -268,47 +305,107 @@ export function Masonry({
   }, [grid]);
 
   return (
-    <div ref={containerRef} className="list" style={{ height: containerHeight }}>
-      {grid.map(item => {
-        return (
-          <div
-            key={item.id}
-            data-key={item.id}
-            className="item-wrapper"
-            style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              width: item.w,
-              height: item.h,
-              opacity: 0,
-            }}
-            onClick={() => window.open(item.url, '_blank', 'noopener')}
-            onMouseEnter={e => handleMouseEnter(e, item)}
-            onMouseLeave={e => handleMouseLeave(e, item)}
+    <>
+      <div ref={containerRef} className="list" style={{ height: containerHeight }}>
+        {grid.map(item => {
+          return (
+            <div
+              key={item.id}
+              data-key={item.id}
+              className="item-wrapper"
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: item.w,
+                height: item.h,
+                opacity: 0,
+              }}
+              onClick={() => {
+                const idx = items.findIndex(i => i.id === item.id);
+                if (idx !== -1) {
+                  setActiveImageIndex(idx);
+                }
+              }}
+              onMouseEnter={e => handleMouseEnter(e, item)}
+              onMouseLeave={e => handleMouseLeave(e, item)}
+            >
+              <div className="item-img" style={{ backgroundImage: `url(${item.img})` }}>
+                {colorShiftOnHover && (
+                  <div
+                    className="color-overlay"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5))',
+                      opacity: 0,
+                      pointerEvents: 'none',
+                      borderRadius: '8px'
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {activeImageIndex !== null && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md animate-in fade-in duration-300"
+          onClick={handleClose}
+        >
+          {/* Close button */}
+          <button
+            type="button"
+            className="absolute top-4 right-4 z-50 p-2.5 bg-white/10 hover:bg-white/20 text-white lightbox-btn transition-colors active:scale-95"
+            onClick={handleClose}
+            aria-label="Close gallery"
           >
-            <div className="item-img" style={{ backgroundImage: `url(${item.img})` }}>
-              {colorShiftOnHover && (
-                <div
-                  className="color-overlay"
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(45deg, rgba(255,0,150,0.5), rgba(0,150,255,0.5))',
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    borderRadius: '8px'
-                  }}
-                />
-              )}
+            <X className="size-6 sm:size-7" />
+          </button>
+
+          {/* Previous Arrow */}
+          <button
+            type="button"
+            className="absolute left-4 z-50 p-3 bg-white/10 hover:bg-white/20 text-white lightbox-btn transition-all active:scale-95 hover:translate-x-[-2px] disabled:opacity-50"
+            onClick={handlePrev}
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="size-6 sm:size-8" />
+          </button>
+
+          {/* Next Arrow */}
+          <button
+            type="button"
+            className="absolute right-4 z-50 p-3 bg-white/10 hover:bg-white/20 text-white lightbox-btn transition-all active:scale-95 hover:translate-x-[2px] disabled:opacity-50"
+            onClick={handleNext}
+            aria-label="Next image"
+          >
+            <ChevronRight className="size-6 sm:size-8" />
+          </button>
+
+          {/* Image Container */}
+          <div
+            className="relative max-w-[90vw] max-h-[85vh] sm:max-w-[85vw] sm:max-h-[80vh] flex flex-col items-center animate-in zoom-in-95 duration-300 select-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={items[activeImageIndex].img}
+              alt={`Project Gallery Image ${activeImageIndex + 1}`}
+              className="max-w-full max-h-[75vh] sm:max-h-[80vh] object-contain lightbox-img border border-white/10 shadow-2xl select-none"
+            />
+            {/* Image counter */}
+            <div className="mt-4 px-4 py-1.5 bg-white/10 backdrop-blur-md lightbox-badge text-white text-xs sm:text-sm font-bold tracking-widest border border-white/5">
+              {activeImageIndex + 1} / {items.length}
             </div>
           </div>
-        );
-      })}
-    </div>
+        </div>
+      )}
+    </>
   );
 }
 export default Masonry;

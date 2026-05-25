@@ -177,32 +177,32 @@ function ContactFormBox() {
       <div className="mx-auto px-4 max-w-[1305px]">
         {/* Pointy Corners: rounded-none */}
         <div
-          className="mx-auto max-w-[900px] border-[6px] border-[#1E3A6E] rounded-none"
+          className="mx-auto max-w-[900px] border-[4px] sm:border-[6px] border-[#1E3A6E] rounded-none"
           style={{
             background: "#6B9EF8",
             boxShadow: "0 10px 40px rgba(0,0,0,0.15)",
           }}
         >
-          <div className="px-6 py-8 sm:px-10 sm:py-12 md:p-14">
+          <div className="px-4 py-6 sm:px-10 sm:py-12 md:p-14">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 setStatus("sent");
               }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
                   placeholder="FIRST NAME*"
                   required
-                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-4 py-4 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-3.5 py-3 sm:px-4 sm:py-4 text-[14px] sm:text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                 />
                 <input
                   type="text"
                   placeholder="LAST NAME*"
                   required
-                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-4 py-4 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-3.5 py-3 sm:px-4 sm:py-4 text-[14px] sm:text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                 />
               </div>
 
@@ -211,13 +211,13 @@ function ContactFormBox() {
                   type="email"
                   placeholder="EMAIL*"
                   required
-                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-4 py-4 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-3.5 py-3 sm:px-4 sm:py-4 text-[14px] sm:text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                 />
                 <input
                   type="tel"
                   placeholder="PHONE*"
                   required
-                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-4 py-4 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                  className="rounded-none border-2 border-[#1E3A6E] bg-white px-3.5 py-3 sm:px-4 sm:py-4 text-[14px] sm:text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                 />
               </div>
 
@@ -225,7 +225,7 @@ function ContactFormBox() {
                 <select
                   required
                   defaultValue=""
-                  className="w-full rounded-none border-2 border-[#1E3A6E] bg-white px-4 py-4 text-[16px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow appearance-none"
+                  className="w-full rounded-none border-2 border-[#1E3A6E] bg-white px-3.5 py-3 sm:px-4 sm:py-4 text-[14px] sm:text-[16px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow appearance-none"
                   style={{
                     backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
                     backgroundRepeat: "no-repeat",
@@ -246,17 +246,17 @@ function ContactFormBox() {
               </div>
 
               {/* SMS opt-in */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2.5 sm:gap-3">
                 <input
                   id="sms-optin"
                   type="checkbox"
                   checked={smsOptIn}
                   onChange={(e) => setSmsOptIn(e.target.checked)}
-                  className="mt-1 size-5 rounded border-white accent-[#1E3A6E] cursor-pointer shrink-0"
+                  className="mt-1 size-4 sm:size-5 rounded border-white accent-[#1E3A6E] cursor-pointer shrink-0"
                 />
                 <label
                   htmlFor="sms-optin"
-                  className="text-[14px] text-white cursor-pointer leading-relaxed select-none"
+                  className="text-[12px] sm:text-[14px] text-white cursor-pointer leading-relaxed select-none"
                 >
                   By submitting this form and signing up for texts, you consent to receive
                   messages from All Phase Plumbing at the number provided regarding your request,
@@ -271,7 +271,7 @@ function ContactFormBox() {
               <div className="pt-2 flex flex-col items-center">
                 <button
                   type="submit"
-                  className="inline-block active:scale-[0.98] transition-all bg-[#F5C842] text-[#1E3A6E] border-2 border-[#1E3A6E] px-14 py-4 sm:px-[72px] sm:py-[18px] text-[20px] sm:text-[26px] font-black rounded-none hover:bg-[#eec136] tracking-wide uppercase"
+                  className="inline-block active:scale-[0.98] transition-all bg-[#F5C842] text-[#1E3A6E] border-2 border-[#1E3A6E] px-8 py-3 sm:px-[72px] sm:py-[18px] text-[16px] sm:text-[26px] font-black rounded-none hover:bg-[#eec136] tracking-wide uppercase"
                   style={{
                     fontFamily: "'Poppins', sans-serif",
                     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",

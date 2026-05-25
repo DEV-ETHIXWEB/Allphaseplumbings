@@ -97,7 +97,7 @@ export function CTABanner() {
           </div>
 
           {/* Right Column — contact card */}
-          <div className="lg:col-span-3 w-full flex justify-center lg:justify-end self-center">
+          <div className="lg:col-span-3 w-full flex justify-center lg:justify-end self-center lg:ml-[10%]">
             <div className="bg-white rounded-2xl shadow-2xl border-2 border-[#1E3A7B]/20 w-full max-w-[720px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden">
               {/* Blue gradient header strip */}
               <div

@@ -118,7 +118,7 @@ export function Hero() {
         {/* ── Full-width form card — sits flush at the bottom of the hero ── */}
         <div className="mt-2">
           <div
-            className="rounded-t-2xl overflow-hidden border-[6px] border-[#1E3A6E]"
+            className="rounded-t-2xl overflow-hidden border-[4px] sm:border-[6px] border-[#1E3A6E]"
             style={{
               background: "#6B9EF8",
               boxShadow: "0 -4px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06)",
@@ -129,86 +129,86 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setServiceType("residential")}
-                className={`flex items-center gap-3 px-10 py-5 text-[26px] font-semibold transition-all duration-300 border-b-4 ${
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 sm:gap-3 px-3 py-3.5 sm:px-10 sm:py-5 text-base sm:text-[26px] font-semibold transition-all duration-300 border-b-4 ${
                   serviceType === "residential"
                     ? "border-[#F5C842] text-white bg-white/25 shadow-[inset_0_-3px_0_#F5C842,0_4px_12px_rgba(30,58,110,0.25)] -translate-y-[1px] scale-[1.02]"
                     : "border-transparent text-white/70 hover:text-white hover:bg-white/10 bg-transparent"
                 }`}
               >
-                <Home className="size-7" /> Residential
+                <Home className="size-4 sm:size-7" /> Residential
               </button>
               <button
                 type="button"
                 onClick={() => setServiceType("commercial")}
-                className={`flex items-center gap-3 px-10 py-5 text-[26px] font-semibold transition-all duration-300 border-b-4 ${
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 sm:gap-3 px-3 py-3.5 sm:px-10 sm:py-5 text-base sm:text-[26px] font-semibold transition-all duration-300 border-b-4 ${
                   serviceType === "commercial"
                     ? "border-[#F5C842] text-white bg-white/25 shadow-[inset_0_-3px_0_#F5C842,0_4px_12px_rgba(30,58,110,0.25)] -translate-y-[1px] scale-[1.02]"
                     : "border-transparent text-white/70 hover:text-white hover:bg-white/10 bg-transparent"
                 }`}
               >
-                <Building2 className="size-7" /> Commercial
+                <Building2 className="size-4 sm:size-7" /> Commercial
               </button>
             </div>
 
             {/* Form body */}
-            <div className="px-6 py-4 sm:px-8 sm:py-5">
+            <div className="px-4 py-4 sm:px-8 sm:py-5">
               {/* Contact promo */}
-              <div className="mb-4 text-white">
+              <div className="mb-3 sm:mb-4 text-white">
                 <h2
-                  className="text-[32px] font-bold leading-tight"
+                  className="text-2xl sm:text-[32px] font-bold leading-tight"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   Contact us today
                 </h2>
-                <p className="mt-1.5 text-[18px] font-semibold leading-snug">Same Day Service</p>
-                <p className="text-[16px] font-medium leading-snug">Plumbing and Drain Cleaning</p>
-                <p className="text-[14px] font-normal text-white/85 mt-0.5">
+                <p className="mt-1 text-[15px] sm:text-[18px] font-semibold leading-snug">Same Day Service</p>
+                <p className="text-[14px] sm:text-[16px] font-medium leading-snug">Plumbing and Drain Cleaning</p>
+                <p className="text-[12px] sm:text-[14px] font-normal text-white/85 mt-0.5">
                   When booked before 2pm, Monday &ndash; Friday
                 </p>
               </div>
 
               <h2
-                className="text-[24px] font-bold text-white mb-4"
+                className="text-lg sm:text-[24px] font-bold text-white mb-2.5 sm:mb-4"
                 style={{ fontFamily: "Inter, sans-serif" }}
               >
                 Let Us Call You
               </h2>
 
               <form onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2.5 sm:gap-3 items-stretch">
                   <input
                     type="text"
                     placeholder="FIRST NAME*"
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
                   <input
                     type="text"
                     placeholder="LAST NAME*"
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
                   <input
                     type="email"
                     placeholder="EMAIL*"
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
                   <input
                     type="tel"
                     placeholder="PHONE*"
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
                   <input
                     type="text"
                     placeholder="STREET ADDRESS*"
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
                   <input
@@ -216,28 +216,61 @@ export function Hero() {
                     placeholder="ZIP CODE*"
                     required
                     maxLength={10}
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
 
-                  <input
-                    type="text"
-                    placeholder="SERVICE NEEDED*"
+                  <select
                     required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow sm:col-span-2 lg:col-span-1"
-                  />
+                    defaultValue=""
+                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow sm:col-span-2 lg:col-span-1 appearance-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "right 12px center",
+                      backgroundSize: "16px",
+                      paddingRight: "36px",
+                    }}
+                  >
+                    <option value="" disabled>
+                      SERVICE NEEDED*
+                    </option>
+                    {serviceType === "residential" ? (
+                      <>
+                        <option value="Drain Cleaning">Drain Cleaning</option>
+                        <option value="Emergency Plumber">Emergency Plumber</option>
+                        <option value="Garbage Disposals">Garbage Disposals</option>
+                        <option value="Hydro Jetting">Hydro Jetting</option>
+                        <option value="Repiping">Repiping</option>
+                        <option value="Sump Pumps">Sump Pumps</option>
+                        <option value="Toilets & Faucets">Toilets &amp; Faucets</option>
+                        <option value="Water Heaters">Water Heaters</option>
+                        <option value="Leak Detection">Leak Detection</option>
+                        <option value="Water Softeners">Water Softeners &amp; Filtration</option>
+                        <option value="Sewer Repair">Sewer Line Repair</option>
+                        <option value="Other">Other Service</option>
+                      </>
+                    ) : (
+                      <>
+                        <option value="Commercial Drain Cleaning">Commercial Drain Cleaning</option>
+                        <option value="Commercial Plumbing Repair">Commercial Plumbing Repair</option>
+                        <option value="Commercial Sewer Services">Commercial Sewer Services</option>
+                        <option value="Backflow Testing">Backflow Testing</option>
+                        <option value="Gas Line Service">Gas Line Service</option>
+                        <option value="Other Commercial">Other Commercial Service</option>
+                      </>
+                    )}
+                  </select>
                 </div>
 
-                <div className="mt-4 flex justify-center">
+                <div className="mt-3.5 sm:mt-4 flex justify-center">
                   <StarBorder
                     type="submit"
                     className="inline-block active:scale-[0.98] transition-all"
-                    innerClassName="font-bold"
+                    innerClassName="font-bold px-8 py-2.5 text-[17px] sm:px-16 sm:py-3 sm:text-[22px]"
                     innerStyle={{
                       background: "#F5C842",
                       color: "#1E3A6E",
                       border: "2px solid #1E3A6E",
-                      padding: "12px 64px",
-                      fontSize: "22px",
                     }}
                   >
                     Send Request
@@ -245,17 +278,17 @@ export function Hero() {
                 </div>
 
                 {/* SMS opt-in */}
-                <div className="mt-3.5 flex items-start gap-2.5">
+                <div className="mt-3 flex items-start gap-2">
                   <input
                     id="sms-optin"
                     type="checkbox"
                     checked={smsOptIn}
                     onChange={(e) => setSmsOptIn(e.target.checked)}
-                    className="mt-1 size-5 rounded border-white accent-[#1E3A6E] cursor-pointer shrink-0"
+                    className="mt-1 size-4 rounded border-white accent-[#1E3A6E] cursor-pointer shrink-0"
                   />
                   <label
                     htmlFor="sms-optin"
-                    className="text-[12px] text-white cursor-pointer leading-relaxed"
+                    className="text-[11px] sm:text-[12px] text-white cursor-pointer leading-relaxed"
                   >
                     By submitting this form and signing up for texts, you consent to receive
                     messages from All Phase Plumbing at the number provided regarding your request,
@@ -266,7 +299,7 @@ export function Hero() {
                   </label>
                 </div>
 
-                <p className="mt-3 text-[13px] text-white/75 leading-relaxed border-t border-white/15 pt-3">
+                <p className="mt-3 text-[12px] sm:text-[13px] text-white/75 leading-relaxed border-t border-white/15 pt-2.5">
                   By entering your email address, you agree to receive emails about services,
                   updates or promotions, and you agree to our{" "}
                   <a href="/about" className="underline hover:text-[#F5C842]">

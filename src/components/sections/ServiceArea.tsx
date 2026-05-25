@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { useEffect, useRef } from "react";
+import Particles from "@/components/ui/Particles";
 
 /* ── Leaflet dynamic import (avoids SSR issues) ───────────────────────────── */
 declare global {
@@ -140,15 +141,22 @@ export function ServiceArea() {
         background: "linear-gradient(135deg, #0f2246 0%, #1E3A6E 40%, #2d5fa8 75%, #4A7BC4 100%)",
       }}
     >
-      {/* Subtle dot pattern overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.07]"
-        style={{
-          backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
-        }}
-        aria-hidden="true"
-      />
+      {/* ── Particle background ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <Particles
+          particleCount={500}
+          particleSpread={20}
+          speed={1}
+          particleBaseSize={150}
+          sizeRandomness={1.1}
+          alphaParticles={true}
+          cameraDistance={20}
+          disableRotation={true}
+          moveParticlesOnHover={false}
+          particleColors={["#ffffff", "#aac8f0", "#7ab3e0"]}
+          className="w-full h-full"
+        />
+      </div>
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Heading — white text on gradient bg */}

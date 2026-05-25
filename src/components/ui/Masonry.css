@@ -26,3 +26,14 @@
   border-radius: 10px;
   box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
 }
+
+/* Lightbox styles to bypass site-wide border-radius reset */
+.lightbox-btn {
+  border-radius: 9999px !important;
+}
+.lightbox-badge {
+  border-radius: 9999px !important;
+}
+.lightbox-img {
+  border-radius: 12px !important;
+}

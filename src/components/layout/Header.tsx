@@ -121,6 +121,7 @@ function gridClass(cols: 1 | 2 | 3) {
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openNav, setOpenNav] = useState<string | null>(null);
+  const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const opts = useSiteOptions();
 
@@ -287,21 +288,66 @@ export function Header() {
 
       {/* ── Mobile drawer ── */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white shadow-lg">
+        <div className="lg:hidden border-t border-gray-100 bg-white shadow-lg overflow-y-auto max-h-[80vh]">
           <nav className="container mx-auto px-4 py-3 flex flex-col gap-0.5">
-            {NAV.map((item) => (
-              <Link
-                key={item.to + item.label}
-                to={item.to}
-                onClick={() => setMobileOpen(false)}
-                activeOptions={{ exact: item.exact ?? false }}
-                className="px-4 py-3 rounded-lg text-base font-bold text-[#1E3A6E]
-                           hover:bg-[#1E3A6E] hover:text-white transition-all duration-200"
-                activeProps={{ className: "!bg-[#1E3A6E] !text-white" }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const hasDropdown = item.dropdown && item.dropdown.length > 0;
+              const isExpanded = expandedMobileItem === item.label;
+
+              return (
+                <div key={item.to + item.label} className="flex flex-col border-b border-gray-50 last:border-b-0">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      to={item.to}
+                      onClick={() => {
+                        setMobileOpen(false);
+                        setExpandedMobileItem(null);
+                      }}
+                      activeOptions={{ exact: item.exact ?? false }}
+                      className="flex-1 px-4 py-3 text-[17px] font-bold text-[#1E3A6E] rounded-lg
+                                 hover:bg-[#1E3A6E]/5 transition-all duration-200"
+                      activeProps={{ className: "!bg-[#1E3A6E]/10 !text-[#4A7BC4]" }}
+                    >
+                      {item.label}
+                    </Link>
+                    {hasDropdown && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExpandedMobileItem(isExpanded ? null : item.label);
+                        }}
+                        className="p-3 text-[#1E3A6E] hover:bg-[#1E3A6E]/5 rounded-lg transition-colors flex items-center justify-center"
+                        aria-label={`Toggle ${item.label} submenu`}
+                      >
+                        <ChevronDown
+                          className={`size-5 opacity-70 transition-transform duration-200 ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
+                  {hasDropdown && isExpanded && (
+                    <div className="pl-6 pr-4 pb-2.5 flex flex-col gap-1.5 bg-[#eef4fb]/40 rounded-lg animate-in fade-in slide-in-from-top-1 duration-150">
+                      {item.dropdown!.map((sub) => (
+                        <Link
+                          key={sub.to + sub.label}
+                          to={sub.to}
+                          onClick={() => {
+                            setMobileOpen(false);
+                            setExpandedMobileItem(null);
+                          }}
+                          className="px-3 py-2 text-[15px] font-semibold text-[#1E3A6E] border-l-2 border-[#1E3A6E]/20 hover:border-[#1E3A6E] hover:text-[#4A7BC4] transition-all"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <a
               href={opts.phone_href}
               className="mt-2 flex items-center justify-center gap-2 rounded-xl px-4 py-3.5

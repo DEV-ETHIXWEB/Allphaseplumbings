@@ -35,7 +35,7 @@ export function Footer() {
             <h3 className="text-[15px] font-bold uppercase tracking-wider text-white border-b border-white/15 pb-2.5">
               Services Area
             </h3>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-2 text-[14px] font-medium text-white/70">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 mt-2 text-[19px] font-medium text-white/70">
               <Link to="/service-area" className="hover:text-[#F5C842]">Seattle</Link>
               <Link to="/service-area" className="hover:text-[#F5C842]">Redmond</Link>
               <Link to="/service-area" className="hover:text-[#F5C842]">Tacoma</Link>
@@ -53,7 +53,7 @@ export function Footer() {
             <h3 className="text-[15px] font-bold uppercase tracking-wider text-white border-b border-white/15 pb-2.5">
               Services
             </h3>
-            <ul className="space-y-2.5 mt-2 text-[14px] font-medium text-white/70">
+            <ul className="space-y-2.5 mt-2 text-[19px] font-medium text-white/70">
               <li>
                 <Link to="/services/plumbing" className="hover:text-[#F5C842]">
                   Plumbing
@@ -77,7 +77,7 @@ export function Footer() {
             <h3 className="text-[15px] font-bold uppercase tracking-wider text-white border-b border-white/15 pb-2.5">
               About
             </h3>
-            <ul className="space-y-2.5 mt-2 text-[14px] font-medium text-white/70">
+            <ul className="space-y-2.5 mt-2 text-[19px] font-medium text-white/70">
               <li>
                 <Link to="/about" className="hover:text-[#F5C842]">
                   About Us
@@ -101,7 +101,7 @@ export function Footer() {
             <h3 className="text-[15px] font-bold uppercase tracking-wider text-white border-b border-white/15 pb-2.5">
               Contact Us
             </h3>
-            <ul className="space-y-4 text-[14px] font-medium text-white/70 mt-2">
+            <ul className="space-y-4 text-[19px] font-medium text-white/70 mt-2">
               <li className="flex items-center gap-3">
                 <Phone className="size-4 shrink-0 text-[#F5C842]" />
                 <a
