@@ -16,12 +16,16 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
+import { Route as CommercialIndexRouteImport } from './routes/commercial/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesWaterHeatersRouteImport } from './routes/services/water-heaters'
-import { Route as ServicesSewerServicesRouteImport } from './routes/services/sewer-services'
 import { Route as ServicesPlumbingRouteImport } from './routes/services/plumbing'
 import { Route as ServicesDrainCleaningRouteImport } from './routes/services/drain-cleaning'
+import { Route as CommercialDrainCleaningRouteImport } from './routes/commercial/drain-cleaning'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as ServicesSewerServicesIndexRouteImport } from './routes/services/sewer-services/index'
+import { Route as ServicesSewerServicesSewerReplacementRouteImport } from './routes/services/sewer-services/sewer-replacement'
+import { Route as ServicesSewerServicesSewerRepairRouteImport } from './routes/services/sewer-services/sewer-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -58,6 +62,11 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommercialIndexRoute = CommercialIndexRouteImport.update({
+  id: '/commercial/',
+  path: '/commercial/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -66,11 +75,6 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
 const ServicesWaterHeatersRoute = ServicesWaterHeatersRouteImport.update({
   id: '/services/water-heaters',
   path: '/services/water-heaters',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesSewerServicesRoute = ServicesSewerServicesRouteImport.update({
-  id: '/services/sewer-services',
-  path: '/services/sewer-services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesPlumbingRoute = ServicesPlumbingRouteImport.update({
@@ -83,11 +87,34 @@ const ServicesDrainCleaningRoute = ServicesDrainCleaningRouteImport.update({
   path: '/services/drain-cleaning',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommercialDrainCleaningRoute = CommercialDrainCleaningRouteImport.update({
+  id: '/commercial/drain-cleaning',
+  path: '/commercial/drain-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesSewerServicesIndexRoute =
+  ServicesSewerServicesIndexRouteImport.update({
+    id: '/services/sewer-services/',
+    path: '/services/sewer-services/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesSewerServicesSewerReplacementRoute =
+  ServicesSewerServicesSewerReplacementRouteImport.update({
+    id: '/services/sewer-services/sewer-replacement',
+    path: '/services/sewer-services/sewer-replacement',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesSewerServicesSewerRepairRoute =
+  ServicesSewerServicesSewerRepairRouteImport.update({
+    id: '/services/sewer-services/sewer-repair',
+    path: '/services/sewer-services/sewer-repair',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -97,12 +124,16 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
-  '/services/sewer-services': typeof ServicesSewerServicesRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
   '/blog/': typeof BlogIndexRoute
+  '/commercial/': typeof CommercialIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/services/sewer-services/sewer-repair': typeof ServicesSewerServicesSewerRepairRoute
+  '/services/sewer-services/sewer-replacement': typeof ServicesSewerServicesSewerReplacementRoute
+  '/services/sewer-services/': typeof ServicesSewerServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -112,12 +143,16 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
-  '/services/sewer-services': typeof ServicesSewerServicesRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
   '/blog': typeof BlogIndexRoute
+  '/commercial': typeof CommercialIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/services/sewer-services/sewer-repair': typeof ServicesSewerServicesSewerRepairRoute
+  '/services/sewer-services/sewer-replacement': typeof ServicesSewerServicesSewerReplacementRoute
+  '/services/sewer-services': typeof ServicesSewerServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,12 +163,16 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
-  '/services/sewer-services': typeof ServicesSewerServicesRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
   '/blog/': typeof BlogIndexRoute
+  '/commercial/': typeof CommercialIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/services/sewer-services/sewer-repair': typeof ServicesSewerServicesSewerRepairRoute
+  '/services/sewer-services/sewer-replacement': typeof ServicesSewerServicesSewerReplacementRoute
+  '/services/sewer-services/': typeof ServicesSewerServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -145,12 +184,16 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/commercial/drain-cleaning'
     | '/services/drain-cleaning'
     | '/services/plumbing'
-    | '/services/sewer-services'
     | '/services/water-heaters'
     | '/blog/'
+    | '/commercial/'
     | '/services/'
+    | '/services/sewer-services/sewer-repair'
+    | '/services/sewer-services/sewer-replacement'
+    | '/services/sewer-services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -160,12 +203,16 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/commercial/drain-cleaning'
     | '/services/drain-cleaning'
     | '/services/plumbing'
-    | '/services/sewer-services'
     | '/services/water-heaters'
     | '/blog'
+    | '/commercial'
     | '/services'
+    | '/services/sewer-services/sewer-repair'
+    | '/services/sewer-services/sewer-replacement'
+    | '/services/sewer-services'
   id:
     | '__root__'
     | '/'
@@ -175,12 +222,16 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/commercial/drain-cleaning'
     | '/services/drain-cleaning'
     | '/services/plumbing'
-    | '/services/sewer-services'
     | '/services/water-heaters'
     | '/blog/'
+    | '/commercial/'
     | '/services/'
+    | '/services/sewer-services/sewer-repair'
+    | '/services/sewer-services/sewer-replacement'
+    | '/services/sewer-services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,12 +242,16 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  CommercialDrainCleaningRoute: typeof CommercialDrainCleaningRoute
   ServicesDrainCleaningRoute: typeof ServicesDrainCleaningRoute
   ServicesPlumbingRoute: typeof ServicesPlumbingRoute
-  ServicesSewerServicesRoute: typeof ServicesSewerServicesRoute
   ServicesWaterHeatersRoute: typeof ServicesWaterHeatersRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  CommercialIndexRoute: typeof CommercialIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  ServicesSewerServicesSewerRepairRoute: typeof ServicesSewerServicesSewerRepairRoute
+  ServicesSewerServicesSewerReplacementRoute: typeof ServicesSewerServicesSewerReplacementRoute
+  ServicesSewerServicesIndexRoute: typeof ServicesSewerServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -250,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/commercial/': {
+      id: '/commercial/'
+      path: '/commercial'
+      fullPath: '/commercial/'
+      preLoaderRoute: typeof CommercialIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -262,13 +324,6 @@ declare module '@tanstack/react-router' {
       path: '/services/water-heaters'
       fullPath: '/services/water-heaters'
       preLoaderRoute: typeof ServicesWaterHeatersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/sewer-services': {
-      id: '/services/sewer-services'
-      path: '/services/sewer-services'
-      fullPath: '/services/sewer-services'
-      preLoaderRoute: typeof ServicesSewerServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/plumbing': {
@@ -285,11 +340,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesDrainCleaningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/commercial/drain-cleaning': {
+      id: '/commercial/drain-cleaning'
+      path: '/commercial/drain-cleaning'
+      fullPath: '/commercial/drain-cleaning'
+      preLoaderRoute: typeof CommercialDrainCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/sewer-services/': {
+      id: '/services/sewer-services/'
+      path: '/services/sewer-services'
+      fullPath: '/services/sewer-services/'
+      preLoaderRoute: typeof ServicesSewerServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/sewer-services/sewer-replacement': {
+      id: '/services/sewer-services/sewer-replacement'
+      path: '/services/sewer-services/sewer-replacement'
+      fullPath: '/services/sewer-services/sewer-replacement'
+      preLoaderRoute: typeof ServicesSewerServicesSewerReplacementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/sewer-services/sewer-repair': {
+      id: '/services/sewer-services/sewer-repair'
+      path: '/services/sewer-services/sewer-repair'
+      fullPath: '/services/sewer-services/sewer-repair'
+      preLoaderRoute: typeof ServicesSewerServicesSewerRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -303,12 +386,17 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogSlugRoute: BlogSlugRoute,
+  CommercialDrainCleaningRoute: CommercialDrainCleaningRoute,
   ServicesDrainCleaningRoute: ServicesDrainCleaningRoute,
   ServicesPlumbingRoute: ServicesPlumbingRoute,
-  ServicesSewerServicesRoute: ServicesSewerServicesRoute,
   ServicesWaterHeatersRoute: ServicesWaterHeatersRoute,
   BlogIndexRoute: BlogIndexRoute,
+  CommercialIndexRoute: CommercialIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  ServicesSewerServicesSewerRepairRoute: ServicesSewerServicesSewerRepairRoute,
+  ServicesSewerServicesSewerReplacementRoute:
+    ServicesSewerServicesSewerReplacementRoute,
+  ServicesSewerServicesIndexRoute: ServicesSewerServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -25,7 +25,7 @@ export function CustomerQuote() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden"
+      className="relative overflow-hidden border-b border-white"
       style={{
         background: "linear-gradient(160deg, #0f2246 0%, #1E3A6E 40%, #2d5fa8 75%, #4A7BC4 100%)",
         minHeight: 340,
@@ -112,7 +112,7 @@ export function CustomerQuote() {
           }}
         >
           <Link
-            to="/about"
+            to="/contact"
             className="inline-flex items-center justify-center px-12 py-3.5
                        border-2 border-white text-white font-extrabold text-base tracking-widest uppercase
                        hover:bg-white hover:text-[#1E3A6E] transition-all duration-200 rounded-sm"

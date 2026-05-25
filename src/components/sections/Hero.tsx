@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Star, Home, Building2 } from "lucide-react";
+import { Star, Home, Building2, Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import mascot from "@/assets/mascot.svg";
 import { useSiteOptions } from "@/hooks/use-site-options";
@@ -44,8 +44,14 @@ export function Hero() {
       >
         {/* ── Two-column: text LEFT  ·  mascot RIGHT ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-end">
-          {/* LEFT — hero copy */}
-          <div className="pb-20 lg:-ml-10 xl:-ml-16">
+          {/* LEFT — hero copy (10% larger, shifted 10% left) */}
+          <div
+            className="pb-20 lg:-ml-10 xl:-ml-16"
+            style={{
+              transform: "scale(1.1) translateX(0%)",
+              transformOrigin: "top left",
+            }}
+          >
             <span className="text-[#1E3A6E] font-bold text-[28px] tracking-wide">
               All Phase Plumbing
             </span>
@@ -115,8 +121,15 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Full-width form card — sits flush at the bottom of the hero ── */}
-        <div className="mt-2">
+        {/* ── Full-width form card — sits flush at the bottom of the hero (25% wider than container) ── */}
+        <div
+          className="mt-2"
+          style={{
+            width: "112.5%",
+            marginLeft: "-6.25%",
+            marginRight: "-6.25%",
+          }}
+        >
           <div
             className="rounded-t-2xl overflow-hidden border-[4px] sm:border-[6px] border-[#1E3A6E]"
             style={{
@@ -150,31 +163,67 @@ export function Hero() {
               </button>
             </div>
 
-            {/* Form body */}
-            <div className="px-4 py-4 sm:px-8 sm:py-5">
-              {/* Contact promo */}
-              <div className="mb-3 sm:mb-4 text-white">
+            {/* Form body — split into promo (left) + form (right) on large screens */}
+            <div className="px-4 py-4 sm:px-8 sm:py-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:gap-8">
+              {/* Contact promo (left column on lg) */}
+              <div className="mb-4 lg:mb-0 text-white lg:border-r lg:border-white/25 lg:pr-6">
                 <h2
-                  className="text-2xl sm:text-[32px] font-bold leading-tight"
+                  className="text-2xl sm:text-[34px] lg:text-[38px] font-bold leading-tight"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   Contact us today
                 </h2>
-                <p className="mt-1 text-[15px] sm:text-[18px] font-semibold leading-snug">Same Day Service</p>
-                <p className="text-[14px] sm:text-[16px] font-medium leading-snug">Plumbing and Drain Cleaning</p>
-                <p className="text-[12px] sm:text-[14px] font-normal text-white/85 mt-0.5">
+                <p className="mt-2 text-[17px] sm:text-[20px] font-bold leading-snug text-[#F5C842]">
+                  Same Day Service
+                </p>
+                <p className="text-[15px] sm:text-[17px] font-semibold leading-snug mt-1">
+                  Plumbing and Drain Cleaning
+                </p>
+                <p className="text-[13px] sm:text-[14px] font-normal text-white/85 mt-1">
                   When booked before 2pm, Monday &ndash; Friday
                 </p>
+
+                {/* Trust badges row */}
+                <div className="hidden lg:flex flex-col gap-2 mt-5 pt-5 border-t border-white/20">
+                  <div className="flex items-center gap-2.5 text-white">
+                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                      ✓
+                    </span>
+                    <span className="text-[15px] font-semibold">Licensed &amp; Insured</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-white">
+                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                      ✓
+                    </span>
+                    <span className="text-[15px] font-semibold">Available 24/7</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-white">
+                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                      ✓
+                    </span>
+                    <span className="text-[15px] font-semibold">Serving Seattle Since 1989</span>
+                  </div>
+                </div>
+
+                <a
+                  href={opts.phone_href}
+                  className="hidden lg:inline-flex items-center gap-2 mt-5 px-4 py-2.5 rounded-lg bg-white/15 hover:bg-white/25 transition-colors font-bold text-white text-[17px]"
+                >
+                  <Phone className="size-5" />
+                  {opts.phone}
+                </a>
               </div>
 
-              <h2
-                className="text-lg sm:text-[24px] font-bold text-white mb-2.5 sm:mb-4"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Let Us Call You
-              </h2>
+              {/* Form (right column on lg) */}
+              <div>
+                <h2
+                  className="text-lg sm:text-[26px] font-bold text-white mb-3 sm:mb-4"
+                  style={{ fontFamily: "Inter, sans-serif" }}
+                >
+                  Let Us Call You
+                </h2>
 
-              <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2.5 sm:gap-3 items-stretch">
                   <input
                     type="text"
@@ -312,6 +361,7 @@ export function Hero() {
                   . You may unsubscribe at any time.
                 </p>
               </form>
+              </div>
             </div>
           </div>
         </div>

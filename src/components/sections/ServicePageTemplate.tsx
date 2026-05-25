@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Phone, Plus, Minus, ChevronRight } from "lucide-react";
+import { Phone, Plus, Minus, ChevronRight, Percent, ArrowRight } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { StarBorder } from "@/components/ui/StarBorder";
+import GlareHover from "@/components/ui/GlareHover";
 
 export type ServiceFAQ = { q: string; a: string };
 
@@ -17,6 +18,7 @@ export type RelatedService = { label: string; href: string };
 export type ServicePageContent = {
   title: string;
   breadcrumbLabel: string;
+  parentBreadcrumb?: { label: string; href: string };
   introHeading: string;
   introBlocks: ServiceContentBlock[];
   faqs: ServiceFAQ[];
@@ -149,22 +151,54 @@ function SidebarServicesMenu({ related }: { related: RelatedService[] }) {
   );
 }
 
-/* ───── Sidebar coupon ───── */
+/* ───── Sidebar coupon (matches the homepage ticket design) ───── */
 function SidebarCoupon() {
   return (
-    <div className="border-2 border-dashed border-[#1E3A6E] rounded-md p-5 text-center bg-white">
-      <p className="text-[13px] font-semibold text-[#1E3A6E] tracking-widest mb-2">SPECIAL</p>
-      <div className="flex items-baseline justify-center gap-1">
-        <span className="text-[64px] font-black text-[#1E3A6E] leading-none">10</span>
-        <span className="text-[20px] font-bold text-[#1E3A6E]">%</span>
-      </div>
-      <p className="text-[16px] font-bold text-[#1E3A6E] uppercase mt-1">Off</p>
-      <p className="text-[13px] text-gray-700 mt-3 leading-snug">
-        Your Next Service Call Up to $100
-      </p>
-      <p className="text-[11px] text-gray-500 mt-3 leading-snug">
-        Offer not valid with any other offers or discounts. Expires 10/31/2026
-      </p>
+    <div className="relative flex flex-col h-[220px]">
+      {/* Side notches */}
+      <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white z-20 border border-[#1E3A7B]/20" />
+      <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white z-20 border border-[#1E3A7B]/20" />
+
+      <GlareHover
+        width="100%"
+        height="100%"
+        background="transparent"
+        borderRadius="0.75rem"
+        borderColor="transparent"
+        glareColor="#94a3b8"
+        glareOpacity={0.18}
+        glareAngle={-45}
+        glareSize={300}
+        transitionDuration={650}
+        className="flex-1 shadow-md hover:shadow-[0_8px_30px_rgba(30,58,110,0.25)] hover:-translate-y-1 transition-all duration-300"
+        style={{ border: "2px solid #1E3A7B", borderRadius: "0.75rem" }}
+      >
+        <div className="w-full h-full flex self-stretch">
+          {/* Left navy stub */}
+          <div className="flex flex-col items-center justify-center w-[30%] bg-[#1E3A6E] px-3 border-r-2 border-dashed border-white/40 shrink-0 self-stretch">
+            <Percent className="size-7 text-white mb-2" />
+            <span className="text-2xl font-black text-white leading-none tracking-tight">10%</span>
+          </div>
+          {/* Right body */}
+          <div className="flex-1 bg-white py-4 px-4 flex flex-col justify-center self-stretch">
+            <h3 className="font-bold text-gray-900 text-[17px] leading-snug">
+              10% Off Service Call
+            </h3>
+            <p className="text-[13px] text-gray-500 mt-1 leading-relaxed">
+              Up to $100 off your next plumbing service call.
+            </p>
+            <span className="inline-block bg-gray-100 text-gray-600 text-xs font-mono px-2 py-1 rounded mt-2 w-fit">
+              APP-10
+            </span>
+            <Link
+              to="/coupons"
+              className="inline-flex items-center gap-1 text-[#F5C842] font-semibold text-sm mt-2 hover:gap-2 transition-all"
+            >
+              CLAIM OFFER <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        </div>
+      </GlareHover>
     </div>
   );
 }
@@ -238,6 +272,17 @@ export function ServicePageTemplate({ content }: { content: ServicePageContent }
               Home
             </Link>
             <ChevronRight className="inline size-4 mx-1 text-gray-400" />
+            {content.parentBreadcrumb && (
+              <>
+                <Link
+                  to={content.parentBreadcrumb.href}
+                  className="text-[#1E3A6E] hover:text-[#4A7BC4] font-semibold"
+                >
+                  {content.parentBreadcrumb.label}
+                </Link>
+                <ChevronRight className="inline size-4 mx-1 text-gray-400" />
+              </>
+            )}
             <span className="text-[#1E3A6E] font-semibold">{content.breadcrumbLabel}</span>
           </nav>
 

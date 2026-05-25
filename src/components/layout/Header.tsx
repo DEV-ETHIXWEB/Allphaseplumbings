@@ -5,6 +5,7 @@ import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import logo from "@/assets/app-logo.svg";
 import { StarBorder } from "@/components/ui/StarBorder";
+import { PillNavItem } from "./PillNavItem";
 
 /* ── Navigation config ─────────────────────────────────────────────────────── */
 type DropItem = { to: string; label: string };
@@ -63,17 +64,17 @@ const NAV: NavItem[] = [
     label: "Sewer",
     dropCols: 1,
     dropdown: [
-      { to: "/services/sewer-services", label: "Sewer Repair" },
-      { to: "/services/sewer-services", label: "Sewer Replacement" },
+      { to: "/services/sewer-services/sewer-repair", label: "Sewer Repair" },
+      { to: "/services/sewer-services/sewer-replacement", label: "Sewer Replacement" },
     ],
   },
 
   {
-    to: "/services",
+    to: "/commercial",
     label: "Commercial",
     exact: true,
     dropCols: 1,
-    dropdown: [{ to: "/services", label: "Commercial Drain Cleaning" }],
+    dropdown: [{ to: "/commercial/drain-cleaning", label: "Commercial Drain Cleaning" }],
   },
 
   { to: "/blog", label: "Blog" },
@@ -132,21 +133,34 @@ export function Header() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    let rafId: number | null = null;
+    let lastState: boolean | null = null;
+
+    function update() {
+      rafId = null;
+      const y = window.scrollY;
+      // Wide hysteresis gap (400 down / 80 up) avoids any oscillation around the threshold,
+      // even when shrinking the header causes minor layout shifts.
+      let next = lastState ?? false;
+      if (!next && y > 400) next = true;
+      else if (next && y < 80) next = false;
+      if (next !== lastState) {
+        lastState = next;
+        setIsScrolled(next);
+      }
+    }
+
     function handleScroll() {
-      // Use hysteresis (different thresholds for entering vs exiting) to prevent scroll bouncing glitches
-      setIsScrolled((prev) => {
-        if (!prev && window.scrollY > 300) {
-          return true; // shrink when scrolling past 300px (below page heading)
-        }
-        if (prev && window.scrollY < 180) {
-          return false; // expand only when scrolling back up near the top (above 180px)
-        }
-        return prev;
-      });
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(update);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    update();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const shouldShrink = !isHomePage && isScrolled;
@@ -230,20 +244,15 @@ export function Header() {
       {/* ── Desktop nav bar ── */}
       <div className="hidden lg:block border-t-[4px] border-[#1E3A6E] bg-white relative">
         <div className="w-full px-4 sm:px-6 lg:px-10">
-          <nav className="flex items-center justify-between gap-2 pt-0.5 pb-0">
+          <nav className="flex items-center justify-between gap-1 pt-2 pb-2">
             {NAV.map((item) => (
               <div
                 key={item.to + item.label}
                 onMouseEnter={() => (item.dropdown ? openMenu(item.label) : setOpenNav(null))}
                 onMouseLeave={closeMenu}
+                className="relative"
               >
-                <Link
-                  to={item.to}
-                  activeOptions={{ exact: item.exact ?? false }}
-                  className="flex items-center gap-1 px-3.5 py-2.5 text-[19px] font-bold text-[#1E3A6E]
-                             rounded-md transition-all duration-200 hover:bg-[#1E3A6E] hover:text-white"
-                  activeProps={{ className: "!bg-[#1E3A6E] !text-white" }}
-                >
+                <PillNavItem to={item.to} exact={item.exact}>
                   {item.label}
                   {item.dropdown && (
                     <ChevronDown
@@ -252,7 +261,7 @@ export function Header() {
                       }`}
                     />
                   )}
-                </Link>
+                </PillNavItem>
               </div>
             ))}
           </nav>

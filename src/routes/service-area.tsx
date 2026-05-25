@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/layout/PageShell";
 import { ServiceArea } from "@/components/sections/ServiceArea";
-import { CTABanner } from "@/components/sections/CTABanner";
 
 export const Route = createFileRoute("/service-area")({
   head: () => ({
@@ -23,9 +22,9 @@ export const Route = createFileRoute("/service-area")({
         title="Proudly serving the"
         italic="Puget Sound region."
         subtitle="20+ cities across Greater Seattle. If you're nearby, we're on the way."
+        largeEyebrow
       />
       <ServiceArea />
-      <CTABanner />
     </PageShell>
   ),
 });

@@ -17,17 +17,23 @@ export function PageHero({
   title,
   italic,
   subtitle,
+  largeEyebrow,
 }: {
   eyebrow?: string;
   title: string;
   italic?: string;
   subtitle?: string;
+  largeEyebrow?: boolean;
 }) {
   return (
     <section className="bg-secondary/40 border-b border-border py-16 lg:py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         {eyebrow && (
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-accent mb-3">
+          <span
+            className={`inline-block font-semibold uppercase tracking-widest text-accent mb-3 ${
+              largeEyebrow ? "text-2xl" : "text-xs"
+            }`}
+          >
             {eyebrow}
           </span>
         )}

@@ -42,7 +42,7 @@ export function TopBar() {
   }, []);
 
   return (
-    <div className="relative z-50 w-full bg-[#6B9EF8] hidden md:block">
+    <div className="relative z-50 w-full bg-[#6B9EF8] hidden lg:block">
       <div className="grid w-full text-sm font-normal items-start grid-cols-[1fr_auto_1fr]">
         {/* ── LEFT — Read Our Reviews ── */}
         <a

@@ -136,7 +136,7 @@ export function ServiceArea() {
 
   return (
     <section
-      className="py-20 relative overflow-hidden"
+      className="py-20 relative overflow-hidden border-b-2 border-white"
       style={{
         background: "linear-gradient(135deg, #0f2246 0%, #1E3A6E 40%, #2d5fa8 75%, #4A7BC4 100%)",
       }}

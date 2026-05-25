@@ -26,26 +26,28 @@ const COUPONS = [
   },
 ] as const;
 
-export function Coupons() {
+export function Coupons({ hideHeader = false }: { hideHeader?: boolean } = {}) {
   return (
-    <section className="py-20 bg-secondary/40">
+    <section className={`${hideHeader ? "py-10" : "py-20"} bg-secondary/40`}>
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center gap-4 mb-12">
-          <div>
-            <span className="inline-block text-[24px] font-semibold uppercase tracking-widest text-accent mb-3">
-              Homeowner Coupons
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
-              Save more on your <span className="font-display-italic text-accent">next visit.</span>
-            </h2>
+        {!hideHeader && (
+          <div className="flex flex-col items-center text-center gap-4 mb-12">
+            <div>
+              <span className="inline-block text-[24px] font-semibold uppercase tracking-widest text-accent mb-3">
+                Homeowner Coupons
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
+                Save more on your <span className="font-display-italic text-accent">next visit.</span>
+              </h2>
+            </div>
+            <Link
+              to="/coupons"
+              className="inline-flex items-center gap-1.5 text-[28px] font-semibold text-primary hover:text-accent"
+            >
+              View All Offers <ArrowRight className="size-7" />
+            </Link>
           </div>
-          <Link
-            to="/coupons"
-            className="inline-flex items-center gap-1.5 text-[28px] font-semibold text-primary hover:text-accent"
-          >
-            View All Offers <ArrowRight className="size-7" />
-          </Link>
-        </div>
+        )}
 
         {/* grid — on mobile stack, tablet+ 3 col */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
