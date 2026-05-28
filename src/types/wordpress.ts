@@ -130,4 +130,9 @@ export interface WPSiteOptions {
   cta_subheading?: string;
   cta_body?: string;
   dispatch_message?: string; // "Dispatching certified local technicians …"
+
+  // Social media
+  social_facebook?: string; // full URL e.g. "https://facebook.com/allphaseplumbing"
+  social_instagram?: string;
+  social_tiktok?: string;
 }

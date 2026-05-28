@@ -58,9 +58,9 @@ export function Coupons({ hideHeader = false }: { hideHeader?: boolean } = {}) {
             */
             <div key={c.code} className="relative flex flex-col h-[220px]">
               {/* Left circular notch */}
-              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary/60 z-20 border border-[#1E3A7B]/20" />
+              <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary/40 z-20" />
               {/* Right circular notch */}
-              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary/60 z-20 border border-[#1E3A7B]/20" />
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary/40 z-20" />
 
               <GlareHover
                 width="100%"

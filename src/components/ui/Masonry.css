@@ -7,11 +7,12 @@
 
 .item-wrapper {
   position: absolute;
-  will-change: transform, width, height, opacity;
+  will-change: transform, opacity;
   padding: 4px;
   cursor: pointer;
   top: 0;
   left: 0;
+  transform: translateZ(0); /* force GPU layer upfront */
 }
 
 .item-wrapper > .item-img {

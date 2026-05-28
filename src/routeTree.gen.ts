@@ -18,9 +18,24 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as CommercialIndexRouteImport } from './routes/commercial/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as ServicesWaterSoftenersRouteImport } from './routes/services/water-softeners'
+import { Route as ServicesWaterLinesRouteImport } from './routes/services/water-lines'
 import { Route as ServicesWaterHeatersRouteImport } from './routes/services/water-heaters'
+import { Route as ServicesToiletsRouteImport } from './routes/services/toilets'
+import { Route as ServicesToiletInstallationRouteImport } from './routes/services/toilet-installation'
+import { Route as ServicesSlabLeakRepairRouteImport } from './routes/services/slab-leak-repair'
+import { Route as ServicesSepticTankServiceRouteImport } from './routes/services/septic-tank-service'
+import { Route as ServicesRepipingRouteImport } from './routes/services/repiping'
 import { Route as ServicesPlumbingRouteImport } from './routes/services/plumbing'
+import { Route as ServicesPipeReplacementRouteImport } from './routes/services/pipe-replacement'
+import { Route as ServicesPipeRepairRouteImport } from './routes/services/pipe-repair'
+import { Route as ServicesHydroJettingRouteImport } from './routes/services/hydro-jetting'
+import { Route as ServicesHotWaterSystemRepairRouteImport } from './routes/services/hot-water-system-repair'
+import { Route as ServicesGasLineRepairRouteImport } from './routes/services/gas-line-repair'
+import { Route as ServicesFixtureReplacementRouteImport } from './routes/services/fixture-replacement'
+import { Route as ServicesEmergencyPlumberRouteImport } from './routes/services/emergency-plumber'
 import { Route as ServicesDrainCleaningRouteImport } from './routes/services/drain-cleaning'
+import { Route as ServicesBurstPipeRepairRouteImport } from './routes/services/burst-pipe-repair'
 import { Route as CommercialDrainCleaningRouteImport } from './routes/commercial/drain-cleaning'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as ServicesSewerServicesIndexRouteImport } from './routes/services/sewer-services/index'
@@ -72,9 +87,46 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesWaterSoftenersRoute = ServicesWaterSoftenersRouteImport.update({
+  id: '/services/water-softeners',
+  path: '/services/water-softeners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesWaterLinesRoute = ServicesWaterLinesRouteImport.update({
+  id: '/services/water-lines',
+  path: '/services/water-lines',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesWaterHeatersRoute = ServicesWaterHeatersRouteImport.update({
   id: '/services/water-heaters',
   path: '/services/water-heaters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesToiletsRoute = ServicesToiletsRouteImport.update({
+  id: '/services/toilets',
+  path: '/services/toilets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesToiletInstallationRoute =
+  ServicesToiletInstallationRouteImport.update({
+    id: '/services/toilet-installation',
+    path: '/services/toilet-installation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesSlabLeakRepairRoute = ServicesSlabLeakRepairRouteImport.update({
+  id: '/services/slab-leak-repair',
+  path: '/services/slab-leak-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSepticTankServiceRoute =
+  ServicesSepticTankServiceRouteImport.update({
+    id: '/services/septic-tank-service',
+    path: '/services/septic-tank-service',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesRepipingRoute = ServicesRepipingRouteImport.update({
+  id: '/services/repiping',
+  path: '/services/repiping',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesPlumbingRoute = ServicesPlumbingRouteImport.update({
@@ -82,9 +134,52 @@ const ServicesPlumbingRoute = ServicesPlumbingRouteImport.update({
   path: '/services/plumbing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesPipeReplacementRoute = ServicesPipeReplacementRouteImport.update({
+  id: '/services/pipe-replacement',
+  path: '/services/pipe-replacement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesPipeRepairRoute = ServicesPipeRepairRouteImport.update({
+  id: '/services/pipe-repair',
+  path: '/services/pipe-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesHydroJettingRoute = ServicesHydroJettingRouteImport.update({
+  id: '/services/hydro-jetting',
+  path: '/services/hydro-jetting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesHotWaterSystemRepairRoute =
+  ServicesHotWaterSystemRepairRouteImport.update({
+    id: '/services/hot-water-system-repair',
+    path: '/services/hot-water-system-repair',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesGasLineRepairRoute = ServicesGasLineRepairRouteImport.update({
+  id: '/services/gas-line-repair',
+  path: '/services/gas-line-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesFixtureReplacementRoute =
+  ServicesFixtureReplacementRouteImport.update({
+    id: '/services/fixture-replacement',
+    path: '/services/fixture-replacement',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesEmergencyPlumberRoute =
+  ServicesEmergencyPlumberRouteImport.update({
+    id: '/services/emergency-plumber',
+    path: '/services/emergency-plumber',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesDrainCleaningRoute = ServicesDrainCleaningRouteImport.update({
   id: '/services/drain-cleaning',
   path: '/services/drain-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesBurstPipeRepairRoute = ServicesBurstPipeRepairRouteImport.update({
+  id: '/services/burst-pipe-repair',
+  path: '/services/burst-pipe-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommercialDrainCleaningRoute = CommercialDrainCleaningRouteImport.update({
@@ -125,9 +220,24 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
+  '/services/burst-pipe-repair': typeof ServicesBurstPipeRepairRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
+  '/services/emergency-plumber': typeof ServicesEmergencyPlumberRoute
+  '/services/fixture-replacement': typeof ServicesFixtureReplacementRoute
+  '/services/gas-line-repair': typeof ServicesGasLineRepairRoute
+  '/services/hot-water-system-repair': typeof ServicesHotWaterSystemRepairRoute
+  '/services/hydro-jetting': typeof ServicesHydroJettingRoute
+  '/services/pipe-repair': typeof ServicesPipeRepairRoute
+  '/services/pipe-replacement': typeof ServicesPipeReplacementRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
+  '/services/repiping': typeof ServicesRepipingRoute
+  '/services/septic-tank-service': typeof ServicesSepticTankServiceRoute
+  '/services/slab-leak-repair': typeof ServicesSlabLeakRepairRoute
+  '/services/toilet-installation': typeof ServicesToiletInstallationRoute
+  '/services/toilets': typeof ServicesToiletsRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
+  '/services/water-lines': typeof ServicesWaterLinesRoute
+  '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog/': typeof BlogIndexRoute
   '/commercial/': typeof CommercialIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -144,9 +254,24 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
+  '/services/burst-pipe-repair': typeof ServicesBurstPipeRepairRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
+  '/services/emergency-plumber': typeof ServicesEmergencyPlumberRoute
+  '/services/fixture-replacement': typeof ServicesFixtureReplacementRoute
+  '/services/gas-line-repair': typeof ServicesGasLineRepairRoute
+  '/services/hot-water-system-repair': typeof ServicesHotWaterSystemRepairRoute
+  '/services/hydro-jetting': typeof ServicesHydroJettingRoute
+  '/services/pipe-repair': typeof ServicesPipeRepairRoute
+  '/services/pipe-replacement': typeof ServicesPipeReplacementRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
+  '/services/repiping': typeof ServicesRepipingRoute
+  '/services/septic-tank-service': typeof ServicesSepticTankServiceRoute
+  '/services/slab-leak-repair': typeof ServicesSlabLeakRepairRoute
+  '/services/toilet-installation': typeof ServicesToiletInstallationRoute
+  '/services/toilets': typeof ServicesToiletsRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
+  '/services/water-lines': typeof ServicesWaterLinesRoute
+  '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog': typeof BlogIndexRoute
   '/commercial': typeof CommercialIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -164,9 +289,24 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
+  '/services/burst-pipe-repair': typeof ServicesBurstPipeRepairRoute
   '/services/drain-cleaning': typeof ServicesDrainCleaningRoute
+  '/services/emergency-plumber': typeof ServicesEmergencyPlumberRoute
+  '/services/fixture-replacement': typeof ServicesFixtureReplacementRoute
+  '/services/gas-line-repair': typeof ServicesGasLineRepairRoute
+  '/services/hot-water-system-repair': typeof ServicesHotWaterSystemRepairRoute
+  '/services/hydro-jetting': typeof ServicesHydroJettingRoute
+  '/services/pipe-repair': typeof ServicesPipeRepairRoute
+  '/services/pipe-replacement': typeof ServicesPipeReplacementRoute
   '/services/plumbing': typeof ServicesPlumbingRoute
+  '/services/repiping': typeof ServicesRepipingRoute
+  '/services/septic-tank-service': typeof ServicesSepticTankServiceRoute
+  '/services/slab-leak-repair': typeof ServicesSlabLeakRepairRoute
+  '/services/toilet-installation': typeof ServicesToiletInstallationRoute
+  '/services/toilets': typeof ServicesToiletsRoute
   '/services/water-heaters': typeof ServicesWaterHeatersRoute
+  '/services/water-lines': typeof ServicesWaterLinesRoute
+  '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog/': typeof BlogIndexRoute
   '/commercial/': typeof CommercialIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -185,9 +325,24 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
+    | '/services/burst-pipe-repair'
     | '/services/drain-cleaning'
+    | '/services/emergency-plumber'
+    | '/services/fixture-replacement'
+    | '/services/gas-line-repair'
+    | '/services/hot-water-system-repair'
+    | '/services/hydro-jetting'
+    | '/services/pipe-repair'
+    | '/services/pipe-replacement'
     | '/services/plumbing'
+    | '/services/repiping'
+    | '/services/septic-tank-service'
+    | '/services/slab-leak-repair'
+    | '/services/toilet-installation'
+    | '/services/toilets'
     | '/services/water-heaters'
+    | '/services/water-lines'
+    | '/services/water-softeners'
     | '/blog/'
     | '/commercial/'
     | '/services/'
@@ -204,9 +359,24 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
+    | '/services/burst-pipe-repair'
     | '/services/drain-cleaning'
+    | '/services/emergency-plumber'
+    | '/services/fixture-replacement'
+    | '/services/gas-line-repair'
+    | '/services/hot-water-system-repair'
+    | '/services/hydro-jetting'
+    | '/services/pipe-repair'
+    | '/services/pipe-replacement'
     | '/services/plumbing'
+    | '/services/repiping'
+    | '/services/septic-tank-service'
+    | '/services/slab-leak-repair'
+    | '/services/toilet-installation'
+    | '/services/toilets'
     | '/services/water-heaters'
+    | '/services/water-lines'
+    | '/services/water-softeners'
     | '/blog'
     | '/commercial'
     | '/services'
@@ -223,9 +393,24 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
+    | '/services/burst-pipe-repair'
     | '/services/drain-cleaning'
+    | '/services/emergency-plumber'
+    | '/services/fixture-replacement'
+    | '/services/gas-line-repair'
+    | '/services/hot-water-system-repair'
+    | '/services/hydro-jetting'
+    | '/services/pipe-repair'
+    | '/services/pipe-replacement'
     | '/services/plumbing'
+    | '/services/repiping'
+    | '/services/septic-tank-service'
+    | '/services/slab-leak-repair'
+    | '/services/toilet-installation'
+    | '/services/toilets'
     | '/services/water-heaters'
+    | '/services/water-lines'
+    | '/services/water-softeners'
     | '/blog/'
     | '/commercial/'
     | '/services/'
@@ -243,9 +428,24 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CommercialDrainCleaningRoute: typeof CommercialDrainCleaningRoute
+  ServicesBurstPipeRepairRoute: typeof ServicesBurstPipeRepairRoute
   ServicesDrainCleaningRoute: typeof ServicesDrainCleaningRoute
+  ServicesEmergencyPlumberRoute: typeof ServicesEmergencyPlumberRoute
+  ServicesFixtureReplacementRoute: typeof ServicesFixtureReplacementRoute
+  ServicesGasLineRepairRoute: typeof ServicesGasLineRepairRoute
+  ServicesHotWaterSystemRepairRoute: typeof ServicesHotWaterSystemRepairRoute
+  ServicesHydroJettingRoute: typeof ServicesHydroJettingRoute
+  ServicesPipeRepairRoute: typeof ServicesPipeRepairRoute
+  ServicesPipeReplacementRoute: typeof ServicesPipeReplacementRoute
   ServicesPlumbingRoute: typeof ServicesPlumbingRoute
+  ServicesRepipingRoute: typeof ServicesRepipingRoute
+  ServicesSepticTankServiceRoute: typeof ServicesSepticTankServiceRoute
+  ServicesSlabLeakRepairRoute: typeof ServicesSlabLeakRepairRoute
+  ServicesToiletInstallationRoute: typeof ServicesToiletInstallationRoute
+  ServicesToiletsRoute: typeof ServicesToiletsRoute
   ServicesWaterHeatersRoute: typeof ServicesWaterHeatersRoute
+  ServicesWaterLinesRoute: typeof ServicesWaterLinesRoute
+  ServicesWaterSoftenersRoute: typeof ServicesWaterSoftenersRoute
   BlogIndexRoute: typeof BlogIndexRoute
   CommercialIndexRoute: typeof CommercialIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -319,11 +519,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/water-softeners': {
+      id: '/services/water-softeners'
+      path: '/services/water-softeners'
+      fullPath: '/services/water-softeners'
+      preLoaderRoute: typeof ServicesWaterSoftenersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/water-lines': {
+      id: '/services/water-lines'
+      path: '/services/water-lines'
+      fullPath: '/services/water-lines'
+      preLoaderRoute: typeof ServicesWaterLinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/water-heaters': {
       id: '/services/water-heaters'
       path: '/services/water-heaters'
       fullPath: '/services/water-heaters'
       preLoaderRoute: typeof ServicesWaterHeatersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/toilets': {
+      id: '/services/toilets'
+      path: '/services/toilets'
+      fullPath: '/services/toilets'
+      preLoaderRoute: typeof ServicesToiletsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/toilet-installation': {
+      id: '/services/toilet-installation'
+      path: '/services/toilet-installation'
+      fullPath: '/services/toilet-installation'
+      preLoaderRoute: typeof ServicesToiletInstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/slab-leak-repair': {
+      id: '/services/slab-leak-repair'
+      path: '/services/slab-leak-repair'
+      fullPath: '/services/slab-leak-repair'
+      preLoaderRoute: typeof ServicesSlabLeakRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/septic-tank-service': {
+      id: '/services/septic-tank-service'
+      path: '/services/septic-tank-service'
+      fullPath: '/services/septic-tank-service'
+      preLoaderRoute: typeof ServicesSepticTankServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/repiping': {
+      id: '/services/repiping'
+      path: '/services/repiping'
+      fullPath: '/services/repiping'
+      preLoaderRoute: typeof ServicesRepipingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/plumbing': {
@@ -333,11 +582,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesPlumbingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/pipe-replacement': {
+      id: '/services/pipe-replacement'
+      path: '/services/pipe-replacement'
+      fullPath: '/services/pipe-replacement'
+      preLoaderRoute: typeof ServicesPipeReplacementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/pipe-repair': {
+      id: '/services/pipe-repair'
+      path: '/services/pipe-repair'
+      fullPath: '/services/pipe-repair'
+      preLoaderRoute: typeof ServicesPipeRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/hydro-jetting': {
+      id: '/services/hydro-jetting'
+      path: '/services/hydro-jetting'
+      fullPath: '/services/hydro-jetting'
+      preLoaderRoute: typeof ServicesHydroJettingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/hot-water-system-repair': {
+      id: '/services/hot-water-system-repair'
+      path: '/services/hot-water-system-repair'
+      fullPath: '/services/hot-water-system-repair'
+      preLoaderRoute: typeof ServicesHotWaterSystemRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/gas-line-repair': {
+      id: '/services/gas-line-repair'
+      path: '/services/gas-line-repair'
+      fullPath: '/services/gas-line-repair'
+      preLoaderRoute: typeof ServicesGasLineRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/fixture-replacement': {
+      id: '/services/fixture-replacement'
+      path: '/services/fixture-replacement'
+      fullPath: '/services/fixture-replacement'
+      preLoaderRoute: typeof ServicesFixtureReplacementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/emergency-plumber': {
+      id: '/services/emergency-plumber'
+      path: '/services/emergency-plumber'
+      fullPath: '/services/emergency-plumber'
+      preLoaderRoute: typeof ServicesEmergencyPlumberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/drain-cleaning': {
       id: '/services/drain-cleaning'
       path: '/services/drain-cleaning'
       fullPath: '/services/drain-cleaning'
       preLoaderRoute: typeof ServicesDrainCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/burst-pipe-repair': {
+      id: '/services/burst-pipe-repair'
+      path: '/services/burst-pipe-repair'
+      fullPath: '/services/burst-pipe-repair'
+      preLoaderRoute: typeof ServicesBurstPipeRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/commercial/drain-cleaning': {
@@ -387,9 +692,24 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   BlogSlugRoute: BlogSlugRoute,
   CommercialDrainCleaningRoute: CommercialDrainCleaningRoute,
+  ServicesBurstPipeRepairRoute: ServicesBurstPipeRepairRoute,
   ServicesDrainCleaningRoute: ServicesDrainCleaningRoute,
+  ServicesEmergencyPlumberRoute: ServicesEmergencyPlumberRoute,
+  ServicesFixtureReplacementRoute: ServicesFixtureReplacementRoute,
+  ServicesGasLineRepairRoute: ServicesGasLineRepairRoute,
+  ServicesHotWaterSystemRepairRoute: ServicesHotWaterSystemRepairRoute,
+  ServicesHydroJettingRoute: ServicesHydroJettingRoute,
+  ServicesPipeRepairRoute: ServicesPipeRepairRoute,
+  ServicesPipeReplacementRoute: ServicesPipeReplacementRoute,
   ServicesPlumbingRoute: ServicesPlumbingRoute,
+  ServicesRepipingRoute: ServicesRepipingRoute,
+  ServicesSepticTankServiceRoute: ServicesSepticTankServiceRoute,
+  ServicesSlabLeakRepairRoute: ServicesSlabLeakRepairRoute,
+  ServicesToiletInstallationRoute: ServicesToiletInstallationRoute,
+  ServicesToiletsRoute: ServicesToiletsRoute,
   ServicesWaterHeatersRoute: ServicesWaterHeatersRoute,
+  ServicesWaterLinesRoute: ServicesWaterLinesRoute,
+  ServicesWaterSoftenersRoute: ServicesWaterSoftenersRoute,
   BlogIndexRoute: BlogIndexRoute,
   CommercialIndexRoute: CommercialIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,

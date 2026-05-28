@@ -30,8 +30,8 @@ function PostCard({ post }: { post: WPPost }) {
   const cat = post._embedded?.["wp:term"]?.[0]?.[0]?.name;
   return (
     <article
-      className="group rounded-xl overflow-hidden shadow-md hover:shadow-[0_8px_30px_rgba(91,155,213,0.4)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-      style={{ background: "#5B9BD5" }}
+      className="group rounded-xl overflow-hidden shadow-md hover:shadow-[0_8px_30px_rgba(91,155,213,0.4)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border-[3px] border-[#1E3A6E]"
+      style={{ background: "#A8C4FB" }}
     >
       <div className="aspect-[16/10] relative overflow-hidden">
         {img ? (
@@ -61,7 +61,7 @@ function PostCard({ post }: { post: WPPost }) {
         <Link
           to="/blog/$slug"
           params={{ slug: post.slug }}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-white hover:gap-2 hover:text-white/80 transition-all"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-[#1E3A6E] hover:gap-2 hover:text-[#1E3A6E]/70 transition-all"
         >
           Read More <ArrowRight className="size-4" />
         </Link>
@@ -74,8 +74,8 @@ function PlaceholderCard({ i }: { i: number }) {
   const data = PLACEHOLDER_DATA[i];
   return (
     <article
-      className="group rounded-xl overflow-hidden shadow-md hover:shadow-[0_8px_30px_rgba(91,155,213,0.4)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-      style={{ background: "#5B9BD5" }}
+      className="group rounded-xl overflow-hidden shadow-md hover:shadow-[0_8px_30px_rgba(91,155,213,0.4)] hover:-translate-y-1 transition-all duration-300 cursor-pointer border-[3px] border-[#1E3A6E]"
+      style={{ background: "#A8C4FB" }}
     >
       <div className="aspect-[16/10] relative overflow-hidden">
         <img
@@ -93,7 +93,7 @@ function PlaceholderCard({ i }: { i: number }) {
         <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">{data.title}</h3>
         <Link
           to="/blog"
-          className="inline-flex items-center gap-1 text-sm font-semibold text-white hover:gap-2 hover:text-white/80 transition-all"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-[#1E3A6E] hover:gap-2 hover:text-[#1E3A6E]/70 transition-all"
         >
           Read More <ArrowRight className="size-4" />
         </Link>

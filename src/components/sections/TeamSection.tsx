@@ -103,7 +103,8 @@ export function TeamSection() {
             <div
               className="absolute -bottom-5 -left-5 z-20 flex items-center gap-3
                          bg-white rounded-xl px-4 py-3 shadow-[0_8px_32px_rgba(30,58,110,0.18)]
-                         border border-[#1E3A6E]/10"
+                         border border-[#1E3A6E]/10
+                         scale-[1.15] origin-bottom-left"
             >
               <div
                 className="flex items-center justify-center w-10 h-10 rounded-full text-white text-lg font-black shrink-0"

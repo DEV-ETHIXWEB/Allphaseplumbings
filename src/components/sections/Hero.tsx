@@ -48,16 +48,25 @@ export function Hero() {
           <div
             className="pb-20 lg:-ml-10 xl:-ml-16 lg:[transform:scale(1.1)_translateX(0%)] lg:[transform-origin:top_left]"
           >
-            <span className="text-[#1E3A6E] font-bold text-[28px] tracking-wide">
+            <span
+              className="text-white font-bold text-[28px] tracking-wide"
+              style={{
+                WebkitTextStroke: "1px #1E3A6E",
+                paintOrder: "stroke fill",
+                textShadow: "0 2px 8px rgba(15,34,70,0.55)",
+              }}
+            >
               All Phase Plumbing
             </span>
 
             <h1
-              className="mt-3 text-[27px] sm:text-[36px] lg:text-[38px] text-[#1E3A6E] leading-[1.15] lg:whitespace-nowrap"
+              className="mt-3 text-[30px] sm:text-[40px] lg:text-[42px] text-white leading-[1.15] lg:whitespace-nowrap"
               style={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 900,
-                textShadow: "0 8px 6px #6399ED",
+                WebkitTextStroke: "1.5px #1E3A6E",
+                paintOrder: "stroke fill",
+                textShadow: "0 4px 14px rgba(15,34,70,0.7), 0 2px 4px rgba(0,0,0,0.35)",
               }}
             >
               Your Home&rsquo;s Plumbing,
@@ -65,7 +74,14 @@ export function Hero() {
               Done Right the First Time.
             </h1>
 
-            <p className="mt-5 text-[21px] sm:text-[25px] text-gray-700 max-w-lg leading-relaxed font-medium">
+            <p
+              className="mt-5 text-[21px] sm:text-[25px] text-white max-w-lg leading-relaxed font-medium"
+              style={{
+                WebkitTextStroke: "0.8px #1E3A6E",
+                paintOrder: "stroke fill",
+                textShadow: "0 2px 6px rgba(15,34,70,0.55)",
+              }}
+            >
               Serving Tukwila &amp; the Greater Seattle Area with Expert Care Since 1989.
             </p>
 
@@ -86,7 +102,16 @@ export function Hero() {
                 <span className="text-[#EA4335]">e</span>
               </p>
               <div className="flex items-center gap-2.5 mt-1.5">
-                <span className="text-[19px] font-semibold text-gray-700">5 Star Reviews</span>
+                <span
+                  className="text-[19px] font-semibold text-white"
+                  style={{
+                    WebkitTextStroke: "0.8px #1E3A6E",
+                    paintOrder: "stroke fill",
+                    textShadow: "0 2px 6px rgba(15,34,70,0.55)",
+                  }}
+                >
+                  5 Star Reviews
+                </span>
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="size-6 fill-[#FFB800] text-[#FFB800]" />
@@ -110,7 +135,7 @@ export function Hero() {
               alt="All Phase Plumbing technician"
               aria-hidden="true"
               className="h-[420px] xl:h-[480px] w-auto object-contain drop-shadow-2xl select-none pointer-events-none"
-              style={{ transform: "translateY(2%)" }}
+              style={{ transform: "translateY(calc(2% + 3px))" }}
               loading="eager"
               decoding="async"
             />
@@ -159,48 +184,48 @@ export function Hero() {
               {/* Contact promo (left column on lg) */}
               <div className="mb-4 lg:mb-0 text-white lg:border-r lg:border-white/25 lg:pr-6">
                 <h2
-                  className="text-2xl sm:text-[34px] lg:text-[38px] font-bold leading-tight"
+                  className="text-[26px] sm:text-[37px] lg:text-[42px] font-bold leading-tight"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   Contact us today
                 </h2>
-                <p className="mt-2 text-[17px] sm:text-[20px] font-bold leading-snug text-[#F5C842]">
+                <p className="mt-2 text-[19px] sm:text-[22px] font-bold leading-snug text-[#F5C842]">
                   Same Day Service
                 </p>
-                <p className="text-[15px] sm:text-[17px] font-semibold leading-snug mt-1">
+                <p className="text-[16.5px] sm:text-[19px] font-semibold leading-snug mt-1">
                   Plumbing and Drain Cleaning
                 </p>
-                <p className="text-[14px] font-normal text-white/85 mt-1">
+                <p className="text-[15px] font-normal text-white/85 mt-1">
                   When booked before 2pm, Monday &ndash; Friday
                 </p>
 
                 {/* Trust badges row */}
                 <div className="hidden lg:flex flex-col gap-2 mt-5 pt-5 border-t border-white/20">
-                  <div className="flex items-center gap-2.5 text-white">
-                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="inline-flex size-[31px] items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
                       ✓
                     </span>
-                    <span className="text-[15px] font-semibold">Licensed &amp; Insured</span>
+                    <span className="text-[16.5px] font-semibold">Licensed &amp; Insured</span>
                   </div>
-                  <div className="flex items-center gap-2.5 text-white">
-                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="inline-flex size-[31px] items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
                       ✓
                     </span>
-                    <span className="text-[15px] font-semibold">Available 24/7</span>
+                    <span className="text-[16.5px] font-semibold">Available 24/7</span>
                   </div>
-                  <div className="flex items-center gap-2.5 text-white">
-                    <span className="inline-flex size-7 items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
+                  <div className="flex items-center gap-3 text-white">
+                    <span className="inline-flex size-[31px] items-center justify-center rounded-full bg-white/15 text-[#F5C842] font-black">
                       ✓
                     </span>
-                    <span className="text-[15px] font-semibold">Serving Seattle Since 1989</span>
+                    <span className="text-[16.5px] font-semibold">Serving Seattle Since 1989</span>
                   </div>
                 </div>
 
                 <a
                   href={opts.phone_href}
-                  className="hidden lg:inline-flex items-center gap-2 mt-5 px-4 py-2.5 rounded-lg bg-white/15 hover:bg-white/25 transition-colors font-bold text-white text-[17px]"
+                  className="hidden lg:inline-flex items-center gap-2.5 mt-5 px-[18px] py-3 rounded-lg bg-white/15 hover:bg-white/25 transition-colors font-bold text-white text-[19px]"
                 >
-                  <Phone className="size-5" />
+                  <Phone className="size-[22px]" />
                   {opts.phone}
                 </a>
               </div>
@@ -215,24 +240,10 @@ export function Hero() {
                 </h2>
 
                 <form onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2.5 sm:gap-3 items-stretch">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 items-stretch">
                   <input
                     type="text"
-                    placeholder="FIRST NAME*"
-                    required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="LAST NAME*"
-                    required
-                    className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
-                  />
-
-                  <input
-                    type="email"
-                    placeholder="EMAIL*"
+                    placeholder="FULL NAME*"
                     required
                     className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />
@@ -245,8 +256,8 @@ export function Hero() {
                   />
 
                   <input
-                    type="text"
-                    placeholder="STREET ADDRESS*"
+                    type="email"
+                    placeholder="EMAIL*"
                     required
                     className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                   />

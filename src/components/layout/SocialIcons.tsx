@@ -1,4 +1,4 @@
-import { Instagram, Facebook } from "lucide-react";
+import { useSiteOptions } from "@/hooks/use-site-options";
 
 /** TikTok icon — lucide-react doesn't ship one, so inline a simple SVG */
 function TikTokIcon({ className }: { className?: string }) {
@@ -9,20 +9,42 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
+/** Instagram — solid/filled glyph */
+function Instagram({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.71 3.71 0 0 1-1.38-.9 3.71 3.71 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.93 5.93 0 0 0-2.14 1.39A5.93 5.93 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.73 1.46 1.39 2.12a5.93 5.93 0 0 0 2.12 1.39c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.93 5.93 0 0 0 2.12-1.39 5.93 5.93 0 0 0 1.39-2.12c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.93 5.93 0 0 0-1.39-2.12A5.93 5.93 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
+    </svg>
+  );
+}
+
+/** Facebook — solid/filled glyph */
+function Facebook({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z" />
+    </svg>
+  );
+}
+
 export function SocialIcons() {
+  const opts = useSiteOptions();
+
   const items = [
-    { label: "TikTok", Icon: TikTokIcon },
-    { label: "Instagram", Icon: Instagram },
-    { label: "Facebook", Icon: Facebook },
+    { label: "TikTok", href: opts.social_tiktok, Icon: TikTokIcon },
+    { label: "Instagram", href: opts.social_instagram, Icon: Instagram },
+    { label: "Facebook", href: opts.social_facebook, Icon: Facebook },
   ];
 
   return (
-    <div className="flex items-center justify-center gap-6 h-full w-full bg-[#1E3A8A] px-6">
-      {items.map(({ label, Icon }) => (
+    <div className="flex items-center justify-around h-full w-full bg-[#1E3A8A] px-6">
+      {items.map(({ label, href, Icon }) => (
         <a
           key={label}
-          href="#"
+          href={href}
           aria-label={label}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center justify-center size-9 text-white hover:text-[#F5C842] hover:scale-110 transition-all duration-200"
         >
           <Icon className="size-5" />

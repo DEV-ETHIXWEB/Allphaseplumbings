@@ -123,8 +123,10 @@ const Particles = ({
 
     let renderer: any, gl: any, camera: any, geometry: any, program: any, particles: any;
     let animationFrameId: number;
+    let cancelled = false;
 
     import("ogl").then(({ Renderer, Camera, Geometry, Program, Mesh }) => {
+      if (cancelled) return;
       renderer = new Renderer({ dpr: pixelRatio, depth: false, alpha: true });
       gl = renderer.gl;
       container.appendChild(gl.canvas);
@@ -231,6 +233,7 @@ const Particles = ({
     });
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(animationFrameId);
       const resize = (container as any)._particleResize;
       if (resize) window.removeEventListener("resize", resize);
@@ -239,6 +242,8 @@ const Particles = ({
       if (gl?.canvas && container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
+      // Defensive: clear any straggler canvases that may have been appended after cleanup
+      while (container.firstChild) container.removeChild(container.firstChild);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

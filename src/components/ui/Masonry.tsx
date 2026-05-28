@@ -77,11 +77,11 @@ export function Masonry({
   items,
   ease = 'power3.out',
   duration = 0.6,
-  stagger = 0.05,
+  stagger = 0.06,
   animateFrom = 'bottom',
   scaleOnHover = true,
   hoverScale = 0.95,
-  blurToFocus = true,
+  blurToFocus = false,
   colorShiftOnHover = false
 }: MasonryProps) {
   const columns = useMedia(
@@ -176,45 +176,44 @@ export function Masonry({
 
     grid.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
-      const animationProps = {
-        x: item.x,
-        y: item.y,
-        width: item.w,
-        height: item.h
-      };
+
+      // Always set width/height instantly — no layout animation, no reflow
+      gsap.set(selector, { width: item.w, height: item.h });
 
       if (!hasMounted.current) {
         const initialPos = getInitialPosition(item);
-        const initialState = {
-          opacity: 0,
-          x: initialPos.x,
-          y: initialPos.y,
-          width: item.w,
-          height: item.h,
-          ...(blurToFocus && { filter: 'blur(10px)' })
-        };
 
-        gsap.fromTo(selector, initialState, {
-          opacity: 1,
-          ...animationProps,
-          ...(blurToFocus && { filter: 'blur(0px)' }),
-          duration: 0.8,
-          ease: 'power3.out',
-          delay: index * stagger
-        });
+        // Only animate transform (x/y) + opacity — both GPU-composited, zero reflow
+        gsap.fromTo(
+          selector,
+          { opacity: 0, x: initialPos.x, y: initialPos.y },
+          {
+            opacity: 1,
+            x: item.x,
+            y: item.y,
+            duration: 0.96,
+            ease: 'power3.out',
+            delay: index * stagger,
+            force3D: true,
+            overwrite: true,
+          }
+        );
       } else {
+        // On resize: snap width/height, smoothly tween position only
         gsap.to(selector, {
-          ...animationProps,
+          x: item.x,
+          y: item.y,
           duration: duration,
           ease: ease,
-          overwrite: 'auto'
+          force3D: true,
+          overwrite: 'auto',
         });
       }
     });
 
     hasMounted.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grid, imagesReady, isVisible, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, isVisible, stagger, animateFrom, duration, ease]);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>, item: typeof grid[0]) => {
     const element = e.currentTarget;
@@ -224,7 +223,9 @@ export function Masonry({
       gsap.to(selector, {
         scale: hoverScale,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        force3D: true,
+        overwrite: 'auto',
       });
     }
 
@@ -247,7 +248,9 @@ export function Masonry({
       gsap.to(selector, {
         scale: 1,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        force3D: true,
+        overwrite: 'auto',
       });
     }
 

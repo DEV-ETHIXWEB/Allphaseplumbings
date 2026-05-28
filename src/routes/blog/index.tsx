@@ -45,8 +45,8 @@ const STATIC_ARTICLES = [
     excerpt: "January in the Pacific Northwest is often deceptive. While our neighbors in the Midwest are…",
     date: "January 6, 2026",
     comments: "No Comments",
-    gradient: "linear-gradient(135deg, #B8C9D9 0%, #8BA3BC 100%)",
-    emoji: "❄️",
+    img: "https://images.unsplash.com/photo-1704915171712-41bd8b5652a0?w=800&q=80",
+    imgAlt: "Frozen outdoor faucet covered in snow and ice",
   },
   {
     slug: "handyman-vs-professional-plumber-seattle",
@@ -54,8 +54,8 @@ const STATIC_ARTICLES = [
     excerpt: "As a homeowner in Seattle, you've probably faced a leaky faucet, a running toilet, or…",
     date: "November 10, 2025",
     comments: "No Comments",
-    gradient: "linear-gradient(135deg, #4A6B8A 0%, #2D4660 100%)",
-    emoji: "🔧",
+    img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&q=80",
+    imgAlt: "Professional plumber working under a kitchen sink",
   },
   {
     slug: "tankless-water-heaters-seattle-worth-upgrade",
@@ -63,8 +63,8 @@ const STATIC_ARTICLES = [
     excerpt: "As a homeowner in Seattle, you're always looking for ways to make your home more…",
     date: "November 10, 2025",
     comments: "No Comments",
-    gradient: "linear-gradient(135deg, #D4A574 0%, #A07A4F 100%)",
-    emoji: "🚿",
+    img: "https://images.unsplash.com/photo-1575299737366-39c143459bc5?w=800&q=80",
+    imgAlt: "Tankless water heater mounted on wall above sink",
   },
   {
     slug: "preventing-tree-root-damage-sewer-lines",
@@ -72,10 +72,10 @@ const STATIC_ARTICLES = [
     excerpt: "If you live in the Seattle Metro Area, you're surrounded by beautiful, mature trees. From…",
     date: "November 10, 2025",
     comments: "1 Comment",
-    gradient: "linear-gradient(135deg, #6B5544 0%, #3D2F22 100%)",
-    emoji: "🌳",
+    img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
+    imgAlt: "Tangled tree roots spreading across the ground",
   },
-] as const;
+];
 
 function BlogIndex() {
   const fetchPostsFn = useServerFn(fetchPosts);
@@ -192,12 +192,14 @@ function BlogIndex() {
                   <Link
                     to="/blog/$slug"
                     params={{ slug: a.slug }}
-                    className="block aspect-[16/10] relative overflow-hidden"
-                    style={{ background: a.gradient }}
+                    className="block aspect-[16/10] relative overflow-hidden bg-slate-200"
                   >
-                    <div className="w-full h-full flex items-center justify-center text-7xl opacity-80 group-hover:scale-110 transition-transform duration-500">
-                      {a.emoji}
-                    </div>
+                    <img
+                      src={a.img}
+                      alt={a.imgAlt}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                   <div className="px-5 pt-5 pb-5 flex flex-col flex-1">

@@ -17,6 +17,15 @@ function TikTokGlyph({ className }: { className?: string }) {
   );
 }
 
+/* Facebook — solid filled glyph (navy via currentColor) */
+function FacebookFilled({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z" />
+    </svg>
+  );
+}
+
 /* ── Navigation config ─────────────────────────────────────────────────────── */
 type DropItem = { to: string; label: string };
 type NavItem = {
@@ -36,36 +45,36 @@ const NAV: NavItem[] = [
     label: "Plumbing",
     dropCols: 3,
     dropdown: [
-      { to: "/services/plumbing", label: "Drain Cleaning" },
-      { to: "/services/plumbing", label: "Emergency Plumber" },
+      { to: "/services/drain-cleaning", label: "Drain Cleaning" },
+      { to: "/services/emergency-plumber", label: "Emergency Plumber" },
       { to: "/services/plumbing", label: "Garbage Disposals" },
-      { to: "/services/plumbing", label: "Hydro Jetting" },
-      { to: "/services/plumbing", label: "Repiping" },
+      { to: "/services/hydro-jetting", label: "Hydro Jetting" },
+      { to: "/services/repiping", label: "Repiping" },
       { to: "/services/plumbing", label: "Sump Pumps" },
-      { to: "/services/plumbing", label: "Toilets" },
+      { to: "/services/toilets", label: "Toilets" },
       { to: "/services/water-heaters", label: "Tankless Water Heaters" },
       { to: "/services/water-heaters", label: "Water Heaters" },
-      { to: "/services/plumbing", label: "Water Lines" },
-      { to: "/services/plumbing", label: "Water Softeners" },
+      { to: "/services/water-lines", label: "Water Lines" },
+      { to: "/services/water-softeners", label: "Water Softeners" },
       { to: "/services/plumbing", label: "Leak Detection" },
-      { to: "/services/plumbing", label: "Pipe Repair" },
-      { to: "/services/plumbing", label: "Burst Pipe Repair" },
+      { to: "/services/pipe-repair", label: "Pipe Repair" },
+      { to: "/services/burst-pipe-repair", label: "Burst Pipe Repair" },
       { to: "/services/plumbing", label: "Faucet Installation" },
-      { to: "/services/sewer-services", label: "Sewer Line Repair" },
+      { to: "/services/sewer-services/sewer-repair", label: "Sewer Line Repair" },
       { to: "/services/plumbing", label: "Shower Installation" },
-      { to: "/services/plumbing", label: "Toilet Installation" },
-      { to: "/services/plumbing", label: "Hot Water System Repair" },
+      { to: "/services/toilet-installation", label: "Toilet Installation" },
+      { to: "/services/hot-water-system-repair", label: "Hot Water System Repair" },
       { to: "/services/drain-cleaning", label: "Clogged Drain Repair" },
       { to: "/services/plumbing", label: "Backflow Testing" },
-      { to: "/services/plumbing", label: "Gas Line Repair" },
+      { to: "/services/gas-line-repair", label: "Gas Line Repair" },
       { to: "/services/sewer-services", label: "Sewer Camera Inspection" },
       { to: "/services/plumbing", label: "Bathtub Installation" },
-      { to: "/services/plumbing", label: "Septic Tank Service" },
-      { to: "/services/plumbing", label: "Fixture Replacement" },
+      { to: "/services/septic-tank-service", label: "Septic Tank Service" },
+      { to: "/services/fixture-replacement", label: "Fixture Replacement" },
       { to: "/services/plumbing", label: "Outdoor Faucet Repair" },
-      { to: "/services/plumbing", label: "Pipe Replacement" },
+      { to: "/services/pipe-replacement", label: "Pipe Replacement" },
       { to: "/services/plumbing", label: "Water Filtration System Installation" },
-      { to: "/services/plumbing", label: "Slab Leak Repair" },
+      { to: "/services/slab-leak-repair", label: "Slab Leak Repair" },
     ],
   },
 
@@ -210,37 +219,37 @@ export function Header() {
             <img
               src={logo}
               alt="All Phase Plumbing"
-              className="h-12 w-auto object-contain"
+              className="h-[53px] w-auto object-contain"
             />
           </Link>
 
-          <div className="justify-self-end flex items-center gap-1.5">
+          <div className="justify-self-end flex items-center gap-0">
             <a
-              href="https://instagram.com"
+              href={opts.social_instagram}
               aria-label="Instagram"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <Instagram className="size-5" />
+              <Instagram className="size-[22px]" />
             </a>
             <a
-              href="https://facebook.com"
+              href={opts.social_facebook}
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <Facebook className="size-5" />
+              <Facebook className="size-[22px]" />
             </a>
             <a
-              href="https://tiktok.com"
+              href={opts.social_tiktok}
               aria-label="TikTok"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <TikTokGlyph className="size-5" />
+              <TikTokGlyph className="size-[22px]" />
             </a>
           </div>
         </div>

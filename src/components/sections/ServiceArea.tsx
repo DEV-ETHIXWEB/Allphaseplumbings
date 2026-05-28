@@ -124,7 +124,7 @@ function ServiceMap() {
   return (
     <div
       ref={mapRef}
-      className="w-full h-full min-h-[160px] lg:min-h-[480px]"
+      className="w-full h-full min-h-[300px] lg:min-h-[500px]"
       style={{ zIndex: 0 }}
     />
   );
@@ -175,10 +175,10 @@ export function ServiceArea() {
         </div>
 
         {/* Two-column layout: map LEFT, city list RIGHT */}
-        <div className="grid grid-cols-2 gap-3 lg:gap-6 items-stretch">
-          {/* ── LEFT: Map — isolation:isolate keeps Leaflet z-indexes contained ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* ── LEFT: Map — full-bleed on mobile, contained on desktop ── */}
           <div
-            className="rounded-2xl overflow-hidden border-2 border-white/25 shadow-2xl bg-white aspect-square order-1 h-full"
+            className="-mx-4 lg:mx-0 rounded-none lg:rounded-2xl overflow-hidden border-y-2 lg:border-2 border-white/25 shadow-2xl bg-white order-1 h-[300px] sm:h-[380px] lg:h-[500px]"
             style={{ isolation: "isolate", position: "relative" }}
           >
             <ServiceMap />
@@ -186,7 +186,7 @@ export function ServiceArea() {
 
           {/* ── RIGHT: City list ── */}
           <div
-            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 aspect-square flex flex-col justify-start overflow-y-auto"
+            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 flex flex-col justify-start lg:h-[500px] overflow-y-auto"
             style={{ background: "rgba(255,255,255,0.10)", backdropFilter: "blur(12px)" }}
           >
             <div className="grid grid-cols-1 gap-y-1">

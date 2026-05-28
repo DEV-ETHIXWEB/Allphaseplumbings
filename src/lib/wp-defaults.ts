@@ -109,6 +109,11 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   cta_subheading: "Same Day Service",
   cta_body: "Plumbing and Drain Cleaning — When booked before 2pm, Mon–Fri",
   dispatch_message: "⚡ Dispatching certified local technicians near Tukwila WA...",
+
+  // Social media
+  social_facebook: "https://www.facebook.com/allphaseplumbing",
+  social_instagram: "https://www.instagram.com/allphaseplumbing",
+  social_tiktok: "https://www.tiktok.com/@allphaseplumbing",
 };
 
 // ── Default services (used when WP CPT returns nothing) ───────────────────────
