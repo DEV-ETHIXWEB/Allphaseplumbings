@@ -274,10 +274,41 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
   );
 }
 
+/* ── Service-area polygon (must match the one drawn on the map) ── */
+const SERVICE_AREA_POLYGON: [number, number][] = [
+  [47.77, -122.42],
+  [47.77, -122.05],
+  [47.68, -122.04],
+  [47.6, -121.97],
+  [47.49, -122.03],
+  [47.32, -122.03],
+  [47.24, -122.13],
+  [47.22, -122.32],
+  [47.26, -122.52],
+  [47.35, -122.58],
+  [47.48, -122.55],
+  [47.62, -122.52],
+  [47.73, -122.48],
+  [47.77, -122.42],
+];
+
+/** Standard ray-casting point-in-polygon test. */
+function pointInPolygon(lat: number, lon: number, poly: [number, number][]): boolean {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [yi, xi] = poly[i];
+    const [yj, xj] = poly[j];
+    const intersect =
+      yi > lat !== yj > lat && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi;
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
 /* ── ZIP geocoder hook (Nominatim, debounced) ───────────────── */
 function useZipGeocode(zip: string) {
   const [state, setState] = useState<{
-    status: "idle" | "loading" | "ok" | "error";
+    status: "idle" | "loading" | "ok" | "out" | "error";
     location: ZipLocation | null;
   }>({ status: "idle", location: null });
 
@@ -308,9 +339,12 @@ function useZipGeocode(zip: string) {
             a.city || a.town || a.village || a.hamlet || a.suburb || a.county || "";
           const state_ = a.state || "";
           const label = [city, state_, zip].filter(Boolean).join(", ");
+          const lat = parseFloat(hit.lat);
+          const lon = parseFloat(hit.lon);
+          const served = pointInPolygon(lat, lon, SERVICE_AREA_POLYGON);
           setState({
-            status: "ok",
-            location: { lat: parseFloat(hit.lat), lon: parseFloat(hit.lon), label },
+            status: served ? "ok" : "out",
+            location: { lat, lon, label },
           });
         })
         .catch(() => {
@@ -367,7 +401,7 @@ function ContactFormBox({
 }: {
   zip: string;
   setZip: (z: string) => void;
-  zipStatus: "idle" | "loading" | "ok" | "error";
+  zipStatus: "idle" | "loading" | "ok" | "out" | "error";
 }) {
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [status, setStatus] = useState<"idle" | "sent">("idle");
@@ -433,6 +467,8 @@ function ContactFormBox({
                   className={`${inputBase}
                     ${zipStatus === "ok"
                       ? "!border-emerald-400 !bg-emerald-500/10"
+                      : zipStatus === "out"
+                      ? "!border-amber-400 !bg-amber-500/10"
                       : zipStatus === "error"
                       ? "!border-red-400 !bg-red-500/10"
                       : ""}`}
@@ -443,6 +479,11 @@ function ContactFormBox({
                 {zipStatus === "ok" && (
                   <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-emerald-400 font-black text-lg animate-in zoom-in duration-300">
                     ✓
+                  </span>
+                )}
+                {zipStatus === "out" && (
+                  <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-400 font-black text-lg">
+                    !
                   </span>
                 )}
               </div>
@@ -532,12 +573,15 @@ const SERVICE_CITIES = [
 function ContactServiceAreaSection({
   zipLocation,
   zipStatus,
+  onResetZip,
 }: {
   zipLocation: ZipLocation | null;
-  zipStatus: "idle" | "loading" | "ok" | "error";
+  zipStatus: "idle" | "loading" | "ok" | "out" | "error";
+  onResetZip: () => void;
 }) {
   const showInfo = zipStatus === "ok" && zipLocation;
-  const showCities = !showInfo;
+  const showOutOfArea = zipStatus === "out" && zipLocation;
+  const showCities = !showInfo && !showOutOfArea;
 
   return (
     <div className="py-20">
@@ -561,15 +605,53 @@ function ContactServiceAreaSection({
               className="text-[28px] sm:text-[36px] font-black text-white leading-tight"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
-              {showInfo ? "We Serve Your Area" : "Find Your Service Area"}
+              {showInfo
+                ? "We Serve Your Area"
+                : showOutOfArea
+                ? "Sorry, We Don't Serve Here Yet"
+                : "Find Your Service Area"}
             </h2>
             <div className="mt-3 w-14 h-1.5 rounded-full bg-[#F5C842]" />
 
             <p className="mt-4 text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
               {showInfo
                 ? "Great news — we dispatch local technicians to your neighborhood daily. Same-day service across Greater Seattle, with honest, upfront pricing on every job."
+                : showOutOfArea
+                ? `Looks like ${zipLocation?.label} is outside our current service area. We're sorry — we don't serve here for now. Below are the cities we currently cover.`
                 : "Enter your ZIP code in the form above and we'll instantly check coverage, drop a pin on your area, and connect you with our nearest technician."}
             </p>
+
+            {/* Out-of-area banner */}
+            {showOutOfArea && (
+              <div
+                className="mt-5 rounded-2xl border border-amber-400/40 bg-amber-500/10 p-4 flex flex-col gap-3"
+                role="alert"
+              >
+                <div className="flex items-start gap-3">
+                  <div
+                    className="flex items-center justify-center size-9 rounded-xl shrink-0 text-[#1E3A6E] font-black"
+                    style={{ background: "linear-gradient(135deg,#F5C842,#e6b228)" }}
+                  >
+                    !
+                  </div>
+                  <div className="text-white/90 text-[14px] leading-relaxed">
+                    <p className="font-bold text-white">
+                      {zipLocation?.label} is outside our service area.
+                    </p>
+                    <p className="text-white/75 mt-0.5">
+                      Sorry — we don't serve here for now.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={onResetZip}
+                  className="self-start inline-flex items-center gap-2 px-4 py-2 text-[13px] font-bold uppercase tracking-wide text-[#1E3A6E] bg-[#F5C842] hover:bg-[#eec136] active:scale-[0.98] transition-all duration-150"
+                >
+                  ← Go Back to Area List
+                </button>
+              </div>
+            )}
 
             {/* Cities list — shown when no valid ZIP */}
             {showCities && (
@@ -693,7 +775,11 @@ function ContactPage() {
           />
         </div>
         <ContactFormBox zip={zip} setZip={setZip} zipStatus={zipStatus} />
-        <ContactServiceAreaSection zipLocation={zipLocation} zipStatus={zipStatus} />
+        <ContactServiceAreaSection
+          zipLocation={zipLocation}
+          zipStatus={zipStatus}
+          onResetZip={() => setZip("")}
+        />
       </section>
 
       <Badges />

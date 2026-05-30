@@ -13,10 +13,22 @@ export function Badges() {
           Badges
         </h2>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-[94px] max-w-5xl mx-auto">
-          <img src={bbb} alt="BBB Accredited Business" className="h-24 w-auto object-contain" />
-          <img src={angi} alt="Angi Super Service Award" className="h-[154px] w-auto object-contain" />
-          <img src={phcc} alt="PHCC Member" className="h-[121px] w-auto object-contain" />
+        <div className="flex flex-row items-center justify-center gap-2 sm:gap-[94px] max-w-5xl mx-auto px-2">
+          <img
+            src={bbb}
+            alt="BBB Accredited Business"
+            className="h-auto sm:h-24 w-auto max-w-[30%] sm:max-w-none object-contain shrink"
+          />
+          <img
+            src={angi}
+            alt="Angi Super Service Award"
+            className="h-auto sm:h-[154px] w-auto max-w-[30%] sm:max-w-none object-contain shrink"
+          />
+          <img
+            src={phcc}
+            alt="PHCC Member"
+            className="h-auto sm:h-[121px] w-auto max-w-[30%] sm:max-w-none object-contain shrink"
+          />
         </div>
       </div>
     </section>

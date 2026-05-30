@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/layout/PageShell";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 
-export const Route = createFileRoute("/service-area")({
+export const Route = createFileRoute("/service-area/")({
   head: () => ({
     meta: [
       { title: "Service Area — All Phase Plumbing Greater Seattle" },

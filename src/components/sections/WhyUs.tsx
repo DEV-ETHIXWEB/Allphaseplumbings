@@ -54,7 +54,7 @@ export function WhyUs() {
                   >
                     {r.title}
                   </h3>
-                  <p className="text-sm lg:text-lg text-white/70 leading-relaxed">
+                  <p className="hidden lg:block text-sm lg:text-lg text-white/70 leading-relaxed">
                     {r.desc}
                   </p>
                 </div>

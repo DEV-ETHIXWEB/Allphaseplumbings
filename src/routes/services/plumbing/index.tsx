@@ -6,6 +6,7 @@ import {
 } from "@/components/sections/ServicePageTemplate";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { CustomerQuote } from "@/components/sections/CustomerQuote";
+import { PlumbingServicesGrid } from "@/components/sections/PlumbingServicesGrid";
 
 const CONTENT: ServicePageContent = {
   title: "Plumbing",
@@ -131,7 +132,7 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
-export const Route = createFileRoute("/services/plumbing")({
+export const Route = createFileRoute("/services/plumbing/")({
   head: () => ({
     meta: [
       { title: "Plumbing Repair Seattle — All Phase Plumbing" },
@@ -147,6 +148,7 @@ export const Route = createFileRoute("/services/plumbing")({
   component: () => (
     <PageShell>
       <ServicePageTemplate content={CONTENT} />
+      <PlumbingServicesGrid />
       <WhyUs />
       <CustomerQuote />
     </PageShell>
