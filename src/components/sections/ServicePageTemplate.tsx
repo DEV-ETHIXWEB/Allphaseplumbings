@@ -29,7 +29,7 @@ export type ServicePageContent = {
 /* ───── Big hero with title and background image at 30% opacity ───── */
 function ServicePageHero({ title, heroImage }: { title: string; heroImage?: string }) {
   return (
-    <section className="relative bg-[#eef4fb] pt-20 pb-15 sm:pt-28 sm:pb-21 overflow-hidden border-b border-[#1E3A6E]/10">
+    <section className="relative bg-[#eef4fb] pt-16 pb-12 sm:pt-[90px] sm:pb-[68px] overflow-hidden border-b border-[#1E3A6E]/10">
       {heroImage && (
         <img
           src={heroImage}
@@ -42,7 +42,7 @@ function ServicePageHero({ title, heroImage }: { title: string; heroImage?: stri
 
       <div className="relative container mx-auto px-4 text-center">
         <h1
-          className="text-[33px] sm:text-[54px] lg:text-[66px] font-black tracking-tight text-[#1E3A6E]"
+          className="text-[26px] sm:text-[43px] lg:text-[53px] font-black tracking-tight text-[#1E3A6E]"
           style={{
             fontFamily: "'Poppins', sans-serif",
             letterSpacing: "0.02em",

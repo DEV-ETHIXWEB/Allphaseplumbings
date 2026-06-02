@@ -111,7 +111,7 @@ const Particles = ({
   sizeRandomness = 1,
   cameraDistance = 20,
   disableRotation = false,
-  pixelRatio = 1,
+  pixelRatio,
   className = "",
 }: ParticlesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,15 +119,24 @@ const Particles = ({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (typeof window === "undefined" || !container) return;
+
+    // Respect users who prefer reduced motion — skip the whole WebGL pipeline.
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+
+    // Keep DPR at 1 for particles — soft round sprites don't benefit from retina sampling
+    // and rendering at 2x/3x triples the fill-rate cost.
+    const dpr = pixelRatio ?? 1;
 
     let renderer: any, gl: any, camera: any, geometry: any, program: any, particles: any;
     let animationFrameId: number;
     let cancelled = false;
+    let isVisible = true; // gate the rAF loop so offscreen instances cost ~0
 
     import("ogl").then(({ Renderer, Camera, Geometry, Program, Mesh }) => {
       if (cancelled) return;
-      renderer = new Renderer({ dpr: pixelRatio, depth: false, alpha: true });
+      renderer = new Renderer({ dpr, depth: false, alpha: true });
       gl = renderer.gl;
       container.appendChild(gl.canvas);
       gl.clearColor(0, 0, 0, 0);
@@ -203,6 +212,10 @@ const Particles = ({
 
       const update = (t: number) => {
         animationFrameId = requestAnimationFrame(update);
+        if (!isVisible) {
+          lastTime = t; // avoid huge delta when we resume
+          return;
+        }
         const delta = t - lastTime;
         lastTime = t;
         elapsed += delta * speed;
@@ -232,9 +245,26 @@ const Particles = ({
       (container as any)._particleMouseMove = moveParticlesOnHover ? handleMouseMove : null;
     });
 
+    // Pause the loop when the canvas is offscreen — multiple instances on one page
+    // would otherwise keep burning GPU time on hidden sections.
+    const visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0]?.isIntersecting ?? true;
+      },
+      { rootMargin: "100px" },
+    );
+    visibilityObserver.observe(container);
+
+    const onVisibilityChange = () => {
+      isVisible = !document.hidden && isVisible;
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     return () => {
       cancelled = true;
       cancelAnimationFrame(animationFrameId);
+      visibilityObserver.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       const resize = (container as any)._particleResize;
       if (resize) window.removeEventListener("resize", resize);
       const mouseMove = (container as any)._particleMouseMove;

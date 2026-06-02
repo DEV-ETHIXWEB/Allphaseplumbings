@@ -26,21 +26,21 @@ export function PageHero({
   largeEyebrow?: boolean;
 }) {
   return (
-    <section className="bg-secondary/40 border-b border-border py-16 lg:py-20">
+    <section className="bg-secondary/40 border-b border-border py-[51px] lg:py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         {eyebrow && (
           <span
-            className={`inline-block font-semibold uppercase tracking-widest text-accent mb-3 ${
-              largeEyebrow ? "text-2xl" : "text-sm"
+            className={`inline-block font-semibold uppercase tracking-widest text-accent mb-2 ${
+              largeEyebrow ? "text-[19px]" : "text-[11px]"
             }`}
           >
             {eyebrow}
           </span>
         )}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
+        <h1 className="text-[29px] sm:text-[38px] lg:text-[48px] font-bold text-primary leading-[1.1]">
           {title} {italic && <span className="font-display-italic text-accent">{italic}</span>}
         </h1>
-        {subtitle && <p className="mt-5 text-lg text-muted-foreground max-w-2xl">{subtitle}</p>}
+        {subtitle && <p className="mt-4 text-[14px] text-muted-foreground max-w-2xl">{subtitle}</p>}
       </div>
     </section>
   );

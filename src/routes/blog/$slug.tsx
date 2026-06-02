@@ -20,7 +20,7 @@ export const Route = createFileRoute("/blog/$slug")({
 function ArticleHero({ title, gradient }: { title: string; gradient: string }) {
   return (
     <section
-      className="relative border-b border-border py-16 lg:py-20 overflow-hidden"
+      className="relative border-b border-border py-[51px] lg:py-16 overflow-hidden"
       style={{ background: gradient }}
     >
       <div
@@ -54,7 +54,7 @@ function ArticleHero({ title, gradient }: { title: string; gradient: string }) {
         aria-hidden="true"
       />
       <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-wide text-white leading-tight">
+        <h1 className="text-[19px] sm:text-[24px] lg:text-[29px] font-black uppercase tracking-wide text-white leading-tight">
           {title}
         </h1>
       </div>

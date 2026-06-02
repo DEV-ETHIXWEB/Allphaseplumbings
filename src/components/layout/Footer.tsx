@@ -30,25 +30,15 @@ export function Footer() {
 
           {/* ── Col 1: Logo + tagline ── */}
           <div className="flex flex-col gap-4">
-            <Link to="/" className="relative inline-block self-start">
-              {/* White silhouette sitting behind, scaled up to look like a highlight */}
-              <img
-                src={logo}
-                alt=""
-                aria-hidden="true"
-                className="absolute top-1/2 left-1/2 h-[60px] w-auto block pointer-events-none select-none"
-                style={{
-                  transform: "translate(-50%, -50%) scale(1.18)",
-                  filter: "brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,0.6))",
-                  zIndex: 0,
-                }}
-              />
-              {/* Original colored logo on top (~15% larger than base) */}
+            <Link to="/" className="inline-block self-start">
               <img
                 src={logo}
                 alt="All Phase Plumbing"
-                className="relative h-[69px] w-auto block"
-                style={{ zIndex: 1 }}
+                className="h-[69px] w-auto block"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 6px rgba(255,255,255,0.85)) drop-shadow(0 0 14px rgba(255,255,255,0.45))",
+                }}
               />
             </Link>
             <p className="text-[13px] text-white/55 leading-relaxed max-w-[180px]">

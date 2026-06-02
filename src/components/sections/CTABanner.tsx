@@ -49,7 +49,7 @@ export function CTABanner() {
   }
 
   const inputCls =
-    "border border-gray-200 rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] text-[16px] sm:text-[21px] bg-white text-gray-800 transition-shadow hover:border-gray-300 focus:shadow-md";
+    "border border-gray-200 rounded-lg px-4 py-2.5 w-full focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] text-[15px] sm:text-[16px] bg-white text-gray-800 transition-shadow hover:border-gray-300 focus:shadow-md";
 
   return (
     <section
@@ -76,7 +76,7 @@ export function CTABanner() {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-[20px] items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-[20px] items-end lg:translate-x-[10%]">
           {/* Left Column — van slides in from left, sits flush against the form */}
           <div className="flex flex-col justify-end items-center lg:items-end relative select-none overflow-visible min-w-0">
             <div
@@ -101,19 +101,19 @@ export function CTABanner() {
             <div className="bg-white rounded-2xl shadow-2xl border-2 border-[#1E3A7B]/20 w-full max-w-[720px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden">
               {/* Blue gradient header strip */}
               <div
-                className="px-6 sm:px-10 py-5 sm:py-7"
+                className="px-6 sm:px-8 py-4 sm:py-5"
                 style={{ background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)" }}
               >
-                <h2 className="text-[32px] sm:text-[45px] font-bold text-white text-center">{opts.cta_heading}</h2>
-                <p className="text-[#FFB800] font-semibold text-[20px] sm:text-[27px] mt-1.5 text-center">
+                <h2 className="text-[26px] sm:text-[32px] font-bold text-white text-center">{opts.cta_heading}</h2>
+                <p className="text-[#FFB800] font-semibold text-[16px] sm:text-[19px] mt-1 text-center">
                   {opts.cta_subheading}
                 </p>
               </div>
 
-              <div className="p-6 sm:p-10">
-                <p className="text-gray-600 text-[18px] sm:text-[24px] mb-6">{opts.cta_body}</p>
+              <div className="p-5 sm:p-6">
+                <p className="text-gray-600 text-[14px] sm:text-[15px] mb-3">{opts.cta_body}</p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3">
                   <input
                     type="text"
                     name="name"
@@ -159,19 +159,14 @@ export function CTABanner() {
                     ))}
                   </select>
 
-                  <p className="text-[17px] text-gray-400 leading-relaxed">
-                    By submitting this form you consent to receive messages from All Phase Plumbing.
-                    Msg &amp; data rates may apply. Reply STOP to unsubscribe.
-                  </p>
-
                   <StarBorder
                     type="submit"
                     className="block w-full active:scale-[0.98] transition-all"
-                    innerClassName="text-[18px] sm:text-[24px] font-bold text-white tracking-widest w-full"
+                    innerClassName="text-[16px] sm:text-[18px] font-bold text-white tracking-widest w-full"
                     innerStyle={{
                       background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)",
                       border: "none",
-                      padding: "16px 24px",
+                      padding: "11px 20px",
                     }}
                   >
                     CONTACT US TODAY

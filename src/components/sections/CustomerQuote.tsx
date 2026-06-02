@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import Particles from "@/components/ui/Particles";
-import wrenchImg from "@/assets/wrench.png";
-import pipeImg from "@/assets/pipe.png";
 
 export function CustomerQuote() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -45,46 +43,6 @@ export function CustomerQuote() {
           moveParticlesOnHover={false}
           particleColors={["#ffffff", "#aac8f0", "#7ab3e0"]}
           className="w-full h-full"
-        />
-      </div>
-
-      {/* ── Left: Wrench PNG — slides in from left ── */}
-      <div
-        className="absolute bottom-4 pointer-events-none select-none z-10 hidden sm:block"
-        style={{
-          left: "12%",
-          transform: `translateX(${visible ? "0px" : "-220px"})`,
-          opacity: visible ? 1 : 0,
-          transition: "transform 1.1s cubic-bezier(0.22,1,0.36,1), opacity 0.8s ease",
-          transitionDelay: "0.1s",
-        }}
-        aria-hidden="true"
-      >
-        <img
-          src={wrenchImg}
-          alt=""
-          className="w-[110px] sm:w-[140px] lg:w-[170px] h-auto drop-shadow-xl"
-          draggable={false}
-        />
-      </div>
-
-      {/* ── Right: Pipe PNG — slides in from right ── */}
-      <div
-        className="absolute bottom-4 pointer-events-none select-none z-10 hidden sm:block"
-        style={{
-          right: "12%",
-          transform: `translateX(${visible ? "0px" : "220px"})`,
-          opacity: visible ? 1 : 0,
-          transition: "transform 1.1s cubic-bezier(0.22,1,0.36,1), opacity 0.8s ease",
-          transitionDelay: "0.2s",
-        }}
-        aria-hidden="true"
-      >
-        <img
-          src={pipeImg}
-          alt=""
-          className="w-[130px] sm:w-[160px] lg:w-[190px] h-auto drop-shadow-xl"
-          draggable={false}
         />
       </div>
 

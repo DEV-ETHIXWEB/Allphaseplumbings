@@ -49,7 +49,7 @@ export function Hero() {
             className="pb-20 lg:-ml-10 xl:-ml-16 lg:[transform:scale(1.1)_translateX(0%)] lg:[transform-origin:top_left]"
           >
             <span
-              className="text-white font-bold text-[28px] tracking-wide"
+              className="text-white font-bold text-[34px] tracking-wide"
               style={{
                 WebkitTextStroke: "1px #1E3A6E",
                 paintOrder: "stroke fill",
@@ -60,7 +60,7 @@ export function Hero() {
             </span>
 
             <h1
-              className="mt-3 text-[30px] sm:text-[40px] lg:text-[42px] text-white leading-[1.15] lg:whitespace-nowrap"
+              className="mt-3 text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
               style={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 900,
@@ -75,7 +75,7 @@ export function Hero() {
             </h1>
 
             <p
-              className="mt-5 text-[21px] sm:text-[25px] text-white max-w-lg leading-relaxed font-medium"
+              className="mt-5 text-[25px] sm:text-[30px] text-white max-w-lg leading-relaxed font-medium"
               style={{
                 WebkitTextStroke: "0.8px #1E3A6E",
                 paintOrder: "stroke fill",

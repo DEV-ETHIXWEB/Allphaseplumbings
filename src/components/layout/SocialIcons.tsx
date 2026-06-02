@@ -37,7 +37,7 @@ export function SocialIcons() {
   ];
 
   return (
-    <div className="flex items-center justify-around h-full w-full bg-[#1E3A8A] px-6">
+    <div className="flex items-center justify-around h-full w-full bg-[#1E3A8A] px-[26px]">
       {items.map(({ label, href, Icon }) => (
         <a
           key={label}
@@ -45,9 +45,9 @@ export function SocialIcons() {
           aria-label={label}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center size-9 text-white hover:text-[#F5C842] hover:scale-110 transition-all duration-200"
+          className="flex items-center justify-center size-11 text-white hover:text-[#F5C842] hover:scale-110 transition-all duration-200"
         >
-          <Icon className="size-5" />
+          <Icon className="size-[26px]" />
         </a>
       ))}
     </div>

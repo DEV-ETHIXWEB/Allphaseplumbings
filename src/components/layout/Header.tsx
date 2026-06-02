@@ -152,17 +152,20 @@ export function Header() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Home page minimizes the top utility bar only AFTER the hero is mostly out of view;
+    // other pages use a smaller threshold since their heros are shorter.
+    const downThreshold = isHomePage ? 750 : 400;
+    const upThreshold = isHomePage ? 120 : 80;
+
     let rafId: number | null = null;
     let lastState: boolean | null = null;
 
     function update() {
       rafId = null;
       const y = window.scrollY;
-      // Wide hysteresis gap (400 down / 80 up) avoids any oscillation around the threshold,
-      // even when shrinking the header causes minor layout shifts.
       let next = lastState ?? false;
-      if (!next && y > 400) next = true;
-      else if (next && y < 80) next = false;
+      if (!next && y > downThreshold) next = true;
+      else if (next && y < upThreshold) next = false;
       if (next !== lastState) {
         lastState = next;
         setIsScrolled(next);
@@ -180,9 +183,12 @@ export function Header() {
       window.removeEventListener("scroll", handleScroll);
       if (rafId !== null) window.cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [isHomePage]);
 
-  const shouldShrink = !isHomePage && isScrolled;
+  // TopBar collapses on every page (home included) once past the threshold.
+  // The logo/badge/phone row only collapses on non-home pages — home keeps it visible.
+  const shouldShrinkTopBar = isScrolled;
+  const shouldShrinkLogoRow = !isHomePage && isScrolled;
 
   function openMenu(label: string) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -198,7 +204,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-[0_6px_14px_-2px_rgba(0,0,0,0.22)]">
       {/* Top bar */}
       <div className={`transition-all duration-300 ease-in-out ${
-        shouldShrink ? "lg:max-h-0 lg:opacity-0 lg:overflow-hidden" : "lg:max-h-12"
+        shouldShrinkTopBar ? "lg:max-h-0 lg:opacity-0 lg:overflow-hidden" : "lg:max-h-12"
       }`}>
         <TopBar />
       </div>
@@ -275,7 +281,7 @@ export function Header() {
 
       {/* Logo · badge · phone (lg and up only — phone/tablet uses the bar above) */}
       <div className={`hidden lg:block bg-white transition-all duration-300 ease-in-out ${
-        shouldShrink ? "lg:max-h-0 lg:py-0 lg:opacity-0 lg:pointer-events-none lg:overflow-hidden" : "lg:max-h-48"
+        shouldShrinkLogoRow ? "lg:max-h-0 lg:py-0 lg:opacity-0 lg:pointer-events-none lg:overflow-hidden" : "lg:max-h-48"
       }`}>
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <div className="flex items-center gap-6 pt-2 pb-2.5">

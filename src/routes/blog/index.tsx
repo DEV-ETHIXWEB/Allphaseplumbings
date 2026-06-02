@@ -91,7 +91,7 @@ function BlogIndex() {
     <PageShell>
       {/* ── Hero ── */}
       <section
-        className="relative border-b border-border py-20 lg:py-28 overflow-hidden"
+        className="relative border-b border-border py-10 lg:py-[60px] overflow-hidden"
         style={{
           background:
             "linear-gradient(135deg, #f4f8fd 0%, #e6eff9 50%, #dbe7f4 100%)",
@@ -102,9 +102,18 @@ function BlogIndex() {
           style={{
             backgroundImage: `url(${skylineBg})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.12,
-            filter: "blur(6px)",
+            backgroundPosition: "center 40%",
+            opacity: 0.55,
+            filter: "blur(1px) brightness(0.98)",
+          }}
+          aria-hidden="true"
+        />
+        {/* Soft white veil to keep navy heading readable */}
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.15) 100%)",
           }}
           aria-hidden="true"
         />
@@ -157,10 +166,10 @@ function BlogIndex() {
         />
 
         <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-wider text-primary mb-4">
+          <h1 className="text-[38px] sm:text-[48px] lg:text-[58px] font-black uppercase tracking-wider text-primary mb-3">
             Blog
           </h1>
-          <nav className="text-base text-muted-foreground">
+          <nav className="text-[13px] text-muted-foreground">
             <Link to="/" className="font-semibold text-primary hover:text-accent">
               Home
             </Link>{" "}

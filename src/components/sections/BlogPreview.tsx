@@ -50,12 +50,12 @@ function PostCard({ post }: { post: WPPost }) {
       </div>
       <div className="p-6">
         {cat && (
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white/75 mb-3">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#1E3A6E]/75 mb-3">
             {cat}
           </span>
         )}
         <h3
-          className="text-xl font-bold text-white mb-3 line-clamp-2"
+          className="text-xl font-bold text-[#1E3A6E] mb-3 line-clamp-2"
           dangerouslySetInnerHTML={{ __html: post.title.rendered }}
         />
         <Link
@@ -87,10 +87,10 @@ function PlaceholderCard({ i }: { i: number }) {
         />
       </div>
       <div className="p-6">
-        <span className="inline-block text-xs font-semibold uppercase tracking-wider text-white/75 mb-3">
+        <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#1E3A6E]/75 mb-3">
           Plumbing Tips
         </span>
-        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">{data.title}</h3>
+        <h3 className="text-xl font-bold text-[#1E3A6E] mb-3 line-clamp-2">{data.title}</h3>
         <Link
           to="/blog"
           className="inline-flex items-center gap-1 text-sm font-semibold text-[#1E3A6E] hover:gap-2 hover:text-[#1E3A6E]/70 transition-all"

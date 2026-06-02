@@ -21,7 +21,7 @@ export const Route = createFileRoute("/coupons")({
     <PageShell>
       {/* ── Hero ── */}
       <section
-        className="relative border-b border-border py-20 lg:py-28 overflow-hidden"
+        className="relative border-b border-border py-16 lg:py-[90px] overflow-hidden"
         style={{
           background:
             "linear-gradient(135deg, #f4f8fd 0%, #e6eff9 50%, #dbe7f4 100%)",
@@ -96,10 +96,10 @@ export const Route = createFileRoute("/coupons")({
         />
 
         <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black uppercase tracking-wider text-primary mb-4">
+          <h1 className="text-[38px] sm:text-[48px] lg:text-[58px] font-black uppercase tracking-wider text-primary mb-3">
             Coupons
           </h1>
-          <nav className="text-base text-muted-foreground">
+          <nav className="text-[13px] text-muted-foreground">
             <Link to="/" className="font-semibold text-primary hover:text-accent">
               Home
             </Link>{" "}

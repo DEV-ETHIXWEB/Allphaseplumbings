@@ -125,7 +125,7 @@ export function TopBar() {
             <CouponBookCard />
           </div>
           {/* invisible spacer matching card width so social icons sit right after it */}
-          <div className="hidden md:block shrink-0 w-[392px]" aria-hidden="true" />
+          <div className="hidden md:block shrink-0 w-[344px]" aria-hidden="true" />
           <div className="hidden md:flex flex-1 items-stretch min-w-0">
             <SocialIcons />
           </div>

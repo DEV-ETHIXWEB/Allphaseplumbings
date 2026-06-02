@@ -36,7 +36,7 @@ export const Route = createFileRoute("/about")({
 /* ── 1. About Us Hero (Height reduced at the bottom by 20%) ── */
 function AboutHero() {
   return (
-    <section className="relative bg-[#eef4fb] pt-20 pb-9 sm:pt-28 sm:pb-12 overflow-hidden border-b border-[#1E3A6E]/10">
+    <section className="relative bg-[#eef4fb] pt-16 pb-7 sm:pt-[90px] sm:pb-10 overflow-hidden border-b border-[#1E3A6E]/10">
       <img
         src={skylineBg}
         alt=""
@@ -46,7 +46,7 @@ function AboutHero() {
       />
       <div className="relative container mx-auto px-4 text-center">
         <h1
-          className="text-[33px] sm:text-[54px] lg:text-[66px] font-black tracking-tight text-[#1E3A6E]"
+          className="text-[26px] sm:text-[43px] lg:text-[53px] font-black tracking-tight text-[#1E3A6E]"
           style={{
             fontFamily: "'Poppins', sans-serif",
             letterSpacing: "0.02em",
@@ -55,7 +55,7 @@ function AboutHero() {
         >
           ABOUT US
         </h1>
-        <nav className="text-[16px] sm:text-[18px] mt-4 flex items-center justify-center font-bold text-[#1E3A6E]">
+        <nav className="text-[13px] sm:text-[14px] mt-3 flex items-center justify-center font-bold text-[#1E3A6E]">
           <Link to="/" className="hover:underline text-[#4A7BC4]">
             Home
           </Link>
