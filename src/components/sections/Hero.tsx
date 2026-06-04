@@ -86,7 +86,14 @@ export function Hero() {
             </p>
 
             {/* Google reviews */}
-            <div className="mt-8">
+            <div
+              className="mt-8 inline-flex flex-col px-5 py-4 rounded-xl backdrop-blur-md"
+              style={{
+                background: "rgba(255,255,255,0.18)",
+                border: "1px solid rgba(255,255,255,0.35)",
+                boxShadow: "0 8px 24px -6px rgba(15,34,70,0.35)",
+              }}
+            >
               <p
                 className="text-[40px] font-normal leading-none select-none"
                 style={{

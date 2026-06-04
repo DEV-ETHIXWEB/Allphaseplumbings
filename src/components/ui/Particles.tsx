@@ -197,7 +197,7 @@ const Particles = ({
         uniforms: {
           uTime: { value: 0 },
           uSpread: { value: particleSpread },
-          uBaseSize: { value: particleBaseSize * pixelRatio },
+          uBaseSize: { value: particleBaseSize * dpr },
           uSizeRandomness: { value: sizeRandomness },
           uAlphaParticles: { value: alphaParticles ? 1 : 0 },
         },

@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Star } from "lucide-react";
-import { CouponBookCard } from "./CouponBookCard";
-import { SocialIcons } from "./SocialIcons";
+import { ChevronDown } from "lucide-react";
+import { useSiteOptions } from "@/hooks/use-site-options";
 
 const CITIES_COL1 = [
   "Auburn",
@@ -27,9 +26,35 @@ const CITIES_COL2 = [
   "Tukwila",
 ];
 
+/* TikTok glyph */
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.59a8.16 8.16 0 0 0 4.77 1.52V6.69h-1.84z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.71 3.71 0 0 1-1.38-.9 3.71 3.71 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2zM12 0C8.74 0 8.33 0 7.05.07 5.78.13 4.9.33 4.14.63a5.93 5.93 0 0 0-2.14 1.39A5.93 5.93 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s0 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.73 1.46 1.39 2.12a5.93 5.93 0 0 0 2.12 1.39c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67 0 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.93 5.93 0 0 0 2.12-1.39 5.93 5.93 0 0 0 1.39-2.12c.3-.76.5-1.64.56-2.91.07-1.28.07-1.69.07-4.95s0-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.93 5.93 0 0 0-1.39-2.12A5.93 5.93 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.96.93-1.96 1.88V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z" />
+    </svg>
+  );
+}
+
 export function TopBar() {
   const [nearMeOpen, setNearMeOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
+  const opts = useSiteOptions();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -41,31 +66,23 @@ export function TopBar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  return (
-    <div className="relative z-50 w-full bg-[#6B9EF8] hidden lg:block">
-      <div className="grid w-full text-sm font-normal items-start grid-cols-[1fr_auto_1fr]">
-        {/* ── LEFT — Read Our Reviews ── */}
-        <a
-          href="https://www.google.com/search?q=All+Phase+Plumbing+Tukwila+WA+reviews"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-end gap-4 pt-[13px] pb-[13px] pr-6 bg-[#6B9EF8] text-white hover:bg-[#5088dc] transition-colors duration-200 whitespace-nowrap"
-        >
-          <div className="flex gap-0.5 mr-[10%]">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="size-[17px] fill-[#FFC533] text-[#FFC533]" />
-            ))}
-          </div>
-          <span className="hidden sm:inline tracking-wide text-[17px] font-normal mr-[10%]">
-            Read Our Reviews ›
-          </span>
-        </a>
+  const socials = [
+    { label: "TikTok", href: opts.social_tiktok, Icon: TikTokIcon },
+    { label: "Instagram", href: opts.social_instagram, Icon: InstagramIcon },
+    { label: "Facebook", href: opts.social_facebook, Icon: FacebookIcon },
+  ];
 
-        {/* ── CENTER — Find All Phase Near Me ── */}
-        <div ref={dropRef} className="relative shrink-0">
+  return (
+    <div className="relative z-50 w-full bg-[#1E3A8A] hidden lg:block">
+      <div className="grid w-full items-center grid-cols-[1fr_auto_1fr] px-4">
+        {/* Left spacer */}
+        <div />
+
+        {/* ── Center: Find All Phase Near Me ── */}
+        <div ref={dropRef} className="relative shrink-0 justify-self-center">
           <button
             onClick={() => setNearMeOpen((p) => !p)}
-            className="flex items-center justify-center gap-2 w-full h-full px-[94px] pt-[13px] pb-[13px] bg-[#1E3A8A] text-white hover:bg-[#162e58] transition-colors duration-200 tracking-wide font-normal text-[17px] whitespace-nowrap"
+            className="flex items-center justify-center gap-2 px-[94px] pt-[13px] pb-[13px] text-white hover:bg-[#162e58] transition-colors duration-200 tracking-wide font-normal text-[17px] whitespace-nowrap"
           >
             <span>Find All Phase Near Me</span>
             <ChevronDown
@@ -73,7 +90,6 @@ export function TopBar() {
             />
           </button>
 
-          {/* City dropdown */}
           {nearMeOpen && (
             <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 w-[520px] max-w-[calc(100vw-32px)] bg-white border-2 border-[#1E3A7B] rounded-b-xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] p-5">
               <div className="grid grid-cols-2 gap-x-8 text-sm">
@@ -119,15 +135,21 @@ export function TopBar() {
           )}
         </div>
 
-        {/* RIGHT — Coupons | Book Online Now (overlaid absolutely so it does NOT push row height) + Social icons */}
-        <div className="relative flex items-stretch bg-[#6B9EF8] self-stretch">
-          <div className="hidden md:block absolute top-0 left-0 z-20">
-            <CouponBookCard />
-          </div>
-          {/* invisible spacer matching card width so social icons sit right after it */}
-          <div className="hidden md:block shrink-0 w-[344px]" aria-hidden="true" />
-          <div className="hidden md:flex flex-1 items-stretch min-w-0">
-            <SocialIcons />
+        {/* ── Right: social handles in a box ── */}
+        <div className="justify-self-end">
+          <div className="inline-flex items-center gap-1 rounded-md border border-white/25 bg-white/10 px-2 py-1.5 backdrop-blur-sm">
+            {socials.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center size-8 rounded text-white hover:bg-white/15 hover:text-[#F5C842] transition-colors"
+              >
+                <Icon className="size-[18px]" />
+              </a>
+            ))}
           </div>
         </div>
       </div>

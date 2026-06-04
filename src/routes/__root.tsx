@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { CouponsSidePopout } from "@/components/layout/CouponsSidePopout";
 
 function NotFoundComponent() {
   return (
@@ -183,6 +184,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <CouponsSidePopout />
     </QueryClientProvider>
   );
 }

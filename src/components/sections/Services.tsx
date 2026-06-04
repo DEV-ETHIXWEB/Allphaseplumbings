@@ -49,7 +49,7 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
         className="flex items-center justify-center bg-[#f0f5ff] px-4 pt-6 pb-4 sm:px-8 sm:pt-10 sm:pb-6
                       group-hover:bg-[#e8effc] transition-colors duration-300"
       >
-        <div className="w-24 h-24 sm:w-44 sm:h-44 drop-shadow-lg group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+        <div className="w-[82px] h-[82px] sm:w-[150px] sm:h-[150px] drop-shadow-lg group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
           <img
             src={svc.icon}
             alt=""

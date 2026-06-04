@@ -97,7 +97,6 @@ const NAV: NavItem[] = [
   },
 
   { to: "/blog", label: "Blog" },
-  { to: "/coupons", label: "Coupons" },
 
   {
     to: "/service-area",
@@ -403,10 +402,10 @@ export function Header() {
         style={{ transformOrigin: "top center" }}
       >
         <nav className="container mx-auto px-4 py-3 flex flex-col gap-0.5">
-          {NAV.map((item, idx) => {
+          {NAV.flatMap((item, idx) => {
             const hasDropdown = item.dropdown && item.dropdown.length > 0;
             const isExpanded = expandedMobileItem === item.label;
-            return (
+            const nodes = [
               <div
                 key={item.to + item.label}
                 className={`flex flex-col border-b border-gray-50 last:border-b-0
@@ -479,8 +478,37 @@ export function Header() {
                     </div>
                   </div>
                 )}
-              </div>
-            );
+              </div>,
+            ];
+            if (item.label === "Blog") {
+              nodes.push(
+                <div
+                  key="mobile-coupons"
+                  className={`flex flex-col border-b border-gray-50 last:border-b-0
+                              transition-[opacity,transform] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                              ${
+                                mobileOpen
+                                  ? "opacity-100 translate-y-0"
+                                  : "opacity-0 -translate-y-2"
+                              }`}
+                  style={{ transitionDelay: mobileOpen ? `${80 + (idx + 0.5) * 35}ms` : "0ms" }}
+                >
+                  <Link
+                    to="/coupons"
+                    onClick={() => {
+                      setMobileOpen(false);
+                      setExpandedMobileItem(null);
+                    }}
+                    className="flex-1 px-4 py-3 text-[17px] font-bold text-[#1E3A6E] rounded-lg
+                               hover:bg-[#1E3A6E]/5 transition-all duration-200"
+                    activeProps={{ className: "!bg-[#1E3A6E]/10 !text-[#4A7BC4]" }}
+                  >
+                    Coupons
+                  </Link>
+                </div>,
+              );
+            }
+            return nodes;
           })}
           <a
             href={opts.phone_href}
