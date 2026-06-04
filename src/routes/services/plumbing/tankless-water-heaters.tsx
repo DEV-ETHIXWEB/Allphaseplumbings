@@ -23,11 +23,11 @@ const CONTENT: ServicePageContent = {
       heading: "Why Choose a Tankless Water Heater in Seattle?",
       paragraphs: ["Switching to a tankless water heater is one of the smartest investments you can make for your home. Here's why:"],
       list: [
-        "Energy Efficiency — heats water only when needed, cutting energy costs and waste.",
-        "Endless Hot Water — never run out, even during long showers or multiple appliance use.",
-        "Compact Design — small, wall-mounted units free up space in your utility area.",
-        "Longer Lifespan — tankless systems often last 20+ years with proper maintenance.",
-        "Reduced Risk of Leaks — without a large tank, the risk of flooding from tank failure is eliminated.",
+        "Energy Efficiency, heats water only when needed, cutting energy costs and waste.",
+        "Endless Hot Water, never run out, even during long showers or multiple appliance use.",
+        "Compact Design, small, wall-mounted units free up space in your utility area.",
+        "Longer Lifespan, tankless systems often last 20+ years with proper maintenance.",
+        "Reduced Risk of Leaks, without a large tank, the risk of flooding from tank failure is eliminated.",
       ],
       // Trailing paragraph below
     },
@@ -50,7 +50,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       paragraphs: [
-        "Our licensed plumbers ensure your replacement is completed right the first time — efficiently, safely, and to code.",
+        "Our licensed plumbers ensure your replacement is completed right the first time, efficiently, safely, and to code.",
       ],
     },
     {
@@ -68,34 +68,34 @@ const CONTENT: ServicePageContent = {
     },
     {
       paragraphs: [
-        "Our plumbers will diagnose the issue, explain your repair options clearly, and use high-quality parts to restore your system's efficiency and reliability. Don't wait for small issues to turn into costly breakdowns — schedule your repair today.",
+        "Our plumbers will diagnose the issue, explain your repair options clearly, and use high-quality parts to restore your system's efficiency and reliability. Don't wait for small issues to turn into costly breakdowns, schedule your repair today.",
       ],
     },
     {
       heading: "Tankless Water Heater Repair Process in Seattle",
       paragraphs: ["Our Seattle tankless water heater repair process ensures precise diagnostics and long-lasting results. Here's what to expect:"],
       list: [
-        "Inspection — we evaluate heating elements, sensors, water lines, and controls.",
-        "Diagnosis — we identify the root cause of performance issues or error codes.",
-        "Repair — we perform quick, professional repairs using trusted components.",
-        "Testing — we verify that your system delivers consistent, efficient hot water.",
-        "Maintenance Tips — we offer advice to extend your unit's lifespan and prevent future problems.",
+        "Inspection, we evaluate heating elements, sensors, water lines, and controls.",
+        "Diagnosis, we identify the root cause of performance issues or error codes.",
+        "Repair, we perform quick, professional repairs using trusted components.",
+        "Testing, we verify that your system delivers consistent, efficient hot water.",
+        "Maintenance Tips, we offer advice to extend your unit's lifespan and prevent future problems.",
       ],
     },
     {
       heading: "Seattle Tankless Water Heaters: Upgrade to Efficiency",
       paragraphs: [
-        "Searching for Seattle tankless water heaters near me? All Phase Plumbing offers comprehensive services — from repair to installation. Our skilled technicians are ready to provide expert care that keeps your system running smoothly.",
+        "Searching for Seattle tankless water heaters near me? All Phase Plumbing offers comprehensive services, from repair to installation. Our skilled technicians are ready to provide expert care that keeps your system running smoothly.",
         "Call (206) 772-6077 today or schedule online for professional tankless water heater service in Seattle and experience the comfort of endless, energy-efficient hot water.",
       ],
     },
   ],
   faqs: [
     { q: "Will a tankless system give my whole house hot water at once?", a: "Sized correctly, yes. We calculate your peak demand (showers, dishwasher, washing machine running together) and pick a unit with the right flow rate, or recommend two units in parallel for larger homes." },
-    { q: "Do I need a new gas line for a tankless heater?", a: "Often yes — gas tankless units require a larger BTU input than a tank unit, which usually means upsizing the gas line. We handle this as part of the installation." },
-    { q: "How much can I save going tankless?", a: "Most homes see 20–35% lower water-heating bills compared to a tank. Savings depend on usage and fuel type — we'll give you realistic numbers for your home." },
+    { q: "Do I need a new gas line for a tankless heater?", a: "Often yes, gas tankless units require a larger BTU input than a tank unit, which usually means upsizing the gas line. We handle this as part of the installation." },
+    { q: "How much can I save going tankless?", a: "Most homes see 20–35% lower water-heating bills compared to a tank. Savings depend on usage and fuel type, we'll give you realistic numbers for your home." },
     { q: "What maintenance does a tankless heater need?", a: "An annual descale flush, especially in areas with harder water. Skipping this is the #1 cause of premature failure and error codes." },
-    { q: "How long does installation take?", a: "Replacing a tank with a tankless unit usually takes a full day because of gas, venting, and water-line upgrades. A like-for-like tankless swap is faster — usually 4–6 hours." },
+    { q: "How long does installation take?", a: "Replacing a tank with a tankless unit usually takes a full day because of gas, venting, and water-line upgrades. A like-for-like tankless swap is faster, usually 4–6 hours." },
   ],
   related: [
     { label: "Water Heaters", href: "/services/water-heaters" },
@@ -108,7 +108,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/tankless-water-heaters")({
   head: () => ({
     meta: [
-      { title: "Seattle Tankless Water Heaters — All Phase Plumbing" },
+      { title: "Seattle Tankless Water Heaters, All Phase Plumbing" },
       { name: "description", content: "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation." },
     ],
   }),

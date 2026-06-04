@@ -121,11 +121,11 @@ const Particles = ({
     const container = containerRef.current;
     if (typeof window === "undefined" || !container) return;
 
-    // Respect users who prefer reduced motion — skip the whole WebGL pipeline.
+    // Respect users who prefer reduced motion, skip the whole WebGL pipeline.
     const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return;
 
-    // Keep DPR at 1 for particles — soft round sprites don't benefit from retina sampling
+    // Keep DPR at 1 for particles, soft round sprites don't benefit from retina sampling
     // and rendering at 2x/3x triples the fill-rate cost.
     const dpr = pixelRatio ?? 1;
 
@@ -245,7 +245,7 @@ const Particles = ({
       (container as any)._particleMouseMove = moveParticlesOnHover ? handleMouseMove : null;
     });
 
-    // Pause the loop when the canvas is offscreen — multiple instances on one page
+    // Pause the loop when the canvas is offscreen, multiple instances on one page
     // would otherwise keep burning GPU time on hidden sections.
     const visibilityObserver = new IntersectionObserver(
       (entries) => {

@@ -14,9 +14,9 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "When your business needs a reliable Seattle commercial plumber, turn to the experts at All Phase Plumbing. We provide full-service commercial plumbing solutions designed to keep your property running smoothly — from routine maintenance and emergency repairs to new installations and system upgrades.",
+        "When your business needs a reliable Seattle commercial plumber, turn to the experts at All Phase Plumbing. We provide full-service commercial plumbing solutions designed to keep your property running smoothly, from routine maintenance and emergency repairs to new installations and system upgrades.",
         "As a trusted name in commercial plumbing, we understand the demands of operating in commercial environments. Whether you manage a restaurant, office building, apartment complex, or industrial facility, our licensed plumbers deliver efficient, code-compliant, and cost-effective services tailored to your business's needs.",
-        "Our goal is to minimize downtime and maximize system performance, so you can focus on your operations — not your plumbing.",
+        "Our goal is to minimize downtime and maximize system performance, so you can focus on your operations, not your plumbing.",
       ],
     },
     {
@@ -45,7 +45,7 @@ const CONTENT: ServicePageContent = {
       heading: "Seattle Commercial Water Heater Repair",
       paragraphs: [
         "Hot water is critical for daily business operations. If your water heater is failing, you can count on All Phase Plumbing for prompt and professional Seattle commercial water heater repair.",
-        "We service all makes and models — from standard tank units to high-efficiency commercial systems — restoring performance quickly to minimize downtime. Our team can handle:",
+        "We service all makes and models, from standard tank units to high-efficiency commercial systems, restoring performance quickly to minimize downtime. Our team can handle:",
       ],
       list: [
         "Pilot light or ignition issues",
@@ -65,7 +65,7 @@ const CONTENT: ServicePageContent = {
       heading: "Seattle Commercial Plumbing Repair",
       paragraphs: [
         "From leaky pipes to malfunctioning fixtures, plumbing problems can disrupt productivity and damage property. That's why All Phase Plumbing provides fast, accurate Seattle commercial plumbing repair for businesses of all sizes.",
-        "Our licensed plumbers arrive on time, equipped to handle any issue — ensuring minimal disruption to your operations. We provide durable, long-lasting repairs using top-quality materials and proven methods.",
+        "Our licensed plumbers arrive on time, equipped to handle any issue, ensuring minimal disruption to your operations. We provide durable, long-lasting repairs using top-quality materials and proven methods.",
       ],
     },
     {
@@ -83,7 +83,7 @@ const CONTENT: ServicePageContent = {
       heading: "Call Your Trusted Seattle Commercial Plumber Today",
       paragraphs: [
         "When you need a dependable Seattle commercial plumbing company, trust All Phase Plumbing to deliver quality service and peace of mind. From emergency repairs to preventative maintenance, we'll help keep your systems running efficiently.",
-        "Call (206) 772-6077 today or schedule service online for expert commercial plumbing in Seattle — backed by experience, integrity, and results.",
+        "Call (206) 772-6077 today or schedule service online for expert commercial plumbing in Seattle, backed by experience, integrity, and results.",
       ],
     },
   ],
@@ -94,7 +94,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you offer emergency commercial plumbing services in Seattle?",
-      a: "Yes — we offer 24/7 emergency commercial plumbing services across the Greater Seattle area. A licensed plumber is dispatched to your business as quickly as possible to minimize downtime.",
+      a: "Yes, we offer 24/7 emergency commercial plumbing services across the Greater Seattle area. A licensed plumber is dispatched to your business as quickly as possible to minimize downtime.",
     },
     {
       q: "How often should I schedule commercial plumbing maintenance?",
@@ -124,13 +124,13 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/commercial/")({
   head: () => ({
     meta: [
-      { title: "Commercial Plumbing — All Phase Plumbing Seattle" },
+      { title: "Commercial Plumbing, All Phase Plumbing Seattle" },
       {
         name: "description",
         content:
-          "Full-service commercial plumbing in Seattle — water heaters, drain cleaning, sewer repair, leak detection, and preventative maintenance for businesses of all sizes.",
+          "Full-service commercial plumbing in Seattle, water heaters, drain cleaning, sewer repair, leak detection, and preventative maintenance for businesses of all sizes.",
       },
-      { property: "og:title", content: "Commercial Plumbing — All Phase Plumbing" },
+      { property: "og:title", content: "Commercial Plumbing, All Phase Plumbing" },
       {
         property: "og:description",
         content: "Trusted commercial plumber for Seattle businesses.",

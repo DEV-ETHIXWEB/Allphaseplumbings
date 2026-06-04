@@ -125,7 +125,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Will pipe replacement require opening my walls?",
-      a: "In most cases, yes — access points are needed to route new pipes. We minimize disruption as much as possible and can advise on restoration options. Trenchless methods may reduce excavation for exterior lines.",
+      a: "In most cases, yes, access points are needed to route new pipes. We minimize disruption as much as possible and can advise on restoration options. Trenchless methods may reduce excavation for exterior lines.",
     },
     {
       q: "Can pipe replacement increase my home's value?",
@@ -152,7 +152,7 @@ export const Route = createFileRoute("/services/pipe-replacement")({
       { property: "og:title", content: "Pipe Replacement | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional pipe replacement services — durable, long-lasting plumbing solutions.",
+        content: "Professional pipe replacement services, durable, long-lasting plumbing solutions.",
       },
     ],
   }),

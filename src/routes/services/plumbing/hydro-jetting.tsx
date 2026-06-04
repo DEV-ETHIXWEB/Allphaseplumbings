@@ -16,19 +16,19 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "All Phase Plumbing offers professional Seattle Hydro Jetting services to keep your drains and sewer lines clear and flowing smoothly. Using high-pressure water streams, hydro jetting effectively removes stubborn clogs, grease buildup, and mineral deposits that traditional snaking methods often can't handle.",
-        "Our team has the expertise and equipment to perform safe, thorough hydro jetting — protecting your pipes while restoring optimal flow. Whether you're dealing with recurring blockages or need preventative maintenance, our hydro jetting service is a reliable solution to keep your plumbing running at its best.",
+        "Our team has the expertise and equipment to perform safe, thorough hydro jetting, protecting your pipes while restoring optimal flow. Whether you're dealing with recurring blockages or need preventative maintenance, our hydro jetting service is a reliable solution to keep your plumbing running at its best.",
       ],
     },
     {
       heading: "Signs You Need Hydro Jet Drain Cleaning",
       paragraphs: [
-        "Clogged or slow drains are more than just an inconvenience — they can signal deeper problems in your plumbing system. Some common indicators that hydro jet drain cleaning may be necessary include:",
+        "Clogged or slow drains are more than just an inconvenience, they can signal deeper problems in your plumbing system. Some common indicators that hydro jet drain cleaning may be necessary include:",
       ],
       list: [
-        "Recurring Clogs — drains that back up repeatedly despite snaking or chemical treatments.",
-        "Slow Draining Sinks or Tubs — water takes longer than usual to drain, signaling buildup in the pipes.",
-        "Foul Odors — persistent sewage smells coming from drains or around plumbing fixtures.",
-        "Gurgling or Bubbling Pipes — air trapped in the plumbing can indicate blockages in the main line.",
+        "Recurring Clogs, drains that back up repeatedly despite snaking or chemical treatments.",
+        "Slow Draining Sinks or Tubs, water takes longer than usual to drain, signaling buildup in the pipes.",
+        "Foul Odors, persistent sewage smells coming from drains or around plumbing fixtures.",
+        "Gurgling or Bubbling Pipes, air trapped in the plumbing can indicate blockages in the main line.",
       ],
       // Trailing paragraph below
     },
@@ -43,11 +43,11 @@ const CONTENT: ServicePageContent = {
         "Understanding what causes clogs can help prevent future plumbing issues. Some of the most common causes include:",
       ],
       list: [
-        "Grease and Fat Buildup — cooking oils, fats, and food scraps accumulate in pipes.",
-        "Mineral Deposits — hard water leaves calcium and lime inside pipes, restricting flow.",
-        "Hair and Soap Scum — common in bathroom drains; tough clogs that snaking alone can't remove.",
-        "Foreign Objects — wipes, paper products, or small toys can get stuck and cause backups.",
-        "Tree Root Intrusion — roots penetrate sewer lines and create blockages that require hydro jetting to remove completely.",
+        "Grease and Fat Buildup, cooking oils, fats, and food scraps accumulate in pipes.",
+        "Mineral Deposits, hard water leaves calcium and lime inside pipes, restricting flow.",
+        "Hair and Soap Scum, common in bathroom drains; tough clogs that snaking alone can't remove.",
+        "Foreign Objects, wipes, paper products, or small toys can get stuck and cause backups.",
+        "Tree Root Intrusion, roots penetrate sewer lines and create blockages that require hydro jetting to remove completely.",
       ],
     },
     {
@@ -56,21 +56,21 @@ const CONTENT: ServicePageContent = {
         "At All Phase Plumbing, we use advanced technology and proven methods to perform hydro jetting safely and effectively. Here's what you can expect:",
       ],
       list: [
-        "Assessment and Appointment — we evaluate your plumbing system and schedule a convenient time.",
-        "Inspection — using cameras and diagnostic tools, we locate the clog and assess your pipes.",
-        "Hydro Jetting — high-pressure water removes grease, mineral buildup, and debris, cleaning pipes thoroughly.",
-        "Verification — after hydro jetting, we re-inspect the line to ensure it's completely clear.",
-        "Advice and Prevention — our technicians provide maintenance tips to reduce future clogs.",
+        "Assessment and Appointment, we evaluate your plumbing system and schedule a convenient time.",
+        "Inspection, using cameras and diagnostic tools, we locate the clog and assess your pipes.",
+        "Hydro Jetting, high-pressure water removes grease, mineral buildup, and debris, cleaning pipes thoroughly.",
+        "Verification, after hydro jetting, we re-inspect the line to ensure it's completely clear.",
+        "Advice and Prevention, our technicians provide maintenance tips to reduce future clogs.",
       ],
     },
     {
       heading: "Benefits of Hydro Jetting",
       list: [
-        "Comprehensive Cleaning — removes grease, roots, and buildup for long-lasting results.",
-        "Improved Flow — clears obstructions and restores full water pressure.",
-        "Prevents Future Clogs — keeps pipes clean and reduces backups.",
-        "Eco-Friendly — uses only water, no harsh chemicals.",
-        "Extends Pipe Life — regular hydro jetting minimizes corrosion and wear.",
+        "Comprehensive Cleaning, removes grease, roots, and buildup for long-lasting results.",
+        "Improved Flow, clears obstructions and restores full water pressure.",
+        "Prevents Future Clogs, keeps pipes clean and reduces backups.",
+        "Eco-Friendly, uses only water, no harsh chemicals.",
+        "Extends Pipe Life, regular hydro jetting minimizes corrosion and wear.",
       ],
       paragraphs: [
         "When you choose All Phase Plumbing, you're investing in a cleaner, safer, and more efficient plumbing system.",
@@ -88,7 +88,7 @@ const CONTENT: ServicePageContent = {
     { q: "How is hydro jetting different from snaking?", a: "Snaking punches a hole through the clog. Hydro jetting cleans the entire inner diameter of the pipe with high-pressure water, removing buildup that grows the clog back. Jetting prevents recurrence." },
     { q: "Is hydro jetting safe for my pipes?", a: "On healthy modern pipes, yes. We always camera-inspect first to confirm the line can handle the pressure. If pipes are cracked or fragile, we recommend repair before jetting." },
     { q: "How often should I get my main line jetted?", a: "Homes with frequent grease, tree-root issues, or older clay lines benefit from every 12–18 months. Average homes can go a few years between professional jettings." },
-    { q: "Will hydro jetting clear tree roots?", a: "Yes — we use a root-cutting jetter head specifically for this. For severe root intrusion, we may recommend trenchless sewer repair as a longer-term fix." },
+    { q: "Will hydro jetting clear tree roots?", a: "Yes, we use a root-cutting jetter head specifically for this. For severe root intrusion, we may recommend trenchless sewer repair as a longer-term fix." },
     { q: "How long does a hydro jetting service take?", a: "Most residential jobs run 1–2 hours including camera inspection. Larger commercial lines can take longer depending on length and severity." },
   ],
   related: [
@@ -102,7 +102,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/hydro-jetting")({
   head: () => ({
     meta: [
-      { title: "Seattle Hydro Jetting — All Phase Plumbing" },
+      { title: "Seattle Hydro Jetting, All Phase Plumbing" },
       { name: "description", content: "Professional hydro jetting in Seattle. Removes grease, scale, and tree roots from drains and sewer lines." },
     ],
   }),

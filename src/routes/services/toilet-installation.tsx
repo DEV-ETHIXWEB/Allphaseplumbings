@@ -125,11 +125,11 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do I need a plumber to install a toilet?",
-      a: "Professional installation is strongly recommended. Improper sealing, flange issues, or incorrect supply line connections can lead to water damage and mold beneath the floor — often not discovered until significant damage has occurred.",
+      a: "Professional installation is strongly recommended. Improper sealing, flange issues, or incorrect supply line connections can lead to water damage and mold beneath the floor, often not discovered until significant damage has occurred.",
     },
     {
       q: "What type of toilet should I choose?",
-      a: "The best toilet depends on your bathroom layout, comfort preferences, and water efficiency goals. We can help you select the right model — whether standard two-piece, comfort-height, low-flow, or dual-flush.",
+      a: "The best toilet depends on your bathroom layout, comfort preferences, and water efficiency goals. We can help you select the right model, whether standard two-piece, comfort-height, low-flow, or dual-flush.",
     },
     {
       q: "What is a toilet flange and why does it matter?",
@@ -160,7 +160,7 @@ export const Route = createFileRoute("/services/toilet-installation")({
       { property: "og:title", content: "Toilet Installation | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional toilet installation services — reliable, leak-free, and built to last.",
+        content: "Professional toilet installation services, reliable, leak-free, and built to last.",
       },
     ],
   }),

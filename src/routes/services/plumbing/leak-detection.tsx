@@ -110,11 +110,11 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "How can you find a leak without tearing up my walls?", a: "We use acoustic listening devices, thermal imaging, and pressure testing to pinpoint the exact spot before any cutting. When we do open a wall, it's a precise hole — not exploratory damage." },
+    { q: "How can you find a leak without tearing up my walls?", a: "We use acoustic listening devices, thermal imaging, and pressure testing to pinpoint the exact spot before any cutting. When we do open a wall, it's a precise hole, not exploratory damage." },
     { q: "What's a typical sign of a slab leak?", a: "Warm spots on the floor, the sound of water running with everything off, and a rising water bill without explanation. Foundation cracks or unexplained mold are red flags too." },
-    { q: "Will my homeowners insurance cover hidden leak damage?", a: "Many policies cover the water damage but not the leak repair itself. Documenting the exact leak source helps your claim — we provide written findings you can give your adjuster." },
+    { q: "Will my homeowners insurance cover hidden leak damage?", a: "Many policies cover the water damage but not the leak repair itself. Documenting the exact leak source helps your claim, we provide written findings you can give your adjuster." },
     { q: "How long does leak detection take?", a: "Most residential detections are completed in 1–2 hours. Underground or large-home detections can take longer depending on the system layout." },
-    { q: "Do you detect gas leaks too?", a: "Yes — for non-emergency situations. If you smell gas right now, leave the building and call your gas utility's emergency line first." },
+    { q: "Do you detect gas leaks too?", a: "Yes, for non-emergency situations. If you smell gas right now, leave the building and call your gas utility's emergency line first." },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -127,8 +127,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/leak-detection")({
   head: () => ({
     meta: [
-      { title: "Seattle Leak Detection — All Phase Plumbing" },
-      { name: "description", content: "Non-invasive Seattle leak detection — slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage." },
+      { title: "Seattle Leak Detection, All Phase Plumbing" },
+      { name: "description", content: "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage." },
     ],
   }),
   component: () => (

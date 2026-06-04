@@ -13,7 +13,7 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "Whether you're upgrading an old fiberglass shower to a tiled walk-in, converting a tub to a shower, or building one from scratch in a remodel, proper plumbing is what makes the difference between years of trouble-free use and a slow leak destroying your subfloor.",
-        "All Phase Plumbing handles the plumbing side of new shower installations across Seattle — drain, water supply, valve, shower head, and waterproofing inspection — coordinated with your tile or shower-pan contractor.",
+        "All Phase Plumbing handles the plumbing side of new shower installations across Seattle, drain, water supply, valve, shower head, and waterproofing inspection, coordinated with your tile or shower-pan contractor.",
         "Call (206) 772-6077 to schedule a shower installation consultation.",
       ],
     },
@@ -48,9 +48,9 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "Can you convert my tub to a walk-in shower?", a: "Yes — we handle the plumbing side of tub-to-shower conversions including drain relocation and supply line adjustments. We coordinate with your tile or shower-pan installer." },
+    { q: "Can you convert my tub to a walk-in shower?", a: "Yes, we handle the plumbing side of tub-to-shower conversions including drain relocation and supply line adjustments. We coordinate with your tile or shower-pan installer." },
     { q: "What's the difference between pressure-balanced and thermostatic valves?", a: "Pressure-balanced valves keep temperature steady when pressure changes. Thermostatic valves let you preset an exact temperature. Thermostatic is more comfortable; pressure-balanced is more common in modern homes." },
-    { q: "Do you install rain heads and body sprays?", a: "Yes. They require larger supply lines and sometimes a higher-flow valve — we'll spec the right setup so all heads work at full pressure simultaneously." },
+    { q: "Do you install rain heads and body sprays?", a: "Yes. They require larger supply lines and sometimes a higher-flow valve, we'll spec the right setup so all heads work at full pressure simultaneously." },
     { q: "How long does shower installation take?", a: "Plumbing rough-in is typically 1–2 days. Total project time depends on tile and finish work, usually 4–10 days for a full shower build." },
     { q: "Will the bathroom be unusable during installation?", a: "Usually for several days while plumbing, waterproofing, and tile cure. We coordinate timing to minimize disruption." },
   ],
@@ -65,8 +65,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/shower-installation")({
   head: () => ({
     meta: [
-      { title: "Seattle Shower Installation — All Phase Plumbing" },
-      { name: "description", content: "Seattle shower installation — new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work." },
+      { title: "Seattle Shower Installation, All Phase Plumbing" },
+      { name: "description", content: "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work." },
     ],
   }),
   component: () => (

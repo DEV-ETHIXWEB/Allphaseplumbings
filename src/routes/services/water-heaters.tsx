@@ -22,7 +22,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Complete Water Heater Services",
       paragraphs: [
-        "Whether you need a quick repair, a brand-new tankless system, or a like-for-like tank replacement, our licensed plumbers handle the entire job — from removing the old unit to permitting and final inspection.",
+        "Whether you need a quick repair, a brand-new tankless system, or a like-for-like tank replacement, our licensed plumbers handle the entire job, from removing the old unit to permitting and final inspection.",
       ],
     },
     {
@@ -42,7 +42,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Tank vs. Tankless: Which Is Right for You?",
       paragraphs: [
-        "Traditional tank heaters store 40–80 gallons of pre-heated water and have a lower upfront cost. Tankless units heat on demand — they cost more to install but last longer, save energy, and provide unlimited hot water.",
+        "Traditional tank heaters store 40–80 gallons of pre-heated water and have a lower upfront cost. Tankless units heat on demand, they cost more to install but last longer, save energy, and provide unlimited hot water.",
       ],
       list: [
         "Tank: lower install cost, simpler service",
@@ -75,7 +75,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Is a tankless water heater worth the cost?",
-      a: "For most Seattle homes, yes — over a 20-year span tankless typically saves money on energy bills and lasts twice as long as a tank. We'll run the numbers for your home before recommending one.",
+      a: "For most Seattle homes, yes, over a 20-year span tankless typically saves money on energy bills and lasts twice as long as a tank. We'll run the numbers for your home before recommending one.",
     },
     {
       q: "How quickly can you install a new water heater?",
@@ -83,7 +83,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you handle the permit?",
-      a: "Yes — water heater installs in Seattle require a permit, and we pull and close it as part of every install. You'll have proper paperwork for your insurance and home sale.",
+      a: "Yes, water heater installs in Seattle require a permit, and we pull and close it as part of every install. You'll have proper paperwork for your insurance and home sale.",
     },
   ],
   related: [
@@ -97,7 +97,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/water-heaters")({
   head: () => ({
     meta: [
-      { title: "Water Heater Repair & Install Seattle — All Phase Plumbing" },
+      { title: "Water Heater Repair & Install Seattle, All Phase Plumbing" },
       {
         name: "description",
         content:

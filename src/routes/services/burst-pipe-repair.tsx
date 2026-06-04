@@ -120,7 +120,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "How do I stop a burst pipe?",
-      a: "Immediately shut off your main water supply valve to stop water flow. Then call All Phase Plumbing at (206) 772-6077 for emergency repair. Don't attempt to patch the pipe yourself — temporary fixes can fail under pressure.",
+      a: "Immediately shut off your main water supply valve to stop water flow. Then call All Phase Plumbing at (206) 772-6077 for emergency repair. Don't attempt to patch the pipe yourself, temporary fixes can fail under pressure.",
     },
     {
       q: "How much water damage can a burst pipe cause?",
@@ -155,7 +155,7 @@ export const Route = createFileRoute("/services/burst-pipe-repair")({
       { property: "og:title", content: "Burst Pipe Repair | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Emergency burst pipe repair — fast response, reliable fix, upfront pricing.",
+        content: "Emergency burst pipe repair, fast response, reliable fix, upfront pricing.",
       },
     ],
   }),

@@ -12,7 +12,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Cleaner-tasting water, fewer mineral deposits, and peace of mind about what's coming out of your tap — that's what a properly chosen water filtration system delivers. All Phase Plumbing installs whole-home filters, under-sink filters, and reverse osmosis systems across the Seattle area.",
+        "Cleaner-tasting water, fewer mineral deposits, and peace of mind about what's coming out of your tap, that's what a properly chosen water filtration system delivers. All Phase Plumbing installs whole-home filters, under-sink filters, and reverse osmosis systems across the Seattle area.",
         "Every home's water is different. We start with a water test, recommend the right filtration approach for your concerns and budget, and handle the install cleanly with proper bypass valves and supply-line work.",
         "Call (206) 772-6077 to schedule a filtration consultation.",
       ],
@@ -31,13 +31,13 @@ const CONTENT: ServicePageContent = {
     {
       heading: "How to Choose the Right Filter",
       paragraphs: [
-        "There's no single best filter — it depends on what's in your water. Chlorine taste is a different filter than iron staining, which is different from heavy metals. We start with a free water test, then recommend the right approach for what you actually need (and avoid expensive systems for problems you don't have).",
+        "There's no single best filter, it depends on what's in your water. Chlorine taste is a different filter than iron staining, which is different from heavy metals. We start with a free water test, then recommend the right approach for what you actually need (and avoid expensive systems for problems you don't have).",
       ],
     },
     {
       heading: "Whole-Home vs. Point-of-Use",
       paragraphs: [
-        "Whole-home filters treat all water entering the house — great for chlorine, sediment, and overall taste improvement. Point-of-use systems (under-sink, RO) treat just drinking water — best when you want premium drinking quality without the cost of treating water for showers, laundry, and irrigation.",
+        "Whole-home filters treat all water entering the house, great for chlorine, sediment, and overall taste improvement. Point-of-use systems (under-sink, RO) treat just drinking water, best when you want premium drinking quality without the cost of treating water for showers, laundry, and irrigation.",
       ],
     },
     {
@@ -49,10 +49,10 @@ const CONTENT: ServicePageContent = {
   ],
   faqs: [
     { q: "Do I need a filter on Seattle city water?", a: "Seattle tap water is generally high quality, but many homeowners want to remove chlorine taste, lead from old plumbing, or improve drinking water specifically. A simple under-sink filter often does the job affordably." },
-    { q: "What about well water?", a: "Well water usually needs more comprehensive treatment — sediment, iron, hardness, and sometimes bacteria. We test first and design a system that fits the issues found." },
-    { q: "What's the difference between a filter and a softener?", a: "A softener removes hardness (calcium and magnesium) by ion exchange. A filter removes contaminants like sediment, chlorine, or metals. Many homes benefit from both — we can install a combo system." },
+    { q: "What about well water?", a: "Well water usually needs more comprehensive treatment, sediment, iron, hardness, and sometimes bacteria. We test first and design a system that fits the issues found." },
+    { q: "What's the difference between a filter and a softener?", a: "A softener removes hardness (calcium and magnesium) by ion exchange. A filter removes contaminants like sediment, chlorine, or metals. Many homes benefit from both, we can install a combo system." },
     { q: "How often do filters need to be changed?", a: "Depends on the system and water quality. Whole-home sediment filters: 3–6 months. Carbon filters: 6–12 months. RO membranes: 2–3 years. We can set up a reminder service." },
-    { q: "Will a filter slow my water pressure?", a: "Properly sized filters have minimal pressure impact. Undersized systems or clogged filters cause noticeable drops — sizing it right at install matters." },
+    { q: "Will a filter slow my water pressure?", a: "Properly sized filters have minimal pressure impact. Undersized systems or clogged filters cause noticeable drops, sizing it right at install matters." },
   ],
   related: [
     { label: "Water Softeners", href: "/services/plumbing/water-softeners" },
@@ -65,7 +65,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/water-filtration")({
   head: () => ({
     meta: [
-      { title: "Seattle Water Filtration System Installation — All Phase Plumbing" },
+      { title: "Seattle Water Filtration System Installation, All Phase Plumbing" },
       { name: "description", content: "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test." },
     ],
   }),

@@ -124,7 +124,7 @@ const CONTENT: ServicePageContent = {
     { q: "Should I try chemical drain cleaner first?", a: "We recommend against it. Store-bought chemicals can damage pipes (especially older metal lines) and rarely clear the full clog. They also make professional clearing more hazardous." },
     { q: "What's the difference between snaking and hydro jetting?", a: "Snaking punches through a clog. Hydro jetting cleans the entire pipe interior. For recurring clogs or grease-heavy lines, jetting is the better long-term fix." },
     { q: "Why does the same drain keep clogging?", a: "Repeated clogs usually mean buildup in the pipe wall, a partial collapse, or a problem in the main sewer line. We camera-inspect to find the real cause instead of just clearing it again." },
-    { q: "Can you tell if my clog is local or in the main line?", a: "Yes — by checking which fixtures are affected and running a camera if needed. Multiple drains backing up usually points to the main sewer line." },
+    { q: "Can you tell if my clog is local or in the main line?", a: "Yes, by checking which fixtures are affected and running a camera if needed. Multiple drains backing up usually points to the main sewer line." },
     { q: "How fast can you respond to a backed-up drain?", a: "Same day across Seattle for most calls. For sewer backups, we treat it as an emergency and dispatch as quickly as possible." },
   ],
   related: [
@@ -138,8 +138,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")({
   head: () => ({
     meta: [
-      { title: "Clogged Drain Repair Seattle — All Phase Plumbing" },
-      { name: "description", content: "Seattle clogged drain repair — kitchen, bathroom, toilet, and recurring drain issues solved at the root cause." },
+      { title: "Clogged Drain Repair Seattle, All Phase Plumbing" },
+      { name: "description", content: "Seattle clogged drain repair, kitchen, bathroom, toilet, and recurring drain issues solved at the root cause." },
     ],
   }),
   component: () => (

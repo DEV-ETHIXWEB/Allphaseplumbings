@@ -30,14 +30,21 @@ export function Coupons({ hideHeader = false }: { hideHeader?: boolean } = {}) {
             </div>
             <Link
               to="/coupons"
-              className="inline-flex items-center gap-1.5 text-[28px] font-semibold text-primary hover:text-accent"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-white font-bold text-[22px] sm:text-[26px]
+                         shadow-[0_8px_20px_-6px_rgba(30,58,110,0.55)]
+                         hover:shadow-[0_12px_28px_-6px_rgba(30,58,110,0.7)]
+                         hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              style={{
+                background: "linear-gradient(135deg, #1E3A6E 0%, #6B9FE4 100%)",
+                border: "2px solid #1E3A6E",
+              }}
             >
-              View All Offers <ArrowRight className="size-7" />
+              View All Offers <ArrowRight className="size-6 sm:size-7" />
             </Link>
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {COUPONS.map((c) => (
             <Link
               key={c.alt}

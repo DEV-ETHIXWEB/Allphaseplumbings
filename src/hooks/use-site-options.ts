@@ -3,7 +3,7 @@
  *
  * Fetches global site options from WordPress and merges them over
  * the local defaults. Multiple components on the same page share
- * the same React Query cache entry — only one network request is made.
+ * the same React Query cache entry, only one network request is made.
  */
 
 import { useServerFn } from "@tanstack/react-start";

@@ -15,7 +15,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Outdated or damaged plumbing fixtures don't just affect how your bathroom or kitchen looks — they can also waste water, reduce performance, and cause ongoing plumbing issues. Fixture replacement is a simple but powerful way to improve efficiency, reliability, and appearance.",
+        "Outdated or damaged plumbing fixtures don't just affect how your bathroom or kitchen looks, they can also waste water, reduce performance, and cause ongoing plumbing issues. Fixture replacement is a simple but powerful way to improve efficiency, reliability, and appearance.",
         "Our fixture replacement services are designed to remove old or failing fixtures and install new ones correctly, safely, and to code.",
       ],
     },
@@ -110,7 +110,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What types of faucets do you install?",
-      a: "We install all styles and brands — single-handle, double-handle, pull-down kitchen faucets, bathroom vanity faucets, tub fillers, and more. We can also help you select a fixture that matches your existing hardware.",
+      a: "We install all styles and brands, single-handle, double-handle, pull-down kitchen faucets, bathroom vanity faucets, tub fillers, and more. We can also help you select a fixture that matches your existing hardware.",
     },
     {
       q: "How long does fixture replacement take?",
@@ -122,7 +122,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you haul away old fixtures?",
-      a: "Yes — we remove and dispose of old fixtures as part of our service, leaving your bathroom or kitchen clean and ready to use.",
+      a: "Yes, we remove and dispose of old fixtures as part of our service, leaving your bathroom or kitchen clean and ready to use.",
     },
   ],
   related: [
@@ -145,7 +145,7 @@ export const Route = createFileRoute("/services/fixture-replacement")({
       { property: "og:title", content: "Fixture Replacement | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional fixture replacement services — reliable, code-compliant, and efficient.",
+        content: "Professional fixture replacement services, reliable, code-compliant, and efficient.",
       },
     ],
   }),

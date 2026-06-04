@@ -121,7 +121,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What are the signs my septic tank is full?",
-      a: "Signs include slow drains throughout the home, gurgling sounds, sewage odors indoors or outdoors, and wet or soggy areas near the drain field. Don't wait for a complete backup — schedule service at the first sign of trouble.",
+      a: "Signs include slow drains throughout the home, gurgling sounds, sewage odors indoors or outdoors, and wet or soggy areas near the drain field. Don't wait for a complete backup, schedule service at the first sign of trouble.",
     },
     {
       q: "Can I use a garbage disposal with a septic system?",
@@ -156,7 +156,7 @@ export const Route = createFileRoute("/services/septic-tank-service")({
       { property: "og:title", content: "Septic Tank Service | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional septic tank service — pumping, inspection, and maintenance.",
+        content: "Professional septic tank service, pumping, inspection, and maintenance.",
       },
     ],
   }),

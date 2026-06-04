@@ -151,9 +151,9 @@ const CONTENT: ServicePageContent = {
   faqs: [
     { q: "Can you install a faucet I bought myself?", a: "Yes. We install customer-supplied faucets all the time. We'll verify the model is compatible with your sink and supply lines before starting." },
     { q: "How long does faucet installation usually take?", a: "Most replacements take 45 minutes to 90 minutes. New installs or faucets requiring shutoff valve replacement can run 2 hours or more." },
-    { q: "Do you replace the shutoff valves while you're under the sink?", a: "If the existing valves are old, stuck, or leaking, we recommend replacing them at the same time — it's much easier and cheaper now than a separate visit later." },
+    { q: "Do you replace the shutoff valves while you're under the sink?", a: "If the existing valves are old, stuck, or leaking, we recommend replacing them at the same time, it's much easier and cheaper now than a separate visit later." },
     { q: "Will a touchless faucet work with my existing plumbing?", a: "Yes, but it needs a power source. We'll confirm whether you need a nearby outlet for the AC adapter or whether the battery-pack version makes more sense for your sink." },
-    { q: "What if I notice a leak a few days after installation?", a: "Call us — we stand behind our work. If something we installed is leaking, we'll come back and make it right." },
+    { q: "What if I notice a leak a few days after installation?", a: "Call us, we stand behind our work. If something we installed is leaking, we'll come back and make it right." },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -166,7 +166,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/faucet-installation")({
   head: () => ({
     meta: [
-      { title: "Seattle Faucet Installation — All Phase Plumbing" },
+      { title: "Seattle Faucet Installation, All Phase Plumbing" },
       { name: "description", content: "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing." },
     ],
   }),

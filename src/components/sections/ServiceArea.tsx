@@ -41,7 +41,7 @@ function ServiceMap() {
       });
       mapInstanceRef.current = map;
 
-      /* ── Tile layer (CartoDB light — crisp & neutral) ── */
+      /* ── Tile layer (CartoDB light, crisp & neutral) ── */
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
@@ -159,7 +159,7 @@ export function ServiceArea() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* Heading — white text on gradient bg */}
+        {/* Heading, white text on gradient bg */}
         <div className="text-center mb-10">
           <span className="inline-block text-2xl font-bold uppercase tracking-widest text-[#F5C842] mb-3">
             Service Area
@@ -176,7 +176,7 @@ export function ServiceArea() {
 
         {/* Two-column layout: map LEFT, city list RIGHT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* ── LEFT: Map — full-bleed on mobile, contained on desktop ── */}
+          {/* ── LEFT: Map, full-bleed on mobile, contained on desktop ── */}
           <div
             className="-mx-4 lg:mx-0 rounded-none lg:rounded-2xl overflow-hidden border-y-2 lg:border-2 border-white/25 shadow-2xl bg-white order-1 h-[300px] sm:h-[380px] lg:h-[500px]"
             style={{ isolation: "isolate", position: "relative" }}
@@ -186,7 +186,7 @@ export function ServiceArea() {
 
           {/* ── RIGHT: City list ── */}
           <div
-            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 flex flex-col justify-start lg:h-[500px] overflow-y-auto"
+            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 flex flex-col justify-start h-[340px] sm:h-auto lg:h-[500px] overflow-y-auto"
             style={{ background: "rgba(255,255,255,0.10)", backdropFilter: "blur(12px)" }}
           >
             <div className="grid grid-cols-1 gap-y-1">
@@ -202,10 +202,10 @@ export function ServiceArea() {
               ))}
             </div>
 
-            {/* CTA row — hidden on mobile to fit the square */}
+            {/* CTA row, hidden on mobile to fit the square */}
             <div className="mt-8 pt-6 border-t border-white/20 hidden sm:flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <p className="text-base text-white/65 italic">
-                Don't see your city? Call us — we likely serve your area.
+                Don't see your city? Call us, we likely serve your area.
               </p>
               <StarBorder
                 as="a"

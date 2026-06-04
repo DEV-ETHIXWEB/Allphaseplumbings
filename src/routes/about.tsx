@@ -17,7 +17,7 @@ import Particles from "@/components/ui/Particles";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About All Phase Plumbing — Seattle Family-Owned Since 1989" },
+      { title: "About All Phase Plumbing, Seattle Family-Owned Since 1989" },
       {
         name: "description",
         content:
@@ -73,7 +73,7 @@ function AboutIntro() {
     { Icon: ShieldCheck, title: "Licensed & Insured", body: "Every job backed by certified, bonded technicians." },
     { Icon: Clock, title: "24/7 Emergency Response", body: "Same-day service across Greater Seattle." },
     { Icon: Award, title: "35+ Years of Trust", body: "Family-owned and serving the community since 1989." },
-    { Icon: Wrench, title: "Honest, Upfront Pricing", body: "No surprises — clear quotes before we start work." },
+    { Icon: Wrench, title: "Honest, Upfront Pricing", body: "No surprises, clear quotes before we start work." },
   ];
 
   return (
@@ -154,7 +154,7 @@ function AboutIntro() {
               <div className="text-[13px] text-gray-500 leading-snug max-w-[220px]">
                 <span className="font-bold text-[#1E3A6E]">Free estimates</span>
                 <br />
-                on most services — talk to a real plumber, not a robot.
+                on most services, talk to a real plumber, not a robot.
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@ function AboutIntro() {
               />
             </div>
 
-            {/* Floating badge — "Family Owned" */}
+            {/* Floating badge, "Family Owned" */}
             <div
               className="absolute -bottom-6 left-4 sm:left-6 z-30 flex items-center gap-3
                          bg-white rounded-xl px-4 py-3 shadow-[0_10px_30px_rgba(30,58,110,0.22)]
@@ -221,10 +221,10 @@ function AboutIntro() {
   );
 }
 
-/* ── 5. Hear From Our Team — YouTube video carousel + lightbox ── */
+/* ── 5. Hear From Our Team, YouTube video carousel + lightbox ── */
 
-// ⚠️  Replace each youtubeId with the real video ID from the URL
-//     e.g. https://youtu.be/dQw4w9WgXcQ  →  youtubeId: "dQw4w9WgXcQ"
+// ⚠️ Replace each youtubeId with the real video ID from the URL
+// e.g. https://youtu.be/dQw4w9WgXcQ →  youtubeId: "dQw4w9WgXcQ"
 const TEAM_VIDEOS = [
   { youtubeId: "RajYE63nG3U", name: "Gary Hanowalt", role: "Owner" },
   { youtubeId: "lt3EWALCVJQ", name: "Larry Belich", role: "General Manager" },
@@ -329,10 +329,10 @@ function AboutInterview() {
             </h2>
             <div className="mt-4 w-14 h-1.5 rounded-full bg-[#F5C842]" />
             <p className="mt-5 text-[15px] sm:text-[16px] text-gray-600 leading-relaxed">
-              The people behind All Phase Plumbing — born and raised in the Pacific Northwest with decades of plumbing experience between them. Click any video to hear their story in their own words.
+              The people behind All Phase Plumbing, born and raised in the Pacific Northwest with decades of plumbing experience between them. Click any video to hear their story in their own words.
             </p>
 
-            {/* Team list — name + designation */}
+            {/* Team list, name + designation */}
             <ul className="mt-7 space-y-2.5">
               {TEAM_VIDEOS.map((m, i) => {
                 const active = i === activeIdx;
@@ -551,17 +551,17 @@ function CustomerReviewsBanner() {
   );
 }
 
-/* ── 11. Masonry Gallery items — real project photos ── */
+/* ── 11. Masonry Gallery items, real project photos ── */
 const MASONRY_ITEMS = [
-  { id: "1",  img: "/projects/project-1.jpg",  height: 680, url: "#" },
-  { id: "2",  img: "/projects/project-2.jpg",  height: 580, url: "#" },
-  { id: "3",  img: "/projects/project-3.jpg",  height: 650, url: "#" },
-  { id: "4",  img: "/projects/project-4.jpg",  height: 700, url: "#" },
-  { id: "5",  img: "/projects/project-5.jpg",  height: 620, url: "#" },
-  { id: "6",  img: "/projects/project-6.jpg",  height: 660, url: "#" },
-  { id: "7",  img: "/projects/project-7.jpg",  height: 640, url: "#" },
-  { id: "8",  img: "/projects/project-8.png",  height: 590, url: "#" },
-  { id: "9",  img: "/projects/project-9.png",  height: 670, url: "#" },
+  { id: "1", img: "/projects/project-1.jpg", height: 680, url: "#" },
+  { id: "2", img: "/projects/project-2.jpg", height: 580, url: "#" },
+  { id: "3", img: "/projects/project-3.jpg", height: 650, url: "#" },
+  { id: "4", img: "/projects/project-4.jpg", height: 700, url: "#" },
+  { id: "5", img: "/projects/project-5.jpg", height: 620, url: "#" },
+  { id: "6", img: "/projects/project-6.jpg", height: 660, url: "#" },
+  { id: "7", img: "/projects/project-7.jpg", height: 640, url: "#" },
+  { id: "8", img: "/projects/project-8.png", height: 590, url: "#" },
+  { id: "9", img: "/projects/project-9.png", height: 670, url: "#" },
   { id: "10", img: "/projects/project-10.png", height: 710, url: "#" },
   { id: "11", img: "/projects/project-11.png", height: 600, url: "#" },
   { id: "12", img: "/projects/project-12.png", height: 630, url: "#" },

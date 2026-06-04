@@ -12,8 +12,8 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Your main water line carries every gallon of water into your home — and when it fails, the whole house feels it. A buried main line leak can mean wet spots in the yard, dropping pressure, climbing water bills, or no water at all. All Phase Plumbing diagnoses, repairs, and replaces water service lines across the Seattle area.",
-        "We use modern locating and leak-detection equipment so we can pinpoint problems and propose targeted fixes — not exploratory digging.",
+        "Your main water line carries every gallon of water into your home, and when it fails, the whole house feels it. A buried main line leak can mean wet spots in the yard, dropping pressure, climbing water bills, or no water at all. All Phase Plumbing diagnoses, repairs, and replaces water service lines across the Seattle area.",
+        "We use modern locating and leak-detection equipment so we can pinpoint problems and propose targeted fixes, not exploratory digging.",
         "Call (206) 772-6077 to schedule water line service.",
       ],
     },
@@ -43,16 +43,16 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Water Line Service",
       paragraphs: [
-        "If you suspect a water line problem, don't wait — small leaks become large losses fast. Call (206) 772-6077 and a licensed plumber will diagnose the issue and walk you through repair options.",
+        "If you suspect a water line problem, don't wait, small leaks become large losses fast. Call (206) 772-6077 and a licensed plumber will diagnose the issue and walk you through repair options.",
       ],
     },
   ],
   faqs: [
     { q: "How long does a water line replacement take?", a: "Trenchless replacements are often completed in a single day. Traditional dig-and-replace can take 1–3 days depending on length and depth." },
     { q: "Will my water be off the whole time?", a: "Service is typically off for several hours while the new line is connected. We coordinate the shutdown window with you in advance." },
-    { q: "Who's responsible — me or the city?", a: "The city owns the line to the meter; everything from the meter to your house is yours. We work on the homeowner side and coordinate with the city when meter or shutoff work is needed." },
+    { q: "Who's responsible, me or the city?", a: "The city owns the line to the meter; everything from the meter to your house is yours. We work on the homeowner side and coordinate with the city when meter or shutoff work is needed." },
     { q: "Will you need to tear up my yard?", a: "Often not. Trenchless methods need only small access pits. Even traditional excavation is planned to minimize landscape damage." },
-    { q: "What pipe material do you install?", a: "HDPE (high-density polyethylene) for buried mains — flexible, corrosion-proof, and rated for 50+ years." },
+    { q: "What pipe material do you install?", a: "HDPE (high-density polyethylene) for buried mains, flexible, corrosion-proof, and rated for 50+ years." },
   ],
   related: [
     { label: "Pipe Replacement", href: "/services/plumbing/pipe-replacement" },
@@ -65,7 +65,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/water-lines")({
   head: () => ({
     meta: [
-      { title: "Seattle Water Line Repair & Replacement — All Phase Plumbing" },
+      { title: "Seattle Water Line Repair & Replacement, All Phase Plumbing" },
       { name: "description", content: "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard." },
     ],
   }),

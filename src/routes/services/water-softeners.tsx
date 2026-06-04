@@ -92,7 +92,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Can a water softener damage my pipes?",
-      a: "No — in fact, softened water reduces mineral buildup inside pipes, which can extend their lifespan. Properly installed and maintained water softeners are safe for all standard plumbing.",
+      a: "No, in fact, softened water reduces mineral buildup inside pipes, which can extend their lifespan. Properly installed and maintained water softeners are safe for all standard plumbing.",
     },
     {
       q: "How long does a water softener last?",

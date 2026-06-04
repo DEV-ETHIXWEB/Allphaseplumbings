@@ -12,7 +12,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Natural gas lines power your water heater, furnace, range, dryer, and outdoor BBQ. They're safe when installed and maintained correctly — and dangerous when they're not. All Phase Plumbing's licensed plumbers handle gas line repair, installation, and leak testing across the Seattle area to code.",
+        "Natural gas lines power your water heater, furnace, range, dryer, and outdoor BBQ. They're safe when installed and maintained correctly, and dangerous when they're not. All Phase Plumbing's licensed plumbers handle gas line repair, installation, and leak testing across the Seattle area to code.",
         "If you smell gas right now, leave the building, call your gas utility's emergency line first, and then call us at (206) 772-6077 once it's safe.",
       ],
     },
@@ -49,15 +49,15 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Gas Line Service",
       paragraphs: [
-        "For non-emergency gas line repair, new installations, or appliance hookups, call (206) 772-6077 — licensed plumbers, code-compliant work, and safe gas systems guaranteed.",
+        "For non-emergency gas line repair, new installations, or appliance hookups, call (206) 772-6077, licensed plumbers, code-compliant work, and safe gas systems guaranteed.",
       ],
     },
   ],
   faqs: [
-    { q: "Are gas lines part of plumbing?", a: "Yes — in Washington, gas piping work is performed under a plumbing license. We're qualified to install, repair, and test natural gas piping." },
+    { q: "Are gas lines part of plumbing?", a: "Yes, in Washington, gas piping work is performed under a plumbing license. We're qualified to install, repair, and test natural gas piping." },
     { q: "What should I do if I smell gas?", a: "Leave the building immediately, don't operate any electrical switches, and call your gas utility's emergency line from outside. Once they've made the area safe, call us for the repair." },
-    { q: "Do you pull permits for gas work?", a: "Yes — gas line work requires permits and inspection in Seattle and most surrounding jurisdictions. We handle the paperwork." },
-    { q: "Can you run a gas line to my outdoor grill?", a: "Yes — we extend gas lines to BBQs, fire pits, patio heaters, and outdoor kitchens. Permits and inspection included." },
+    { q: "Do you pull permits for gas work?", a: "Yes, gas line work requires permits and inspection in Seattle and most surrounding jurisdictions. We handle the paperwork." },
+    { q: "Can you run a gas line to my outdoor grill?", a: "Yes, we extend gas lines to BBQs, fire pits, patio heaters, and outdoor kitchens. Permits and inspection included." },
     { q: "How do you find a gas leak without taking apart the wall?", a: "Calibrated electronic gas detectors and bubble-soap testing on accessible joints. For hidden leaks we use pressure-drop testing to isolate the section before opening anything." },
   ],
   related: [
@@ -71,7 +71,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/gas-line-repair")({
   head: () => ({
     meta: [
-      { title: "Seattle Gas Line Repair & Installation — All Phase Plumbing" },
+      { title: "Seattle Gas Line Repair & Installation, All Phase Plumbing" },
       { name: "description", content: "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe." },
     ],
   }),

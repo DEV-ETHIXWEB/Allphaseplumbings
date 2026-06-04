@@ -23,7 +23,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Seattle Commercial Drain Cleaning Services",
       paragraphs: [
-        "For Seattle businesses, clean and properly functioning drains are essential to maintaining health, safety, and productivity. At All Phase Plumbing, we take a proactive approach to drain maintenance to help you avoid plumbing emergencies and unsanitary conditions. Our Seattle commercial drain cleaning services are customized to meet the specific needs of your facility — whether you operate a restaurant kitchen with heavy grease flow, an office building with multiple restrooms, or a retail store that depends on reliable drainage.",
+        "For Seattle businesses, clean and properly functioning drains are essential to maintaining health, safety, and productivity. At All Phase Plumbing, we take a proactive approach to drain maintenance to help you avoid plumbing emergencies and unsanitary conditions. Our Seattle commercial drain cleaning services are customized to meet the specific needs of your facility, whether you operate a restaurant kitchen with heavy grease flow, an office building with multiple restrooms, or a retail store that depends on reliable drainage.",
         "We use advanced camera inspection tools to diagnose problems at their source and provide targeted cleaning that fully restores your plumbing's performance. When buildup or blockages threaten to slow your operations, our commercial hydro jetting in Seattle clears out pipes fast, helping you avoid downtime and expensive repairs. Every service is performed with minimal disruption to your business, ensuring you can stay open and productive while we get your plumbing back on track.",
       ],
     },
@@ -65,7 +65,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What is hydro jetting, and how does it help my commercial drains?",
-      a: "Hydro jetting uses high-pressure water (up to 4,000 PSI) to scour the inside of your drain pipes. Unlike snaking, which only punches a hole through a clog, hydro jetting cleans the entire diameter of the pipe — removing grease, mineral buildup, and debris that cause repeat clogs.",
+      a: "Hydro jetting uses high-pressure water (up to 4,000 PSI) to scour the inside of your drain pipes. Unlike snaking, which only punches a hole through a clog, hydro jetting cleans the entire diameter of the pipe, removing grease, mineral buildup, and debris that cause repeat clogs.",
     },
     {
       q: "What is the difference between drain snaking and hydro jetting?",
@@ -91,13 +91,13 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/commercial/drain-cleaning")({
   head: () => ({
     meta: [
-      { title: "Commercial Drain Cleaning — All Phase Plumbing Seattle" },
+      { title: "Commercial Drain Cleaning, All Phase Plumbing Seattle" },
       {
         name: "description",
         content:
-          "Professional commercial drain cleaning in Seattle — hydro jetting, camera inspection, and grease line maintenance for restaurants, offices, and industrial facilities.",
+          "Professional commercial drain cleaning in Seattle, hydro jetting, camera inspection, and grease line maintenance for restaurants, offices, and industrial facilities.",
       },
-      { property: "og:title", content: "Commercial Drain Cleaning — All Phase Plumbing" },
+      { property: "og:title", content: "Commercial Drain Cleaning, All Phase Plumbing" },
       {
         property: "og:description",
         content: "Hydro jetting and camera inspection for Seattle businesses.",

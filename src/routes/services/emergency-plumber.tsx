@@ -75,11 +75,11 @@ const CONTENT: ServicePageContent = {
   faqs: [
     {
       q: "Do you offer 24/7 emergency plumbing services?",
-      a: "Yes — All Phase Plumbing is available 24 hours a day, 7 days a week for plumbing emergencies throughout Greater Seattle. Call (206) 772-6077 anytime.",
+      a: "Yes, All Phase Plumbing is available 24 hours a day, 7 days a week for plumbing emergencies throughout Greater Seattle. Call (206) 772-6077 anytime.",
     },
     {
       q: "What counts as a plumbing emergency?",
-      a: "True emergencies include burst pipes, major leaks causing flooding, complete loss of water, overflowing toilets or sewage backups, gas line leaks, and no hot water in urgent situations. When in doubt, call us — we'll help you determine priority.",
+      a: "True emergencies include burst pipes, major leaks causing flooding, complete loss of water, overflowing toilets or sewage backups, gas line leaks, and no hot water in urgent situations. When in doubt, call us, we'll help you determine priority.",
     },
     {
       q: "How quickly can an emergency plumber arrive?",

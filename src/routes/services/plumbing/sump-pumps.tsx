@@ -54,11 +54,11 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "How often should I test my sump pump?", a: "Twice a year — pour a bucket of water into the pit and confirm the float lifts and the pump kicks on. We can include this as part of an annual maintenance visit." },
-    { q: "Do I need a battery backup?", a: "In Seattle, yes — power outages often happen during the exact storms when the pump is needed most. A backup pump runs on its own battery and keeps pumping when the main is dead." },
-    { q: "My pump runs constantly — is that bad?", a: "It can burn out the motor early and usually means the float is stuck, the check valve has failed, or groundwater is finding a new path in. We diagnose and fix the underlying issue." },
+    { q: "How often should I test my sump pump?", a: "Twice a year, pour a bucket of water into the pit and confirm the float lifts and the pump kicks on. We can include this as part of an annual maintenance visit." },
+    { q: "Do I need a battery backup?", a: "In Seattle, yes, power outages often happen during the exact storms when the pump is needed most. A backup pump runs on its own battery and keeps pumping when the main is dead." },
+    { q: "My pump runs constantly, is that bad?", a: "It can burn out the motor early and usually means the float is stuck, the check valve has failed, or groundwater is finding a new path in. We diagnose and fix the underlying issue." },
     { q: "Where does the discharge water go?", a: "It needs to terminate at least 10 feet from the foundation, ideally to a yard drain or storm system per code. We handle the routing as part of installation." },
-    { q: "Can you install a sump pump where there isn't one?", a: "Yes — we cut and install a basin if your basement or crawl space has a recurring water problem. We'll evaluate the best location during a site visit." },
+    { q: "Can you install a sump pump where there isn't one?", a: "Yes, we cut and install a basin if your basement or crawl space has a recurring water problem. We'll evaluate the best location during a site visit." },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -71,8 +71,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/sump-pumps")({
   head: () => ({
     meta: [
-      { title: "Sump Pump Repair, Replacement & Installation Seattle — All Phase Plumbing" },
-      { name: "description", content: "Seattle sump pump service — repair, replacement, and new installs with battery-backup options to keep your basement dry." },
+      { title: "Sump Pump Repair, Replacement & Installation Seattle, All Phase Plumbing" },
+      { name: "description", content: "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry." },
     ],
   }),
   component: () => (

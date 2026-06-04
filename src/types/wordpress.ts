@@ -89,7 +89,7 @@ export interface WPWhyUsReason {
   desc: string;
 }
 
-// ── Global site options  (/wp-json/allphase/v1/options) ───────────────────────
+// ── Global site options (/wp-json/allphase/v1/options) ───────────────────────
 // All fields are optional so a partial WP response can be merged over defaults.
 
 export interface WPSiteOptions {

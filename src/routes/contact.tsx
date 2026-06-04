@@ -86,14 +86,14 @@ declare global {
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact All Phase Plumbing — Seattle Plumber" },
+      { title: "Contact All Phase Plumbing, Seattle Plumber" },
       {
         name: "description",
         content:
           "Call (206) 772-6077 or request a tech online. Same-day plumbing service across Greater Seattle.",
       },
       { property: "og:title", content: "Contact All Phase Plumbing" },
-      { property: "og:description", content: "Call (206) 772-6077 — speak to a real person." },
+      { property: "og:description", content: "Call (206) 772-6077, speak to a real person." },
     ],
   }),
   component: ContactPage,
@@ -204,7 +204,7 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
     };
   }, []);
 
-  // React to zip lookup — fly the map smoothly and drop a highlight marker
+  // React to zip lookup, fly the map smoothly and drop a highlight marker
   useEffect(() => {
     const map = mapInstanceRef.current;
     const L = LRef.current;
@@ -216,7 +216,7 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
     }
 
     if (!zipLocation) {
-      // ZIP cleared — smoothly fly back to the original service area view
+      // ZIP cleared, smoothly fly back to the original service area view
       if (originalBoundsRef.current) {
         map.flyToBounds(originalBoundsRef.current, {
           padding: [32, 32],
@@ -538,7 +538,7 @@ function ContactFormBox({
               </button>
               {status === "sent" && (
                 <p className="text-[15px] font-bold text-white text-center bg-white/10 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/20 animate-in fade-in slide-in-from-bottom-2 duration-400">
-                  ✓ Thanks — we'll be in touch within the hour.
+                  ✓ Thanks, we'll be in touch within the hour.
                 </p>
               )}
             </div>
@@ -615,9 +615,9 @@ function ContactServiceAreaSection({
 
             <p className="mt-4 text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
               {showInfo
-                ? "Great news — we dispatch local technicians to your neighborhood daily. Same-day service across Greater Seattle, with honest, upfront pricing on every job."
+                ? "Great news, we dispatch local technicians to your neighborhood daily. Same-day service across Greater Seattle, with honest, upfront pricing on every job."
                 : showOutOfArea
-                ? `Looks like ${zipLocation?.label} is outside our current service area. We're sorry — we don't serve here for now. Below are the cities we currently cover.`
+                ? `Looks like ${zipLocation?.label} is outside our current service area. We're sorry, we don't serve here for now. Below are the cities we currently cover.`
                 : "Enter your ZIP code in the form above and we'll instantly check coverage, drop a pin on your area, and connect you with our nearest technician."}
             </p>
 
@@ -639,7 +639,7 @@ function ContactServiceAreaSection({
                       {zipLocation?.label} is outside our service area.
                     </p>
                     <p className="text-white/75 mt-0.5">
-                      Sorry — we don't serve here for now.
+                      Sorry, we don't serve here for now.
                     </p>
                   </div>
                 </div>
@@ -653,7 +653,7 @@ function ContactServiceAreaSection({
               </div>
             )}
 
-            {/* Cities list — shown when no valid ZIP */}
+            {/* Cities list, shown when no valid ZIP */}
             {showCities && (
               <div
                 key="cities-list"
@@ -677,7 +677,7 @@ function ContactServiceAreaSection({
               </div>
             )}
 
-            {/* ZIP result info — shown when valid ZIP */}
+            {/* ZIP result info, shown when valid ZIP */}
             {showInfo && (
               <div
                 key={zipLocation?.label || "zip-info"}
@@ -708,7 +708,7 @@ function ContactServiceAreaSection({
               </div>
             )}
 
-            {/* Contact + Availability — only shown after a valid ZIP is entered */}
+            {/* Contact + Availability, only shown after a valid ZIP is entered */}
             {showInfo && (
               <div className="mt-6 space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-400">
                 <a
@@ -736,7 +736,7 @@ function ContactServiceAreaSection({
                   </span>
                   <span className="flex flex-col leading-tight">
                     <span className="text-[10px] uppercase tracking-[0.25em] text-[#F5C842]">Availability</span>
-                    <span className="text-[18px] sm:text-[20px] font-black text-white">Open 24/7 — Same-day Service</span>
+                    <span className="text-[18px] sm:text-[20px] font-black text-white">Open 24/7, Same-day Service</span>
                   </span>
                 </div>
               </div>
@@ -758,7 +758,7 @@ function ContactPage() {
 
       {/* Single shared background for form + service area */}
       <section className="relative overflow-hidden bg-[#1E3A6E]">
-        {/* Particle background — same as WhyUs / homepage */}
+        {/* Particle background, same as WhyUs / homepage */}
         <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
           <Particles
             particleCount={650}

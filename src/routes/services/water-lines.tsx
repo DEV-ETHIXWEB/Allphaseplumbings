@@ -68,7 +68,7 @@ const CONTENT: ServicePageContent = {
       heading: "Get Reliable Assistance for Your Seattle Water Lines",
       paragraphs: [
         "If you're noticing low water pressure, discolored water, or unexplained wet spots around your yard, don't wait until it becomes an emergency. All Phase Plumbing offers trusted Seattle water line repair and replacement to protect your property and restore your water supply.",
-        "Call Us: (206) 772-6077 today or schedule your inspection online — our friendly team will ensure your home's water line is repaired or replaced with expert precision and care.",
+        "Call Us: (206) 772-6077 today or schedule your inspection online, our friendly team will ensure your home's water line is repaired or replaced with expert precision and care.",
       ],
     },
   ],
@@ -83,7 +83,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What is trenchless water line replacement?",
-      a: "Trenchless replacement allows us to install new pipes underground with minimal digging — protecting your lawn, driveway, and landscaping. It's faster, less disruptive, and often more cost-effective than traditional excavation.",
+      a: "Trenchless replacement allows us to install new pipes underground with minimal digging, protecting your lawn, driveway, and landscaping. It's faster, less disruptive, and often more cost-effective than traditional excavation.",
     },
     {
       q: "How long does a water line replacement take?",
@@ -91,7 +91,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "How much does Seattle water line replacement cost?",
-      a: "Costs vary based on pipe length, depth, material, and access. We provide honest upfront estimates after a thorough inspection — call (206) 772-6077 for a quote.",
+      a: "Costs vary based on pipe length, depth, material, and access. We provide honest upfront estimates after a thorough inspection, call (206) 772-6077 for a quote.",
     },
     {
       q: "Can a leaking water line cause property damage?",

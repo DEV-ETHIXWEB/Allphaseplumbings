@@ -12,7 +12,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "From slow drips behind walls to pinhole leaks under sinks, pipe damage rarely fixes itself. The longer it sits, the more it costs — in water bills, drywall, flooring, and mold remediation. All Phase Plumbing provides fast, code-compliant pipe repair across the Seattle area for residential and small commercial properties.",
+        "From slow drips behind walls to pinhole leaks under sinks, pipe damage rarely fixes itself. The longer it sits, the more it costs, in water bills, drywall, flooring, and mold remediation. All Phase Plumbing provides fast, code-compliant pipe repair across the Seattle area for residential and small commercial properties.",
         "We diagnose the actual problem, explain your options, and complete the repair right the first time. No guesswork, no upselling.",
         "Call (206) 772-6077 to schedule pipe repair.",
       ],
@@ -37,7 +37,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "When Repair Isn't Enough",
       paragraphs: [
-        "If we find widespread corrosion, repeated failures in nearby sections, or pipe material at end of life, we'll tell you straight — patching the same pipe over and over costs more than a planned replacement. See our pipe replacement and repiping services for those options.",
+        "If we find widespread corrosion, repeated failures in nearby sections, or pipe material at end of life, we'll tell you straight, patching the same pipe over and over costs more than a planned replacement. See our pipe replacement and repiping services for those options.",
       ],
     },
     {
@@ -48,10 +48,10 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "How do you find a leak inside a wall?", a: "We use acoustic listening tools, thermal imaging, and pressure testing to pinpoint the spot before cutting. The opening is precise — not exploratory damage." },
-    { q: "Will my water bill drop after repair?", a: "If the leak was active, yes — sometimes dramatically. We can compare meter readings before and after to confirm the fix." },
+    { q: "How do you find a leak inside a wall?", a: "We use acoustic listening tools, thermal imaging, and pressure testing to pinpoint the spot before cutting. The opening is precise, not exploratory damage." },
+    { q: "Will my water bill drop after repair?", a: "If the leak was active, yes, sometimes dramatically. We can compare meter readings before and after to confirm the fix." },
     { q: "Do you handle hot water pipe repairs differently?", a: "Same materials and joints, but extra care to support the repaired section because hot water pipe expansion stresses joints over time." },
-    { q: "Can you repair galvanized pipe?", a: "Sometimes — short sections can be transitioned to PEX or copper. If the surrounding galvanized is heavily corroded, partial replacement is usually a better investment." },
+    { q: "Can you repair galvanized pipe?", a: "Sometimes, short sections can be transitioned to PEX or copper. If the surrounding galvanized is heavily corroded, partial replacement is usually a better investment." },
     { q: "How long does a typical pipe repair take?", a: "Most single-point repairs are 1–2 hours including testing. Repairs requiring drywall opening or harder-to-access pipes can take 3–4 hours." },
   ],
   related: [
@@ -65,8 +65,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/pipe-repair")({
   head: () => ({
     meta: [
-      { title: "Seattle Pipe Repair — All Phase Plumbing" },
-      { name: "description", content: "Pinhole leaks, joint failures, hidden pipe damage — fast, code-compliant Seattle pipe repair from licensed plumbers." },
+      { title: "Seattle Pipe Repair, All Phase Plumbing" },
+      { name: "description", content: "Pinhole leaks, joint failures, hidden pipe damage, fast, code-compliant Seattle pipe repair from licensed plumbers." },
     ],
   }),
   component: () => (

@@ -27,8 +27,8 @@ export const STATIC_ARTICLES: StaticArticle[] = [
         </p>
         <p>
           As of January 6, 2026, the forecast for the Puget Sound shows a mix of heavy rain
-          followed by overnight lows dipping toward freezing. This specific weather pattern —
-          constant moisture followed by sharp freezes — is exactly what causes $50,000 "hidden"
+          followed by overnight lows dipping toward freezing. This specific weather pattern,
+          constant moisture followed by sharp freezes, is exactly what causes $50,000 "hidden"
           floods in crawlspaces and attics. At <strong>All Phase Plumbing</strong>, we believe a
           well-informed homeowner is our best partner. This 1800-word guide is designed to move you
           from reactive repairs to proactive home performance.
@@ -50,7 +50,7 @@ export const STATIC_ARTICLES: StaticArticle[] = [
         </p>
         <p>
           In <strong>Tacoma</strong> and <strong>Seattle</strong>, many older homes still utilize
-          galvanized steel or older copper. These materials have "memory" — meaning once they have
+          galvanized steel or older copper. These materials have "memory", meaning once they have
           been stressed by a freeze, they are permanently weakened. Even if they don't burst this
           week, they may develop a pinhole leak in the spring.
         </p>
@@ -384,8 +384,8 @@ STATIC_ARTICLES.push({
       <p>
         As a homeowner in Seattle, you're always looking for ways to make your home more
         efficient, save on utility bills, and free up space in a market where every square foot
-        counts. That's why the idea of a tankless water heater—also known as an on-demand water
-        heater—is so appealing. But is it really worth the investment? As the local plumbing pros,
+        counts. That's why the idea of a tankless water heater, also known as an on-demand water
+        heater, is so appealing. But is it really worth the investment? As the local plumbing pros,
         we get this question all the time. Let's break down the pros and cons to help you decide
         if a tankless water heater in Seattle is the right upgrade for your home.
       </p>
@@ -410,7 +410,7 @@ STATIC_ARTICLES.push({
 
       <h3>2. Significant Energy Savings</h3>
       <p>
-        The biggest energy waste from a traditional heater is "standby heat loss"—the energy used
+        The biggest energy waste from a traditional heater is "standby heat loss", the energy used
         to keep a tank full of water hot even when no one is using it. Tankless heaters eliminate
         this waste, as they only use energy when a hot water faucet is on. This can lead to a{" "}
         <strong>24–36% increase in energy efficiency</strong> and noticeable savings on your
@@ -453,7 +453,7 @@ STATIC_ARTICLES.push({
       <p>
         While tankless units provide endless hot water, they have a limited flow rate (measured in
         gallons per minute, or GPM). If you're running multiple hot water appliances at the same
-        time—like a shower and a dishwasher—a single unit may struggle to keep up, resulting in a
+        time, like a shower and a dishwasher, a single unit may struggle to keep up, resulting in a
         drop in water temperature or pressure. For larger families, we sometimes recommend
         installing a second unit or a high-capacity model to ensure smooth operation.
       </p>
@@ -511,7 +511,7 @@ STATIC_ARTICLES.push({
 
       <h2>Why Tree Roots Love Your Sewer Line</h2>
       <p>
-        It's not personal—it's survival. Tree roots are constantly seeking three things: water,
+        It's not personal, it's survival. Tree roots are constantly seeking three things: water,
         nutrients, and oxygen. Your sewer line provides all three in abundance, especially if it
         has an existing small leak or joint separation.
       </p>
@@ -617,7 +617,7 @@ STATIC_ARTICLES.push({
         </li>
       </ul>
       <p>
-        If the damage is severe—meaning the pipe is cracked or collapsed—we will likely recommend{" "}
+        If the damage is severe, meaning the pipe is cracked or collapsed, we will likely recommend{" "}
         <strong>trenchless sewer repair</strong> to fix or replace the damaged section with
         minimal digging, preserving your beautiful Seattle landscaping.
       </p>

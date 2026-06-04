@@ -78,11 +78,11 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "My outdoor faucet leaks only when I turn it on — what's wrong?", a: "Usually a worn washer or packing inside the valve stem. It's a quick repair and stops the drip without needing a full faucet replacement." },
+    { q: "My outdoor faucet leaks only when I turn it on, what's wrong?", a: "Usually a worn washer or packing inside the valve stem. It's a quick repair and stops the drip without needing a full faucet replacement." },
     { q: "Should I replace a standard hose bib with a frost-proof one?", a: "If you don't have a frost-proof spigot, we strongly recommend the upgrade in Seattle's climate. They prevent freeze bursts that often happen inside the wall." },
-    { q: "Why is water dripping from my ceiling when I use the outdoor spigot?", a: "Likely a cracked pipe behind the wall — often from a past freeze. Don't keep using the spigot. We'll open the wall in a targeted spot, repair the pipe, and patch as needed." },
+    { q: "Why is water dripping from my ceiling when I use the outdoor spigot?", a: "Likely a cracked pipe behind the wall, often from a past freeze. Don't keep using the spigot. We'll open the wall in a targeted spot, repair the pipe, and patch as needed." },
     { q: "How long does outdoor faucet repair take?", a: "Most repairs are completed in under an hour. A frost-proof replacement that requires accessing pipe behind the wall can take 2–3 hours." },
-    { q: "Do you winterize outdoor faucets?", a: "Yes — we can shut off and drain the outdoor line for you each fall, or install dedicated shutoffs so you can do it yourself in future seasons." },
+    { q: "Do you winterize outdoor faucets?", a: "Yes, we can shut off and drain the outdoor line for you each fall, or install dedicated shutoffs so you can do it yourself in future seasons." },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -95,8 +95,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/outdoor-faucet-repair")({
   head: () => ({
     meta: [
-      { title: "Outdoor Faucet & Hose Bib Repair Seattle — All Phase Plumbing" },
-      { name: "description", content: "Seattle outdoor faucet and hose bib repair — leaks, freeze damage, low pressure, and frost-proof spigot upgrades." },
+      { title: "Outdoor Faucet & Hose Bib Repair Seattle, All Phase Plumbing" },
+      { name: "description", content: "Seattle outdoor faucet and hose bib repair, leaks, freeze damage, low pressure, and frost-proof spigot upgrades." },
     ],
   }),
   component: () => (

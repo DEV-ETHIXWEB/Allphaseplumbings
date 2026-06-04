@@ -29,7 +29,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Seattle Garbage Disposal Replacement",
       paragraphs: [
-        "If your garbage disposal is more than 10 years old or beyond repair, garbage disposal replacement in Seattle may be your best option. Older units often struggle with frequent breakdowns, leaks, or reduced grinding power — making replacement a more cost-effective solution.",
+        "If your garbage disposal is more than 10 years old or beyond repair, garbage disposal replacement in Seattle may be your best option. Older units often struggle with frequent breakdowns, leaks, or reduced grinding power, making replacement a more cost-effective solution.",
         "Our plumbers will handle the entire process, from safely removing your old disposal to installing your new one with precision. We install all major disposal brands and can help you choose a quiet, energy-efficient model that fits your kitchen's needs and plumbing system.",
       ],
     },
@@ -49,7 +49,7 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "Why is my garbage disposal humming but not working?", a: "A humming disposal usually means the motor has power but the grinding plate is jammed. Don't keep flipping the switch — it can burn out the motor. Call us at (206) 772-6077 and we'll safely free the jam and check for damage." },
+    { q: "Why is my garbage disposal humming but not working?", a: "A humming disposal usually means the motor has power but the grinding plate is jammed. Don't keep flipping the switch, it can burn out the motor. Call us at (206) 772-6077 and we'll safely free the jam and check for damage." },
     { q: "How long does a garbage disposal last?", a: "Most quality units last 8–15 years with regular use and proper care. If yours is over 10 years old and giving you frequent trouble, replacement is usually the better long-term investment." },
     { q: "Can you replace a disposal with a more powerful model?", a: "Absolutely. We'll size the right horsepower for your household, confirm your sink and electrical can handle it, and install the new unit cleanly with leak-tested connections." },
     { q: "Why does my disposal smell bad?", a: "Food residue stuck under the splash guard or in the chamber is the usual cause. We can clean and deodorize the unit during a service visit, or replace worn seals that are trapping debris." },
@@ -66,7 +66,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
   head: () => ({
     meta: [
-      { title: "Seattle Garbage Disposal Repair, Replacement & Installation — All Phase Plumbing" },
+      { title: "Seattle Garbage Disposal Repair, Replacement & Installation, All Phase Plumbing" },
       { name: "description", content: "Fast, reliable garbage disposal repair, replacement, and installation in Seattle from All Phase Plumbing." },
     ],
   }),

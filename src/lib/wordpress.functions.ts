@@ -6,7 +6,7 @@
  * credentials or internal URLs to the browser.
  *
  * Environment variable required: PUBLIC_WP_URL
- * e.g.  PUBLIC_WP_URL=https://allphaseplumbing.com
+ * e.g. PUBLIC_WP_URL=https://allphaseplumbing.com
  */
 
 import { createServerFn } from "@tanstack/react-start";
@@ -34,7 +34,7 @@ async function wpFetch<T>(path: string): Promise<T> {
     // 10-second timeout via AbortSignal
     signal: AbortSignal.timeout(10_000),
   });
-  if (!res.ok) throw new Error(`WP REST API ${res.status} — ${path}`);
+  if (!res.ok) throw new Error(`WP REST API ${res.status}, ${path}`);
   return res.json() as Promise<T>;
 }
 

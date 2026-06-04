@@ -120,7 +120,7 @@ const CONTENT: ServicePageContent = {
     { q: "What pipe materials do you use?", a: "PEX for most water supply (flexible, freeze-tolerant, long-lasting) and copper where required by spec. For drain/sewer, modern PVC or HDPE depending on application." },
     { q: "How long does a whole-home repipe take?", a: "Most single-family homes are repiped in 2–5 days. We work in phases so you have water at the end of each day whenever possible." },
     { q: "Will you have to cut into my walls?", a: "Some access is unavoidable, but we plan the route to minimize wall openings and patch them cleanly when finished." },
-    { q: "Is repiping covered by insurance?", a: "Standard policies usually cover water damage caused by sudden leaks but not the cost of replacing pipes. Some policies offer service-line endorsements — worth checking." },
+    { q: "Is repiping covered by insurance?", a: "Standard policies usually cover water damage caused by sudden leaks but not the cost of replacing pipes. Some policies offer service-line endorsements, worth checking." },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -133,8 +133,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/pipe-replacement")({
   head: () => ({
     meta: [
-      { title: "Seattle Pipe Replacement & Repiping — All Phase Plumbing" },
-      { name: "description", content: "Seattle pipe replacement and full home repiping — PEX, copper, drain & sewer lines. Long-term reliability over endless patches." },
+      { title: "Seattle Pipe Replacement & Repiping, All Phase Plumbing" },
+      { name: "description", content: "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches." },
     ],
   }),
   component: () => (

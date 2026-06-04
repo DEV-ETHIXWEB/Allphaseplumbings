@@ -63,7 +63,7 @@ const CONTENT: ServicePageContent = {
         "Comprehensive Cleaning: Removes grease, roots, and buildup for long-lasting results.",
         "Improved Flow: Clears obstructions and restores full water pressure.",
         "Prevents Future Clogs: Keeps your pipes clean and reduces the risk of backups.",
-        "Eco-Friendly: Uses only water—no harsh chemicals.",
+        "Eco-Friendly: Uses only water, no harsh chemicals.",
         "Extends Pipe Life: Regular hydro jetting minimizes corrosion and wear.",
       ],
       paragraphs: [
@@ -85,7 +85,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you provide emergency hydro jetting services in Seattle?",
-      a: "Yes — All Phase Plumbing is available 24/7 for emergency hydro jetting throughout the Greater Seattle area. Call us anytime at (206) 772-6077.",
+      a: "Yes, All Phase Plumbing is available 24/7 for emergency hydro jetting throughout the Greater Seattle area. Call us anytime at (206) 772-6077.",
     },
     {
       q: "How often should I have my drains hydro jetted?",
@@ -93,7 +93,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "How does hydro jetting compare to snaking or chemical drain cleaners?",
-      a: "Snaking punches through a clog but leaves residue behind. Hydro jetting scours the entire pipe wall clean using high-pressure water up to 4,000 PSI — delivering longer-lasting results. Chemical cleaners can damage pipes and rarely fix the root cause.",
+      a: "Snaking punches through a clog but leaves residue behind. Hydro jetting scours the entire pipe wall clean using high-pressure water up to 4,000 PSI, delivering longer-lasting results. Chemical cleaners can damage pipes and rarely fix the root cause.",
     },
     {
       q: "How long does a hydro jetting service take?",

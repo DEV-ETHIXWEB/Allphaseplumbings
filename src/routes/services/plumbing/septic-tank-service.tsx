@@ -12,8 +12,8 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Homes outside Seattle's main sewer footprint — across parts of King, Pierce, and Snohomish counties — rely on septic systems to safely process household wastewater. A well-maintained septic system can last 25+ years; a neglected one can fail in 5.",
-        "All Phase Plumbing helps homeowners with the plumbing side of septic systems — clogged lines into and out of the tank, baffle and tee repairs, and coordination with licensed septic pumpers and installers.",
+        "Homes outside Seattle's main sewer footprint, across parts of King, Pierce, and Snohomish counties, rely on septic systems to safely process household wastewater. A well-maintained septic system can last 25+ years; a neglected one can fail in 5.",
+        "All Phase Plumbing helps homeowners with the plumbing side of septic systems, clogged lines into and out of the tank, baffle and tee repairs, and coordination with licensed septic pumpers and installers.",
         "Call (206) 772-6077 to schedule septic-related plumbing service.",
       ],
     },
@@ -47,16 +47,16 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Septic Service",
       paragraphs: [
-        "If you're seeing slow drains, odors, or wet spots in the yard, don't wait — septic failures get expensive fast. Call (206) 772-6077 and we'll diagnose the plumbing-side issue and coordinate any septic specialist work needed.",
+        "If you're seeing slow drains, odors, or wet spots in the yard, don't wait, septic failures get expensive fast. Call (206) 772-6077 and we'll diagnose the plumbing-side issue and coordinate any septic specialist work needed.",
       ],
     },
   ],
   faqs: [
-    { q: "Do you pump septic tanks yourselves?", a: "We focus on the plumbing connections — the lines into and out of the tank. We coordinate with licensed septic pumping contractors when tank pumping is needed." },
+    { q: "Do you pump septic tanks yourselves?", a: "We focus on the plumbing connections, the lines into and out of the tank. We coordinate with licensed septic pumping contractors when tank pumping is needed." },
     { q: "How often should I pump my septic tank?", a: "Every 3–5 years for typical residential use. Larger households or heavy water use may need pumping more often." },
     { q: "Can I use a garbage disposal with a septic system?", a: "It's possible but adds significant solids to the tank, which means pumping more often. We can advise on whether your system is sized for it." },
-    { q: "My drain field smells — what's wrong?", a: "Could be a saturated field, failed lateral, or solids that have escaped a poorly-maintained tank. Camera inspection of the outlet line helps diagnose." },
-    { q: "Do I need a sewer camera inspection if I'm buying a septic home?", a: "Strongly recommended — along with a tank inspection by a licensed septic contractor. We do the line inspection portion." },
+    { q: "My drain field smells, what's wrong?", a: "Could be a saturated field, failed lateral, or solids that have escaped a poorly-maintained tank. Camera inspection of the outlet line helps diagnose." },
+    { q: "Do I need a sewer camera inspection if I'm buying a septic home?", a: "Strongly recommended, along with a tank inspection by a licensed septic contractor. We do the line inspection portion." },
   ],
   related: [
     { label: "Sewer Services", href: "/services/sewer-services" },
@@ -69,8 +69,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/septic-tank-service")({
   head: () => ({
     meta: [
-      { title: "Septic Tank Service Seattle Area — All Phase Plumbing" },
-      { name: "description", content: "Septic system plumbing service across the Seattle area — drain line repair, cleanouts, baffles, and coordination with septic pumpers." },
+      { title: "Septic Tank Service Seattle Area, All Phase Plumbing" },
+      { name: "description", content: "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers." },
     ],
   }),
   component: () => (

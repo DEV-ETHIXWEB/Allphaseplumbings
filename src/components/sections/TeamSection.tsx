@@ -62,7 +62,7 @@ export function TeamSection() {
               ))}
             </ul>
 
-            {/* CTA button — matches reference */}
+            {/* CTA button, matches reference */}
             <Link
               to="/about"
               className="mt-10 inline-flex items-center justify-center px-10 py-4
@@ -77,7 +77,7 @@ export function TeamSection() {
 
           {/* ── RIGHT: styled slideshow ── */}
           <div className="relative flex items-center justify-center">
-            {/* Outer decorative frame — offset navy border */}
+            {/* Outer decorative frame, offset navy border */}
             <div
               className="absolute inset-0 rounded-2xl border-2 border-[#1E3A6E]/25"
               style={{ transform: "translate(10px, 10px)" }}
@@ -99,7 +99,7 @@ export function TeamSection() {
               <TeamSlideshow />
             </div>
 
-            {/* Floating badge — "35+ Years" */}
+            {/* Floating badge, "35+ Years" */}
             <div
               className="absolute -bottom-5 -left-5 z-20 flex items-center gap-3
                          bg-white rounded-xl px-4 py-3 shadow-[0_8px_32px_rgba(30,58,110,0.18)]

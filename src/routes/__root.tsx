@@ -11,6 +11,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { CouponsSidePopout } from "@/components/layout/CouponsSidePopout";
+import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 
 function NotFoundComponent() {
   return (
@@ -185,6 +186,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <CouponsSidePopout />
+      <MobileBottomNav />
     </QueryClientProvider>
   );
 }

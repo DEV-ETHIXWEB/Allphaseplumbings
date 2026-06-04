@@ -177,13 +177,13 @@ export function Masonry({
     grid.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
 
-      // Always set width/height instantly — no layout animation, no reflow
+      // Always set width/height instantly, no layout animation, no reflow
       gsap.set(selector, { width: item.w, height: item.h });
 
       if (!hasMounted.current) {
         const initialPos = getInitialPosition(item);
 
-        // Only animate transform (x/y) + opacity — both GPU-composited, zero reflow
+        // Only animate transform (x/y) + opacity, both GPU-composited, zero reflow
         gsap.fromTo(
           selector,
           { opacity: 0, x: initialPos.x, y: initialPos.y },

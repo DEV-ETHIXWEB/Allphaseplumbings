@@ -77,7 +77,7 @@ export function CTABanner() {
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-[20px] items-end lg:translate-x-[10%]">
-          {/* Left Column — van slides in from left, sits flush against the form */}
+          {/* Left Column, van slides in from left, sits flush against the form */}
           <div className="flex flex-col justify-end items-center lg:items-end relative select-none overflow-visible min-w-0">
             <div
               className={`w-[454px] sm:w-[551px] lg:w-[530px] xl:w-[640px] 2xl:w-[780px] transition-opacity duration-300
@@ -96,7 +96,7 @@ export function CTABanner() {
             </div>
           </div>
 
-          {/* Right Column — contact card */}
+          {/* Right Column, contact card */}
           <div className="w-full flex justify-center lg:justify-end self-center lg:w-[470px] xl:w-[550px] 2xl:w-[620px]">
             <div className="bg-white rounded-2xl shadow-2xl border-2 border-[#1E3A7B]/20 w-full max-w-[720px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 overflow-hidden">
               {/* Blue gradient header strip */}

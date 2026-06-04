@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, MapPin, Clock } from "lucide-react";
-import logo from "@/assets/app-logo.svg";
+import logo from "@/assets/app-logo-white.svg";
 import mascot from "@/assets/mascot.svg";
 
 const CITIES = [
-  "Seattle",   "Redmond",
-  "Tacoma",    "Kirkland",
-  "Renton",    "Puyallup",
-  "Bellevue",  "Tukwila",
+  "Seattle", "Redmond",
+  "Tacoma", "Kirkland",
+  "Renton", "Puyallup",
+  "Bellevue", "Tukwila",
   "Mercer Island", "Auburn",
 ];
 
@@ -34,15 +34,11 @@ export function Footer() {
               <img
                 src={logo}
                 alt="All Phase Plumbing"
-                className="h-[69px] w-auto block"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 6px rgba(255,255,255,0.85)) drop-shadow(0 0 14px rgba(255,255,255,0.45))",
-                }}
+                className="h-[88px] w-auto block"
               />
             </Link>
             <p className="text-[13px] text-white/55 leading-relaxed max-w-[180px]">
-              Greater Seattle's trusted plumber — licensed, insured &amp; available 24/7.
+              Greater Seattle's trusted plumber, licensed, insured &amp; available 24/7.
             </p>
             <a
               href="tel:+12067726077"
@@ -78,8 +74,8 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               {[
-                { label: "Plumbing",   to: "/services/plumbing" },
-                { label: "Sewers",     to: "/services/sewer-services" },
+                { label: "Plumbing", to: "/services/plumbing" },
+                { label: "Sewers", to: "/services/sewer-services" },
                 { label: "Commercial", to: "/services" },
               ].map(({ label, to }) => (
                 <li key={label}>
@@ -99,9 +95,9 @@ export function Footer() {
             <ul className="space-y-2">
               {[
                 { label: "About Us", to: "/about" },
-                { label: "Blog",     to: "/blog" },
-                { label: "Coupons",  to: "/coupons" },
-                { label: "Contact",  to: "/contact" },
+                { label: "Blog", to: "/blog" },
+                { label: "Coupons", to: "/coupons" },
+                { label: "Contact", to: "/contact" },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="text-[14px] font-medium text-white/70 hover:text-[#F5C842] transition-colors">
@@ -136,7 +132,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Mascot — only at xl where the pr-[320px] grid gap gives it space */}
+      {/* Mascot, only at xl where the pr-[320px] grid gap gives it space */}
       <div className="absolute bottom-0 right-[8%] z-20 pointer-events-none select-none hidden xl:block">
         <img
           src={mascot}

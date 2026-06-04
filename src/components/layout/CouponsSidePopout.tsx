@@ -11,7 +11,7 @@ const COUPON_IMAGES = [
   { src: coupon3, alt: "FREE follow up camera inspection with drain cleaning" },
 ] as const;
 
-const PANEL_WIDTH = 260;
+const PANEL_WIDTH = 304;
 
 /**
  * Right-edge drawer. Tab is tightly sized around the "COUPONS" label and
@@ -20,7 +20,7 @@ const PANEL_WIDTH = 260;
  *
  * The drawer also hides itself entirely when the on-page Homeowner Coupons
  * section enters the viewport (no need to advertise a shortcut when the
- * user is already looking at the offers) — it reappears once that section
+ * user is already looking at the offers), it reappears once that section
  * leaves the viewport.
  *
  * Hidden entirely when navigating to /coupons.
@@ -60,7 +60,7 @@ export function CouponsSidePopout() {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      {/* Tab — vertical pill, attached to the left side of the panel.
+      {/* Tab, vertical pill, attached to the left side of the panel.
           Icon at the top, "Coupons" label running top-to-bottom below. */}
       <div className="self-center">
         <Link
@@ -80,12 +80,12 @@ export function CouponsSidePopout() {
         </Link>
       </div>
 
-      {/* Panel — sits to the RIGHT of the tab, pinned to viewport right edge */}
+      {/* Panel, sits to the RIGHT of the tab, pinned to viewport right edge */}
       <div
-        className="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-2.5"
+        className="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-4"
         style={{ width: PANEL_WIDTH }}
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           {COUPON_IMAGES.map((c) => (
             <Link
               key={c.alt}
@@ -97,9 +97,9 @@ export function CouponsSidePopout() {
           ))}
           <Link
             to="/coupons"
-            className="mt-0.5 inline-flex items-center justify-center gap-1.5 text-center text-[11px] font-extrabold text-[#1E3A6E] uppercase tracking-widest hover:text-[#4A7BC4] transition-colors"
+            className="mt-1 inline-flex items-center justify-center gap-2 text-center text-[14px] font-extrabold text-[#1E3A6E] uppercase tracking-widest hover:text-[#4A7BC4] transition-colors"
           >
-            View All Coupons <Tag className="size-3" aria-hidden="true" />
+            View All Coupons <Tag className="size-4" aria-hidden="true" />
           </Link>
         </div>
       </div>

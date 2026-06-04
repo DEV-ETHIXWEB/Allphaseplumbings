@@ -21,7 +21,7 @@ const REVIEWS = [
     initial: "L",
     color: "#34A853",
     date: "3 weeks ago",
-    text: "Had a major drain emergency on a Sunday — All Phase answered the call and came out within an hour. They saved us from a flooded basement. Honest, fast, and trustworthy.",
+    text: "Had a major drain emergency on a Sunday, All Phase answered the call and came out within an hour. They saved us from a flooded basement. Honest, fast, and trustworthy.",
   },
   {
     name: "Michael T.",
@@ -164,7 +164,7 @@ export function GoogleReviewsMarquee() {
         }
         @keyframes google-reviews-scroll {
           from { transform: translate3d(0, 0, 0); }
-          to   { transform: translate3d(-50%, 0, 0); }
+          to { transform: translate3d(-50%, 0, 0); }
         }
         @media (prefers-reduced-motion: reduce) {
           .google-reviews-marquee-track { animation: none; }

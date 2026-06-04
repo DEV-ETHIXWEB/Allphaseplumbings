@@ -13,7 +13,7 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "A burst pipe is one of the most damaging plumbing emergencies a home can face. Water can dump into walls, ceilings, and floors at hundreds of gallons per hour. All Phase Plumbing dispatches emergency burst-pipe crews 24/7 across the Seattle area to stop the water, repair the line, and help you minimize damage.",
-        "If you have a burst pipe right now, shut off your main water valve and call us at (206) 772-6077 — we'll be on the way.",
+        "If you have a burst pipe right now, shut off your main water valve and call us at (206) 772-6077, we'll be on the way.",
       ],
     },
     {
@@ -24,7 +24,7 @@ const CONTENT: ServicePageContent = {
         "Cut power to affected areas at the breaker if safe to do so",
         "Move belongings out of the wet area",
         "Take photos for your insurance claim",
-        "Call (206) 772-6077 — 24/7 emergency line",
+        "Call (206) 772-6077, 24/7 emergency line",
       ],
     },
     {
@@ -56,15 +56,15 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Call Now for Burst Pipe Repair",
       paragraphs: [
-        "Every minute matters with a burst pipe. Call (206) 772-6077 right now — our 24/7 line answers immediately and a licensed plumber will be dispatched.",
+        "Every minute matters with a burst pipe. Call (206) 772-6077 right now, our 24/7 line answers immediately and a licensed plumber will be dispatched.",
       ],
     },
   ],
   faqs: [
     { q: "How fast can you get to my house?", a: "Most Seattle-area emergency calls reach you within 60–90 minutes. We'll give you a realistic ETA the moment you call." },
-    { q: "Will insurance cover the damage?", a: "Most homeowner policies cover sudden water damage from burst pipes — though they usually don't cover the pipe itself. We provide written documentation for your claim." },
+    { q: "Will insurance cover the damage?", a: "Most homeowner policies cover sudden water damage from burst pipes, though they usually don't cover the pipe itself. We provide written documentation for your claim." },
     { q: "Can I just patch it myself?", a: "A temporary clamp can slow a small leak in an emergency, but full-pressure water service shouldn't be restored until a licensed plumber properly replaces the section." },
-    { q: "Why do pipes burst when they freeze?", a: "Frozen water expands and creates extreme pressure inside the pipe. The actual rupture is usually somewhere between the freeze and a closed faucet — not where the ice is." },
+    { q: "Why do pipes burst when they freeze?", a: "Frozen water expands and creates extreme pressure inside the pipe. The actual rupture is usually somewhere between the freeze and a closed faucet, not where the ice is." },
     { q: "Should I shut off the water heater too?", a: "Yes, if water has reached it or if you've shut off the main and the heater is now empty. Running it dry can damage the heating elements." },
   ],
   related: [
@@ -78,8 +78,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/burst-pipe-repair")({
   head: () => ({
     meta: [
-      { title: "Emergency Burst Pipe Repair Seattle — All Phase Plumbing" },
-      { name: "description", content: "24/7 burst pipe repair in Seattle. Stop the water and call (206) 772-6077 — licensed emergency plumbers on the way." },
+      { title: "Emergency Burst Pipe Repair Seattle, All Phase Plumbing" },
+      { name: "description", content: "24/7 burst pipe repair in Seattle. Stop the water and call (206) 772-6077, licensed emergency plumbers on the way." },
     ],
   }),
   component: () => (

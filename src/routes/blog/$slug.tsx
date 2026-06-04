@@ -10,7 +10,7 @@ import skylineBg from "@/assets/seattle-skyline.jpg";
 export const Route = createFileRoute("/blog/$slug")({
   head: () => ({
     meta: [
-      { title: "Article — All Phase Plumbing Blog" },
+      { title: "Article, All Phase Plumbing Blog" },
       { name: "description", content: "Plumbing article from All Phase Plumbing Seattle." },
     ],
   }),

@@ -66,7 +66,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "24/7 Emergency Plumbers in Seattle",
       paragraphs: [
-        "Plumbing disasters don't wait for business hours — neither do we. All Phase Plumbing offers 24/7 emergency plumbing in Seattle for burst pipes, flooding, major leaks, or clogged drains.",
+        "Plumbing disasters don't wait for business hours, neither do we. All Phase Plumbing offers 24/7 emergency plumbing in Seattle for burst pipes, flooding, major leaks, or clogged drains.",
         "When every minute counts, our local plumbers respond quickly to minimize water damage and restore your system's function. Call us anytime for immediate assistance from our emergency plumbing team.",
       ],
     },
@@ -113,7 +113,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Why do my drains keep clogging?",
-      a: "Repeat clogs often mean buildup deeper in the line — grease, soap scum, or tree roots. We use hydro-jetting and camera inspection to clear and verify the line, not just snake the surface.",
+      a: "Repeat clogs often mean buildup deeper in the line, grease, soap scum, or tree roots. We use hydro-jetting and camera inspection to clear and verify the line, not just snake the surface.",
     },
     {
       q: "How can I prevent my pipes from freezing in winter?",
@@ -135,11 +135,11 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/")({
   head: () => ({
     meta: [
-      { title: "Plumbing Repair Seattle — All Phase Plumbing" },
+      { title: "Plumbing Repair Seattle, All Phase Plumbing" },
       {
         name: "description",
         content:
-          "Leaks, fixtures, pipes, water pressure — diagnosed and repaired by licensed Seattle plumbers.",
+          "Leaks, fixtures, pipes, water pressure, diagnosed and repaired by licensed Seattle plumbers.",
       },
       { property: "og:title", content: "Plumbing Repair Seattle" },
       { property: "og:description", content: "Licensed plumbing repair across Greater Seattle." },

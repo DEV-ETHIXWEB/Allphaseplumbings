@@ -7,13 +7,13 @@ import skylineBg from "@/assets/seattle-skyline.jpg";
 export const Route = createFileRoute("/coupons")({
   head: () => ({
     meta: [
-      { title: "Plumbing Coupons & Offers — All Phase Plumbing Seattle" },
+      { title: "Plumbing Coupons & Offers, All Phase Plumbing Seattle" },
       {
         name: "description",
         content:
-          "Current homeowner coupons from All Phase Plumbing — drain cleaning, camera inspection, and service call discounts.",
+          "Current homeowner coupons from All Phase Plumbing, drain cleaning, camera inspection, and service call discounts.",
       },
-      { property: "og:title", content: "Plumbing Coupons — All Phase" },
+      { property: "og:title", content: "Plumbing Coupons, All Phase" },
       { property: "og:description", content: "Save on your next plumbing visit." },
     ],
   }),

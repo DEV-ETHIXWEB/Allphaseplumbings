@@ -9,7 +9,7 @@ const SERVICES = [
   {
     title: "Plumbing Repair",
     description:
-      "From leaky faucets to burst pipes — we fix it right the first time with upfront pricing and no hidden fees.",
+      "From leaky faucets to burst pipes, we fix it right the first time with upfront pricing and no hidden fees.",
     href: "/services/plumbing" as const,
     icon: wwd1,
   },
@@ -18,21 +18,21 @@ const SERVICES = [
     description:
       "Slow or fully blocked drains cleared fast. We tackle kitchen, bathroom, and main sewer line clogs.",
     href: "/services/drain-cleaning" as const,
-    icon: wwd2,
+    icon: wwd4,
   },
   {
     title: "Water Heaters",
     description:
       "Tank and tankless installation, repair, and replacement. Hot water when you need it, guaranteed.",
     href: "/services/water-heaters" as const,
-    icon: wwd3,
+    icon: wwd2,
   },
   {
     title: "Sewer Service",
     description:
       "Camera inspections, hydro-jetting, and sewer line repair to keep everything flowing smoothly.",
     href: "/services/sewer-services" as const,
-    icon: wwd4,
+    icon: wwd3,
     iconScale: 0.95,
   },
 ] as const;
@@ -64,7 +64,7 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
 
       <div className="p-3 sm:p-6 flex flex-col flex-1 items-center sm:items-start text-center sm:text-left">
         <h3 className="text-base sm:text-[22px] font-extrabold text-[#1E3A6E] leading-snug">{svc.title}</h3>
-        {/* Description + Learn More — hidden on phones, visible from sm and up */}
+        {/* Description + Learn More, hidden on phones, visible from sm and up */}
         <p className="hidden sm:block text-gray-500 mt-1 sm:mt-2 text-sm sm:text-[16px] leading-relaxed flex-1">
           {svc.description}
         </p>

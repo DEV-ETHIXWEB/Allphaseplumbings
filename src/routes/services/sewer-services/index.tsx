@@ -15,7 +15,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "When you need Seattle sewer repair, All Phase Plumbing is your trusted local expert for fast, reliable, and long-lasting solutions. Sewer problems can cause serious disruptions — from foul odors and slow drains to full system backups — and our team is ready to respond quickly to restore your peace of mind.",
+        "When you need Seattle sewer repair, All Phase Plumbing is your trusted local expert for fast, reliable, and long-lasting solutions. Sewer problems can cause serious disruptions, from foul odors and slow drains to full system backups, and our team is ready to respond quickly to restore your peace of mind.",
         "We offer a complete range of sewer services in Seattle, including:",
       ],
       list: [
@@ -33,7 +33,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Comprehensive Sewer Services",
       paragraphs: [
-        "When it comes to dependable Seattle sewer services, homeowners and businesses alike rely on All Phase Plumbing. Our experienced technicians understand the unique challenges of Seattle's plumbing systems — from older infrastructure to shifting soil conditions — and deliver precise, efficient solutions every time.",
+        "When it comes to dependable Seattle sewer services, homeowners and businesses alike rely on All Phase Plumbing. Our experienced technicians understand the unique challenges of Seattle's plumbing systems, from older infrastructure to shifting soil conditions, and deliver precise, efficient solutions every time.",
       ],
     },
     {
@@ -63,7 +63,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       paragraphs: [
-        "This process eliminates guesswork, allowing us to recommend the most effective solution — whether it's a simple cleaning or a full sewer replacement. Don't wait for a small issue to become a major headache. Schedule your Seattle sewer inspection with All Phase Plumbing today.",
+        "This process eliminates guesswork, allowing us to recommend the most effective solution, whether it's a simple cleaning or a full sewer replacement. Don't wait for a small issue to become a major headache. Schedule your Seattle sewer inspection with All Phase Plumbing today.",
       ],
     },
     {
@@ -97,7 +97,7 @@ const CONTENT: ServicePageContent = {
       heading: "Seattle Trenchless Sewer Repair",
       paragraphs: [
         "Want your sewer line fixed without tearing up your yard? Seattle trenchless sewer repair is the solution. This modern technique allows us to repair or replace damaged pipes through small access points, avoiding the need for large-scale excavation.",
-        "Using advanced tools, we install a new lining or pipe inside the existing structure — creating a seamless, durable fix that restores flow and prevents future issues. It's faster, cleaner, and more affordable than traditional methods.",
+        "Using advanced tools, we install a new lining or pipe inside the existing structure, creating a seamless, durable fix that restores flow and prevents future issues. It's faster, cleaner, and more affordable than traditional methods.",
         "If you want sewer repair without the mess, contact All Phase Plumbing for expert trenchless sewer repair in Seattle.",
       ],
     },
@@ -105,14 +105,14 @@ const CONTENT: ServicePageContent = {
       heading: "Trenchless Sewer Replacement in Seattle",
       paragraphs: [
         "When your existing sewer line is beyond repair, trenchless sewer replacement in Seattle offers an efficient, non-invasive upgrade. Our plumbers use specialized equipment to install new, high-strength piping underground, preserving your landscaping and property structures.",
-        "This process ensures long-term durability and minimal disruption — ideal for Seattle homeowners who want a modern solution for aging infrastructure.",
+        "This process ensures long-term durability and minimal disruption, ideal for Seattle homeowners who want a modern solution for aging infrastructure.",
         "Let All Phase Plumbing handle your sewer replacement project with the care and expertise your home deserves.",
       ],
     },
     {
       heading: "Get Expert Help with Seattle Sewer Repair",
       paragraphs: [
-        "Don't let sewer issues take over your day — or your yard. Whether you're facing a backup, odor, or broken line, All Phase Plumbing provides fast, affordable, and professional Seattle sewer repair. Our goal is to restore your system efficiently so you can get back to normal life with confidence.",
+        "Don't let sewer issues take over your day, or your yard. Whether you're facing a backup, odor, or broken line, All Phase Plumbing provides fast, affordable, and professional Seattle sewer repair. Our goal is to restore your system efficiently so you can get back to normal life with confidence.",
         "Call (206) 772-6077 or schedule online to book your appointment today and experience the All Phase difference.",
       ],
     },
@@ -128,7 +128,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What is trenchless sewer repair?",
-      a: "Trenchless sewer repair is a no-dig method that uses small access points to repair or replace damaged sewer lines. Techniques include pipe bursting and CIPP lining — both faster, cleaner, and less disruptive than traditional excavation.",
+      a: "Trenchless sewer repair is a no-dig method that uses small access points to repair or replace damaged sewer lines. Techniques include pipe bursting and CIPP lining, both faster, cleaner, and less disruptive than traditional excavation.",
     },
     {
       q: "How long does sewer repair or replacement take?",
@@ -154,13 +154,13 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/sewer-services/")({
   head: () => ({
     meta: [
-      { title: "Sewer Repair & Trenchless Sewer Seattle — All Phase Plumbing" },
+      { title: "Sewer Repair & Trenchless Sewer Seattle, All Phase Plumbing" },
       {
         name: "description",
         content:
           "Sewer line repair, replacement, and trenchless solutions across Greater Seattle. Free camera inspection with qualifying work.",
       },
-      { property: "og:title", content: "Sewer Services — All Phase Plumbing" },
+      { property: "og:title", content: "Sewer Services, All Phase Plumbing" },
       { property: "og:description", content: "Sewer repair and trenchless replacement." },
     ],
   }),

@@ -12,7 +12,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "Plumbing fixtures wear out, leak, and go out of style. Replacing them is one of the quickest ways to refresh a kitchen or bathroom — but it has to be done with care to avoid leaks behind walls and damaged supply lines. All Phase Plumbing replaces every fixture in the house, cleanly and code-compliantly.",
+        "Plumbing fixtures wear out, leak, and go out of style. Replacing them is one of the quickest ways to refresh a kitchen or bathroom, but it has to be done with care to avoid leaks behind walls and damaged supply lines. All Phase Plumbing replaces every fixture in the house, cleanly and code-compliantly.",
         "Whether it's a single faucet, a full bathroom refresh, or a kitchen remodel, we'll handle the demo, replacement, supply-line upgrades, and leak testing.",
         "Call (206) 772-6077 to schedule fixture replacement.",
       ],
@@ -54,11 +54,11 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "Can I supply my own fixtures?", a: "Yes — we install customer-supplied fixtures all the time. We confirm sizing and compatibility before starting." },
-    { q: "Do you replace shutoff valves while you're under there?", a: "If they're sticky, leaking, or old, yes — it's much cheaper to do during the same visit." },
+    { q: "Can I supply my own fixtures?", a: "Yes, we install customer-supplied fixtures all the time. We confirm sizing and compatibility before starting." },
+    { q: "Do you replace shutoff valves while you're under there?", a: "If they're sticky, leaking, or old, yes, it's much cheaper to do during the same visit." },
     { q: "How long does fixture replacement take?", a: "A single faucet runs ~45–90 minutes. A toilet takes 60–90 minutes. A full bathroom of fixtures usually takes a half day." },
-    { q: "Will you haul away my old fixtures?", a: "Yes — disposal is included in standard fixture replacement." },
-    { q: "What if I notice a leak after install?", a: "Call us — if we installed it and it's leaking, we fix it. We stand behind our work." },
+    { q: "Will you haul away my old fixtures?", a: "Yes, disposal is included in standard fixture replacement." },
+    { q: "What if I notice a leak after install?", a: "Call us, if we installed it and it's leaking, we fix it. We stand behind our work." },
   ],
   related: [
     { label: "Faucet Installation", href: "/services/plumbing/faucet-installation" },
@@ -71,8 +71,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/fixture-replacement")({
   head: () => ({
     meta: [
-      { title: "Seattle Fixture Replacement — All Phase Plumbing" },
-      { name: "description", content: "Seattle plumbing fixture replacement — faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work." },
+      { title: "Seattle Fixture Replacement, All Phase Plumbing" },
+      { name: "description", content: "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work." },
     ],
   }),
   component: () => (

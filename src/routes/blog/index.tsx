@@ -9,13 +9,13 @@ import skylineBg from "@/assets/seattle-skyline.jpg";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Plumbing Blog — Tips from All Phase Plumbing Seattle" },
+      { title: "Plumbing Blog, Tips from All Phase Plumbing Seattle" },
       {
         name: "description",
         content:
           "Plumbing guides, maintenance tips, and Seattle-specific advice from licensed local plumbers.",
       },
-      { property: "og:title", content: "Plumbing Blog — All Phase" },
+      { property: "og:title", content: "Plumbing Blog, All Phase" },
       { property: "og:description", content: "Plumbing know-how from licensed Seattle plumbers." },
     ],
   }),

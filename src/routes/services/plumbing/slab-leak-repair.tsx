@@ -13,7 +13,7 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "Slab leaks happen when water pipes running through or under your home's concrete foundation crack, corrode, or shift. Because the leak is hidden under concrete, it often goes undetected until water bills spike, flooring warps, or warm spots show up underfoot. By then, structural damage is usually already underway.",
-        "All Phase Plumbing uses non-invasive slab leak detection to pinpoint the exact location of the leak — then offers the right repair approach for your home, from spot repair to full rerouting that avoids the slab entirely.",
+        "All Phase Plumbing uses non-invasive slab leak detection to pinpoint the exact location of the leak, then offers the right repair approach for your home, from spot repair to full rerouting that avoids the slab entirely.",
         "Call (206) 772-6077 to schedule slab leak detection.",
       ],
     },
@@ -32,15 +32,15 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Non-Invasive Slab Leak Detection",
       paragraphs: [
-        "Before opening any concrete, we use electronic listening equipment, thermal imaging, and pressure isolation to pinpoint exactly where the leak is. This means surgical access instead of guesswork demolition — a smaller hole, a faster fix, and a cleaner patch.",
+        "Before opening any concrete, we use electronic listening equipment, thermal imaging, and pressure isolation to pinpoint exactly where the leak is. This means surgical access instead of guesswork demolition, a smaller hole, a faster fix, and a cleaner patch.",
       ],
     },
     {
       heading: "Slab Leak Repair Options",
       list: [
-        "Spot repair — cut concrete, repair the specific pipe section, patch",
-        "Re-routing — abandon the under-slab section and run new pipe through walls or ceiling",
-        "Whole-home repipe — when multiple slab failures suggest end-of-life pipes",
+        "Spot repair, cut concrete, repair the specific pipe section, patch",
+        "Re-routing, abandon the under-slab section and run new pipe through walls or ceiling",
+        "Whole-home repipe, when multiple slab failures suggest end-of-life pipes",
       ],
       paragraphs: [
         "We walk you through the tradeoffs honestly. Spot repair is cheapest if the rest of the line is in good shape; rerouting often makes more sense for older homes where another slab leak is likely.",
@@ -55,16 +55,16 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Slab Leak Service",
       paragraphs: [
-        "Suspect a slab leak? Call (206) 772-6077 — we'll detect, locate, and repair with the least disruption possible to your floors and foundation.",
+        "Suspect a slab leak? Call (206) 772-6077, we'll detect, locate, and repair with the least disruption possible to your floors and foundation.",
       ],
     },
   ],
   faqs: [
-    { q: "How do you find a leak under concrete?", a: "Acoustic listening devices, thermal imaging, and pressure isolation testing. We pinpoint the spot before any concrete comes up — so the opening is targeted, not exploratory." },
+    { q: "How do you find a leak under concrete?", a: "Acoustic listening devices, thermal imaging, and pressure isolation testing. We pinpoint the spot before any concrete comes up, so the opening is targeted, not exploratory." },
     { q: "Will my insurance cover slab leak repair?", a: "Coverage varies. Most policies cover the damage caused by the leak but not the leak repair itself. Documentation of the exact failure helps your claim." },
-    { q: "Is it better to repair or reroute?", a: "Depends on pipe age and history. Single failure in newer pipe — spot repair. Multiple failures or old galvanized pipe — rerouting or repiping is usually smarter long-term." },
+    { q: "Is it better to repair or reroute?", a: "Depends on pipe age and history. Single failure in newer pipe, spot repair. Multiple failures or old galvanized pipe, rerouting or repiping is usually smarter long-term." },
     { q: "How long does slab leak repair take?", a: "Detection: 1–2 hours. Spot repair: same day to next day. Rerouting: 1–3 days depending on scope." },
-    { q: "Can I keep using water while you work?", a: "Sometimes — depends which line is leaking. We'll let you know what's affected so you can plan." },
+    { q: "Can I keep using water while you work?", a: "Sometimes, depends which line is leaking. We'll let you know what's affected so you can plan." },
   ],
   related: [
     { label: "Leak Detection", href: "/services/plumbing/leak-detection" },
@@ -77,8 +77,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/slab-leak-repair")({
   head: () => ({
     meta: [
-      { title: "Seattle Slab Leak Detection & Repair — All Phase Plumbing" },
-      { name: "description", content: "Seattle slab leak detection and repair — non-invasive location, spot repair or rerouting. Stop hidden water damage before it spreads." },
+      { title: "Seattle Slab Leak Detection & Repair, All Phase Plumbing" },
+      { name: "description", content: "Seattle slab leak detection and repair, non-invasive location, spot repair or rerouting. Stop hidden water damage before it spreads." },
     ],
   }),
   component: () => (

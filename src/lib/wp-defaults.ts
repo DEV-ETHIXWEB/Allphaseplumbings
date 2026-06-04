@@ -64,7 +64,7 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
     {
       icon: "Layers",
       title: "All Under One Roof",
-      desc: "Plumbing, drains, sewer, water heaters — one call does it.",
+      desc: "Plumbing, drains, sewer, water heaters, one call does it.",
     },
   ],
 
@@ -73,9 +73,9 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   team_heading: "See the All Phase team",
   team_italic: "in action.",
   team_body:
-    "We're a family-owned crew of real plumbers — licensed, background-checked, and proud to have served Seattle homes for more than three decades. When you call, you talk to a neighbor.",
+    "We're a family-owned crew of real plumbers, licensed, background-checked, and proud to have served Seattle homes for more than three decades. When you call, you talk to a neighbor.",
   team_points: [
-    "Real plumbers — not subcontractors",
+    "Real plumbers, not subcontractors",
     "Licensed, bonded, and background-checked",
     "Serving Seattle homes for 30+ years",
   ],
@@ -107,7 +107,7 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   // CTA banner
   cta_heading: "Contact Us Today",
   cta_subheading: "Same Day Service",
-  cta_body: "Plumbing and Drain Cleaning — When booked before 2pm, Mon–Fri",
+  cta_body: "Plumbing and Drain Cleaning, When booked before 2pm, Mon–Fri",
   dispatch_message: "⚡ Dispatching certified local technicians near Tukwila WA...",
 
   // Social media
@@ -124,7 +124,7 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
     iconName: "Wrench",
     title: "Plumbing Repair",
     description:
-      "Leaks, fixtures, pipes, water pressure — diagnosed and repaired by licensed pros.",
+      "Leaks, fixtures, pipes, water pressure, diagnosed and repaired by licensed pros.",
     href: "/services/plumbing",
   },
   {
@@ -138,7 +138,7 @@ export const DEFAULT_SERVICES: ServiceCard[] = [
     number: "03",
     iconName: "Flame",
     title: "Water Heaters",
-    description: "Tank and tankless install, repair, and replacement — same-day in most cases.",
+    description: "Tank and tankless install, repair, and replacement, same-day in most cases.",
     href: "/services/water-heaters",
   },
   {

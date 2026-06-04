@@ -137,7 +137,7 @@ export function TopBar() {
 
         {/* ── Right: social handles in a box ── */}
         <div className="justify-self-end">
-          <div className="inline-flex items-center gap-1 rounded-md border border-white/25 bg-white/10 px-2 py-1.5 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-3 rounded-md border border-white/25 bg-white/10 px-3 py-2 backdrop-blur-sm">
             {socials.map(({ label, href, Icon }) => (
               <a
                 key={label}
@@ -145,9 +145,9 @@ export function TopBar() {
                 aria-label={label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center size-8 rounded text-white hover:bg-white/15 hover:text-[#F5C842] transition-colors"
+                className="flex items-center justify-center size-11 rounded text-white hover:bg-white/15 hover:text-[#F5C842] transition-colors"
               >
-                <Icon className="size-[18px]" />
+                <Icon className="size-[28px]" />
               </a>
             ))}
           </div>

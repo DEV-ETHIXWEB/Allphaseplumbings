@@ -131,8 +131,8 @@ const CONTENT: ServicePageContent = {
     { q: "How long should a hot water tank last?", a: "Most standard tank-style water heaters last 8–12 years. Tankless units can last 20+ years with proper maintenance. If yours is near or past these ranges, plan for replacement rather than another repair." },
     { q: "Is no hot water always the heating element?", a: "Not always. On gas units it's often the pilot, igniter, or thermocouple. On electric, it's usually a heating element or thermostat. We diagnose first, then repair only what's actually failed." },
     { q: "Why does my hot water smell metallic or look rusty?", a: "Usually corrosion inside the tank or the anode rod nearing end of life. A new anode rod is cheap and can buy you years; a corroded tank itself usually needs replacement." },
-    { q: "Can sediment really damage my water heater?", a: "Yes — it insulates the burner from the water, forcing the unit to run longer, which overheats components. An annual flush keeps things efficient and extends the unit's life." },
-    { q: "Do you handle gas water heaters?", a: "Yes — burner, valve, venting, and safety inspections included. All repairs are done to code by licensed plumbers." },
+    { q: "Can sediment really damage my water heater?", a: "Yes, it insulates the burner from the water, forcing the unit to run longer, which overheats components. An annual flush keeps things efficient and extends the unit's life." },
+    { q: "Do you handle gas water heaters?", a: "Yes, burner, valve, venting, and safety inspections included. All repairs are done to code by licensed plumbers." },
   ],
   related: [
     { label: "Water Heaters", href: "/services/water-heaters" },
@@ -145,8 +145,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/hot-water-system-repair")({
   head: () => ({
     meta: [
-      { title: "Hot Water System Repair Seattle — All Phase Plumbing" },
-      { name: "description", content: "Seattle hot water system repair — gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service." },
+      { title: "Hot Water System Repair Seattle, All Phase Plumbing" },
+      { name: "description", content: "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service." },
     ],
   }),
   component: () => (

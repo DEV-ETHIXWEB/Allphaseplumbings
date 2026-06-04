@@ -78,7 +78,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Seattle Toilet Plumber",
       paragraphs: [
-        "When you need reliable plumbing assistance, turn to a Seattle Toilet Plumber from All Phase Plumbing. Our licensed experts are equipped to handle any issue — whether it's a simple repair, emergency service, or full replacement. We pride ourselves on fast response times, transparent pricing, and guaranteed satisfaction.",
+        "When you need reliable plumbing assistance, turn to a Seattle Toilet Plumber from All Phase Plumbing. Our licensed experts are equipped to handle any issue, whether it's a simple repair, emergency service, or full replacement. We pride ourselves on fast response times, transparent pricing, and guaranteed satisfaction.",
         "If your toilet is causing problems or you're planning an upgrade, contact us today for dependable solutions from Seattle's trusted plumbing professionals.",
       ],
     },
@@ -94,7 +94,7 @@ const CONTENT: ServicePageContent = {
     { q: "Why does my toilet keep running?", a: "Usually a worn flapper, fill valve, or chain length issue. These are inexpensive parts but a slow refill leak can waste hundreds of gallons a month. We replace the failed parts and adjust the tank to stop the running for good." },
     { q: "How do I know if I need a new toilet vs. a repair?", a: "If you've had two or more repairs in a year, the tank or bowl is cracked, or it's a high-water-use model from the 90s, replacement usually pays for itself in water savings within a few years." },
     { q: "Do you install bidet and smart toilets?", a: "Yes. We handle smart and bidet-integrated toilets including the additional water supply and electrical considerations they often need." },
-    { q: "What causes a toilet to leak around the base?", a: "Almost always a failed wax ring or loose flange bolts. Don't wait — water leaking under the toilet can rot the subfloor. We reset the toilet with a new seal and check the flange for damage." },
+    { q: "What causes a toilet to leak around the base?", a: "Almost always a failed wax ring or loose flange bolts. Don't wait, water leaking under the toilet can rot the subfloor. We reset the toilet with a new seal and check the flange for damage." },
     { q: "Can you replace a toilet during a bathroom remodel?", a: "Absolutely. We coordinate with your remodel timeline so the new toilet goes in after flooring and is ready when the rest of the bathroom is finished." },
   ],
   related: [
@@ -108,7 +108,7 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/toilets")({
   head: () => ({
     meta: [
-      { title: "Seattle Toilet Repair, Replacement & Installation — All Phase Plumbing" },
+      { title: "Seattle Toilet Repair, Replacement & Installation, All Phase Plumbing" },
       { name: "description", content: "Seattle toilet repair, replacement, and installation. Licensed plumbers, modern fixtures, fast service." },
     ],
   }),

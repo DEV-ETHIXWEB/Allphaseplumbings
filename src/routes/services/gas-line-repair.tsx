@@ -160,7 +160,7 @@ export const Route = createFileRoute("/services/gas-line-repair")({
       { property: "og:title", content: "Gas Line Repair | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional gas line repair — safe, code-compliant, and reliable.",
+        content: "Professional gas line repair, safe, code-compliant, and reliable.",
       },
     ],
   }),

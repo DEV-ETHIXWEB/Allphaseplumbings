@@ -116,7 +116,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Can a slab leak be repaired without breaking the concrete?",
-      a: "In some cases, yes. Pipe rerouting — running new pipes through walls or ceilings to bypass the damaged section — can avoid concrete breaking. In other cases, targeted concrete cutting is necessary but we minimize the area affected.",
+      a: "In some cases, yes. Pipe rerouting, running new pipes through walls or ceilings to bypass the damaged section, can avoid concrete breaking. In other cases, targeted concrete cutting is necessary but we minimize the area affected.",
     },
     {
       q: "How long does slab leak repair take?",
@@ -128,7 +128,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Will my homeowner's insurance cover slab leak repair?",
-      a: "Many homeowners insurance policies cover the cost of breaking through the slab and making the repair, but not the pipe replacement itself. Coverage varies — we can provide documentation to help with your claim.",
+      a: "Many homeowners insurance policies cover the cost of breaking through the slab and making the repair, but not the pipe replacement itself. Coverage varies, we can provide documentation to help with your claim.",
     },
   ],
   related: [
@@ -151,7 +151,7 @@ export const Route = createFileRoute("/services/slab-leak-repair")({
       { property: "og:title", content: "Slab Leak Repair | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional slab leak repair — accurate detection, minimal disruption.",
+        content: "Professional slab leak repair, accurate detection, minimal disruption.",
       },
     ],
   }),

@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "When a pipe bursts at 2 AM, water is flooding your basement, or your only toilet has stopped working, you need an emergency plumber who can actually get to you fast. All Phase Plumbing dispatches licensed emergency plumbers across the Greater Seattle area 24 hours a day, 7 days a week.",
         "Our trucks are stocked for common emergency repairs so we can stop the water, diagnose the problem, and get things working again in a single visit whenever possible.",
-        "Call (206) 772-6077 — we answer the phone, day or night.",
+        "Call (206) 772-6077, we answer the phone, day or night.",
       ],
     },
     {
@@ -47,7 +47,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Why Choose Our Emergency Plumbers",
       list: [
-        "Real 24/7 dispatch — not just an answering service",
+        "Real 24/7 dispatch, not just an answering service",
         "Licensed and insured technicians",
         "Same trucks stocked for most repairs on the first visit",
         "Upfront pricing before work begins",
@@ -57,15 +57,15 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Emergency Plumbing Service",
       paragraphs: [
-        "Don't wait — water damage gets worse by the minute. Call (206) 772-6077 right now and a licensed Seattle plumber will be on the way.",
+        "Don't wait, water damage gets worse by the minute. Call (206) 772-6077 right now and a licensed Seattle plumber will be on the way.",
       ],
     },
   ],
   faqs: [
-    { q: "Do you really answer at night and on weekends?", a: "Yes. Our emergency line rings to a live dispatcher 24/7 — you'll talk to a real person who can get a plumber rolling." },
+    { q: "Do you really answer at night and on weekends?", a: "Yes. Our emergency line rings to a live dispatcher 24/7, you'll talk to a real person who can get a plumber rolling." },
     { q: "What counts as a plumbing emergency?", a: "Anything actively causing damage or unsafe conditions: flooding, no water, sewer backup, gas smells, or a complete loss of toilets/heat." },
-    { q: "Is there an extra charge for after-hours service?", a: "After-hours rates do apply for nights, weekends, and holidays. We'll confirm pricing on the phone before dispatch — no surprises." },
-    { q: "How fast can you get to me?", a: "Most Seattle-area emergency calls are reached within 60–90 minutes. Heavy weather events can extend this — we'll give you a realistic ETA when you call." },
+    { q: "Is there an extra charge for after-hours service?", a: "After-hours rates do apply for nights, weekends, and holidays. We'll confirm pricing on the phone before dispatch, no surprises." },
+    { q: "How fast can you get to me?", a: "Most Seattle-area emergency calls are reached within 60–90 minutes. Heavy weather events can extend this, we'll give you a realistic ETA when you call." },
     { q: "Can you fix it on the first visit?", a: "We stock our trucks for the most common emergencies, so yes in most cases. For specialty parts we'll stabilize the situation and return same-day or next morning to finish." },
   ],
   related: [
@@ -79,8 +79,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/emergency-plumber")({
   head: () => ({
     meta: [
-      { title: "24/7 Emergency Plumber Seattle — All Phase Plumbing" },
-      { name: "description", content: "Seattle 24/7 emergency plumber — burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties." },
+      { title: "24/7 Emergency Plumber Seattle, All Phase Plumbing" },
+      { name: "description", content: "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties." },
     ],
   }),
   component: () => (

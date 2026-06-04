@@ -157,7 +157,7 @@ export const Route = createFileRoute("/services/pipe-repair")({
       { property: "og:title", content: "Pipe Repair | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Professional pipe repair services — fast, reliable, and built to last.",
+        content: "Professional pipe repair services, fast, reliable, and built to last.",
       },
     ],
   }),

@@ -15,7 +15,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "When your drains slow down or back up, trust All Phase Plumbing — Seattle's local drain cleaning experts — to restore smooth, consistent flow. As a leading drain cleaning company in Seattle, we provide complete services to remove clogs, eliminate buildup, and prevent future blockages.",
+        "When your drains slow down or back up, trust All Phase Plumbing, Seattle's local drain cleaning experts, to restore smooth, consistent flow. As a leading drain cleaning company in Seattle, we provide complete services to remove clogs, eliminate buildup, and prevent future blockages.",
         "From kitchen sinks and bathroom drains to floor drains and main sewer lines, our licensed plumbers use professional-grade tools like augers, hydro jetting equipment, and camera inspection technology to accurately diagnose and clean your plumbing system. No matter the clog or cause, we'll get your drains running clear again.",
         "Call Us: (206) 772-6077 or schedule your Seattle drain cleaning online today!",
       ],
@@ -37,7 +37,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Seattle Hydro Jetting Services",
       paragraphs: [
-        "For severe or recurring blockages, Seattle hydro jetting offers a powerful, long-term solution. Using high-pressure water streams, our hydro jetting service cuts through even the toughest obstructions — like grease buildup, scale, and tree roots — restoring your pipes to like-new condition.",
+        "For severe or recurring blockages, Seattle hydro jetting offers a powerful, long-term solution. Using high-pressure water streams, our hydro jetting service cuts through even the toughest obstructions, like grease buildup, scale, and tree roots, restoring your pipes to like-new condition.",
         "Safe for most plumbing systems and highly effective, hydro jet drain cleaning is ideal for both residential and commercial properties. If plungers and snakes can't clear your drains, our expert hydro jetting service can.",
       ],
     },
@@ -45,7 +45,7 @@ const CONTENT: ServicePageContent = {
       heading: "Seattle Sewer Line Cleaning",
       paragraphs: [
         "If multiple drains are backing up or slow to clear, the problem may be deeper in your system. Our Seattle sewer line cleaning services target clogs, buildup, and root intrusions in your home's main sewer line.",
-        "We use advanced camera inspection tools to locate the source of the problem and professional cleaning equipment to clear your lines efficiently — helping you avoid costly sewer backups and property damage.",
+        "We use advanced camera inspection tools to locate the source of the problem and professional cleaning equipment to clear your lines efficiently, helping you avoid costly sewer backups and property damage.",
         "Whether it's preventive maintenance or an urgent blockage, All Phase Plumbing ensures your sewer system flows smoothly again.",
       ],
     },
@@ -59,14 +59,14 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Why Professional Drain Cleaning Matters",
       paragraphs: [
-        "Clogged drains can cause more than inconvenience — they can lead to leaks, odors, and costly water damage. With professional drain cleaning in Seattle, you'll protect your pipes, prevent emergencies, and improve your plumbing system's efficiency.",
+        "Clogged drains can cause more than inconvenience, they can lead to leaks, odors, and costly water damage. With professional drain cleaning in Seattle, you'll protect your pipes, prevent emergencies, and improve your plumbing system's efficiency.",
         "At All Phase Plumbing, our expert technicians provide long-lasting solutions using eco-friendly, proven methods. Whether it's a minor clog or a major blockage, we'll make sure your plumbing runs like it should.",
       ],
     },
     {
       heading: "Schedule Your Seattle Drain Cleaning Today",
       paragraphs: [
-        "Don't let slow drains or backups disrupt your day. Trust the experts at All Phase Plumbing for fast, effective, and affordable drain cleaning in Seattle. We're available for same-day service, routine maintenance, and emergency drain repairs — always with upfront pricing and 100% satisfaction guaranteed.",
+        "Don't let slow drains or backups disrupt your day. Trust the experts at All Phase Plumbing for fast, effective, and affordable drain cleaning in Seattle. We're available for same-day service, routine maintenance, and emergency drain repairs, always with upfront pricing and 100% satisfaction guaranteed.",
         "Call Us: (206) 772-6077 or book online today to schedule your Seattle drain cleaning service and keep your water flowing freely.",
       ],
     },
@@ -86,7 +86,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "What is hydro jetting, and when is it needed?",
-      a: "Hydro jetting uses high-pressure water streams (up to 4,000 PSI) to scour the inside of your pipes clean — removing grease, scale, and even tree roots. It's the best solution for severe or recurring blockages where snaking alone isn't enough. It's safe for most modern plumbing systems.",
+      a: "Hydro jetting uses high-pressure water streams (up to 4,000 PSI) to scour the inside of your pipes clean, removing grease, scale, and even tree roots. It's the best solution for severe or recurring blockages where snaking alone isn't enough. It's safe for most modern plumbing systems.",
     },
     {
       q: "How do I know if I need sewer line cleaning instead of regular drain cleaning?",
@@ -94,7 +94,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you offer emergency drain cleaning services in Seattle?",
-      a: "Yes — All Phase Plumbing is available 24/7 for emergency drain cleaning throughout the Greater Seattle area. A backed-up sewer or flooded floor can't wait. Call us anytime at (206) 772-6077 and we'll dispatch a technician right away.",
+      a: "Yes, All Phase Plumbing is available 24/7 for emergency drain cleaning throughout the Greater Seattle area. A backed-up sewer or flooded floor can't wait. Call us anytime at (206) 772-6077 and we'll dispatch a technician right away.",
     },
   ],
   related: [
@@ -108,11 +108,11 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/drain-cleaning")({
   head: () => ({
     meta: [
-      { title: "Seattle Drain Cleaning — Hydro Jetting & Sewer Inspection | All Phase Plumbing" },
+      { title: "Seattle Drain Cleaning, Hydro Jetting & Sewer Inspection | All Phase Plumbing" },
       {
         name: "description",
         content:
-          "Seattle's trusted drain cleaning experts. Hydro jetting, sewer line cleaning, and camera inspection by licensed plumbers. Same-day service — call (206) 772-6077.",
+          "Seattle's trusted drain cleaning experts. Hydro jetting, sewer line cleaning, and camera inspection by licensed plumbers. Same-day service, call (206) 772-6077.",
       },
       { property: "og:title", content: "Seattle Drain Cleaning | All Phase Plumbing" },
       {

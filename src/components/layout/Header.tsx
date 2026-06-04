@@ -8,7 +8,7 @@ import { StarBorder } from "@/components/ui/StarBorder";
 import { PillNavItem } from "./PillNavItem";
 import { Instagram, Facebook } from "lucide-react";
 
-/* TikTok glyph — lucide doesn't ship one. */
+/* TikTok glyph, lucide doesn't ship one. */
 function TikTokGlyph({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -17,7 +17,7 @@ function TikTokGlyph({ className }: { className?: string }) {
   );
 }
 
-/* Facebook — solid filled glyph (navy via currentColor) */
+/* Facebook, solid filled glyph (navy via currentColor) */
 function FacebookFilled({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -185,7 +185,7 @@ export function Header() {
   }, [isHomePage]);
 
   // TopBar collapses on every page (home included) once past the threshold.
-  // The logo/badge/phone row only collapses on non-home pages — home keeps it visible.
+  // The logo/badge/phone row only collapses on non-home pages, home keeps it visible.
   const shouldShrinkTopBar = isScrolled;
   const shouldShrinkLogoRow = !isHomePage && isScrolled;
 
@@ -208,19 +208,10 @@ export function Header() {
         <TopBar />
       </div>
 
-      {/* ── Phone-only header: hamburger · logo (center) · socials ── */}
+      {/* ── Phone-only header: logo (left) · socials (right) ── */}
       <div className="lg:hidden bg-white border-b border-gray-100">
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center px-3 py-2.5 gap-2">
-          <button
-            type="button"
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-label="Toggle menu"
-            className="justify-self-start inline-flex items-center justify-center p-2 rounded-md text-[#1E3A6E] hover:bg-[#1E3A6E]/10 transition-colors duration-200"
-          >
-            {mobileOpen ? <X className="size-7" /> : <Menu className="size-7" />}
-          </button>
-
-          <Link to="/" className="justify-self-center shrink-0">
+        <div className="flex items-center justify-between px-3 py-2.5 gap-2">
+          <Link to="/" className="shrink-0">
             <img
               src={logo}
               alt="All Phase Plumbing"
@@ -228,7 +219,7 @@ export function Header() {
             />
           </Link>
 
-          <div className="justify-self-end flex items-center gap-0">
+          <div className="flex items-center gap-0">
             <a
               href={opts.social_instagram}
               aria-label="Instagram"
@@ -260,7 +251,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Phone CTA — hangs OUTSIDE the white header, attached to its bottom-right edge */}
+      {/* Phone CTA, hangs OUTSIDE the white header, attached to its bottom-right edge */}
       <div className="lg:hidden absolute top-full right-0 z-40 -mt-px">
         <a
           href={opts.phone_href}
@@ -278,17 +269,17 @@ export function Header() {
         </a>
       </div>
 
-      {/* Logo · badge · phone (lg and up only — phone/tablet uses the bar above) */}
+      {/* Logo · badge · phone (lg and up only, phone/tablet uses the bar above) */}
       <div className={`hidden lg:block bg-white transition-all duration-300 ease-in-out ${
         shouldShrinkLogoRow ? "lg:max-h-0 lg:py-0 lg:opacity-0 lg:pointer-events-none lg:overflow-hidden" : "lg:max-h-48"
       }`}>
         <div className="w-full px-4 sm:px-6 lg:px-10">
-          <div className="flex items-center gap-6 pt-2 pb-2.5">
-            <Link to="/" className="shrink-0">
+          <div className="flex items-center gap-6 pt-2 pb-2.5 min-h-[150px]">
+            <Link to="/" className="shrink-0 translate-y-1.5">
               <img
                 src={logo}
                 alt="All Phase Plumbing"
-                className="h-14 sm:h-[132px] w-auto object-contain"
+                className="h-[42px] sm:h-[100px] w-auto object-contain"
               />
             </Link>
 
@@ -389,7 +380,7 @@ export function Header() {
         )}
       </div>
 
-      {/* ── Mobile drawer — overlays the page, doesn't push content ── */}
+      {/* ── Mobile drawer, overlays the page, doesn't push content ── */}
       <div
         className={`lg:hidden absolute top-full left-0 right-0 z-50 border-t border-gray-100
                    bg-white shadow-2xl overflow-y-auto
@@ -449,7 +440,7 @@ export function Header() {
                     </button>
                   )}
                 </div>
-                {/* Sub-menu — smooth grow */}
+                {/* Sub-menu, smooth grow */}
                 {hasDropdown && (
                   <div
                     className={`grid transition-[grid-template-rows,opacity] duration-[350ms]

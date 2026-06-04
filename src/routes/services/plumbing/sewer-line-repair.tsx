@@ -121,9 +121,9 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "How do I know my sewer line is the actual problem?", a: "If multiple fixtures back up at the same time, the issue is almost certainly the main sewer line — not an individual drain. A camera inspection confirms it." },
+    { q: "How do I know my sewer line is the actual problem?", a: "If multiple fixtures back up at the same time, the issue is almost certainly the main sewer line, not an individual drain. A camera inspection confirms it." },
     { q: "Do you offer trenchless sewer repair?", a: "Yes. For damaged but not fully collapsed lines, trenchless lining or pipe bursting saves your landscaping. We recommend the right method after camera inspection." },
-    { q: "How fast can you respond to a sewer backup?", a: "Backups are an emergency — we dispatch same day across the Seattle area. Call (206) 772-6077 and we'll get a plumber out as quickly as possible." },
+    { q: "How fast can you respond to a sewer backup?", a: "Backups are an emergency, we dispatch same day across the Seattle area. Call (206) 772-6077 and we'll get a plumber out as quickly as possible." },
     { q: "Will you need to dig up my yard?", a: "Not always. Trenchless repair uses small access points. Even for traditional excavation, we plan targeted access to minimize landscape disruption." },
     { q: "Does insurance cover sewer line repair?", a: "Standard policies usually don't cover sewer line repair, but many insurers offer service-line endorsements that do. Worth checking your policy." },
   ],
@@ -138,8 +138,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/sewer-line-repair")({
   head: () => ({
     meta: [
-      { title: "Seattle Sewer Line Repair — All Phase Plumbing" },
-      { name: "description", content: "Seattle sewer line repair — broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available." },
+      { title: "Seattle Sewer Line Repair, All Phase Plumbing" },
+      { name: "description", content: "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available." },
     ],
   }),
   component: () => (

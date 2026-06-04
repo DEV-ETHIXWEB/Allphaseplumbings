@@ -145,7 +145,7 @@ export const Route = createFileRoute("/services/hot-water-system-repair")({
       { property: "og:title", content: "Hot Water System Repair | All Phase Plumbing" },
       {
         property: "og:description",
-        content: "Expert hot water system repair — gas and electric — throughout Greater Seattle.",
+        content: "Expert hot water system repair, gas and electric, throughout Greater Seattle.",
       },
     ],
   }),

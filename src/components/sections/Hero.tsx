@@ -1,8 +1,122 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Star, Home, Building2, Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import mascot from "@/assets/mascot.svg";
 import { useSiteOptions } from "@/hooks/use-site-options";
+import { gsap } from "gsap";
+import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(GSAPSplitText, useGSAP);
+
+const HERO_TAGLINES: readonly (readonly [string, string])[] = [
+  ["Your Home's Plumbing,", "Done Right the First Time."],
+  ["24/7 Emergency Service", "When Pipes Won't Wait."],
+  ["Licensed, Insured & Trusted", "in Seattle Since 1989."],
+  ["From Quick Fixes to Full Repipes,", "We've Got You Covered."],
+] as const;
+
+function CyclingSplitText({
+  lines,
+  intervalMs = 3000,
+  className,
+  style,
+}: {
+  lines: readonly (readonly [string, string])[];
+  intervalMs?: number;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (document.fonts?.status === "loaded") {
+      setFontsLoaded(true);
+    } else {
+      document.fonts?.ready.then(() => setFontsLoaded(true));
+    }
+  }, []);
+
+  useGSAP(
+    () => {
+      if (!fontsLoaded || !ref.current) return;
+      const el = ref.current;
+      let split: InstanceType<typeof GSAPSplitText> | null = null;
+      let killed = false;
+      const tweens: gsap.core.Tween[] = [];
+      const delayedCalls: gsap.core.Tween[] = [];
+
+      const playLine = (i: number) => {
+        if (killed) return;
+        const next = (i + 1) % lines.length;
+
+        if (split) {
+          try { split.revert(); } catch { /* noop */ }
+          split = null;
+        }
+        el.innerHTML = `${lines[i][0]}<br/>${lines[i][1]}`;
+        split = new GSAPSplitText(el, {
+          type: "chars,lines",
+          linesClass: "split-line",
+          charsClass: "split-char",
+          smartWrap: true,
+        });
+
+        gsap.set(split.chars, {
+          opacity: 0,
+          y: 44,
+          willChange: "transform, opacity",
+          force3D: true,
+        });
+
+        const inTween = gsap.to(split.chars, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.025,
+          ease: "power3.out",
+          onComplete: () => {
+            if (killed) return;
+            const holdSec = Math.max(0.4, (intervalMs - 1400) / 1000);
+            const hold = gsap.delayedCall(holdSec, () => {
+              if (killed || !split) return;
+              const outTween = gsap.to(split.chars, {
+                opacity: 0,
+                y: -36,
+                duration: 0.5,
+                stagger: 0.012,
+                ease: "power3.in",
+                onComplete: () => {
+                  if (killed) return;
+                  playLine(next);
+                },
+              });
+              tweens.push(outTween);
+            });
+            delayedCalls.push(hold);
+          },
+        });
+        tweens.push(inTween);
+      };
+
+      playLine(0);
+
+      return () => {
+        killed = true;
+        tweens.forEach((t) => t.kill());
+        delayedCalls.forEach((d) => d.kill());
+        if (split) {
+          try { split.revert(); } catch { /* noop */ }
+        }
+      };
+    },
+    { dependencies: [fontsLoaded, lines, intervalMs], scope: ref },
+  );
+
+  return <h1 ref={ref} className={className} style={style} aria-live="polite" />;
+}
 
 export function Hero() {
   const opts = useSiteOptions();
@@ -42,9 +156,9 @@ export function Hero() {
         className="relative z-10 container mx-auto px-4 pt-28 pb-0"
         style={{ zoom: 0.9 }}
       >
-        {/* ── Two-column: text LEFT  ·  mascot RIGHT ── */}
+        {/* ── Two-column: text LEFT ·  mascot RIGHT ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-end">
-          {/* LEFT — hero copy (10% larger, shifted 10% left) */}
+          {/* LEFT, hero copy (10% larger, shifted 10% left) */}
           <div
             className="pb-20 lg:-ml-10 xl:-ml-16 lg:[transform:scale(1.1)_translateX(0%)] lg:[transform-origin:top_left]"
           >
@@ -59,20 +173,23 @@ export function Hero() {
               All Phase Plumbing
             </span>
 
-            <h1
-              className="mt-3 text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
-              style={{
-                fontFamily: "'Poppins', sans-serif",
-                fontWeight: 900,
-                WebkitTextStroke: "1.5px #1E3A6E",
-                paintOrder: "stroke fill",
-                textShadow: "0 4px 14px rgba(15,34,70,0.7), 0 2px 4px rgba(0,0,0,0.35)",
-              }}
+            <div
+              className="mt-4 relative"
+              style={{ minHeight: "2.6em" }}
             >
-              Your Home&rsquo;s Plumbing,
-              <br />
-              Done Right the First Time.
-            </h1>
+              <CyclingSplitText
+                lines={HERO_TAGLINES}
+                intervalMs={3000}
+                className="text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 900,
+                  WebkitTextStroke: "1.5px #1E3A6E",
+                  paintOrder: "stroke fill",
+                  textShadow: "0 4px 14px rgba(15,34,70,0.7), 0 2px 4px rgba(0,0,0,0.35)",
+                }}
+              />
+            </div>
 
             <p
               className="mt-5 text-[25px] sm:text-[30px] text-white max-w-lg leading-relaxed font-medium"
@@ -128,7 +245,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — mascot, bottom-aligned, animates in on landing */}
+          {/* RIGHT, mascot, bottom-aligned, animates in on landing */}
           <div
             className="hidden lg:flex items-end justify-end"
             style={{
@@ -149,9 +266,10 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Full-width form card — sits flush at the bottom of the hero (25% wider than container) ── */}
+        {/* ── Full-width form card, sits flush at the bottom of the hero (25% wider than container) ── */}
         <div
-          className="mt-2 w-full lg:[width:112.5%] lg:[margin-left:-6.25%] lg:[margin-right:-6.25%]"
+          id="book-now"
+          className="mt-2 scroll-mt-20 w-full lg:[width:112.5%] lg:[margin-left:-6.25%] lg:[margin-right:-6.25%]"
         >
           <div
             className="rounded-t-2xl overflow-hidden border-[4px] sm:border-[6px] border-[#1E3A6E]"
@@ -186,7 +304,7 @@ export function Hero() {
               </button>
             </div>
 
-            {/* Form body — split into promo (left) + form (right) on large screens */}
+            {/* Form body, split into promo (left) + form (right) on large screens */}
             <div className="px-4 py-4 sm:px-8 sm:py-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:gap-8">
               {/* Contact promo (left column on lg) */}
               <div className="mb-4 lg:mb-0 text-white lg:border-r lg:border-white/25 lg:pr-6">

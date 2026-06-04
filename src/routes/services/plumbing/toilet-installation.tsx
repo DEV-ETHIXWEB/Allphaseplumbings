@@ -12,7 +12,7 @@ const CONTENT: ServicePageContent = {
   introBlocks: [
     {
       paragraphs: [
-        "A properly installed toilet should last 20+ years without leaking, rocking, or wasting water. Cutting corners on installation — bad wax ring, loose flange, no shutoff replacement — usually shows up as a leaking base or a soft floor a year later.",
+        "A properly installed toilet should last 20+ years without leaking, rocking, or wasting water. Cutting corners on installation, bad wax ring, loose flange, no shutoff replacement, usually shows up as a leaking base or a soft floor a year later.",
         "All Phase Plumbing installs toilets across Seattle the right way: new wax ring, new supply line, flange checked and rebuilt if needed, level set, and leak-tested before we leave.",
         "Call (206) 772-6077 to schedule toilet installation.",
       ],
@@ -41,7 +41,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "New Installation vs. Replacement",
       paragraphs: [
-        "Replacing an existing toilet is straightforward in most cases. Brand-new installations — for example, adding a half-bath where there wasn't one — require new drain, vent, and supply lines plus permits. We handle both.",
+        "Replacing an existing toilet is straightforward in most cases. Brand-new installations, for example, adding a half-bath where there wasn't one, require new drain, vent, and supply lines plus permits. We handle both.",
       ],
     },
     {
@@ -52,11 +52,11 @@ const CONTENT: ServicePageContent = {
     },
   ],
   faqs: [
-    { q: "Can you install a toilet I bought myself?", a: "Yes — happens often. We confirm rough-in dimensions are compatible before starting." },
+    { q: "Can you install a toilet I bought myself?", a: "Yes, happens often. We confirm rough-in dimensions are compatible before starting." },
     { q: "Do I need a new wax ring?", a: "Always on a fresh install. Reusing an old wax ring is one of the most common causes of base leaks." },
-    { q: "Should you replace the shutoff valve too?", a: "If the existing valve is sticky, leaking, or old, yes — it's much cheaper to do it while the toilet is off than as a separate call later." },
+    { q: "Should you replace the shutoff valve too?", a: "If the existing valve is sticky, leaking, or old, yes, it's much cheaper to do it while the toilet is off than as a separate call later." },
     { q: "How long does installation take?", a: "Most standard replacements take 60–90 minutes. Wall-hung or smart toilets can take 2–3 hours." },
-    { q: "Will you haul away the old toilet?", a: "Yes — old toilet disposal is included with installation." },
+    { q: "Will you haul away the old toilet?", a: "Yes, old toilet disposal is included with installation." },
   ],
   related: [
     { label: "Toilets", href: "/services/plumbing/toilets" },
@@ -69,8 +69,8 @@ const CONTENT: ServicePageContent = {
 export const Route = createFileRoute("/services/plumbing/toilet-installation")({
   head: () => ({
     meta: [
-      { title: "Seattle Toilet Installation — All Phase Plumbing" },
-      { name: "description", content: "Seattle toilet installation — standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation." },
+      { title: "Seattle Toilet Installation, All Phase Plumbing" },
+      { name: "description", content: "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation." },
     ],
   }),
   component: () => (

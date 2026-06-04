@@ -15,13 +15,13 @@ import { CTABanner } from "@/components/sections/CTABanner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "All Phase Plumbing — Seattle Plumber Since 1989" },
+      { title: "All Phase Plumbing, Seattle Plumber Since 1989" },
       {
         name: "description",
         content:
           "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle. Same-day service, licensed since 1989.",
       },
-      { property: "og:title", content: "All Phase Plumbing — Seattle Plumber Since 1989" },
+      { property: "og:title", content: "All Phase Plumbing, Seattle Plumber Since 1989" },
       {
         property: "og:description",
         content: "Same-day plumbing service across Tukwila and Greater Seattle.",

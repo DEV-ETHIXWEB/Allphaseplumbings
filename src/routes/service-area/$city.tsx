@@ -51,7 +51,7 @@ async function fetchCityImage(name: string): Promise<string> {
 
 /**
  * Builds a fully populated ServicePageContent for any city in the
- * service area. Same structure as the reference Auburn page — intro,
+ * service area. Same structure as the reference Auburn page, intro,
  * service breakdown sections, FAQs, and the sidebar.
  */
 function buildCityContent(name: string, heroImage: string): ServicePageContent {
@@ -77,13 +77,13 @@ function buildCityContent(name: string, heroImage: string): ServicePageContent {
       {
         heading: "Water Heaters",
         paragraphs: [
-          `We provide repair, replacement, and maintenance for water heaters of all kinds — including tankless, gas, and electric models. Whether you're dealing with leaks, inconsistent temperatures, or a complete system failure, our ${name} plumbers ensure your hot water supply stays dependable and energy-efficient.`,
+          `We provide repair, replacement, and maintenance for water heaters of all kinds, including tankless, gas, and electric models. Whether you're dealing with leaks, inconsistent temperatures, or a complete system failure, our ${name} plumbers ensure your hot water supply stays dependable and energy-efficient.`,
         ],
       },
       {
         heading: "Drain Cleaning",
         paragraphs: [
-          `Clogged or slow drains are no match for our expert team. We offer comprehensive drain cleaning in ${name} using advanced tools such as hydro jetting and mechanical snaking. From main sewer lines to smaller household drains, we remove grease, roots, and buildup efficiently — helping prevent future clogs and backups.`,
+          `Clogged or slow drains are no match for our expert team. We offer comprehensive drain cleaning in ${name} using advanced tools such as hydro jetting and mechanical snaking. From main sewer lines to smaller household drains, we remove grease, roots, and buildup efficiently, helping prevent future clogs and backups.`,
         ],
       },
       {
@@ -95,7 +95,7 @@ function buildCityContent(name: string, heroImage: string): ServicePageContent {
       {
         heading: "Sump Pumps",
         paragraphs: [
-          `Protect your basement from flooding with our sump pump repair, replacement, and installation services. We work with all types — submersible, pedestal, and battery backup systems — to ensure your pump operates reliably, especially during ${name}'s rainy seasons.`,
+          `Protect your basement from flooding with our sump pump repair, replacement, and installation services. We work with all types, submersible, pedestal, and battery backup systems, to ensure your pump operates reliably, especially during ${name}'s rainy seasons.`,
         ],
       },
       {
@@ -119,7 +119,7 @@ function buildCityContent(name: string, heroImage: string): ServicePageContent {
       {
         heading: "Faucets and Fixtures",
         paragraphs: [
-          `Leaky faucets, dripping showers, and outdated fixtures can waste water and reduce efficiency. We offer professional faucet and fixture repair, installation, and replacement for kitchens, bathrooms, and outdoor spigots — keeping your home looking and functioning its best.`,
+          `Leaky faucets, dripping showers, and outdated fixtures can waste water and reduce efficiency. We offer professional faucet and fixture repair, installation, and replacement for kitchens, bathrooms, and outdoor spigots, keeping your home looking and functioning its best.`,
         ],
       },
       {
@@ -145,11 +145,11 @@ function buildCityContent(name: string, heroImage: string): ServicePageContent {
     faqs: [
       {
         q: `Do you offer same-day plumbing service in ${name}?`,
-        a: `Yes — we dispatch licensed plumbers across ${name} and the surrounding Greater Seattle area daily, and we offer same-day service whenever possible. Call (206) 772-6077 to confirm availability.`,
+        a: `Yes, we dispatch licensed plumbers across ${name} and the surrounding Greater Seattle area daily, and we offer same-day service whenever possible. Call (206) 772-6077 to confirm availability.`,
       },
       {
         q: `Are your ${name} plumbers licensed and insured?`,
-        a: `Absolutely. Every plumber we send is fully licensed in Washington State and insured for your protection. We don't subcontract — your job is handled by our team.`,
+        a: `Absolutely. Every plumber we send is fully licensed in Washington State and insured for your protection. We don't subcontract, your job is handled by our team.`,
       },
       {
         q: "Do you handle emergencies after hours?",
@@ -161,7 +161,7 @@ function buildCityContent(name: string, heroImage: string): ServicePageContent {
       },
       {
         q: "Do you provide upfront pricing?",
-        a: "Yes — every job starts with a clear, upfront quote. No surprise add-ons after the work begins.",
+        a: "Yes, every job starts with a clear, upfront quote. No surprise add-ons after the work begins.",
       },
     ],
     related: [
@@ -178,18 +178,18 @@ export const Route = createFileRoute("/service-area/$city")({
     const city = getCityBySlug(params.city);
     if (!city) throw notFound();
     // Pre-fetch the Wikipedia hero image so the page renders with the real
-    // photo already in place — no placeholder flash on navigation.
+    // photo already in place, no placeholder flash on navigation.
     const heroImage = await fetchCityImage(city.name);
     return { city, heroImage };
   },
   head: ({ loaderData }) => ({
     meta: [
       {
-        title: `Plumber in ${loaderData?.city.name} — All Phase Plumbing`,
+        title: `Plumber in ${loaderData?.city.name}, All Phase Plumbing`,
       },
       {
         name: "description",
-        content: `Licensed plumbing services in ${loaderData?.city.name}, WA — repairs, installations, water heaters, drains, sewer, and 24/7 emergency service from All Phase Plumbing.`,
+        content: `Licensed plumbing services in ${loaderData?.city.name}, WA, repairs, installations, water heaters, drains, sewer, and 24/7 emergency service from All Phase Plumbing.`,
       },
     ],
   }),

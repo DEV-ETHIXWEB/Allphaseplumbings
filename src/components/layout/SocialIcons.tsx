@@ -1,6 +1,6 @@
 import { useSiteOptions } from "@/hooks/use-site-options";
 
-/** TikTok icon — lucide-react doesn't ship one, so inline a simple SVG */
+/** TikTok icon, lucide-react doesn't ship one, so inline a simple SVG */
 function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -9,7 +9,7 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
-/** Instagram — solid/filled glyph */
+/** Instagram, solid/filled glyph */
 function Instagram({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -18,7 +18,7 @@ function Instagram({ className }: { className?: string }) {
   );
 }
 
-/** Facebook — solid/filled glyph */
+/** Facebook, solid/filled glyph */
 function Facebook({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
