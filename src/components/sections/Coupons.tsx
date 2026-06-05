@@ -1,14 +1,26 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import coupon1 from "@/assets/coupon-1.svg";
-import coupon2 from "@/assets/coupon-2.svg";
-import coupon3 from "@/assets/coupon-3.svg";
+import { CouponCard, type CouponCardProps } from "./CouponCard";
 
-const COUPONS = [
-  { src: coupon1, alt: "$100 OFF on your next drain cleaning" },
-  { src: coupon2, alt: "10% OFF on all drain cleaning services" },
-  { src: coupon3, alt: "FREE follow up camera inspection with drain cleaning" },
-] as const;
+const COUPONS: (CouponCardProps & { alt: string })[] = [
+  {
+    headline: "$100",
+    headlineSuffix: "OFF",
+    description: "On Your Next Drain Cleaning",
+    alt: "$100 OFF on your next drain cleaning",
+  },
+  {
+    headline: "10%",
+    headlineSuffix: "OFF",
+    description: "On All Drain Cleaning Services",
+    alt: "10% OFF on all drain cleaning services",
+  },
+  {
+    headline: "FREE",
+    description: "Follow-Up Camera Inspection with Drain Cleaning",
+    alt: "FREE follow up camera inspection with drain cleaning",
+  },
+];
 
 export function Coupons({ hideHeader = false }: { hideHeader?: boolean } = {}) {
   return (
@@ -49,9 +61,10 @@ export function Coupons({ hideHeader = false }: { hideHeader?: boolean } = {}) {
             <Link
               key={c.alt}
               to="/coupons"
-              className="block rounded-xl overflow-hidden shadow-md hover:shadow-[0_8px_30px_rgba(30,58,110,0.25)] hover:-translate-y-1 transition-all duration-300"
+              aria-label={c.alt}
+              className="block overflow-hidden hover:shadow-[0_8px_30px_rgba(30,58,110,0.25)] hover:-translate-y-1 transition-all duration-300"
             >
-              <img src={c.src} alt={c.alt} className="w-full h-auto block" />
+              <CouponCard {...c} />
             </Link>
           ))}
         </div>

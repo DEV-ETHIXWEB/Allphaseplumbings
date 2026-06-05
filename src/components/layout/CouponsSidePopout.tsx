@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Tag } from "lucide-react";
-import coupon1 from "@/assets/coupon-1.svg";
-import coupon2 from "@/assets/coupon-2.svg";
-import coupon3 from "@/assets/coupon-3.svg";
+import { CouponCard, type CouponCardProps } from "@/components/sections/CouponCard";
 
-const COUPON_IMAGES = [
-  { src: coupon1, alt: "$100 OFF on your next drain cleaning" },
-  { src: coupon2, alt: "10% OFF on all drain cleaning services" },
-  { src: coupon3, alt: "FREE follow up camera inspection with drain cleaning" },
-] as const;
+const COUPONS: (CouponCardProps & { alt: string })[] = [
+  {
+    headline: "$100",
+    headlineSuffix: "OFF",
+    description: "On Your Next Drain Cleaning",
+    alt: "$100 OFF on your next drain cleaning",
+  },
+  {
+    headline: "10%",
+    headlineSuffix: "OFF",
+    description: "On All Drain Cleaning Services",
+    alt: "10% OFF on all drain cleaning services",
+  },
+  {
+    headline: "FREE",
+    description: "Follow-Up Camera Inspection with Drain Cleaning",
+    alt: "FREE follow up camera inspection with drain cleaning",
+  },
+];
 
 const PANEL_WIDTH = 304;
 
@@ -83,16 +95,17 @@ export function CouponsSidePopout() {
       {/* Panel, sits to the RIGHT of the tab, pinned to viewport right edge */}
       <div
         className="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-4"
-        style={{ width: PANEL_WIDTH }}
+        style={{ width: PANEL_WIDTH, ["--coupon-notch-bg" as string]: "#ffffff" }}
       >
         <div className="flex flex-col gap-3">
-          {COUPON_IMAGES.map((c) => (
+          {COUPONS.map((c) => (
             <Link
               key={c.alt}
               to="/coupons"
-              className="block rounded-md overflow-hidden hover:scale-[1.02] transition-transform"
+              aria-label={c.alt}
+              className="block overflow-hidden hover:scale-[1.02] transition-transform"
             >
-              <img src={c.src} alt={c.alt} className="w-full h-auto block" />
+              <CouponCard {...c} />
             </Link>
           ))}
           <Link

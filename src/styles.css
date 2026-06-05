@@ -481,3 +481,6 @@ body {
 .app-mbn-search,
 .app-mbn-close { border-radius: 8px !important; }
 .app-mbn-close { border-radius: 9999px !important; }
+
+/* ─── Coupon ticket notches: real circles (override global border-radius:0) ─── */
+.coupon-notch { border-radius: 9999px !important; }

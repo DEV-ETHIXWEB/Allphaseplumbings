@@ -4,6 +4,10 @@ import wwd1 from "@/assets/wwd-1.svg";
 import wwd2 from "@/assets/wwd-2.svg";
 import wwd3 from "@/assets/wwd-3.svg";
 import wwd4 from "@/assets/wwd-4.svg";
+import wwd1Dark from "@/assets/wwd-1-dark.svg";
+import wwd2Dark from "@/assets/wwd-2-dark.svg";
+import wwd3Dark from "@/assets/wwd-3-dark.svg";
+import wwd4Dark from "@/assets/wwd-4-dark.svg";
 
 const SERVICES = [
   {
@@ -12,6 +16,7 @@ const SERVICES = [
       "From leaky faucets to burst pipes, we fix it right the first time with upfront pricing and no hidden fees.",
     href: "/services/plumbing" as const,
     icon: wwd1,
+    iconDark: wwd1Dark,
   },
   {
     title: "Drain Cleaning",
@@ -19,6 +24,7 @@ const SERVICES = [
       "Slow or fully blocked drains cleared fast. We tackle kitchen, bathroom, and main sewer line clogs.",
     href: "/services/drain-cleaning" as const,
     icon: wwd4,
+    iconDark: wwd4Dark,
   },
   {
     title: "Water Heaters",
@@ -26,6 +32,7 @@ const SERVICES = [
       "Tank and tankless installation, repair, and replacement. Hot water when you need it, guaranteed.",
     href: "/services/water-heaters" as const,
     icon: wwd2,
+    iconDark: wwd2Dark,
   },
   {
     title: "Sewer Service",
@@ -33,6 +40,7 @@ const SERVICES = [
       "Camera inspections, hydro-jetting, and sewer line repair to keep everything flowing smoothly.",
     href: "/services/sewer-services" as const,
     icon: wwd3,
+    iconDark: wwd3Dark,
     iconScale: 0.95,
   },
 ] as const;
@@ -49,12 +57,23 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
         className="flex items-center justify-center bg-[#f0f5ff] px-4 pt-6 pb-4 sm:px-8 sm:pt-10 sm:pb-6
                       group-hover:bg-[#e8effc] transition-colors duration-300"
       >
-        <div className="w-[82px] h-[82px] sm:w-[150px] sm:h-[150px] drop-shadow-lg group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+        <div className="relative w-[82px] h-[82px] sm:w-[150px] sm:h-[150px] drop-shadow-lg flex items-center justify-center">
+          {/* Light (default) */}
           <img
             src={svc.icon}
             alt=""
             aria-hidden="true"
-            className="max-w-full max-h-full object-contain"
+            className="absolute inset-0 w-full h-full object-contain
+                       opacity-100 group-hover:opacity-0 transition-opacity duration-150 ease-out"
+            style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
+          />
+          {/* Dark (hover) */}
+          <img
+            src={svc.iconDark}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-contain
+                       opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-out"
             style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
           />
         </div>
