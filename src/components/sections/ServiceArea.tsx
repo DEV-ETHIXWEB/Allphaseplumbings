@@ -4,6 +4,7 @@ import { StarBorder } from "@/components/ui/StarBorder";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { useEffect, useRef } from "react";
 import Particles from "@/components/ui/Particles";
+import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 
 /* ── Leaflet dynamic import (avoids SSR issues) ───────────────────────────── */
 declare global {
@@ -15,6 +16,7 @@ declare global {
 function ServiceMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<import("leaflet").Map | null>(null);
+  const teardownTouchRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
@@ -111,9 +113,16 @@ function ServiceMap() {
 
       /* ── Fit map to polygon ── */
       map.fitBounds(polygon.getBounds(), { padding: [32, 32] });
+
+      /* ── Mobile: require two fingers to pan ── */
+      if (mapRef.current) {
+        teardownTouchRef.current = enableTwoFingerPan(map, mapRef.current);
+      }
     });
 
     return () => {
+      teardownTouchRef.current?.();
+      teardownTouchRef.current = null;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -184,17 +193,19 @@ export function ServiceArea() {
             <ServiceMap />
           </div>
 
-          {/* ── RIGHT: City list ── */}
+          {/* ── RIGHT (desktop) / BELOW (mobile): City list ── */}
           <div
-            className="rounded-2xl border border-white/20 p-3 sm:p-6 lg:p-8 order-2 flex flex-col justify-start h-[340px] sm:h-auto lg:h-[500px] overflow-y-auto"
-            style={{ background: "rgba(255,255,255,0.10)", backdropFilter: "blur(12px)" }}
+            className="order-2 flex flex-col justify-start pt-4 sm:pt-0
+                       sm:rounded-2xl sm:border sm:border-white/20 sm:p-6 lg:p-8
+                       sm:h-auto lg:h-[500px] sm:overflow-y-auto
+                       sm:[background:rgba(255,255,255,0.10)] sm:[backdrop-filter:blur(12px)]"
           >
-            <div className="grid grid-cols-1 gap-y-1">
+            <div className="grid grid-cols-2 sm:grid-cols-1 gap-x-3 gap-y-0">
               {cities.map((city) => (
                 <Link
                   key={city}
                   to="/service-area"
-                  className="flex items-center gap-1.5 py-2.5 sm:py-3 border-b border-white/15 text-white font-semibold text-sm sm:text-base hover:text-[#F5C842] transition-colors group"
+                  className="flex items-center gap-1.5 py-2 sm:py-3 border-b border-white/15 text-white font-semibold text-[13px] sm:text-base hover:text-[#F5C842] transition-colors group"
                 >
                   <MapPin className="size-3.5 sm:size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />
                   {city}, WA

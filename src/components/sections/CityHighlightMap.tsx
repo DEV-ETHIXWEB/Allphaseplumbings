@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { cityHighlightPolygon } from "@/data/service-area-cities";
+import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 
 type Props = {
   name: string;
@@ -52,6 +53,7 @@ async function fetchCityBoundary(name: string): Promise<Ring[] | null> {
 export function CityHighlightMap({ name, lat, lon }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<import("leaflet").Map | null>(null);
+  const teardownTouchRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !mapRef.current) return;
@@ -124,10 +126,17 @@ export function CityHighlightMap({ name, lat, lon }: Props) {
         .openPopup();
 
       map.fitBounds(polygon.getBounds(), { padding: [32, 32] });
+
+      /* ── Mobile: require two fingers to pan ── */
+      if (mapRef.current) {
+        teardownTouchRef.current = enableTwoFingerPan(map, mapRef.current);
+      }
     })();
 
     return () => {
       cancelled = true;
+      teardownTouchRef.current?.();
+      teardownTouchRef.current = null;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;

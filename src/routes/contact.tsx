@@ -4,6 +4,7 @@ import { PageShell } from "@/components/layout/PageShell";
 import { Badges } from "@/components/sections/Badges";
 import { MapPin, Phone, Clock, Loader2, ChevronDown, Check } from "lucide-react";
 import Particles from "@/components/ui/Particles";
+import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 
 /* ── Custom styled service select ───────────────────────────── */
 const SERVICE_OPTIONS = [
@@ -108,6 +109,7 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
   const zipMarkerRef = useRef<import("leaflet").Marker | null>(null);
   const LRef = useRef<typeof import("leaflet") | null>(null);
   const originalBoundsRef = useRef<import("leaflet").LatLngBounds | null>(null);
+  const teardownTouchRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
@@ -194,9 +196,16 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
 
       originalBoundsRef.current = polygon.getBounds();
       map.fitBounds(originalBoundsRef.current, { padding: [32, 32] });
+
+      /* ── Mobile: require two fingers to pan ── */
+      if (mapRef.current) {
+        teardownTouchRef.current = enableTwoFingerPan(map, mapRef.current);
+      }
     });
 
     return () => {
+      teardownTouchRef.current?.();
+      teardownTouchRef.current = null;
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
