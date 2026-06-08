@@ -281,6 +281,15 @@ const Particles = ({
       if (gl?.canvas && container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
+      // Explicitly release the WebGL context. Browsers cap the number of live
+      // contexts (~16 in Chrome); without this the context lingers until GC,
+      // so navigating between routes — or mounting several Particles at once —
+      // accumulates contexts past the cap. The browser then force-drops the
+      // oldest ones, blanking their canvases and causing a bright/dark flicker.
+      if (gl) {
+        const loseCtx = gl.getExtension("WEBGL_lose_context");
+        if (loseCtx) loseCtx.loseContext();
+      }
       // Defensive: clear any straggler canvases that may have been appended after cleanup
       while (container.firstChild) container.removeChild(container.firstChild);
     };

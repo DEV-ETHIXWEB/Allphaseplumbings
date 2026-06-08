@@ -12,14 +12,31 @@ import wwd2Dark from "@/assets/wwd-2-dark.svg";
 import wwd3Dark from "@/assets/wwd-3-dark.svg";
 import wwd4Dark from "@/assets/wwd-4-dark.svg";
 
-/** Pick the best matching home-page icon for a sidebar service label. */
-function iconForLabel(label: string): { light: string; dark: string } {
-  const l = label.toLowerCase();
-  if (l.includes("drain")) return { light: wwd4, dark: wwd4Dark };
-  if (l.includes("sewer") || l.includes("septic")) return { light: wwd3, dark: wwd3Dark };
-  if (l.includes("water heater") || l.includes("tankless") || l.includes("hot water"))
-    return { light: wwd2, dark: wwd2Dark };
-  return { light: wwd1, dark: wwd1Dark }; // default: plumbing/pipes
+/**
+ * Strict label → icon mapping. Only the 4 services that have a real
+ * home-page icon get one; everything else returns null and the tile
+ * renders a placeholder box (waiting on new icon assets).
+ *
+ * To add a new icon: drop the asset, import it above, and add a single
+ * `case` returning `{ light, dark }` for the matching label.
+ */
+function iconForLabel(label: string): { light: string; dark: string } | null {
+  switch (label.trim().toLowerCase()) {
+    case "plumbing":
+    case "plumbing repair":
+      return { light: wwd1, dark: wwd1Dark };
+    case "water heaters":
+    case "water heater":
+      return { light: wwd2, dark: wwd2Dark };
+    case "sewer":
+    case "sewer service":
+    case "sewer services":
+      return { light: wwd3, dark: wwd3Dark };
+    case "drain cleaning":
+      return { light: wwd4, dark: wwd4Dark };
+    default:
+      return null;
+  }
 }
 
 export type ServiceFAQ = { q: string; a: string };
@@ -169,24 +186,39 @@ function SidebarServicesMenu({ related }: { related: RelatedService[] }) {
                          px-1 py-2
                          hover:-translate-y-0.5 transition-transform duration-200"
             >
-              {/* Icon stack — light fades to dark on hover (matches home page) */}
+              {/* Icon stack — light fades to dark on hover (matches home page).
+                  When no icon is assigned for this label yet, render an empty
+                  dashed placeholder box of the same size. */}
               <span className="relative block w-[112px] h-[112px] sm:w-[128px] sm:h-[128px] mb-2">
-                <img
-                  src={icon.light}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-contain
-                             opacity-100 group-hover:opacity-0
-                             transition-opacity duration-150 ease-out"
-                />
-                <img
-                  src={icon.dark}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-contain
-                             opacity-0 group-hover:opacity-100
-                             transition-opacity duration-150 ease-out"
-                />
+                {icon ? (
+                  <>
+                    <img
+                      src={icon.light}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-contain
+                                 opacity-100 group-hover:opacity-0
+                                 transition-opacity duration-150 ease-out"
+                    />
+                    <img
+                      src={icon.dark}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-contain
+                                 opacity-0 group-hover:opacity-100
+                                 transition-opacity duration-150 ease-out"
+                    />
+                  </>
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center justify-center
+                               border-2 border-dashed border-[#1E3A6E]/35
+                               bg-[#1E3A6E]/5
+                               group-hover:border-[#1E3A6E]/55 group-hover:bg-[#1E3A6E]/10
+                               transition-colors duration-150"
+                  />
+                )}
               </span>
               <span
                 className="text-[13px] sm:text-[14px] font-bold uppercase tracking-wide leading-tight

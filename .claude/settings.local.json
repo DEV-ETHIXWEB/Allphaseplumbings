@@ -3,7 +3,9 @@
     "allow": [
       "Bash(cp \"C:/Users/Yash Raj/AppData/Local/Temp/c8cd4e35-c8d6-463f-b283-e9e7897cb22b.tmp\" \"E:/all-phase-plumbings/src/assets/_check3.png\")",
       "Bash(cp \"C:/Users/Yash Raj/AppData/Local/Temp/a620f53b-e4b8-47ef-bccc-396936856981.tmp\" \"E:/all-phase-plumbings/src/assets/_check4.png\")",
-      "Bash(ls \"D:/Download\" | grep -iE \"plumb|drain|water heater|sewer|icon|wwd\" | head -30)"
+      "Bash(ls \"D:/Download\" | grep -iE \"plumb|drain|water heater|sewer|icon|wwd\" | head -30)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/services/plumbing)"
     ]
   }
 }
