@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import logo from "@/assets/app-logo.svg";
@@ -214,7 +214,7 @@ export function Header() {
       <div className="lg:hidden bg-white border-b border-gray-100">
         <div className="flex items-center justify-between px-3 py-2.5 gap-2">
           <Link to="/" className="shrink-0">
-            <img src={logo} alt="All Phase Plumbing" className="h-[53px] w-auto object-contain" />
+            <img src={logo} alt="All Phase Plumbing" className="h-[58px] w-auto object-contain" />
           </Link>
 
           <div className="flex items-center gap-0">
@@ -249,8 +249,8 @@ export function Header() {
         </div>
       </div>
 
-      {/* Phone CTA, hangs OUTSIDE the white header, attached to its bottom-right edge */}
-      <div className="lg:hidden absolute top-full right-0 z-40 -mt-px">
+      {/* Phone CTA + Book Now chips, hang OUTSIDE the white header, stacked on its bottom-right edge */}
+      <div className="lg:hidden absolute top-full right-0 z-40 -mt-px flex flex-col items-end">
         <a
           href={opts.phone_href}
           aria-label={`Call ${opts.phone}`}
@@ -264,6 +264,20 @@ export function Header() {
         >
           <Phone className="size-3.5" />
           {opts.phone}
+        </a>
+        <a
+          href="/#book-now"
+          aria-label="Book now"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 text-[#1E3A6E] font-bold text-[14px] tracking-wide active:scale-[0.97] transition-transform"
+          style={{
+            background: "#F5C842",
+            border: "1.5px solid #1E3A6E",
+            borderTop: "none",
+            boxShadow: "0 4px 10px -2px rgba(30,58,110,0.45)",
+          }}
+        >
+          <CalendarCheck className="size-3.5" strokeWidth={2.6} />
+          Book Now
         </a>
       </div>
 

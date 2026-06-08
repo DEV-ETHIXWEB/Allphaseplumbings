@@ -51,7 +51,7 @@ export function TeamSection() {
               {opts.team_body}
             </p>
 
-            <ul className="mt-7 space-y-3.5">
+            <ul className="hidden sm:block mt-7 space-y-3.5">
               {opts.team_points.map((p) => (
                 <li key={p} className="flex items-start gap-3">
                   <span className="inline-flex items-center justify-center size-6 rounded-full bg-[#1E3A6E] text-white shrink-0 mt-0.5">

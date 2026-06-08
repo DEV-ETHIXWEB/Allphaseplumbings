@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Star, Home, Building2, Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import mascot from "@/assets/mascot.svg";
+import mascotSit from "@/assets/mascot-sit.png";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { gsap } from "gsap";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
@@ -164,9 +165,9 @@ export function Hero() {
         {/* ── Two-column: text LEFT ·  mascot RIGHT ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-end">
           {/* LEFT, hero copy (10% larger, shifted 10% left) */}
-          <div className="pb-20 lg:-ml-10 xl:-ml-16 lg:[transform:scale(1.1)_translateX(0%)] lg:[transform-origin:top_left]">
+          <div className="pb-0 lg:pb-20 lg:-ml-10 xl:-ml-16 lg:[transform:scale(1.1)_translateX(0%)] lg:[transform-origin:top_left]">
             <span
-              className="text-white font-bold text-[34px] tracking-wide"
+              className="hidden sm:inline-block text-white font-bold text-[34px] tracking-wide"
               style={{
                 WebkitTextStroke: "1px #1E3A6E",
                 paintOrder: "stroke fill",
@@ -176,7 +177,7 @@ export function Hero() {
               All Phase Plumbing
             </span>
 
-            <div className="mt-4 relative" style={{ minHeight: "2.6em" }}>
+            <div className="mt-0 sm:mt-4 relative" style={{ minHeight: "2.6em" }}>
               <CyclingSplitText
                 lines={HERO_TAGLINES}
                 intervalMs={3000}
@@ -192,27 +193,55 @@ export function Hero() {
             </div>
 
             <p
-              className="mt-5 text-[25px] sm:text-[30px] text-white max-w-lg leading-relaxed font-medium"
-              style={{
-                WebkitTextStroke: "0.8px #1E3A6E",
-                paintOrder: "stroke fill",
-                textShadow: "0 2px 6px rgba(15,34,70,0.55)",
-              }}
+              className="mt-3 sm:mt-5 text-[16px] sm:text-[30px]
+                         max-w-[210px] sm:max-w-lg
+                         leading-snug sm:leading-relaxed font-semibold sm:font-medium"
             >
-              Serving Tukwila &amp; the Greater Seattle Area with Expert Care Since 1989.
+              <span
+                className="hero-subtitle-text text-white"
+                style={{
+                  WebkitTextStroke: "0px",
+                  paintOrder: "stroke fill",
+                  /* Layered navy shadow gives the text a soft "drop" against
+                     the light sky on mobile, without the boxy highlight. */
+                  textShadow:
+                    "0 1px 0 rgba(15,34,70,0.95), 0 2px 4px rgba(15,34,70,0.9), 0 4px 12px rgba(15,34,70,0.75), 0 0 18px rgba(15,34,70,0.55)",
+                  lineHeight: "1.4",
+                }}
+              >
+                Serving Tukwila &amp; the Greater Seattle Area with Expert Care Since 1989.
+              </span>
             </p>
 
-            {/* Google reviews */}
+            {/* Google reviews — with mascot perched on top edge (mobile only) */}
             <div
-              className="mt-8 inline-flex flex-col px-5 py-4 rounded-xl backdrop-blur-md"
+              className="relative mt-6 sm:mt-8 flex w-full flex-col items-start
+                         px-4 py-3 sm:px-5 sm:py-4
+                         rounded-xl rounded-b-none sm:rounded-b-xl sm:inline-flex sm:w-auto
+                         backdrop-blur-md"
               style={{
                 background: "rgba(255,255,255,0.18)",
                 border: "1px solid rgba(255,255,255,0.35)",
                 boxShadow: "0 8px 24px -6px rgba(15,34,70,0.35)",
               }}
             >
+              {/* Mascot sitting on the box (phone only) — feet rest on the top edge */}
+              <img
+                src={mascotSit}
+                alt=""
+                aria-hidden="true"
+                className="sm:hidden pointer-events-none select-none absolute z-20
+                           h-[211px] w-auto object-contain"
+                style={{
+                  right: "-28px",
+                  bottom: "calc(100% - 83px)",
+                  filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.35))",
+                }}
+                loading="eager"
+                decoding="async"
+              />
               <p
-                className="text-[40px] font-normal leading-none select-none"
+                className="text-[32px] sm:text-[40px] font-normal leading-none select-none"
                 style={{
                   fontFamily: "'Product Sans','Google Sans','Inter','Poppins',sans-serif",
                   letterSpacing: "-0.02em",
@@ -225,9 +254,9 @@ export function Hero() {
                 <span className="text-[#34A853]">l</span>
                 <span className="text-[#EA4335]">e</span>
               </p>
-              <div className="flex items-center gap-2.5 mt-1.5">
+              <div className="flex items-center gap-2 sm:gap-2.5 mt-1.5">
                 <span
-                  className="text-[19px] font-semibold text-white"
+                  className="text-[15px] sm:text-[19px] font-semibold text-white"
                   style={{
                     WebkitTextStroke: "0.8px #1E3A6E",
                     paintOrder: "stroke fill",
@@ -238,7 +267,7 @@ export function Hero() {
                 </span>
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-6 fill-[#FFB800] text-[#FFB800]" />
+                    <Star key={i} className="size-[19px] sm:size-6 fill-[#FFB800] text-[#FFB800]" />
                   ))}
                 </div>
               </div>
@@ -269,7 +298,7 @@ export function Hero() {
         {/* ── Full-width form card, sits flush at the bottom of the hero (25% wider than container) ── */}
         <div
           id="book-now"
-          className="mt-2 scroll-mt-20 w-full lg:[width:112.5%] lg:[margin-left:-6.25%] lg:[margin-right:-6.25%]"
+          className="mt-0 sm:mt-2 scroll-mt-20 w-full lg:[width:112.5%] lg:[margin-left:-6.25%] lg:[margin-right:-6.25%]"
         >
           <div
             className="rounded-t-2xl overflow-hidden border-[4px] sm:border-[6px] border-[#1E3A6E]"

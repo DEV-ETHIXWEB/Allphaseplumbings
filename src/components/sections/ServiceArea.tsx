@@ -177,7 +177,7 @@ export function ServiceArea() {
             Serving the Greater{" "}
             <span className="font-display-italic text-[#F5C842]">Seattle Area.</span>
           </h2>
-          <p className="mt-4 text-lg text-white/75 max-w-2xl mx-auto">
+          <p className="hidden sm:block mt-4 text-lg text-white/75 max-w-2xl mx-auto">
             Licensed plumbers dispatched same-day across King &amp; Pierce counties. If you're in
             any of these areas, we can be there today.
           </p>

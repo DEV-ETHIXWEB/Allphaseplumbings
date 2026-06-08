@@ -1,26 +1,14 @@
 import { useState, useEffect } from "react";
-import sinkImg from "@/assets/sink.png";
-import showerImg from "@/assets/shower.png";
-import spigotImg from "@/assets/spigot.png";
-import heaterImg from "@/assets/heater.png";
+import img1 from "@/assets/img 1.jpeg";
+import img2 from "@/assets/img 2.JPEG";
+import img3 from "@/assets/img 3.JPEG";
+import img4 from "@/assets/img 4.jpeg";
 
 const slides = [
-  {
-    url: sinkImg,
-    alt: "Plumber fixing under-sink pipes",
-  },
-  {
-    url: showerImg,
-    alt: "Licensed plumber installing a shower head",
-  },
-  {
-    url: spigotImg,
-    alt: "Professional plumbing work on water spigot and pressure gauge",
-  },
-  {
-    url: heaterImg,
-    alt: "Expert plumber testing a water heater tank using a multimeter",
-  },
+  { url: img1, alt: "All Phase Plumbing team — job photo 1" },
+  { url: img2, alt: "All Phase Plumbing team — job photo 2" },
+  { url: img3, alt: "All Phase Plumbing team — job photo 3" },
+  { url: img4, alt: "All Phase Plumbing team — job photo 4" },
 ];
 
 export function TeamSlideshow() {

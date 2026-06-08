@@ -479,10 +479,12 @@ body {
 }
 
 /* Reserve space at the bottom of every page on mobile so fixed bottom nav
-   doesn't cover the last bit of content. */
+   doesn't cover the last bit of content. Paint the body navy so the reserved
+   strip blends seamlessly into the footer instead of showing as a white gap. */
 @media (max-width: 1023px) {
   body {
     padding-bottom: 92px;
+    background-color: #1E3A6E;
   }
 }
 
@@ -516,4 +518,12 @@ body {
 /* ─── Coupon ticket notches: real circles (override global border-radius:0) ─── */
 .coupon-notch {
   border-radius: 9999px !important;
+}
+
+/* ─── Hero subtitle: keep the navy text stroke on desktop only
+   (mobile uses a solid navy background highlight instead). ─── */
+@media (min-width: 640px) {
+  .hero-subtitle-text {
+    -webkit-text-stroke: 0.8px #1E3A6E;
+  }
 }
