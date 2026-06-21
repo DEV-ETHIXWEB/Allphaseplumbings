@@ -73,7 +73,7 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   team_heading: "See the All Phase team",
   team_italic: "in action.",
   team_body:
-    "We're a family-owned crew of real plumbers, licensed, background-checked, and proud to have served Seattle homes for more than three decades. When you call, you talk to a neighbor.",
+    "We're a family-owned crew of real plumbers, licensed, background-checked, and proud to have served Seattle homes for more than three decades. When you call, you talk to a neighbour.",
   team_points: [
     "Real plumbers, not subcontractors",
     "Licensed, bonded, and background-checked",

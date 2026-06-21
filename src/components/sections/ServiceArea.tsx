@@ -153,10 +153,10 @@ export function ServiceArea() {
       {/* ── Particle background ── */}
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
         <Particles
-          particleCount={500}
+          particleCount={160}
           particleSpread={20}
-          speed={1}
-          particleBaseSize={150}
+          speed={0.4}
+          particleBaseSize={70}
           sizeRandomness={1.1}
           alphaParticles={true}
           cameraDistance={20}
@@ -198,7 +198,7 @@ export function ServiceArea() {
             className="order-2 flex flex-col justify-start pt-4 sm:pt-0
                        sm:rounded-2xl sm:border sm:border-white/20 sm:p-6 lg:p-8
                        sm:h-auto lg:h-[500px] sm:overflow-y-auto
-                       sm:[background:rgba(255,255,255,0.10)] sm:[backdrop-filter:blur(12px)]"
+                       sm:[background:rgba(15,34,70,0.55)]"
           >
             <div className="grid grid-cols-2 sm:grid-cols-1 gap-x-3 gap-y-0">
               {cities.map((city) => (

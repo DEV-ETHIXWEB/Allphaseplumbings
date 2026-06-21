@@ -58,18 +58,18 @@ function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
                       group-hover:bg-[#e8effc] transition-colors duration-300"
       >
         <div className="relative w-[82px] h-[82px] sm:w-[150px] sm:h-[150px] drop-shadow-lg flex items-center justify-center">
-          {/* Light (default) */}
+          {/* Dark (default) */}
           <img
-            src={svc.icon}
+            src={svc.iconDark}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain
                        opacity-100 group-hover:opacity-0 transition-opacity duration-150 ease-out"
             style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
           />
-          {/* Dark (hover) */}
+          {/* Light (hover) */}
           <img
-            src={svc.iconDark}
+            src={svc.icon}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain

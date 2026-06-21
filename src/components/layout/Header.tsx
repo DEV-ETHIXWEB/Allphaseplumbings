@@ -4,6 +4,7 @@ import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import logo from "@/assets/app-logo.svg";
+import textLogo from "@/assets/APP text logo.png";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { PillNavItem } from "./PillNavItem";
 import { Instagram, Facebook } from "lucide-react";
@@ -214,7 +215,7 @@ export function Header() {
       <div className="lg:hidden bg-white border-b border-gray-100">
         <div className="flex items-center justify-between px-3 py-2.5 gap-2">
           <Link to="/" className="shrink-0">
-            <img src={logo} alt="All Phase Plumbing" className="h-[58px] w-auto object-contain" />
+            <img src={textLogo} alt="All Phase Plumbing" className="h-[58px] w-auto object-contain" />
           </Link>
 
           <div className="flex items-center gap-0">
@@ -223,27 +224,27 @@ export function Header() {
               aria-label="Instagram"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
+              className="inline-flex items-center justify-center size-11 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <Instagram className="size-[22px]" />
+              <Instagram className="size-[26px]" />
             </a>
             <a
               href={opts.social_facebook}
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
+              className="inline-flex items-center justify-center size-11 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <Facebook className="size-[22px]" />
+              <Facebook className="size-[26px]" />
             </a>
             <a
               href={opts.social_tiktok}
               aria-label="TikTok"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center size-9 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
+              className="inline-flex items-center justify-center size-11 text-[#1E3A6E] hover:text-[#F5C842] transition-colors"
             >
-              <TikTokGlyph className="size-[22px]" />
+              <TikTokGlyph className="size-[26px]" />
             </a>
           </div>
         </div>

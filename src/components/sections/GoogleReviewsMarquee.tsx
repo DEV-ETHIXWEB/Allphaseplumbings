@@ -99,10 +99,10 @@ export function GoogleReviewsMarquee() {
       {/* ── Particle background ── */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Particles
-          particleCount={500}
+          particleCount={200}
           particleSpread={20}
-          speed={1}
-          particleBaseSize={150}
+          speed={0.4}
+          particleBaseSize={80}
           sizeRandomness={1.1}
           alphaParticles={true}
           cameraDistance={20}
@@ -163,8 +163,8 @@ export function GoogleReviewsMarquee() {
           animation: google-reviews-scroll 60s linear infinite;
         }
         @keyframes google-reviews-scroll {
-          from { transform: translate3d(0, 0, 0); }
-          to { transform: translate3d(-50%, 0, 0); }
+          from { transform: translate3d(-50%, 0, 0); }
+          to { transform: translate3d(0, 0, 0); }
         }
         @media (prefers-reduced-motion: reduce) {
           .google-reviews-marquee-track { animation: none; }
