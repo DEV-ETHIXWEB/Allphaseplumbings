@@ -4,7 +4,7 @@ import {
   ServicePageTemplate,
   type ServicePageContent,
 } from "@/components/sections/ServicePageTemplate";
-import { WhyUs } from "@/components/sections/WhyUs";
+import { HowItWorks, WhyChooseUs } from "@/components/sections/ServicesPageTemplate";
 
 const CONTENT: ServicePageContent = {
   title: "Garbage Disposals",
@@ -92,7 +92,8 @@ export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
   component: () => (
     <PageShell>
       <ServicePageTemplate content={CONTENT} />
-      <WhyUs />
+      <HowItWorks />
+      <WhyChooseUs />
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-6">
@@ -110,3 +111,4 @@ export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
     </PageShell>
   ),
 });
+

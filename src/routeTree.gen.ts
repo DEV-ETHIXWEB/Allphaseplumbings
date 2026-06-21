@@ -38,6 +38,7 @@ import { Route as ServicesBurstPipeRepairRouteImport } from './routes/services/b
 import { Route as ServiceAreaCityRouteImport } from './routes/service-area/$city'
 import { Route as CommercialDrainCleaningRouteImport } from './routes/commercial/drain-cleaning'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as AreasCityRouteImport } from './routes/areas/$city'
 import { Route as ServicesSewerServicesIndexRouteImport } from './routes/services/sewer-services/index'
 import { Route as ServicesPlumbingIndexRouteImport } from './routes/services/plumbing/index'
 import { Route as ServicesSewerServicesSewerReplacementRouteImport } from './routes/services/sewer-services/sewer-replacement'
@@ -218,6 +219,11 @@ const CommercialDrainCleaningRoute = CommercialDrainCleaningRouteImport.update({
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasCityRoute = AreasCityRouteImport.update({
+  id: '/areas/$city',
+  path: '/areas/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSewerServicesIndexRoute =
@@ -411,6 +417,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/service-area/$city': typeof ServiceAreaCityRoute
@@ -473,6 +480,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/service-area/$city': typeof ServiceAreaCityRoute
@@ -536,6 +544,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/commercial/drain-cleaning': typeof CommercialDrainCleaningRoute
   '/service-area/$city': typeof ServiceAreaCityRoute
@@ -600,6 +609,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/sitemap.xml'
+    | '/areas/$city'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
     | '/service-area/$city'
@@ -662,6 +672,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/sitemap.xml'
+    | '/areas/$city'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
     | '/service-area/$city'
@@ -724,6 +735,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/sitemap.xml'
+    | '/areas/$city'
     | '/blog/$slug'
     | '/commercial/drain-cleaning'
     | '/service-area/$city'
@@ -787,6 +799,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CouponsRoute: typeof CouponsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AreasCityRoute: typeof AreasCityRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CommercialDrainCleaningRoute: typeof CommercialDrainCleaningRoute
   ServiceAreaCityRoute: typeof ServiceAreaCityRoute
@@ -1049,6 +1062,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/areas/$city': {
+      id: '/areas/$city'
+      path: '/areas/$city'
+      fullPath: '/areas/$city'
+      preLoaderRoute: typeof AreasCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/sewer-services/': {
       id: '/services/sewer-services/'
       path: '/services/sewer-services'
@@ -1275,6 +1295,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CouponsRoute: CouponsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AreasCityRoute: AreasCityRoute,
   BlogSlugRoute: BlogSlugRoute,
   CommercialDrainCleaningRoute: CommercialDrainCleaningRoute,
   ServiceAreaCityRoute: ServiceAreaCityRoute,

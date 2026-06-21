@@ -4,7 +4,7 @@ import {
   ServicePageTemplate,
   type ServicePageContent,
 } from "@/components/sections/ServicePageTemplate";
-import { WhyUs } from "@/components/sections/WhyUs";
+import { HowItWorks, WhyChooseUs } from "@/components/sections/ServicesPageTemplate";
 import { CustomerQuote } from "@/components/sections/CustomerQuote";
 import { PlumbingServicesGrid } from "@/components/sections/PlumbingServicesGrid";
 
@@ -149,8 +149,10 @@ export const Route = createFileRoute("/services/plumbing/")({
     <PageShell>
       <ServicePageTemplate content={CONTENT} />
       <PlumbingServicesGrid />
-      <WhyUs />
+      <HowItWorks />
+      <WhyChooseUs />
       <CustomerQuote />
     </PageShell>
   ),
 });
+

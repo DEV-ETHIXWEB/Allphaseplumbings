@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { MapPin } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { useSiteOptions } from "@/hooks/use-site-options";
+import { slugify } from "@/data/area-content";
 import { useEffect, useRef } from "react";
 import Particles from "@/components/ui/Particles";
 import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
@@ -204,7 +205,8 @@ export function ServiceArea() {
               {cities.map((city) => (
                 <Link
                   key={city}
-                  to="/service-area"
+                  to="/areas/$city"
+                  params={{ city: slugify(city) }}
                   className="flex items-center gap-1.5 py-2 sm:py-3 border-b border-white/15 text-white font-semibold text-[13px] sm:text-base hover:text-[#F5C842] transition-colors group"
                 >
                   <MapPin className="size-3.5 sm:size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />

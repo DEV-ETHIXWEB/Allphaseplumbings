@@ -22,6 +22,8 @@ import {
   Mail,
   Star,
   CheckCircle,
+  Search,
+  ShieldAlert,
   type LucideIcon,
 } from "lucide-react";
 
@@ -41,6 +43,8 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   Mail,
   Star,
   CheckCircle,
+  Search,
+  ShieldAlert,
 };
 
 /** Returns the Lucide component for a given icon name, falling back to Wrench. */

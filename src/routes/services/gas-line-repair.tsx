@@ -4,7 +4,7 @@ import {
   ServicePageTemplate,
   type ServicePageContent,
 } from "@/components/sections/ServicePageTemplate";
-import { WhyUs } from "@/components/sections/WhyUs";
+import { HowItWorks, WhyChooseUs } from "@/components/sections/ServicesPageTemplate";
 import { CustomerQuote } from "@/components/sections/CustomerQuote";
 
 const CONTENT: ServicePageContent = {
@@ -157,8 +157,10 @@ export const Route = createFileRoute("/services/gas-line-repair")({
   component: () => (
     <PageShell>
       <ServicePageTemplate content={CONTENT} />
-      <WhyUs />
+      <HowItWorks />
+      <WhyChooseUs />
       <CustomerQuote />
     </PageShell>
   ),
 });
+

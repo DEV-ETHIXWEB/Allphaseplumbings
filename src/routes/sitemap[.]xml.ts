@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { SERVICE_AREA_CITIES } from "@/data/service-area-cities";
 
 const BASE_URL = "";
 
@@ -25,6 +26,14 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/service-area", changefreq: "monthly", priority: "0.7" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
+          // Per-city area landing pages
+          ...SERVICE_AREA_CITIES.map(
+            (c): SitemapEntry => ({
+              path: `/areas/${c.slug}`,
+              changefreq: "monthly",
+              priority: "0.7",
+            }),
+          ),
         ];
 
         const urls = entries

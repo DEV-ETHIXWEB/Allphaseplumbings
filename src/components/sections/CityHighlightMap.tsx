@@ -6,6 +6,8 @@ type Props = {
   name: string;
   lat: number;
   lon: number;
+  /** When true, renders as a navy gradient closing band (area-page theme). */
+  themed?: boolean;
 };
 
 /** GeoJSON coords are [lon, lat]; Leaflet wants [lat, lon]. Convert. */
@@ -47,7 +49,7 @@ async function fetchCityBoundary(name: string): Promise<Ring[] | null> {
  * polygon that follows the actual city border (via OpenStreetMap Nominatim).
  * If the boundary can't be fetched, falls back to a circular approximation.
  */
-export function CityHighlightMap({ name, lat, lon }: Props) {
+export function CityHighlightMap({ name, lat, lon, themed = false }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<import("leaflet").Map | null>(null);
   const teardownTouchRef = useRef<(() => void) | null>(null);
@@ -55,9 +57,23 @@ export function CityHighlightMap({ name, lat, lon }: Props) {
   useEffect(() => {
     if (typeof window === "undefined" || !mapRef.current) return;
 
-    let cancelled = false;
+    // Leaflet's stylesheet is required for correct tile positioning / overflow
+    // clipping. Inject it once if no other component already has (self-contained
+    // so the map works on any page, not just ones that render <ServiceArea>).
+    if (!document.getElementById("leaflet-css")) {
+      const link = document.createElement("link");
+      link.id = "leaflet-css";
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      document.head.appendChild(link);
+    }
 
-    (async () => {
+    let cancelled = false;
+    let started = false;
+
+    const initMap = async () => {
+      if (started || cancelled || !mapRef.current) return;
+      started = true;
       const [L, boundaryRings] = await Promise.all([import("leaflet"), fetchCityBoundary(name)]);
       if (cancelled || !mapRef.current) return;
 
@@ -119,16 +135,39 @@ export function CityHighlightMap({ name, lat, lon }: Props) {
         )
         .openPopup();
 
-      map.fitBounds(polygon.getBounds(), { padding: [32, 32] });
+      map.fitBounds(polygon.getBounds(), { padding: [32, 32], animate: false });
+
+      // Belt-and-suspenders: recalc size on the next frame in case the
+      // container settled after creation.
+      requestAnimationFrame(() => {
+        if (cancelled) return;
+        map.invalidateSize();
+        map.fitBounds(polygon.getBounds(), { padding: [32, 32], animate: false });
+      });
 
       /* ── Mobile: require two fingers to pan ── */
       if (mapRef.current) {
         teardownTouchRef.current = enableTwoFingerPan(map, mapRef.current);
       }
-    })();
+    };
+
+    // Lazy-init: only build the map once the container is near the viewport, so
+    // Leaflet measures the real container size (an off-screen map mis-positions
+    // its tiles). Works for both top-of-page and bottom-of-page placements.
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          void initMap();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(mapRef.current);
 
     return () => {
       cancelled = true;
+      io.disconnect();
       teardownTouchRef.current?.();
       teardownTouchRef.current = null;
       if (mapInstanceRef.current) {
@@ -137,6 +176,37 @@ export function CityHighlightMap({ name, lat, lon }: Props) {
       }
     };
   }, [name, lat, lon]);
+
+  if (themed) {
+    return (
+      <section
+        className="border-t border-white/10"
+        style={{
+          background:
+            "linear-gradient(160deg, #0f2246 0%, #1E3A6E 45%, #2d5fa8 80%, #4A7BC4 100%)",
+        }}
+      >
+        <div className="container mx-auto px-4 py-16 sm:py-20">
+          <div className="text-center mb-10">
+            <span className="inline-block text-[13px] sm:text-[15px] font-bold uppercase tracking-widest text-[#6B9FE4] mb-3">
+              Service Map
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-black text-white leading-tight"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Our Service Area in {name}
+            </h2>
+          </div>
+          <div
+            ref={mapRef}
+            className="w-full h-[420px] lg:h-[520px] border-4 border-white/80 shadow-2xl"
+            style={{ isolation: "isolate" }}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-white pb-12 sm:pb-16">
