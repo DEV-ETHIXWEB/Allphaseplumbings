@@ -10,10 +10,19 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(GSAPSplitText, useGSAP);
 
-const HERO_TAGLINES: readonly (readonly [string, string])[] = [
+/* PC (lg+) keeps every tagline to two lines. */
+const HERO_TAGLINES_PC: readonly (readonly string[])[] = [
   ["Your Home's Plumbing,", "Done Right the First Time."],
   ["24/7 Emergency Service", "When Pipes Won't Wait."],
   ["Licensed, Insured & Trusted", "in Seattle Since 1989."],
+  ["From Quick Fixes to Full Repipes,", "We've Got You Covered."],
+] as const;
+
+/* Mobile/tablet shows the "Licensed, Insured & Trusted" tagline as four lines. */
+const HERO_TAGLINES_MOBILE: readonly (readonly string[])[] = [
+  ["Your Home's Plumbing,", "Done Right the First Time."],
+  ["24/7 Emergency Service", "When Pipes Won't Wait."],
+  ["Licensed, Insured", "& Trusted", "in Seattle", "Since 1989."],
   ["From Quick Fixes to Full Repipes,", "We've Got You Covered."],
 ] as const;
 
@@ -23,7 +32,7 @@ function CyclingSplitText({
   className,
   style,
 }: {
-  lines: readonly (readonly [string, string])[];
+  lines: readonly (readonly string[])[];
   intervalMs?: number;
   className?: string;
   style?: CSSProperties;
@@ -61,7 +70,7 @@ function CyclingSplitText({
           }
           split = null;
         }
-        el.innerHTML = `${lines[i][0]}<br/>${lines[i][1]}`;
+        el.innerHTML = lines[i].join("<br/>");
         split = new GSAPSplitText(el, {
           type: "chars,lines",
           linesClass: "split-line",
@@ -138,6 +147,18 @@ export function Hero() {
     return () => clearTimeout(t);
   }, []);
 
+  /* PC (lg+) shows the cycling tagline as two lines; mobile/tablet use the
+     four-line variant of the "Licensed, Insured & Trusted" tagline. */
+  const [isPc, setIsPc] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsPc(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[#cdd9e8] min-h-[820px]">
       {/* ── Video background at 50% opacity ── */}
@@ -160,6 +181,13 @@ export function Hero() {
         aria-hidden="true"
       />
 
+      {/* ── Navy-blue tint at 10% opacity ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "#1E3A6E", opacity: 0.1 }}
+        aria-hidden="true"
+      />
+
       {/* ── Content ── */}
       <div className="relative z-10 container mx-auto px-4 pt-28 pb-0" style={{ zoom: 0.9 }}>
         {/* ── Two-column: text LEFT ·  mascot RIGHT ── */}
@@ -179,9 +207,9 @@ export function Hero() {
 
             <div className="mt-0 sm:mt-4 relative" style={{ minHeight: "2.6em" }}>
               <CyclingSplitText
-                lines={HERO_TAGLINES}
+                lines={isPc ? HERO_TAGLINES_PC : HERO_TAGLINES_MOBILE}
                 intervalMs={3000}
-                className="text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
+                className="max-w-[240px] sm:max-w-none text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
                 style={{
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 900,
@@ -193,7 +221,7 @@ export function Hero() {
             </div>
 
             <p
-              className="mt-3 sm:mt-5 text-[16px] sm:text-[30px]
+              className="hidden sm:block mt-3 sm:mt-5 text-[16px] sm:text-[30px]
                          max-w-[210px] sm:max-w-lg
                          leading-snug sm:leading-relaxed font-semibold sm:font-medium"
             >
@@ -346,10 +374,10 @@ export function Hero() {
                 <p className="mt-2 text-[19px] sm:text-[22px] font-bold leading-snug text-[#F5C842]">
                   Same Day Service
                 </p>
-                <p className="text-[16.5px] sm:text-[19px] font-semibold leading-snug mt-1">
+                <p className="hidden sm:block text-[16.5px] sm:text-[19px] font-semibold leading-snug mt-1">
                   Plumbing and Drain Cleaning
                 </p>
-                <p className="text-[15px] font-normal text-white/85 mt-1">
+                <p className="hidden sm:block text-[15px] font-normal text-white/85 mt-1">
                   When booked before 2pm, Monday &ndash; Friday
                 </p>
 
