@@ -3,7 +3,6 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
-import logo from "@/assets/app-logo.svg";
 import textLogo from "@/assets/APP text logo.png";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { PillNavItem } from "./PillNavItem";
@@ -303,7 +302,7 @@ export function Header() {
           <div className="flex items-center gap-6 pt-2 pb-2.5 min-h-[150px]">
             <Link to="/" className="shrink-0 translate-y-1.5">
               <img
-                src={logo}
+                src={textLogo}
                 alt="All Phase Plumbing"
                 className="h-[42px] sm:h-[100px] w-auto object-contain"
               />
