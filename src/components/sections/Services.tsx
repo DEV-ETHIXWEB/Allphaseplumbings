@@ -9,7 +9,7 @@ import wwd2Dark from "@/assets/wwd-2-dark.svg";
 import wwd3Dark from "@/assets/wwd-3-dark.svg";
 import wwd4Dark from "@/assets/wwd-4-dark.svg";
 
-const SERVICES = [
+export const SERVICES = [
   {
     title: "Plumbing Repair",
     description:
@@ -45,7 +45,7 @@ const SERVICES = [
   },
 ] as const;
 
-function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
+export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
   return (
     <Link
       to={svc.href}

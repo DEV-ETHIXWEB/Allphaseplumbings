@@ -43,7 +43,7 @@ export type AreaWhyCard = {
  */
 export const GOOGLE_REVIEWS = {
   rating: 4.9,
-  count: 327,
+  count: 50,
   profileUrl: "https://www.google.com/maps/search/?api=1&query=All+Phase+Plumbing+Tukwila+WA",
 };
 

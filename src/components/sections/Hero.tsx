@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { Star, Home, Building2, Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import mascot from "@/assets/mascot.svg";
-import mascotSit from "@/assets/mascot-sit.png";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { gsap } from "gsap";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
@@ -253,21 +252,6 @@ export function Hero() {
                 boxShadow: "0 8px 24px -6px rgba(15,34,70,0.35)",
               }}
             >
-              {/* Mascot sitting on the box (phone only) — feet rest on the top edge */}
-              <img
-                src={mascotSit}
-                alt=""
-                aria-hidden="true"
-                className="sm:hidden pointer-events-none select-none absolute z-20
-                           h-[211px] w-auto object-contain"
-                style={{
-                  right: "-28px",
-                  bottom: "calc(100% - 83px)",
-                  filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.35))",
-                }}
-                loading="eager"
-                decoding="async"
-              />
               <p
                 className="text-[32px] sm:text-[40px] font-normal leading-none select-none"
                 style={{

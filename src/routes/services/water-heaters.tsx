@@ -11,22 +11,13 @@ const CONTENT: ServicePageContent = {
   title: "Water Heaters",
   breadcrumbLabel: "Water Heaters",
   heroImage: "https://images.unsplash.com/photo-1701421047855-d7bafd8d6f69?w=1600&q=80",
-  introHeading: "Seattle's Water Heater Experts: All Phase Plumbing",
+  heroH1: "Seattle Water Heater Installation & Repair — Same Day Service",
+  introEyebrow: "Tank & Tankless Specialists",
+  introHeading: "Seattle's Water Heater Experts",
+  hook: "Cold showers, rusty water, or a leaking tank? All Phase Plumbing repairs, replaces, and installs every tank and tankless water heater across Greater Seattle — most jobs done the same day. Upfront flat-rate pricing and a written warranty on every install, since 1989.",
   introBlocks: [
     {
-      paragraphs: [
-        "Cold showers? Rust-colored water? Strange popping noises from the tank? All Phase Plumbing services, repairs, and installs every major brand of tank and tankless water heater across the Seattle area.",
-        "We've been keeping Seattle homes in hot water since 1989 with same-day service, upfront pricing, and a written warranty on every install.",
-      ],
-    },
-    {
-      heading: "Complete Water Heater Services",
-      paragraphs: [
-        "Whether you need a quick repair, a brand-new tankless system, or a like-for-like tank replacement, our licensed plumbers handle the entire job, from removing the old unit to permitting and final inspection.",
-      ],
-    },
-    {
-      heading: "Our water heater services include:",
+      heading: "Our Water Heater Services",
       list: [
         "Tank water heater installation & replacement",
         "Tankless water heater installation",
@@ -37,6 +28,12 @@ const CONTENT: ServicePageContent = {
         "Pressure relief valve repair",
         "Expansion tank install",
         "Gas & electric water heater service",
+      ],
+    },
+    {
+      heading: "Complete Water Heater Services in Greater Seattle",
+      paragraphs: [
+        "Whether you need a quick water heater repair, a brand-new tankless system, or a like-for-like tank replacement, our licensed Seattle plumbers handle the entire job, from removing the old unit to permitting and final inspection.",
       ],
     },
     {

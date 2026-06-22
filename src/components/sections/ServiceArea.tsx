@@ -154,16 +154,16 @@ export function ServiceArea() {
       {/* ── Particle background ── */}
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
         <Particles
-          particleCount={160}
-          particleSpread={20}
-          speed={0.4}
-          particleBaseSize={70}
-          sizeRandomness={1.1}
+          particleCount={320}
+          particleSpread={18}
+          speed={0.5}
+          particleBaseSize={140}
+          sizeRandomness={1.2}
           alphaParticles={true}
           cameraDistance={20}
           disableRotation={true}
           moveParticlesOnHover={false}
-          particleColors={["#ffffff", "#aac8f0", "#7ab3e0"]}
+          particleColors={["#ffffff", "#cfe2fa", "#9fc1ee"]}
           className="w-full h-full"
         />
       </div>

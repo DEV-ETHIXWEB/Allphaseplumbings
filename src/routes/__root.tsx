@@ -135,7 +135,11 @@ function RootComponent() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("heading-fade-in");
+            entry.target.classList.add(
+              entry.target.classList.contains("reveal-on-scroll")
+                ? "reveal-in"
+                : "heading-fade-in",
+            );
             // Unobserve once animated so it stays in place
             observer.unobserve(entry.target);
           }
@@ -146,6 +150,15 @@ function RootComponent() {
 
     // 2. Helper function to check and register headings
     const observeElement = (el: Element) => {
+      // Generic scroll-reveal elements (cards, list items, etc.)
+      if (el.classList.contains("reveal-on-scroll")) {
+        if (!el.classList.contains("reveal-observed")) {
+          el.classList.add("reveal-observed");
+          observer.observe(el);
+        }
+        return;
+      }
+
       const isHeading =
         el.tagName === "H1" ||
         el.tagName === "H2" ||
@@ -160,7 +173,9 @@ function RootComponent() {
     };
 
     // 3. Scan initial DOM
-    document.querySelectorAll("h1, h2, h3, .tracking-widest").forEach(observeElement);
+    document
+      .querySelectorAll("h1, h2, h3, .tracking-widest, .reveal-on-scroll")
+      .forEach(observeElement);
 
     // 4. Setup Mutation Observer to watch for routing node additions dynamically
     const mutationObserver = new MutationObserver((mutations) => {
@@ -168,7 +183,9 @@ function RootComponent() {
         mutation.addedNodes.forEach((node) => {
           if (node instanceof Element) {
             observeElement(node);
-            node.querySelectorAll("h1, h2, h3, .tracking-widest").forEach(observeElement);
+            node
+              .querySelectorAll("h1, h2, h3, .tracking-widest, .reveal-on-scroll")
+              .forEach(observeElement);
           }
         });
       });

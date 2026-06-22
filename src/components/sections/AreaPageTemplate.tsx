@@ -11,7 +11,6 @@ import {
   MapPin,
   Star,
   Plus,
-  Minus,
   Mail,
   Home,
   Building2,
@@ -21,6 +20,7 @@ import { resolveIcon } from "@/lib/icon-map";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { CityHighlightMap } from "@/components/sections/CityHighlightMap";
+import { SERVICES, ServiceCard } from "@/components/sections/Services";
 import Particles from "@/components/ui/Particles";
 import { GOOGLE_REVIEWS, slugify, type AreaContent } from "@/data/area-content";
 
@@ -200,7 +200,8 @@ function LongContent({ area }: { area: AreaContent }) {
   );
 }
 
-/* ───────────────────────── 3. SERVICES IN [CITY] ───────────────────────── */
+/* ───────────────────────── 3. SERVICES IN [CITY] ─────────────────────────
+   Reuses the home page's "What We Do" cards (dark→light icon swap on hover). */
 function Services({ area }: { area: AreaContent }) {
   return (
     <section className="py-16 sm:py-20 bg-[#f7f9fc]">
@@ -217,32 +218,10 @@ function Services({ area }: { area: AreaContent }) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7">
-          {area.services.map((svc) => {
-            const Icon = resolveIcon(svc.icon);
-            return (
-              <Link
-                key={svc.href + svc.name}
-                to={svc.href}
-                className="group flex flex-col bg-white border-2 border-[#1E3A6E] p-6
-                           shadow-md hover:shadow-[0_14px_40px_rgba(30,58,110,0.22)]
-                           hover:-translate-y-1.5 transition-all duration-300"
-              >
-                <div className="inline-flex items-center justify-center size-14 bg-[#1E3A6E] text-[#F5C842] mb-4 group-hover:bg-[#4A7BC4] group-hover:text-white transition-colors">
-                  <Icon className="size-7" />
-                </div>
-                <h3 className="text-[20px] font-extrabold text-[#1E3A6E] leading-snug">
-                  {svc.name}
-                </h3>
-                <p className="mt-2 text-[15px] text-gray-600 leading-relaxed flex-1">
-                  {svc.description}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-[#1E3A6E] font-bold text-[15px] group-hover:gap-3 group-hover:text-[#4A7BC4] transition-all">
-                  Learn More <ArrowRight className="size-4" />
-                </span>
-              </Link>
-            );
-          })}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7">
+          {SERVICES.map((svc) => (
+            <ServiceCard key={svc.href} svc={svc} />
+          ))}
         </div>
       </div>
     </section>
@@ -272,16 +251,16 @@ function WhyChooseUs({ area }: { area: AreaContent }) {
             return (
               <div
                 key={w.title}
-                className="flex flex-col items-center md:items-start text-center md:text-left bg-[#f7f9fc] p-7"
+                className="flex h-full flex-col items-center md:items-start text-center md:text-left bg-[#f7f9fc] p-7"
               >
-                <div className="inline-flex items-center justify-center size-14 bg-[#1E3A6E] text-[#F5C842] shadow-md mb-4">
+                <div className="inline-flex items-center justify-center size-14 bg-[#1E3A6E] text-[#8AB4F8] shadow-md mb-4">
                   <Icon className="size-7" strokeWidth={2.2} />
                 </div>
                 <h3 className="text-[22px] font-extrabold text-[#1E3A6E] mb-2 leading-snug">
                   {w.title}
                 </h3>
-                <p className="text-[15px] text-gray-600 leading-relaxed">{w.body}</p>
-                <span className="mt-4 inline-flex items-center gap-2 bg-[#F5C842]/20 border border-[#F5C842] px-3 py-1.5 text-[13px] font-extrabold text-[#1E3A6E]">
+                <p className="text-[15px] text-gray-600 leading-relaxed flex-1">{w.body}</p>
+                <span className="mt-4 inline-flex items-center gap-2 bg-[#8AB4F8]/20 border border-[#8AB4F8] px-3 py-1.5 text-[13px] font-extrabold text-[#1E3A6E]">
                   <CheckCircle2 className="size-4 text-[#1E9E5A]" />
                   {w.stat}
                 </span>
@@ -412,7 +391,7 @@ function Testimonials({ area }: { area: AreaContent }) {
             href={GOOGLE_REVIEWS.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 bg-white/95 px-5 py-2.5 shadow-lg hover:bg-white transition-colors"
+            className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-1 py-1 hover:opacity-90 transition-opacity"
           >
             <span
               className="text-[20px] font-normal leading-none"
@@ -421,20 +400,20 @@ function Testimonials({ area }: { area: AreaContent }) {
                 letterSpacing: "-0.02em",
               }}
             >
-              <span className="text-[#4285F4]">G</span>
+              <span className="text-[#8AB4F8]">G</span>
               <span className="text-[#EA4335]">o</span>
               <span className="text-[#FBBC05]">o</span>
-              <span className="text-[#4285F4]">g</span>
+              <span className="text-[#8AB4F8]">g</span>
               <span className="text-[#34A853]">l</span>
               <span className="text-[#EA4335]">e</span>
             </span>
-            <span className="text-[18px] font-black text-[#1E3A6E]">{GOOGLE_REVIEWS.rating}</span>
+            <span className="text-[18px] font-black text-white">{GOOGLE_REVIEWS.rating}</span>
             <span className="flex gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="size-[18px] fill-[#FBBC05] text-[#FBBC05]" />
               ))}
             </span>
-            <span className="text-[14px] font-semibold text-[#1E3A6E]">
+            <span className="text-[14px] font-semibold text-white">
               {GOOGLE_REVIEWS.count}+ reviews
             </span>
           </a>
@@ -559,15 +538,21 @@ function FAQ({ area }: { area: AreaContent }) {
                   aria-expanded={open}
                 >
                   <span className="font-bold text-[#1E3A6E] text-[16px]">{f.q}</span>
-                  {open ? (
-                    <Minus className="size-5 text-[#4A7BC4] shrink-0" />
-                  ) : (
-                    <Plus className="size-5 text-[#4A7BC4] shrink-0" />
-                  )}
+                  <Plus
+                    className={`size-5 text-[#4A7BC4] shrink-0 transition-transform duration-300 ease-out ${
+                      open ? "rotate-45" : ""
+                    }`}
+                  />
                 </button>
-                {open && (
-                  <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
-                )}
+                {/* Smooth height expand/collapse via the grid 0fr→1fr trick */}
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-out"
+                  style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
+                  </div>
+                </div>
               </div>
             );
           })}

@@ -1,43 +1,35 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Phone, Plus, Minus, ChevronRight } from "lucide-react";
+import {
+  Phone,
+  Plus,
+  ChevronRight,
+  BadgeCheck,
+  Award,
+  ShieldCheck,
+  CalendarCheck,
+  Tag,
+} from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { StarBorder } from "@/components/ui/StarBorder";
-import wwd1 from "@/assets/wwd-1.svg";
-import wwd2 from "@/assets/wwd-2.svg";
-import wwd3 from "@/assets/wwd-3.svg";
-import wwd4 from "@/assets/wwd-4.svg";
-import wwd1Dark from "@/assets/wwd-1-dark.svg";
-import wwd2Dark from "@/assets/wwd-2-dark.svg";
-import wwd3Dark from "@/assets/wwd-3-dark.svg";
-import wwd4Dark from "@/assets/wwd-4-dark.svg";
 
-/**
- * Strict label → icon mapping. Only the 4 services that have a real
- * home-page icon get one; everything else returns null and the tile
- * renders a placeholder box (waiting on new icon assets).
- *
- * To add a new icon: drop the asset, import it above, and add a single
- * `case` returning `{ light, dark }` for the matching label.
- */
-function iconForLabel(label: string): { light: string; dark: string } | null {
-  switch (label.trim().toLowerCase()) {
-    case "plumbing":
-    case "plumbing repair":
-      return { light: wwd1, dark: wwd1Dark };
-    case "water heaters":
-    case "water heater":
-      return { light: wwd2, dark: wwd2Dark };
-    case "sewer":
-    case "sewer service":
-    case "sewer services":
-      return { light: wwd3, dark: wwd3Dark };
-    case "drain cleaning":
-      return { light: wwd4, dark: wwd4Dark };
-    default:
-      return null;
-  }
-}
+/* Shared treatments reused across the service page. */
+const HEADING_FONT = { fontFamily: "'Poppins', sans-serif" } as const;
+const GOLD_GRADIENT = "linear-gradient(135deg, #F5C842 0%, #d4a82e 100%)";
+
+/* Business-wide trust chips shown under the hero CTA. */
+const HERO_TRUST_CHIPS = [
+  { icon: BadgeCheck, label: "Licensed & Insured" },
+  { icon: Award, label: "Since 1989" },
+  { icon: ShieldCheck, label: "Written Warranty" },
+] as const;
+
+/* Three proof stats shown above the service list (business-wide). */
+const INTRO_STAT_CARDS = [
+  { icon: CalendarCheck, title: "Same-Day Service", sub: "Book before 2pm, Mon–Fri" },
+  { icon: Tag, title: "Upfront Pricing", sub: "Flat-rate quotes, no surprises" },
+  { icon: ShieldCheck, title: "Written Warranty", sub: "On every install & repair" },
+] as const;
 
 export type ServiceFAQ = { q: string; a: string };
 
@@ -53,38 +45,91 @@ export type ServicePageContent = {
   title: string;
   breadcrumbLabel: string;
   parentBreadcrumb?: { label: string; href: string };
+  /** Full, keyword-rich H1 for the hero. Falls back to the title. */
+  heroH1?: string;
+  /** Small uppercase eyebrow above the intro heading. */
+  introEyebrow?: string;
   introHeading: string;
+  /** Short 1–2 line hook that replaces the opening wall of prose. */
+  hook?: string;
   introBlocks: ServiceContentBlock[];
   faqs: ServiceFAQ[];
   related: RelatedService[];
   heroImage?: string;
 };
 
-/* ───── Big hero with title and background image at 30% opacity ───── */
-function ServicePageHero({ title, heroImage }: { title: string; heroImage?: string }) {
+/* ───── Hero: service photo under an ~80% navy overlay, with breadcrumb,
+   keyword-rich H1, a single phone CTA, and three trust chips. ───── */
+function ServicePageHero({ content }: { content: ServicePageContent }) {
+  const opts = useSiteOptions();
   return (
-    <section className="relative bg-[#eef4fb] pt-16 pb-12 sm:pt-[90px] sm:pb-[68px] overflow-hidden border-b border-[#1E3A6E]/10">
-      {heroImage && (
+    <section className="relative overflow-hidden bg-[#1E3A6E] border-b-2 border-white/10">
+      {content.heroImage && (
         <img
-          src={heroImage}
+          src={content.heroImage}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
-          style={{ opacity: 0.3 }}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
       )}
+      {/* ~80% navy veil over the photo keeps white copy legible */}
+      <div aria-hidden="true" className="absolute inset-0 bg-[#1E3A6E]/80" />
 
-      <div className="relative container mx-auto px-4 text-center">
+      <div className="relative container mx-auto px-4 pt-9 pb-12 sm:pt-12 sm:pb-16 text-center">
+        {/* Breadcrumb, above the H1 */}
+        <nav className="text-[13px] sm:text-[14px] mb-5 text-white/70">
+          <Link to="/" className="hover:text-[#F5C842] font-semibold">
+            Home
+          </Link>
+          <ChevronRight className="inline size-3.5 mx-1 text-white/40" />
+          {content.parentBreadcrumb && (
+            <>
+              <Link
+                to={content.parentBreadcrumb.href}
+                className="hover:text-[#F5C842] font-semibold"
+              >
+                {content.parentBreadcrumb.label}
+              </Link>
+              <ChevronRight className="inline size-3.5 mx-1 text-white/40" />
+            </>
+          )}
+          <span className="text-white font-semibold">{content.breadcrumbLabel}</span>
+        </nav>
+
         <h1
-          className="text-[26px] sm:text-[43px] lg:text-[53px] font-black tracking-tight text-[#1E3A6E]"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            letterSpacing: "0.02em",
-            textShadow: "0 4px 12px rgba(147, 197, 253, 0.9)",
-          }}
+          className="mx-auto max-w-4xl text-[27px] sm:text-[40px] lg:text-[50px] font-black text-white leading-[1.08]"
+          style={HEADING_FONT}
         >
-          {title.toUpperCase()}
+          {content.heroH1 ?? content.title}
         </h1>
+
+        {/* Single CTA */}
+        <div className="mt-7 flex justify-center">
+          <a
+            href={opts.phone_href}
+            className="inline-flex items-center justify-center gap-2.5 px-8 py-4 text-[17px] sm:text-[19px] font-black uppercase tracking-wide text-[#1E3A6E] shadow-[0_10px_30px_rgba(245,200,66,0.45)] hover:brightness-105 active:scale-[0.98] transition-all"
+            style={{ background: GOLD_GRADIENT }}
+          >
+            <Phone className="size-5" strokeWidth={2.5} />
+            Call {opts.phone}
+          </a>
+        </div>
+
+        {/* Trust chips */}
+        <ul className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+          {HERO_TRUST_CHIPS.map((c) => (
+            <li
+              key={c.label}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[13px] sm:text-[14px] font-semibold text-white"
+            >
+              <c.icon className="size-4 text-[#F5C842]" strokeWidth={2.4} />
+              {c.label}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -102,42 +147,40 @@ function SidebarContactCard() {
         >
           Contact Us Today
         </h3>
-        <p className="text-[#FFB800] font-semibold text-[18px] mt-1">Same Day Service</p>
-        <p className="text-white text-[14px] mt-1">Plumbing and Drain Cleaning</p>
-        <p className="text-white/85 text-[14px]">When booked before 2pm, Monday – Friday</p>
+        <p className="text-white/90 text-[15px] text-center mt-2">Get a flat-rate quote today.</p>
       </div>
 
       <form className="px-5 pb-6 space-y-3" onSubmit={(e) => e.preventDefault()}>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input
             type="text"
             placeholder="FIRST NAME*"
-            className="rounded-md border-2 border-[#1E3A6E] bg-white px-3 py-3 text-[14px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
+            className="w-full rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
             required
           />
           <input
             type="text"
             placeholder="LAST NAME*"
-            className="rounded-md border-2 border-[#1E3A6E] bg-white px-3 py-3 text-[14px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
+            className="w-full rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
             required
           />
           <input
             type="email"
             placeholder="EMAIL*"
-            className="rounded-md border-2 border-[#1E3A6E] bg-white px-3 py-3 text-[14px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
+            className="w-full sm:col-span-2 rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
             required
           />
           <input
             type="tel"
             placeholder="PHONE*"
-            className="rounded-md border-2 border-[#1E3A6E] bg-white px-3 py-3 text-[14px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
+            className="w-full sm:col-span-2 rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[16px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
             required
           />
         </div>
         <select
           required
           defaultValue=""
-          className="w-full rounded-md border-2 border-[#1E3A6E] bg-white px-3 py-3 text-[13px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
+          className="w-full rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
         >
           <option value="" disabled>
             SERVICE NEEDED*
@@ -160,77 +203,6 @@ function SidebarContactCard() {
           CONTACT US
         </button>
       </form>
-    </div>
-  );
-}
-
-/* ───── Sidebar related services
-   Each tile shows the matching home-page icon. At rest the card is navy
-   with the light-colored icon; on hover it inverts to a white card with
-   the dark icon (mirroring the light → dark crossfade on the homepage
-   What We Do grid). ───── */
-function SidebarServicesMenu({ related }: { related: RelatedService[] }) {
-  return (
-    <div>
-      <h3 className="text-[20px] font-bold uppercase tracking-wider text-[#1E3A6E] text-center mb-4">
-        Services
-      </h3>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-        {related.map((r) => {
-          const icon = iconForLabel(r.label);
-          return (
-            <Link
-              key={r.href + r.label}
-              to={r.href}
-              className="group flex flex-col items-center justify-start text-center
-                         px-1 py-2
-                         hover:-translate-y-0.5 transition-transform duration-200"
-            >
-              {/* Icon stack — light fades to dark on hover (matches home page).
-                  When no icon is assigned for this label yet, render an empty
-                  dashed placeholder box of the same size. */}
-              <span className="relative block w-[112px] h-[112px] sm:w-[128px] sm:h-[128px] mb-2">
-                {icon ? (
-                  <>
-                    <img
-                      src={icon.light}
-                      alt=""
-                      aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-contain
-                                 opacity-100 group-hover:opacity-0
-                                 transition-opacity duration-150 ease-out"
-                    />
-                    <img
-                      src={icon.dark}
-                      alt=""
-                      aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-contain
-                                 opacity-0 group-hover:opacity-100
-                                 transition-opacity duration-150 ease-out"
-                    />
-                  </>
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 flex items-center justify-center
-                               border-2 border-dashed border-[#1E3A6E]/35
-                               bg-[#1E3A6E]/5
-                               group-hover:border-[#1E3A6E]/55 group-hover:bg-[#1E3A6E]/10
-                               transition-colors duration-150"
-                  />
-                )}
-              </span>
-              <span
-                className="text-[13px] sm:text-[14px] font-bold uppercase tracking-wide leading-tight
-                           text-[#1E3A6E] group-hover:text-[#4A7BC4]
-                           transition-colors duration-150"
-              >
-                {r.label}
-              </span>
-            </Link>
-          );
-        })}
-      </div>
     </div>
   );
 }
@@ -270,18 +242,25 @@ function ServiceFAQ({ faqs, title }: { faqs: ServiceFAQ[]; title: string }) {
               <button
                 type="button"
                 onClick={() => setOpenIdx(open ? null : i)}
+                aria-expanded={open}
                 className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left bg-[#eef4fb] hover:bg-[#dde9f6] transition-colors"
               >
                 <span className="font-semibold text-[#4A7BC4] text-[16px]">{f.q}</span>
-                {open ? (
-                  <Minus className="size-5 text-[#4A7BC4] shrink-0" />
-                ) : (
-                  <Plus className="size-5 text-[#4A7BC4] shrink-0" />
-                )}
+                <Plus
+                  className={`size-5 text-[#4A7BC4] shrink-0 transition-transform duration-300 ease-out ${
+                    open ? "rotate-45" : ""
+                  }`}
+                />
               </button>
-              {open && (
-                <div className="px-5 py-4 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
-              )}
+              {/* Smooth height expand/collapse via the grid 0fr→1fr trick */}
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-out"
+                style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-5 py-4 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
+                </div>
+              </div>
             </div>
           );
         })}
@@ -294,39 +273,55 @@ function ServiceFAQ({ faqs, title }: { faqs: ServiceFAQ[]; title: string }) {
 export function ServicePageTemplate({ content }: { content: ServicePageContent }) {
   return (
     <>
-      <ServicePageHero title={content.title} heroImage={content.heroImage} />
+      <ServicePageHero content={content} />
 
       <section className="bg-white py-12 sm:py-16">
         <div className="mx-auto px-4 max-w-[1305px]">
-          {/* Breadcrumb */}
-          <nav className="text-[15px] mb-6">
-            <Link to="/" className="text-[#1E3A6E] hover:text-[#4A7BC4] font-semibold">
-              Home
-            </Link>
-            <ChevronRight className="inline size-4 mx-1 text-gray-400" />
-            {content.parentBreadcrumb && (
-              <>
-                <Link
-                  to={content.parentBreadcrumb.href}
-                  className="text-[#1E3A6E] hover:text-[#4A7BC4] font-semibold"
-                >
-                  {content.parentBreadcrumb.label}
-                </Link>
-                <ChevronRight className="inline size-4 mx-1 text-gray-400" />
-              </>
-            )}
-            <span className="text-[#1E3A6E] font-semibold">{content.breadcrumbLabel}</span>
-          </nav>
-
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10">
             {/* Main content */}
             <div>
+              {/* Dominant intro heading with eyebrow */}
+              {content.introEyebrow && (
+                <span className="inline-block text-[13px] sm:text-[15px] font-bold uppercase tracking-widest text-[#6B9FE4] mb-3">
+                  {content.introEyebrow}
+                </span>
+              )}
               <h2
-                className="text-[32px] sm:text-[40px] lg:text-[44px] font-black text-[#1E3A6E] leading-tight mb-6"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
+                className="text-[34px] sm:text-[44px] lg:text-[50px] font-black text-[#1E3A6E] leading-[1.05] mb-5"
+                style={HEADING_FONT}
               >
                 {content.introHeading}
               </h2>
+
+              {/* Tight hook replaces the old wall of intro prose */}
+              {content.hook && (
+                <p className="text-[18px] sm:text-[20px] text-gray-700 leading-relaxed font-medium max-w-2xl mb-8">
+                  {content.hook}
+                </p>
+              )}
+
+              {/* Three proof stat cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+                {INTRO_STAT_CARDS.map((s, i) => (
+                  <div
+                    key={s.title}
+                    style={{ transitionDelay: `${i * 90}ms` }}
+                    className="reveal-on-scroll flex items-start gap-3 bg-[#f7f9fc] border border-[#1E3A6E]/10 p-4"
+                  >
+                    <span className="inline-flex items-center justify-center size-11 shrink-0 bg-[#1E3A6E] text-[#8AB4F8]">
+                      <s.icon className="size-6" strokeWidth={2.2} />
+                    </span>
+                    <span>
+                      <span className="block text-[15px] font-extrabold text-[#1E3A6E] leading-tight">
+                        {s.title}
+                      </span>
+                      <span className="block text-[12.5px] text-gray-500 leading-snug mt-0.5">
+                        {s.sub}
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              </div>
 
               {content.introBlocks.map((block, idx) => (
                 <div key={idx}>
@@ -360,7 +355,6 @@ export function ServicePageTemplate({ content }: { content: ServicePageContent }
             {/* Sidebar */}
             <aside className="space-y-8">
               <SidebarContactCard />
-              <SidebarServicesMenu related={content.related} />
             </aside>
           </div>
         </div>

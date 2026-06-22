@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone } from "lucide-react";
+import { Phone, ArrowUpRight } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
 
 type Tile = { label: string; href: string };
@@ -47,24 +47,43 @@ export function PlumbingServicesGrid() {
   return (
     <section className="bg-white py-12 sm:py-16">
       <div className="container mx-auto px-4 max-w-[1305px]">
-        <h2
-          className="text-[26px] sm:text-[32px] font-black text-[#1E3A6E] leading-tight mb-6"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          All Plumbing Services
-        </h2>
+        <div className="mb-8">
+          <span className="inline-block text-[12px] sm:text-[13px] font-bold uppercase tracking-[0.22em] text-[#6B9FE4] mb-2.5">
+            Full Service List
+          </span>
+          <h2
+            className="text-[26px] sm:text-[34px] font-black text-[#1E3A6E] leading-tight"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            All Plumbing Services
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-0">
           {SERVICES.map((s) => (
             <Link
               key={s.label}
               to={s.href}
-              className="group flex items-center gap-2 py-3 border-b border-[#1E3A6E]/10 text-[#1E3A6E] hover:text-[#4A7BC4] transition-colors"
+              className="group flex items-center justify-between gap-3 py-3.5
+                         border-b border-[#1E3A6E]/10 hover:border-[#4A7BC4]/40 transition-colors"
             >
-              <span className="text-[#1E3A6E]/40 group-hover:text-[#F5C842] font-black text-[14px] leading-none">
-                ::
+              <span
+                className="flex items-center gap-3 text-[15px] font-semibold text-[#1E3A6E]/85
+                           transition-all duration-200 ease-out
+                           group-hover:text-[#4A7BC4] group-hover:translate-x-1"
+              >
+                <span
+                  aria-hidden="true"
+                  className="size-1.5 rounded-full bg-[#1E3A6E]/25 shrink-0
+                             transition-colors duration-200 group-hover:bg-[#F5C842]"
+                />
+                {s.label}
               </span>
-              <span className="text-[16px] font-bold leading-snug">{s.label}</span>
+              <ArrowUpRight
+                className="size-4 text-[#4A7BC4] shrink-0 opacity-0 -translate-x-1
+                           transition-all duration-200 ease-out
+                           group-hover:opacity-100 group-hover:translate-x-0"
+              />
             </Link>
           ))}
         </div>

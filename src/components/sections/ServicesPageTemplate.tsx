@@ -10,7 +10,6 @@ import {
   Award,
   Star,
   Plus,
-  Minus,
   PhoneCall,
   ClipboardCheck,
   Truck,
@@ -417,17 +416,23 @@ export function HowItWorks() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {STEPS.map((s, i) => (
-            <div key={s.title} className="relative bg-white border-2 border-[#1E3A6E]/15 p-6 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-              <span className="absolute -top-4 -left-3 inline-flex items-center justify-center size-9 bg-[#6B9FE4] text-white font-black text-[16px] border-2 border-[#1E3A6E]">
-                {i + 1}
-              </span>
-              <div className="inline-flex items-center justify-center size-12 bg-[#1E3A6E] text-[#6B9FE4] mb-4">
-                <s.icon className="size-6" strokeWidth={2.2} />
+            <div
+              key={s.title}
+              className="reveal-on-scroll"
+              style={{ transitionDelay: `${i * 90}ms` }}
+            >
+              <div className="relative h-full bg-white border-2 border-[#1E3A6E]/15 p-6 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                <span className="absolute -top-4 -left-3 inline-flex items-center justify-center size-9 bg-[#6B9FE4] text-white font-black text-[16px] border-2 border-[#1E3A6E]">
+                  {i + 1}
+                </span>
+                <div className="inline-flex items-center justify-center size-12 bg-[#1E3A6E] text-[#6B9FE4] mb-4">
+                  <s.icon className="size-6" strokeWidth={2.2} />
+                </div>
+                <h3 className="text-[18px] font-extrabold text-[#1E3A6E] mb-2 leading-snug">
+                  {s.title}
+                </h3>
+                <p className="text-[14px] text-gray-600 leading-relaxed">{s.body}</p>
               </div>
-              <h3 className="text-[18px] font-extrabold text-[#1E3A6E] mb-2 leading-snug">
-                {s.title}
-              </h3>
-              <p className="text-[14px] text-gray-600 leading-relaxed">{s.body}</p>
             </div>
           ))}
         </div>
@@ -576,15 +581,21 @@ function FAQ() {
                   aria-expanded={open}
                 >
                   <span className="font-bold text-[#1E3A6E] text-[16px]">{f.q}</span>
-                  {open ? (
-                    <Minus className="size-5 text-[#4A7BC4] shrink-0" />
-                  ) : (
-                    <Plus className="size-5 text-[#4A7BC4] shrink-0" />
-                  )}
+                  <Plus
+                    className={`size-5 text-[#4A7BC4] shrink-0 transition-transform duration-300 ease-out ${
+                      open ? "rotate-45" : ""
+                    }`}
+                  />
                 </button>
-                {open && (
-                  <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
-                )}
+                {/* Smooth height expand/collapse via the grid 0fr→1fr trick */}
+                <div
+                  className="grid transition-[grid-template-rows] duration-300 ease-out"
+                  style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
+                  </div>
+                </div>
               </div>
             );
           })}
