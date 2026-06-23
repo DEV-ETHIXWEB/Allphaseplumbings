@@ -469,18 +469,18 @@ export function ChatbotWidget() {
       >
         {open ? (
           <span
-            className="ap-circle flex size-[60px] items-center justify-center text-white shadow-[0_10px_28px_-6px_rgba(15,34,70,0.6)] transition-transform duration-200"
+            className="ap-circle flex size-[84px] items-center justify-center text-white shadow-[0_10px_28px_-6px_rgba(15,34,70,0.6)] transition-transform duration-200"
             style={{ background: "linear-gradient(135deg,#0f2246,#2d5fa8)" }}
           >
-            <X className="size-7" />
+            <X className="size-8" />
           </span>
         ) : (
           <span className="relative">
-            <MascotAvatar size={60} />
+            <MascotAvatar size={84} />
             {/* online pulse dot */}
-            <span className="absolute right-1 top-1 flex size-3.5">
+            <span className="absolute right-1 top-1 flex size-4">
               <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
-              <span className="ap-circle relative inline-flex size-3.5 border-2 border-white bg-[#4ade80]" />
+              <span className="ap-circle relative inline-flex size-4 border-2 border-white bg-[#4ade80]" />
             </span>
           </span>
         )}

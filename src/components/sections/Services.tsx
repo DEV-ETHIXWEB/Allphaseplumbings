@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import wwd1 from "@/assets/wwd-1.svg";
-import wwd2 from "@/assets/wwd-2.svg";
-import wwd3 from "@/assets/wwd-3.svg";
-import wwd4 from "@/assets/wwd-4.svg";
+// Base (rest) icons — the new bold "Group" service icons.
+import group36 from "@/assets/Group 36 (1).svg"; // Plumbing (faucet)
+import group37 from "@/assets/Group 37 (1).svg"; // Water Heaters (tank)
+import group38 from "@/assets/Group 38 (1).svg"; // Sewer (pipe)
+import group39 from "@/assets/Group 39 (1).svg"; // Drain Cleaning (drum)
+// Hover icons — the lighter shade revealed on hover.
 import wwd1Dark from "@/assets/wwd-1-dark.svg";
 import wwd2Dark from "@/assets/wwd-2-dark.svg";
 import wwd3Dark from "@/assets/wwd-3-dark.svg";
@@ -15,32 +17,32 @@ export const SERVICES = [
     description:
       "From leaky faucets to burst pipes, we fix it right the first time with upfront pricing and no hidden fees.",
     href: "/services/plumbing" as const,
-    icon: wwd1,
-    iconDark: wwd1Dark,
+    iconBase: group36,
+    iconHover: wwd1Dark,
   },
   {
     title: "Drain Cleaning",
     description:
       "Slow or fully blocked drains cleared fast. We tackle kitchen, bathroom, and main sewer line clogs.",
     href: "/services/drain-cleaning" as const,
-    icon: wwd4,
-    iconDark: wwd4Dark,
+    iconBase: group39,
+    iconHover: wwd4Dark,
   },
   {
     title: "Water Heaters",
     description:
       "Tank and tankless installation, repair, and replacement. Hot water when you need it, guaranteed.",
     href: "/services/water-heaters" as const,
-    icon: wwd2,
-    iconDark: wwd2Dark,
+    iconBase: group37,
+    iconHover: wwd2Dark,
   },
   {
     title: "Sewer Service",
     description:
       "Camera inspections, hydro-jetting, and sewer line repair to keep everything flowing smoothly.",
     href: "/services/sewer-services" as const,
-    icon: wwd3,
-    iconDark: wwd3Dark,
+    iconBase: group38,
+    iconHover: wwd3Dark,
     iconScale: 0.95,
   },
 ] as const;
@@ -58,18 +60,18 @@ export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
                       group-hover:bg-[#e8effc] transition-colors duration-300"
       >
         <div className="relative w-[82px] h-[82px] sm:w-[150px] sm:h-[150px] drop-shadow-lg flex items-center justify-center">
-          {/* Dark (default) */}
+          {/* Base color (default) */}
           <img
-            src={svc.iconDark}
+            src={svc.iconBase}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain
                        opacity-100 group-hover:opacity-0 transition-opacity duration-150 ease-out"
             style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
           />
-          {/* Light (hover) */}
+          {/* Lighter shade (hover) */}
           <img
-            src={svc.icon}
+            src={svc.iconHover}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain
