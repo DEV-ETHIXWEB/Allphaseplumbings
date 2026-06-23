@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { X, Send, Phone, MapPin } from "lucide-react";
-import mascot from "@/assets/mascot.svg";
+import chatbotFace from "@/assets/chatbot face.png";
 import { useSiteOptions } from "@/hooks/use-site-options";
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -48,9 +48,9 @@ function MascotAvatar({ size = 44, ring = true }: { size?: number; ring?: boolea
         className="ap-circle block h-full w-full bg-[#eef2f7] bg-no-repeat"
         style={{
           overflow: "hidden",
-          backgroundImage: `url(${mascot})`,
-          backgroundSize: "210%",
-          backgroundPosition: "50% 7%",
+          backgroundImage: `url(${chatbotFace})`,
+          backgroundSize: "128%",
+          backgroundPosition: "50% 18%",
         }}
       />
     </span>

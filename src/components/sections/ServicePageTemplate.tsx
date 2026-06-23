@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import { StarBorder } from "@/components/ui/StarBorder";
+import Particles from "@/components/ui/Particles";
 import mascotWatermark from "@/assets/mascot watermark.svg";
 
 /* Shared treatments reused across the service page. */
@@ -140,8 +141,31 @@ function ServicePageHero({ content }: { content: ServicePageContent }) {
 function SidebarContactCard() {
   const opts = useSiteOptions();
   return (
-    <div className="bg-[#6B9EF8] rounded-xl shadow-xl border-2 border-[#1E3A6E] overflow-hidden">
-      <div className="px-6 py-6 text-white">
+    <div 
+      className="relative rounded-xl overflow-hidden"
+      style={{
+        background: "linear-gradient(150deg, #25497f 0%, #1E3A6E 45%, #15294e 100%)",
+        boxShadow: "0 -4px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08)",
+      }}
+    >
+      {/* Particle backdrop, drifts inside the form box */}
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        <Particles
+          particleCount={170}
+          particleSpread={13}
+          speed={0.45}
+          particleBaseSize={130}
+          sizeRandomness={1.1}
+          alphaParticles={true}
+          cameraDistance={20}
+          disableRotation={true}
+          moveParticlesOnHover={false}
+          particleColors={["#ffffff", "#eaf2ff", "#cfe0f9"]}
+          className="w-full h-full"
+        />
+      </div>
+
+      <div className="relative z-10 px-6 py-6 text-white">
         <h3
           className="text-[28px] font-bold text-center"
           style={{ fontFamily: "Inter, sans-serif" }}
@@ -151,7 +175,7 @@ function SidebarContactCard() {
         <p className="text-white/90 text-[15px] text-center mt-2">Get a flat-rate quote today.</p>
       </div>
 
-      <form className="px-5 pb-6 space-y-3" onSubmit={(e) => e.preventDefault()}>
+      <form className="relative z-10 px-5 pb-6 space-y-3" onSubmit={(e) => e.preventDefault()}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <input
             type="text"
