@@ -3,7 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
-import textLogo from "@/assets/APP text logo.png";
+import textLogo from "@/assets/App updated logo.png";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { PillNavItem } from "./PillNavItem";
 import { Instagram, Facebook } from "lucide-react";
