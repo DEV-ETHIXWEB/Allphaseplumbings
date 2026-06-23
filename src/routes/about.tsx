@@ -254,8 +254,8 @@ function AboutIntro() {
 // ⚠️ Replace each youtubeId with the real video ID from the URL
 // e.g. https://youtu.be/dQw4w9WgXcQ →  youtubeId: "dQw4w9WgXcQ"
 const TEAM_VIDEOS = [
-  { youtubeId: "RajYE63nG3U", name: "Gary Hanowalt", role: "Owner" },
-  { youtubeId: "lt3EWALCVJQ", name: "Larry Belich", role: "General Manager" },
+  { youtubeId: "RajYE63nG3U", name: "Gary Hanawalt", role: "President" },
+  { youtubeId: "lt3EWALCVJQ", name: "Larry Bellach", role: "General Manager" },
   { youtubeId: "5d--UIUnVvA", name: "Regina Wright", role: "Office Manager" },
   { youtubeId: "VuiMTB6R1NM", name: "Mike McCrae", role: "Equipment & Tech Support" },
   { youtubeId: "4BjcTb-qMYY", name: "EJ Snyder", role: "Sewer & Excavation Specialist" },
