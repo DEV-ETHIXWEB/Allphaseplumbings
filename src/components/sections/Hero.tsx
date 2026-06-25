@@ -167,6 +167,8 @@ export function Hero() {
         muted
         loop
         playsInline
+        preload="metadata"
+        poster="/videos/seattle-bg-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ opacity: 0.8 }}
         aria-hidden="true"

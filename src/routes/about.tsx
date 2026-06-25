@@ -624,18 +624,18 @@ function CustomerReviewsBanner() {
 
 /* ── 11. Masonry Gallery items, real project photos ── */
 const MASONRY_ITEMS = [
-  { id: "1", img: "/projects/project-1.jpg", height: 680, url: "#" },
-  { id: "2", img: "/projects/project-2.jpg", height: 580, url: "#" },
-  { id: "3", img: "/projects/project-3.jpg", height: 650, url: "#" },
-  { id: "4", img: "/projects/project-4.jpg", height: 700, url: "#" },
-  { id: "5", img: "/projects/project-5.jpg", height: 620, url: "#" },
-  { id: "6", img: "/projects/project-6.jpg", height: 660, url: "#" },
-  { id: "7", img: "/projects/project-7.jpg", height: 640, url: "#" },
-  { id: "8", img: "/projects/project-8.png", height: 590, url: "#" },
-  { id: "9", img: "/projects/project-9.png", height: 670, url: "#" },
-  { id: "10", img: "/projects/project-10.png", height: 710, url: "#" },
-  { id: "11", img: "/projects/project-11.png", height: 600, url: "#" },
-  { id: "12", img: "/projects/project-12.png", height: 630, url: "#" },
+  { id: "1", img: "/projects/project-1.webp", height: 680, url: "#" },
+  { id: "2", img: "/projects/project-2.webp", height: 580, url: "#" },
+  { id: "3", img: "/projects/project-3.webp", height: 650, url: "#" },
+  { id: "4", img: "/projects/project-4.webp", height: 700, url: "#" },
+  { id: "5", img: "/projects/project-5.webp", height: 620, url: "#" },
+  { id: "6", img: "/projects/project-6.webp", height: 660, url: "#" },
+  { id: "7", img: "/projects/project-7.webp", height: 640, url: "#" },
+  { id: "8", img: "/projects/project-8.webp", height: 590, url: "#" },
+  { id: "9", img: "/projects/project-9.webp", height: 670, url: "#" },
+  { id: "10", img: "/projects/project-10.webp", height: 710, url: "#" },
+  { id: "11", img: "/projects/project-11.webp", height: 600, url: "#" },
+  { id: "12", img: "/projects/project-12.webp", height: 630, url: "#" },
 ];
 
 function RecentProjects() {

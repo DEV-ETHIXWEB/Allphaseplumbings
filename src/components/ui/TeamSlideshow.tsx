@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import img1 from "@/assets/img 1.jpeg";
-import img2 from "@/assets/img 2.JPEG";
-import img3 from "@/assets/img 3.JPEG";
-import img4 from "@/assets/img 4.jpeg";
+import img1 from "@/assets/team-1.webp";
+import img2 from "@/assets/team-2.webp";
+import img3 from "@/assets/team-3.webp";
+import img4 from "@/assets/team-4.webp";
 
 const slides = [
   { url: img1, alt: "All Phase Plumbing team — job photo 1" },
@@ -35,6 +35,8 @@ export function TeamSlideshow() {
               alt={slide.alt}
               className="w-full h-full object-cover"
               draggable={false}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
             />
           </div>
         ))}
