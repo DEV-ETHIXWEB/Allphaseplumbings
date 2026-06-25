@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import bbb from "@/assets/badge-bbb.svg";
 import angi from "@/assets/badge-angi.svg";
-import phcc from "@/assets/badge-phcc.svg";
+import phcc from "@/assets/badge-phcc.webp";
 import peekingMascot from "@/assets/peeking mascot watermark.svg";
 import BorderGlow from "@/components/ui/BorderGlow";
 

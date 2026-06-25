@@ -56,7 +56,7 @@ export function CTABanner() {
       ref={sectionRef}
       className="relative w-full min-h-[580px] sm:min-h-[660px] flex items-end overflow-hidden pt-16 sm:pt-20 pb-28 sm:pb-32 md:pb-36 border-b border-white"
       style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=80')`,
+        backgroundImage: `url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1280&q=60&fm=webp')`,
         backgroundSize: "cover",
         backgroundPosition: "center 40%",
       }}

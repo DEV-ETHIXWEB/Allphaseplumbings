@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { X, Send, Phone, MapPin } from "lucide-react";
-import chatbotFace from "@/assets/chatbot face.png";
+import chatbotFace from "@/assets/chatbot-face.webp";
 import { useSiteOptions } from "@/hooks/use-site-options";
 
 /* ──────────────────────────────────────────────────────────────────────────
