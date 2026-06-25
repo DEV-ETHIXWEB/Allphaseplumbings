@@ -133,7 +133,17 @@ function CyclingSplitText({
     { dependencies: [fontsLoaded, lines, intervalMs], scope: ref },
   );
 
-  return <h1 ref={ref} className={className} style={style} aria-live="polite" />;
+  /* Render first tagline as real text at first paint so the H1 (LCP element)
+     is never empty while fonts/GSAP load. GSAP overwrites innerHTML on start. */
+  return (
+    <h1
+      ref={ref}
+      className={className}
+      style={style}
+      aria-live="polite"
+      dangerouslySetInnerHTML={{ __html: lines[0].join("<br/>") }}
+    />
+  );
 }
 
 export function Hero() {
@@ -141,6 +151,40 @@ export function Hero() {
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [mascotIn, setMascotIn] = useState(false);
+
+  /* Defer the background video + WebGL particles until the page is loaded and
+     idle. Poster image is the LCP element; video/particles must not compete
+     for bandwidth or main thread during first paint. */
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+  const [showParticles, setShowParticles] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const idle =
+      window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+    let cancelled = false;
+    const start = () =>
+      idle(() => {
+        if (cancelled) return;
+        setVideoSrc("/videos/seattle-bg.mp4");
+        setShowParticles(true);
+      });
+    if (document.readyState === "complete") {
+      start();
+    } else {
+      window.addEventListener("load", start, { once: true });
+    }
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", start);
+    };
+  }, []);
+  useEffect(() => {
+    if (videoSrc && videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [videoSrc]);
   /* Mascot slides up on first paint */
   useEffect(() => {
     const t = setTimeout(() => setMascotIn(true), 120);
@@ -163,17 +207,18 @@ export function Hero() {
     <section className="relative overflow-hidden bg-[#cdd9e8] min-h-[820px]">
       {/* ── Video background at 50% opacity ── */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         poster="/videos/seattle-bg-poster.jpg"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
         style={{ opacity: 0.8 }}
         aria-hidden="true"
       >
-        <source src="/videos/seattle-bg.mp4" type="video/mp4" />
+        {videoSrc && <source src={videoSrc} type="video/mp4" />}
       </video>
 
       {/* ── #6B9FE4 colour filter at 10% opacity ── */}
@@ -324,6 +369,7 @@ export function Hero() {
           >
             {/* Particle backdrop, drifts inside the form box */}
             <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+              {showParticles && (
               <Particles
                 particleCount={170}
                 particleSpread={13}
@@ -337,6 +383,7 @@ export function Hero() {
                 particleColors={["#ffffff", "#eaf2ff", "#cfe0f9"]}
                 className="w-full h-full"
               />
+              )}
             </div>
 
             {/* Residential / Commercial tabs */}
