@@ -68,6 +68,9 @@ export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
             className="absolute inset-0 w-full h-full object-contain
                        opacity-100 group-hover:opacity-0 transition-opacity duration-150 ease-out"
             style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
+            width={150}
+            height={150}
+            loading="lazy"
           />
           {/* Lighter shade (hover) */}
           <img
@@ -77,6 +80,9 @@ export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
             className="absolute inset-0 w-full h-full object-contain
                        opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-out"
             style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
+            width={150}
+            height={150}
+            loading="lazy"
           />
         </div>
       </div>

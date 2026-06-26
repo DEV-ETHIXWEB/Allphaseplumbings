@@ -166,7 +166,10 @@ export function Hero() {
     const start = () =>
       idle(() => {
         if (cancelled) return;
-        setVideoSrc("/videos/seattle-bg.mp4");
+        // Do not load background video on mobile to save payload
+        if (window.innerWidth >= 1024) {
+          setVideoSrc("/videos/seattle-bg.mp4");
+        }
         setShowParticles(true);
       });
     if (document.readyState === "complete") {
@@ -343,15 +346,20 @@ export function Hero() {
               transition: "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22,1,0.36,1)",
             }}
           >
-            <img
-              src={mascot}
-              alt="All Phase Plumbing technician"
-              aria-hidden="true"
-              className="h-[420px] xl:h-[480px] w-auto object-contain drop-shadow-2xl select-none pointer-events-none"
-              style={{ transform: "translateY(calc(2% + 3px))" }}
-              loading="eager"
-              decoding="async"
-            />
+            <picture>
+              <source media="(min-width: 1024px)" srcSet={mascot} />
+              <img
+                src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                alt="All Phase Plumbing technician"
+                aria-hidden="true"
+                className="h-[420px] xl:h-[480px] w-auto object-contain drop-shadow-2xl select-none pointer-events-none"
+                style={{ transform: "translateY(calc(2% + 3px))" }}
+                loading="lazy"
+                decoding="async"
+                width={380}
+                height={480}
+              />
+            </picture>
           </div>
         </div>
 

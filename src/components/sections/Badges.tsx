@@ -26,7 +26,7 @@ function BadgeCard({ b }: { b: Badge }) {
       edgeSensitivity={14}
     >
       <div className="flex h-full items-center justify-center px-4 py-5 sm:px-8 sm:py-6">
-        <img src={b.src} alt={b.alt} className={`w-auto object-contain ${b.imgClass}`} />
+        <img src={b.src} alt={b.alt} className={`w-auto object-contain ${b.imgClass}`} width={200} height={80} loading="lazy" />
       </div>
     </BorderGlow>
   );
@@ -50,6 +50,9 @@ export function Badges() {
         alt=""
         className="absolute top-1/2 -translate-y-1/2 w-40 sm:w-60 lg:w-80 opacity-90 pointer-events-none object-contain object-left"
         style={{ left: "-60px", marginTop: "60px" }}
+        width={320}
+        height={320}
+        loading="lazy"
       />
 
       <div className="relative z-10 container mx-auto px-4">
@@ -84,6 +87,9 @@ export function Badges() {
                   src={b.src}
                   alt={b.alt}
                   className={`w-auto object-contain ${b.mobileImgClass}`}
+                  width={250}
+                  height={150}
+                  loading="lazy"
                 />
               </div>
             ))}
