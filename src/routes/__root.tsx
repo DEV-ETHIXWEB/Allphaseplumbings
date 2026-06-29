@@ -108,10 +108,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap",
-      },
+      // Google Fonts CSS is loaded non-render-blocking via the inline script in
+      // RootShell (media="print" → "all" swap). See FONTS_HREF below.
     ],
   }),
   shellComponent: RootShell,
@@ -120,11 +118,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+/* Google Fonts stylesheet, loaded asynchronously so it never blocks render. */
+const FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap";
+
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Non-render-blocking webfont load: inject a print-media stylesheet and
+            flip it to "all" once it has downloaded (text shows immediately in a
+            fallback font via display=swap, then upgrades). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
+              FONTS_HREF,
+            )};l.media='print';l.onload=function(){this.media='all';};document.head.appendChild(l);})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={FONTS_HREF} />
+        </noscript>
       </head>
       <body>
         {children}
@@ -207,12 +222,22 @@ function RootComponent() {
     };
   }, []);
 
+  const location = useRouter().state.location;
+  const isLandingPage = 
+    location.pathname.startsWith("/draincleaning") ||
+    location.pathname.startsWith("/emergency-plumbing") ||
+    location.pathname.startsWith("/hydro-jetting");
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
-      <CouponsSidePopout />
-      <MobileBottomNav />
-      <ChatbotWidget />
+      {!isLandingPage && (
+        <>
+          <CouponsSidePopout />
+          <MobileBottomNav />
+          <ChatbotWidget />
+        </>
+      )}
     </QueryClientProvider>
   );
 }

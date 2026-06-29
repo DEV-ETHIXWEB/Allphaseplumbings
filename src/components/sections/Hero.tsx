@@ -92,7 +92,9 @@ function CyclingSplitText({
           stagger: 0.025,
           ease: "power3.out",
           onComplete: () => {
-            if (killed) return;
+            // A single headline (e.g. a service landing page) reveals once and
+            // stays — no hold/out/loop. The home page (multiple taglines) cycles.
+            if (killed || lines.length <= 1) return;
             const holdSec = Math.max(0.4, (intervalMs - 1400) / 1000);
             const hold = gsap.delayedCall(holdSec, () => {
               if (killed || !split) return;
@@ -146,7 +148,21 @@ function CyclingSplitText({
   );
 }
 
-export function Hero() {
+export function Hero({
+  /* Optional overrides so service landing pages can name the service in the
+     hero. Defaults reproduce the home-page hero exactly. */
+  taglinesPc = HERO_TAGLINES_PC,
+  taglinesMobile = HERO_TAGLINES_MOBILE,
+  subtitle = "Serving Tukwila & the Greater Seattle Area with Expert Care Since 1989.",
+  /* When set (landing pages), a gold pill with the service name renders above
+     the cycling headline. Undefined on the home page → no badge. */
+  badge,
+}: {
+  taglinesPc?: readonly (readonly string[])[];
+  taglinesMobile?: readonly (readonly string[])[];
+  subtitle?: string;
+  badge?: string;
+} = {}) {
   const opts = useSiteOptions();
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
@@ -255,9 +271,21 @@ export function Hero() {
               All Phase Plumbing
             </span>
 
+            {/* Landing-page service name badge (only when `badge` is provided). */}
+            {badge && (
+              <div className="mt-3 sm:mt-4 mb-1">
+                <span
+                  className="inline-block rounded-full bg-[#F5C842] border-2 border-[#1E3A6E] px-4 py-1.5 text-[12px] sm:text-[15px] font-black uppercase tracking-[0.18em] text-[#1E3A6E] shadow-[0_6px_18px_-4px_rgba(245,200,66,0.7)]"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {badge}
+                </span>
+              </div>
+            )}
+
             <div className="mt-0 sm:mt-4 relative" style={{ minHeight: "2.6em" }}>
               <CyclingSplitText
-                lines={isPc ? HERO_TAGLINES_PC : HERO_TAGLINES_MOBILE}
+                lines={isPc ? taglinesPc : taglinesMobile}
                 intervalMs={3000}
                 className="max-w-[240px] sm:max-w-none text-[36px] sm:text-[48px] lg:text-[50px] text-white leading-[1.15] lg:whitespace-nowrap"
                 style={{
@@ -287,7 +315,7 @@ export function Hero() {
                   lineHeight: "1.4",
                 }}
               >
-                Serving Tukwila &amp; the Greater Seattle Area with Expert Care Since 1989.
+                {subtitle}
               </span>
             </p>
 

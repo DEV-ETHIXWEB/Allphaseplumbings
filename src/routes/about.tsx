@@ -33,35 +33,34 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-/* ── 1. About Us Hero (Height reduced at the bottom by 20%) ── */
+/* ── 1. About Us Hero — mirrors the service-page hero (navy photo + 80% veil,
+   centered white Poppins H1), but with only the page title: no breadcrumb,
+   CTA, or trust chips. ── */
 function AboutHero() {
   return (
-    <section className="relative bg-[#eef4fb] pt-16 pb-7 sm:pt-[90px] sm:pb-10 overflow-hidden border-b border-[#1E3A6E]/10">
+    <section className="relative overflow-hidden bg-[#1E3A6E] border-b-2 border-white/10">
       <img
         src={skylineBg}
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
-        style={{ opacity: 0.3, filter: "blur(1px) brightness(0.95)" }}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
       />
-      <div className="relative container mx-auto px-4 text-center">
+      {/* ~80% navy veil over the photo keeps white copy legible */}
+      <div aria-hidden="true" className="absolute inset-0 bg-[#1E3A6E]/80" />
+
+      {/* Extra top padding below lg clears the sticky header + absolute mobile
+         sub-bar (Available 24/7 / Book Now). Service heroes get this clearance
+         from their breadcrumb + CTA; this title-only hero needs it explicitly. */}
+      <div className="relative container mx-auto px-4 pt-28 pb-12 lg:pt-12 lg:pb-16 text-center">
         <h1
-          className="text-[26px] sm:text-[43px] lg:text-[53px] font-black tracking-tight text-[#1E3A6E]"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            letterSpacing: "0.02em",
-            textShadow: "0 4px 12px rgba(147, 197, 253, 0.9)",
-          }}
+          className="mx-auto max-w-4xl text-[27px] sm:text-[40px] lg:text-[50px] font-black text-white leading-[1.08]"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-          ABOUT US
+          About Us
         </h1>
-        <nav className="text-[13px] sm:text-[14px] mt-3 flex items-center justify-center font-bold text-[#1E3A6E]">
-          <Link to="/" className="hover:underline text-[#4A7BC4]">
-            Home
-          </Link>
-          <span className="mx-2 text-[#1E3A6E]/50">-</span>
-          <span className="text-[#1E3A6E]">About Us</span>
-        </nav>
       </div>
     </section>
   );

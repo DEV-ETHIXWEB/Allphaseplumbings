@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as HydroJettingRouteImport } from './routes/hydro-jetting'
+import { Route as EmergencyPlumbingRouteImport } from './routes/emergency-plumbing'
+import { Route as DraincleaningRouteImport } from './routes/draincleaning'
 import { Route as CouponsRouteImport } from './routes/coupons'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -74,6 +77,21 @@ import { Route as ServicesPlumbingBackflowTestingRouteImport } from './routes/se
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HydroJettingRoute = HydroJettingRouteImport.update({
+  id: '/hydro-jetting',
+  path: '/hydro-jetting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyPlumbingRoute = EmergencyPlumbingRouteImport.update({
+  id: '/emergency-plumbing',
+  path: '/emergency-plumbing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DraincleaningRoute = DraincleaningRouteImport.update({
+  id: '/draincleaning',
+  path: '/draincleaning',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CouponsRoute = CouponsRouteImport.update({
@@ -416,6 +434,9 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/draincleaning': typeof DraincleaningRoute
+  '/emergency-plumbing': typeof EmergencyPlumbingRoute
+  '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -479,6 +500,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/draincleaning': typeof DraincleaningRoute
+  '/emergency-plumbing': typeof EmergencyPlumbingRoute
+  '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -543,6 +567,9 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/draincleaning': typeof DraincleaningRoute
+  '/emergency-plumbing': typeof EmergencyPlumbingRoute
+  '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -608,6 +635,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/draincleaning'
+    | '/emergency-plumbing'
+    | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
     | '/blog/$slug'
@@ -671,6 +701,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/draincleaning'
+    | '/emergency-plumbing'
+    | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
     | '/blog/$slug'
@@ -734,6 +767,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/draincleaning'
+    | '/emergency-plumbing'
+    | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
     | '/blog/$slug'
@@ -798,6 +834,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   CouponsRoute: typeof CouponsRoute
+  DraincleaningRoute: typeof DraincleaningRoute
+  EmergencyPlumbingRoute: typeof EmergencyPlumbingRoute
+  HydroJettingRoute: typeof HydroJettingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AreasCityRoute: typeof AreasCityRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -864,6 +903,27 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hydro-jetting': {
+      id: '/hydro-jetting'
+      path: '/hydro-jetting'
+      fullPath: '/hydro-jetting'
+      preLoaderRoute: typeof HydroJettingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency-plumbing': {
+      id: '/emergency-plumbing'
+      path: '/emergency-plumbing'
+      fullPath: '/emergency-plumbing'
+      preLoaderRoute: typeof EmergencyPlumbingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/draincleaning': {
+      id: '/draincleaning'
+      path: '/draincleaning'
+      fullPath: '/draincleaning'
+      preLoaderRoute: typeof DraincleaningRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coupons': {
@@ -1294,6 +1354,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   CouponsRoute: CouponsRoute,
+  DraincleaningRoute: DraincleaningRoute,
+  EmergencyPlumbingRoute: EmergencyPlumbingRoute,
+  HydroJettingRoute: HydroJettingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AreasCityRoute: AreasCityRoute,
   BlogSlugRoute: BlogSlugRoute,
