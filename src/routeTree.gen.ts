@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as HydroJettingRouteImport } from './routes/hydro-jetting'
-import { Route as EmergencyPlumberRentonKentAuburnRouteImport } from './routes/emergency-plumber-renton-kent-auburn'
+import { Route as EmergencyPlumberRouteImport } from './routes/emergency-plumber'
 import { Route as DraincleaningRouteImport } from './routes/draincleaning'
 import { Route as CouponsRouteImport } from './routes/coupons'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -84,12 +84,11 @@ const HydroJettingRoute = HydroJettingRouteImport.update({
   path: '/hydro-jetting',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EmergencyPlumberRentonKentAuburnRoute =
-  EmergencyPlumberRentonKentAuburnRouteImport.update({
-    id: '/emergency-plumber-renton-kent-auburn',
-    path: '/emergency-plumber-renton-kent-auburn',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+const EmergencyPlumberRoute = EmergencyPlumberRouteImport.update({
+  id: '/emergency-plumber',
+  path: '/emergency-plumber',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DraincleaningRoute = DraincleaningRouteImport.update({
   id: '/draincleaning',
   path: '/draincleaning',
@@ -436,7 +435,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/draincleaning': typeof DraincleaningRoute
-  '/emergency-plumber-renton-kent-auburn': typeof EmergencyPlumberRentonKentAuburnRoute
+  '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
@@ -502,7 +501,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/draincleaning': typeof DraincleaningRoute
-  '/emergency-plumber-renton-kent-auburn': typeof EmergencyPlumberRentonKentAuburnRoute
+  '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
@@ -569,7 +568,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
   '/draincleaning': typeof DraincleaningRoute
-  '/emergency-plumber-renton-kent-auburn': typeof EmergencyPlumberRentonKentAuburnRoute
+  '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/areas/$city': typeof AreasCityRoute
@@ -637,7 +636,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/draincleaning'
-    | '/emergency-plumber-renton-kent-auburn'
+    | '/emergency-plumber'
     | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
@@ -703,7 +702,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/draincleaning'
-    | '/emergency-plumber-renton-kent-auburn'
+    | '/emergency-plumber'
     | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
@@ -769,7 +768,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/coupons'
     | '/draincleaning'
-    | '/emergency-plumber-renton-kent-auburn'
+    | '/emergency-plumber'
     | '/hydro-jetting'
     | '/sitemap.xml'
     | '/areas/$city'
@@ -836,7 +835,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CouponsRoute: typeof CouponsRoute
   DraincleaningRoute: typeof DraincleaningRoute
-  EmergencyPlumberRentonKentAuburnRoute: typeof EmergencyPlumberRentonKentAuburnRoute
+  EmergencyPlumberRoute: typeof EmergencyPlumberRoute
   HydroJettingRoute: typeof HydroJettingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   AreasCityRoute: typeof AreasCityRoute
@@ -913,11 +912,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HydroJettingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/emergency-plumber-renton-kent-auburn': {
-      id: '/emergency-plumber-renton-kent-auburn'
-      path: '/emergency-plumber-renton-kent-auburn'
-      fullPath: '/emergency-plumber-renton-kent-auburn'
-      preLoaderRoute: typeof EmergencyPlumberRentonKentAuburnRouteImport
+    '/emergency-plumber': {
+      id: '/emergency-plumber'
+      path: '/emergency-plumber'
+      fullPath: '/emergency-plumber'
+      preLoaderRoute: typeof EmergencyPlumberRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/draincleaning': {
@@ -1356,7 +1355,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CouponsRoute: CouponsRoute,
   DraincleaningRoute: DraincleaningRoute,
-  EmergencyPlumberRentonKentAuburnRoute: EmergencyPlumberRentonKentAuburnRoute,
+  EmergencyPlumberRoute: EmergencyPlumberRoute,
   HydroJettingRoute: HydroJettingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   AreasCityRoute: AreasCityRoute,

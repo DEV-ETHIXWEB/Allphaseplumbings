@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Droplets, ShieldAlert, ThermometerSnowflake, Waves, AlertTriangle, BatteryWarning, Flame, Slash } from "lucide-react";
 import { LandingPageTemplate } from "@/components/sections/LandingPageTemplate";
 
-export const Route = createFileRoute("/emergency-plumber-renton-kent-auburn")({
+export const Route = createFileRoute("/emergency-plumber")({
   head: () => ({
     meta: [
       { title: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing" },
