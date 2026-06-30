@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Phone, CheckCircle, ShieldCheck, Clock, Star, ChevronDown, MapPin, Truck, Wrench, Shield, type LucideIcon } from "lucide-react";
+import { Phone, CheckCircle, ShieldCheck, Clock, Star, ChevronDown, MapPin, Truck, Wrench, Shield, Tag, X, type LucideIcon } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
 import Particles from "@/components/ui/Particles";
 import { StarBorder } from "@/components/ui/StarBorder";
@@ -38,22 +38,25 @@ export interface LandingPageTemplateProps {
   ctaTitle: React.ReactNode;
   ctaDesc: React.ReactNode;
   faqs: LandingFaqItem[];
+  offerText?: string;
 }
 
 /* ── Minimal Header ── */
-function LandingHeader() {
+function LandingHeader({ trackingPhone }: { trackingPhone?: string }) {
   const opts = useSiteOptions();
+  const phoneToUse = trackingPhone || opts.phone;
+  const phoneHref = `tel:${phoneToUse.replace(/[^0-9]/g, '')}`;
   return (
     <header className="sticky top-0 z-50 bg-white shadow-[0_6px_14px_-2px_rgba(0,0,0,0.22)]">
       <div className="w-full px-4 sm:px-6 lg:px-10">
-        <div className="flex items-center justify-between py-2 min-h-[90px] sm:min-h-[120px]">
+        <div className="flex items-center justify-between py-2 min-h-[100px] sm:min-h-[120px]">
           <div className="shrink-0 translate-y-1">
-            <img src={textLogo} alt="All Phase Plumbing" className="h-[42px] sm:h-[80px] w-auto object-contain" />
+            <img src={textLogo} alt="All Phase Plumbing" className="h-[54px] sm:h-[80px] w-auto object-contain" />
           </div>
           <div className="flex items-center">
             <StarBorder
               as="a"
-              href={opts.phone_href}
+              href={phoneHref}
               className="active:scale-[0.98] hover:scale-[1.04] hover:-translate-y-0.5 transition-all duration-300"
               innerClassName="flex items-center justify-center font-extrabold text-[#1E3A6E] whitespace-nowrap"
               innerStyle={{
@@ -66,7 +69,7 @@ function LandingHeader() {
               }}
             >
               <Phone className="size-5 mr-2" />
-              {opts.phone}
+              {phoneToUse}
             </StarBorder>
           </div>
         </div>
@@ -98,13 +101,6 @@ function LeadForm({ title = "Request a Service", className = "" }: { title?: str
             <input type="text" placeholder="ZIP CODE*" required className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all" />
             <input type="tel" placeholder="PHONE*" required className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all" />
           </div>
-          <select required defaultValue="" className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all appearance-none" style={{ backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center", backgroundSize: "16px", paddingRight: "40px" }}>
-            <option value="" disabled className="text-gray-900">SERVICE NEEDED</option>
-            <option value="Drain Cleaning" className="text-gray-900">Drain Cleaning</option>
-            <option value="Hydro Jetting" className="text-gray-900">Hydro Jetting</option>
-            <option value="Sewer Repair" className="text-gray-900">Sewer Line Repair</option>
-            <option value="Other" className="text-gray-900">Other Emergency</option>
-          </select>
           <div className="flex items-start gap-3 mt-6 pt-2">
             <input id={`sms-optin-${title.replace(/\s+/g, '')}`} type="checkbox" defaultChecked className="mt-1 size-4 rounded bg-white/10 border-white/20 accent-[#F5C842] cursor-pointer shrink-0" />
             <label htmlFor={`sms-optin-${title.replace(/\s+/g, '')}`} className="text-[12px] text-white/70 cursor-pointer leading-relaxed">
@@ -158,13 +154,13 @@ function LandingHero({ title, subtitle, trackingPhone }: { title: React.ReactNod
               {subtitle}
             </p>
             
-            <div className="bg-[#1E3A6E]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 inline-block">
-              <a href={phoneHref} className="inline-flex items-center justify-center w-full rounded bg-[#275BB5] hover:bg-[#F5C842] hover:text-[#1E3A6E] text-white px-8 py-5 font-black text-2xl sm:text-4xl transition-colors shadow-lg tracking-wider">
-                <Phone className="size-8 sm:size-10 mr-4 shrink-0" />
+            <div className="bg-[#1E3A6E]/60 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-6 block sm:inline-block w-full sm:w-auto">
+              <a href={phoneHref} className="inline-flex items-center justify-center w-full whitespace-nowrap rounded bg-[#275BB5] hover:bg-[#F5C842] hover:text-[#1E3A6E] text-white px-4 sm:px-8 py-4 sm:py-5 font-black text-2xl sm:text-4xl transition-colors shadow-lg tracking-wider">
+                <Phone className="size-7 sm:size-10 mr-2 sm:mr-4 shrink-0" />
                 {phoneToUse}
               </a>
               <p className="text-center text-white/80 font-semibold mt-4 text-sm sm:text-base">
-                We answer 24 hours — call now and speak to a plumber.
+                We answer 24 hours a day. Call now and speak to a plumber.
               </p>
             </div>
           </div>
@@ -182,7 +178,7 @@ function LandingTrustBar({ location }: { location: string }) {
   return (
     <div className="bg-white border-b border-gray-200 py-6 sm:py-8 shadow-sm relative z-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center divide-x divide-gray-100">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center divide-x-0 md:divide-x divide-gray-100">
           <div className="flex flex-col items-center justify-center px-4">
             <Star className="size-8 text-[#F5C842] fill-current mb-3" />
             <p className="font-bold text-[#1E3A6E] text-[15px] leading-tight">4.9 Stars on Google</p>
@@ -247,7 +243,7 @@ function LandingHowItWorks({ trackingPhone }: { trackingPhone?: string }) {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl font-black text-[#1E3A6E] mb-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
-            How It Works — Simple and Fast
+            How It Works: Simple and Fast
           </h2>
           <div className="w-24 h-1.5 bg-[#F5C842] mx-auto"></div>
         </div>
@@ -346,20 +342,45 @@ function LandingWhyUs({ title, text }: { title: string, text: React.ReactNode })
             </div>
           </div>
           
-          <div className="space-y-6">
+          <div>
             <h3 className="text-2xl font-black text-[#1E3A6E] mb-6 border-b pb-4">What Our Customers Say</h3>
-            {STATIC_REVIEWS.map((review, i) => (
-              <div key={i} className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 shadow-sm">
-                <div className="flex text-[#F5C842] mb-3">
-                  {[...Array(5)].map((_, j) => <Star key={j} className="size-5 fill-current" />)}
-                </div>
-                <p className="text-gray-700 italic mb-4 font-medium leading-relaxed">"{review.text}"</p>
-                <p className="text-[#1E3A6E] font-bold">— {review.name}</p>
+            <div className="relative overflow-hidden landing-reviews-mask h-[440px] sm:h-[480px]">
+              <div className="landing-reviews-track">
+                {[...STATIC_REVIEWS, ...STATIC_REVIEWS].map((review, i) => (
+                  <div key={i} className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 shadow-sm mb-6">
+                    <div className="flex text-[#F5C842] mb-3">
+                      {[...Array(5)].map((_, j) => <Star key={j} className="size-5 fill-current" />)}
+                    </div>
+                    <p className="text-gray-700 italic mb-4 font-medium leading-relaxed">"{review.text}"</p>
+                    <p className="text-[#1E3A6E] font-bold">{review.name}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .landing-reviews-mask {
+          mask-image: linear-gradient(180deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+          -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+        }
+        .landing-reviews-track {
+          animation: landing-reviews-scroll 28s linear infinite;
+          will-change: transform;
+        }
+        .landing-reviews-mask:hover .landing-reviews-track {
+          animation-play-state: paused;
+        }
+        @keyframes landing-reviews-scroll {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .landing-reviews-track { animation: none; }
+        }
+      `}</style>
     </section>
   );
 }
@@ -440,26 +461,62 @@ function BottomFormSection() {
 }
 
 /* ── Minimal Footer ── */
-function LandingFooter() {
+function LandingFooter({ trackingPhone }: { trackingPhone?: string }) {
   const opts = useSiteOptions();
+  const phoneToUse = trackingPhone || opts.phone;
   return (
-    <footer className="bg-white py-12 border-t border-gray-200 relative overflow-hidden">
-      <img src={mascot} alt="All Phase Plumbing Mascot" className="absolute bottom-0 left-1/2 ml-[130px] sm:ml-[200px] lg:ml-[250px] h-32 sm:h-48 lg:h-56 object-contain pointer-events-none opacity-90" />
+    <footer className="bg-white py-12 pb-28 sm:pb-12 border-t border-gray-200 relative overflow-hidden">
+      <img src={mascot} alt="All Phase Plumbing Mascot" className="absolute bottom-0 right-2 left-auto ml-0 sm:right-auto sm:left-1/2 sm:ml-[200px] lg:ml-[250px] h-20 sm:h-48 lg:h-56 object-contain pointer-events-none opacity-40 sm:opacity-90" />
       <div className="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
         <img src={textLogo} alt="All Phase Plumbing" className="h-[60px] w-auto object-contain mb-6 grayscale opacity-80" />
         <p className="text-gray-500 font-medium mb-2">Licensed &amp; Insured Plumbers serving Seattle</p>
-        <p className="text-gray-500 font-medium mb-6">Call {opts.phone} for 24/7 service.</p>
+        <p className="text-gray-500 font-medium mb-6">Call {phoneToUse} for 24/7 service.</p>
         <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} All Phase Plumbing. All rights reserved.</p>
       </div>
     </footer>
   );
 }
 
+/* ── Sticky Offer Bar ── */
+function OfferBar({ offerText, trackingPhone }: { offerText: string, trackingPhone?: string }) {
+  const opts = useSiteOptions();
+  const [dismissed, setDismissed] = useState(false);
+  const phoneToUse = trackingPhone || opts.phone;
+  const phoneHref = `tel:${phoneToUse.replace(/[^0-9]/g, '')}`;
+  if (dismissed) return null;
+
+  return (
+    <div className="fixed bottom-0 inset-x-0 z-[60] bg-[#1E3A6E] border-t-4 border-[#F5C842] shadow-[0_-8px_24px_-6px_rgba(0,0,0,0.4)]">
+      <div className="container mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <span className="hidden sm:flex shrink-0 size-9 sm:size-11 rounded-full bg-[#F5C842] items-center justify-center">
+            <Tag className="size-5 sm:size-6 text-[#1E3A6E]" strokeWidth={2.5} />
+          </span>
+          <div className="min-w-0">
+            <p className="text-[#F5C842] font-black text-sm sm:text-xl leading-tight truncate">{offerText}</p>
+            <p className="text-white/80 text-[11px] sm:text-sm font-medium leading-tight truncate">Mention this offer when you call.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <a href={phoneHref} className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#F5C842] text-[#1E3A6E] font-black text-xs sm:text-base px-3.5 sm:px-7 py-2.5 sm:py-3 rounded shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] hover:bg-[#eec136] active:scale-[0.98] transition-all uppercase tracking-wide whitespace-nowrap">
+            <Phone className="size-4 sm:size-5" />
+            <span className="hidden sm:inline">Claim Offer</span>
+            <span className="sm:hidden">Call</span>
+          </a>
+          <button onClick={() => setDismissed(true)} aria-label="Dismiss offer" className="shrink-0 text-white/50 hover:text-white transition-colors p-1">
+            <X className="size-4 sm:size-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Main Layout Assembly ── */
 export function LandingPageTemplate(props: LandingPageTemplateProps) {
   return (
-    <div className="min-h-screen bg-white">
-      <LandingHeader />
+    <div className="min-h-screen bg-white pb-[72px] sm:pb-[84px]">
+      <LandingHeader trackingPhone={props.trackingPhone} />
       <main>
         <LandingHero title={props.heroTitle} subtitle={props.heroSubtitle} trackingPhone={props.trackingPhone} />
         <LandingTrustBar location={props.trustBarLocation} />
@@ -479,7 +536,8 @@ export function LandingPageTemplate(props: LandingPageTemplateProps) {
         <LandingFAQ faqs={props.faqs} />
         <BottomFormSection />
       </main>
-      <LandingFooter />
+      <LandingFooter trackingPhone={props.trackingPhone} />
+      <OfferBar offerText={props.offerText ?? "$50 Off Drain Cleaning"} trackingPhone={props.trackingPhone} />
     </div>
   );
 }

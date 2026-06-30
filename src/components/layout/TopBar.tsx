@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const CITIES_COL1 = [
   "Auburn",
@@ -54,7 +54,6 @@ function FacebookIcon({ className }: { className?: string }) {
 export function TopBar() {
   const [nearMeOpen, setNearMeOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
-  const opts = useSiteOptions();
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -67,9 +66,9 @@ export function TopBar() {
   }, []);
 
   const socials = [
-    { label: "TikTok", href: opts.social_tiktok, Icon: TikTokIcon },
-    { label: "Instagram", href: opts.social_instagram, Icon: InstagramIcon },
-    { label: "Facebook", href: opts.social_facebook, Icon: FacebookIcon },
+    { label: "TikTok", href: SOCIAL_LINKS.tiktok, Icon: TikTokIcon },
+    { label: "Instagram", href: SOCIAL_LINKS.instagram, Icon: InstagramIcon },
+    { label: "Facebook", href: SOCIAL_LINKS.facebook, Icon: FacebookIcon },
   ];
 
   return (

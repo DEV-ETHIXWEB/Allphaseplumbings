@@ -3,6 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
 import { useSiteOptions } from "@/hooks/use-site-options";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 import textLogo from "@/assets/App updated logo.png";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { PillNavItem } from "./PillNavItem";
@@ -219,7 +220,7 @@ export function Header() {
 
           <div className="flex items-center gap-0">
             <a
-              href={opts.social_instagram}
+              href={SOCIAL_LINKS.instagram}
               aria-label="Instagram"
               target="_blank"
               rel="noopener noreferrer"
@@ -228,7 +229,7 @@ export function Header() {
               <Instagram className="size-[26px]" />
             </a>
             <a
-              href={opts.social_facebook}
+              href={SOCIAL_LINKS.facebook}
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
@@ -237,7 +238,7 @@ export function Header() {
               <Facebook className="size-[26px]" />
             </a>
             <a
-              href={opts.social_tiktok}
+              href={SOCIAL_LINKS.tiktok}
               aria-label="TikTok"
               target="_blank"
               rel="noopener noreferrer"

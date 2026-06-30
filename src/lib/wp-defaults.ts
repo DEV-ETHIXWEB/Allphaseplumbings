@@ -111,8 +111,8 @@ export const WP_DEFAULTS: Required<WPSiteOptions> = {
   dispatch_message: "⚡ Dispatching certified local technicians near Tukwila WA...",
 
   // Social media
-  social_facebook: "https://www.facebook.com/allphaseplumbing",
-  social_instagram: "https://www.instagram.com/allphaseplumbing",
+  social_facebook: "https://www.facebook.com/AllPhasePlumbingTukwila/",
+  social_instagram: "https://www.instagram.com/all_phase_plumbing/",
   social_tiktok: "https://www.tiktok.com/@allphaseplumbing",
 };
 

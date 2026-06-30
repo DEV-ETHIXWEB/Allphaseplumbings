@@ -77,10 +77,11 @@ export default function HydroJettingLanding() {
       servicesDesc="When standard snaking isn't enough, hydro jetting is the ultimate solution. It uses highly pressurized water to scrub the inside of your pipes, removing years of buildup."
       services={SERVICES}
       whyUsTitle="Why Seattle Homeowners Call All Phase for Hydro Jetting"
-      whyUsText={<p>All Phase Plumbing has been handling complex plumbing issues across the Greater Seattle area for decades. Every job is completed by a licensed, insured plumber—not a subcontractor. When you call us for hydro jetting, you get an honest assessment, upfront pricing, and a fast response. No surprise charges, no aggressive upselling. Just honest work to get your home back to normal.</p>}
+      whyUsText={<p>All Phase Plumbing has been handling complex plumbing issues across the Greater Seattle area for decades. Every job is completed by a licensed, insured plumber, not a subcontractor. When you call us for hydro jetting, you get an honest assessment, upfront pricing, and a fast response. No surprise charges, no aggressive upselling. Just honest work to get your home back to normal.</p>}
       ctaTitle={<>Recurring Clogs Driving You Crazy?<br/>Blast Them Away for Good.</>}
       ctaDesc={<>Stop paying for temporary fixes. A quick camera inspection will show you exactly what's hiding in your pipes. <span className="font-bold text-white">Let us wash it all away.</span></>}
       faqs={FAQS}
+      offerText="$50 Off Hydro Jetting"
     />
   );
 }

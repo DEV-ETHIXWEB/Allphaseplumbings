@@ -1,4 +1,4 @@
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 
 /** TikTok icon, lucide-react doesn't ship one, so inline a simple SVG */
 function TikTokIcon({ className }: { className?: string }) {
@@ -28,12 +28,10 @@ function Facebook({ className }: { className?: string }) {
 }
 
 export function SocialIcons() {
-  const opts = useSiteOptions();
-
   const items = [
-    { label: "TikTok", href: opts.social_tiktok, Icon: TikTokIcon },
-    { label: "Instagram", href: opts.social_instagram, Icon: Instagram },
-    { label: "Facebook", href: opts.social_facebook, Icon: Facebook },
+    { label: "TikTok", href: SOCIAL_LINKS.tiktok, Icon: TikTokIcon },
+    { label: "Instagram", href: SOCIAL_LINKS.instagram, Icon: Instagram },
+    { label: "Facebook", href: SOCIAL_LINKS.facebook, Icon: Facebook },
   ];
 
   return (

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/emergency-plumber")({
 const EMERGENCY_TYPES = [
   {
     title: "Burst or broken pipe",
-    desc: "One of the most urgent situations — water volume can cause structural damage within minutes.",
+    desc: "One of the most urgent situations, water volume can cause structural damage within minutes.",
     icon: Droplets,
   },
   {
@@ -61,7 +61,7 @@ export default function EmergencyPlumberAdsLanding() {
       trackingPhone="(206) 309-1088"
       heroTitle="Emergency Plumber in Renton, Kent, and Auburn, WA"
       heroSubtitle="Burst pipe, sewer backup, or major leak? All Phase Plumbing responds fast across South King County. Available 24 hours a day."
-      promoTextFirst="Emergency Plumbing Service — 24 Hour Plumber"
+      promoTextFirst="Emergency Plumbing Service: 24 Hour Plumber"
       promoTextSecond="Call Now for Immediate Dispatch"
       trustBarLocation="Serving South King County"
       servicesTitle="Is Your Situation a Plumbing Emergency?"
@@ -70,7 +70,7 @@ export default function EmergencyPlumberAdsLanding() {
       whyUsTitle="Why Renton, Kent, and Auburn Homeowners Call All Phase First"
       whyUsText={
         <p>
-          All Phase Plumbing has been serving South King County for years, handling everything from routine drain cleaning to full emergency plumbing response across Renton, Kent, Auburn, Federal Way, and Des Moines. Every job is completed by a licensed, insured plumber — not a subcontractor — and we don't leave until the problem is fully resolved.
+          All Phase Plumbing has been serving South King County for years, handling everything from routine drain cleaning to full emergency plumbing response across Renton, Kent, Auburn, Federal Way, and Des Moines. Every job is completed by a licensed, insured plumber, not a subcontractor, and we don't leave until the problem is fully resolved.
           <br /><br />
           When you call All Phase for an emergency plumbing situation, you get an honest assessment, an upfront price before any work starts, and a plumber who shows up on time. No surprise charges. No upselling. Just the fix your home needs.
         </p>
@@ -78,6 +78,7 @@ export default function EmergencyPlumberAdsLanding() {
       ctaTitle="Plumbing Emergency? Don't Wait."
       ctaDesc="Every minute water is where it shouldn't be, the damage compounds. Call All Phase Plumbing now and speak to a licensed plumber directly."
       faqs={[]}
+      offerText="$50 Off Emergency Service"
     />
   );
 }
