@@ -176,8 +176,7 @@ export function Hero({
   const [showParticles, setShowParticles] = useState(false);
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const idle =
-      window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
     let cancelled = false;
     const start = () =>
       idle(() => {
@@ -392,10 +391,7 @@ export function Hero({
         </div>
 
         {/* ── Full-width form card, sits flush at the bottom of the hero (25% wider than container) ── */}
-        <div
-          id="book-now"
-          className="mt-0 sm:mt-2 scroll-mt-20 w-full lg:w-[90%] lg:mx-auto"
-        >
+        <div id="book-now" className="mt-0 sm:mt-2 scroll-mt-20 w-full lg:w-[90%] lg:mx-auto">
           <div
             className="relative rounded-t-2xl overflow-hidden"
             style={{
@@ -406,19 +402,19 @@ export function Hero({
             {/* Particle backdrop, drifts inside the form box */}
             <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
               {showParticles && (
-              <Particles
-                particleCount={170}
-                particleSpread={13}
-                speed={0.45}
-                particleBaseSize={130}
-                sizeRandomness={1.1}
-                alphaParticles={true}
-                cameraDistance={20}
-                disableRotation={true}
-                moveParticlesOnHover={false}
-                particleColors={["#ffffff", "#eaf2ff", "#cfe0f9"]}
-                className="w-full h-full"
-              />
+                <Particles
+                  particleCount={170}
+                  particleSpread={13}
+                  speed={0.45}
+                  particleBaseSize={130}
+                  sizeRandomness={1.1}
+                  alphaParticles={true}
+                  cameraDistance={20}
+                  disableRotation={true}
+                  moveParticlesOnHover={false}
+                  particleColors={["#ffffff", "#eaf2ff", "#cfe0f9"]}
+                  className="w-full h-full"
+                />
               )}
             </div>
 

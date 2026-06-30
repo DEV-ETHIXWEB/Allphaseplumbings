@@ -159,9 +159,7 @@ function RootComponent() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add(
-              entry.target.classList.contains("reveal-on-scroll")
-                ? "reveal-in"
-                : "heading-fade-in",
+              entry.target.classList.contains("reveal-on-scroll") ? "reveal-in" : "heading-fade-in",
             );
             // Unobserve once animated so it stays in place
             observer.unobserve(entry.target);
@@ -223,7 +221,7 @@ function RootComponent() {
   }, []);
 
   const location = useRouter().state.location;
-  const isLandingPage = 
+  const isLandingPage =
     location.pathname.startsWith("/draincleaning") ||
     location.pathname.startsWith("/emergency-plumber") ||
     location.pathname.startsWith("/hydro-jetting");
