@@ -388,8 +388,8 @@ export function Hero({
           </div>
         </div>
 
-        {/* ── Full-width form card, sits flush at the bottom of the hero (25% wider than container) ── */}
-        <div id="book-now" className="mt-0 sm:mt-2 scroll-mt-20 w-full lg:w-[108%] lg:mx-auto">
+        {/* ── Full-width form card, sits flush at the bottom of the hero ── */}
+        <div id="book-now" className="mt-0 sm:mt-2 scroll-mt-20 w-full">
           <div
             className="relative rounded-t-2xl overflow-hidden"
             style={{
