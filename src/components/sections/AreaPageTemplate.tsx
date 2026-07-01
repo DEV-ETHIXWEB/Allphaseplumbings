@@ -682,9 +682,27 @@ function Contact({ area }: { area: AreaContent }) {
                 }}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                  <input type="text" name="name" placeholder="FULL NAME*" required className={HERO_INPUT_CLS} />
-                  <input type="tel" name="phone" placeholder="PHONE*" required className={HERO_INPUT_CLS} />
-                  <input type="email" name="email" placeholder="EMAIL*" required className={HERO_INPUT_CLS} />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="FULL NAME*"
+                    required
+                    className={HERO_INPUT_CLS}
+                  />
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="PHONE*"
+                    required
+                    className={HERO_INPUT_CLS}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="EMAIL*"
+                    required
+                    className={HERO_INPUT_CLS}
+                  />
                   <input
                     type="text"
                     name="city"
