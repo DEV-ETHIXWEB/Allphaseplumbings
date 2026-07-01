@@ -13,12 +13,14 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as HydroJettingRouteImport } from './routes/hydro-jetting'
 import { Route as EmergencyPlumberRouteImport } from './routes/emergency-plumber'
 import { Route as DraincleaningRouteImport } from './routes/draincleaning'
+import { Route as DrainCleaningRouteImport } from './routes/drain-cleaning'
 import { Route as CouponsRouteImport } from './routes/coupons'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ServiceAreaIndexRouteImport } from './routes/service-area/index'
+import { Route as ResidentialIndexRouteImport } from './routes/residential/index'
 import { Route as CommercialIndexRouteImport } from './routes/commercial/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesWaterSoftenersRouteImport } from './routes/services/water-softeners'
@@ -94,6 +96,11 @@ const DraincleaningRoute = DraincleaningRouteImport.update({
   path: '/draincleaning',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DrainCleaningRoute = DrainCleaningRouteImport.update({
+  id: '/drain-cleaning',
+  path: '/drain-cleaning',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CouponsRoute = CouponsRouteImport.update({
   id: '/coupons',
   path: '/coupons',
@@ -122,6 +129,11 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
 const ServiceAreaIndexRoute = ServiceAreaIndexRouteImport.update({
   id: '/service-area/',
   path: '/service-area/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResidentialIndexRoute = ResidentialIndexRouteImport.update({
+  id: '/residential/',
+  path: '/residential/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommercialIndexRoute = CommercialIndexRouteImport.update({
@@ -434,6 +446,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/drain-cleaning': typeof DrainCleaningRoute
   '/draincleaning': typeof DraincleaningRoute
   '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
@@ -461,6 +474,7 @@ export interface FileRoutesByFullPath {
   '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog/': typeof BlogIndexRoute
   '/commercial/': typeof CommercialIndexRoute
+  '/residential/': typeof ResidentialIndexRoute
   '/service-area/': typeof ServiceAreaIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/services/plumbing/backflow-testing': typeof ServicesPlumbingBackflowTestingRoute
@@ -500,6 +514,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/drain-cleaning': typeof DrainCleaningRoute
   '/draincleaning': typeof DraincleaningRoute
   '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
@@ -527,6 +542,7 @@ export interface FileRoutesByTo {
   '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog': typeof BlogIndexRoute
   '/commercial': typeof CommercialIndexRoute
+  '/residential': typeof ResidentialIndexRoute
   '/service-area': typeof ServiceAreaIndexRoute
   '/services': typeof ServicesIndexRoute
   '/services/plumbing/backflow-testing': typeof ServicesPlumbingBackflowTestingRoute
@@ -567,6 +583,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/coupons': typeof CouponsRoute
+  '/drain-cleaning': typeof DrainCleaningRoute
   '/draincleaning': typeof DraincleaningRoute
   '/emergency-plumber': typeof EmergencyPlumberRoute
   '/hydro-jetting': typeof HydroJettingRoute
@@ -594,6 +611,7 @@ export interface FileRoutesById {
   '/services/water-softeners': typeof ServicesWaterSoftenersRoute
   '/blog/': typeof BlogIndexRoute
   '/commercial/': typeof CommercialIndexRoute
+  '/residential/': typeof ResidentialIndexRoute
   '/service-area/': typeof ServiceAreaIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/services/plumbing/backflow-testing': typeof ServicesPlumbingBackflowTestingRoute
@@ -635,6 +653,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/drain-cleaning'
     | '/draincleaning'
     | '/emergency-plumber'
     | '/hydro-jetting'
@@ -662,6 +681,7 @@ export interface FileRouteTypes {
     | '/services/water-softeners'
     | '/blog/'
     | '/commercial/'
+    | '/residential/'
     | '/service-area/'
     | '/services/'
     | '/services/plumbing/backflow-testing'
@@ -701,6 +721,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/drain-cleaning'
     | '/draincleaning'
     | '/emergency-plumber'
     | '/hydro-jetting'
@@ -728,6 +749,7 @@ export interface FileRouteTypes {
     | '/services/water-softeners'
     | '/blog'
     | '/commercial'
+    | '/residential'
     | '/service-area'
     | '/services'
     | '/services/plumbing/backflow-testing'
@@ -767,6 +789,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/coupons'
+    | '/drain-cleaning'
     | '/draincleaning'
     | '/emergency-plumber'
     | '/hydro-jetting'
@@ -794,6 +817,7 @@ export interface FileRouteTypes {
     | '/services/water-softeners'
     | '/blog/'
     | '/commercial/'
+    | '/residential/'
     | '/service-area/'
     | '/services/'
     | '/services/plumbing/backflow-testing'
@@ -834,6 +858,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   CouponsRoute: typeof CouponsRoute
+  DrainCleaningRoute: typeof DrainCleaningRoute
   DraincleaningRoute: typeof DraincleaningRoute
   EmergencyPlumberRoute: typeof EmergencyPlumberRoute
   HydroJettingRoute: typeof HydroJettingRoute
@@ -861,6 +886,7 @@ export interface RootRouteChildren {
   ServicesWaterSoftenersRoute: typeof ServicesWaterSoftenersRoute
   BlogIndexRoute: typeof BlogIndexRoute
   CommercialIndexRoute: typeof CommercialIndexRoute
+  ResidentialIndexRoute: typeof ResidentialIndexRoute
   ServiceAreaIndexRoute: typeof ServiceAreaIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   ServicesPlumbingBackflowTestingRoute: typeof ServicesPlumbingBackflowTestingRoute
@@ -926,6 +952,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DraincleaningRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/drain-cleaning': {
+      id: '/drain-cleaning'
+      path: '/drain-cleaning'
+      fullPath: '/drain-cleaning'
+      preLoaderRoute: typeof DrainCleaningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coupons': {
       id: '/coupons'
       path: '/coupons'
@@ -966,6 +999,13 @@ declare module '@tanstack/react-router' {
       path: '/service-area'
       fullPath: '/service-area/'
       preLoaderRoute: typeof ServiceAreaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/residential/': {
+      id: '/residential/'
+      path: '/residential'
+      fullPath: '/residential/'
+      preLoaderRoute: typeof ResidentialIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/commercial/': {
@@ -1354,6 +1394,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   CouponsRoute: CouponsRoute,
+  DrainCleaningRoute: DrainCleaningRoute,
   DraincleaningRoute: DraincleaningRoute,
   EmergencyPlumberRoute: EmergencyPlumberRoute,
   HydroJettingRoute: HydroJettingRoute,
@@ -1381,6 +1422,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesWaterSoftenersRoute: ServicesWaterSoftenersRoute,
   BlogIndexRoute: BlogIndexRoute,
   CommercialIndexRoute: CommercialIndexRoute,
+  ResidentialIndexRoute: ResidentialIndexRoute,
   ServiceAreaIndexRoute: ServiceAreaIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   ServicesPlumbingBackflowTestingRoute: ServicesPlumbingBackflowTestingRoute,

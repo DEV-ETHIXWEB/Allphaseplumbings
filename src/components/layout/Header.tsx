@@ -46,10 +46,9 @@ const NAV: NavItem[] = [
     label: "Services",
     dropCols: 3,
     dropdown: [
-      { to: "/services/drain-cleaning", label: "Drain Cleaning" },
+      { to: "/services/drain-cleaning", label: "Drain Cleaning & Hydro Jetting" },
       { to: "/services/plumbing/emergency-plumber", label: "Emergency Plumber" },
       { to: "/services/plumbing/garbage-disposals", label: "Garbage Disposals" },
-      { to: "/services/plumbing/hydro-jetting", label: "Hydro Jetting" },
       { to: "/services/plumbing/repiping", label: "Repiping" },
       { to: "/services/plumbing/sump-pumps", label: "Sump Pumps" },
       { to: "/services/plumbing/toilets", label: "Toilets" },
@@ -88,6 +87,8 @@ const NAV: NavItem[] = [
       { to: "/services/sewer-services/sewer-replacement", label: "Sewer Replacement" },
     ],
   },
+
+  { to: "/residential", label: "Residential", exact: true },
 
   {
     to: "/commercial",

@@ -143,8 +143,7 @@ const CONTENT: ServicePageContent = {
     },
   ],
   related: [
-    { label: "Drain Cleaning", href: "/services/drain-cleaning" },
-    { label: "Hydro Jetting", href: "/services/plumbing/hydro-jetting" },
+    { label: "Drain Cleaning & Hydro Jetting", href: "/services/drain-cleaning" },
     { label: "Sewer Services", href: "/services/sewer-services" },
     { label: "Plumbing", href: "/services/plumbing" },
   ],

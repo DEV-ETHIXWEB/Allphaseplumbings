@@ -222,7 +222,7 @@ function RootComponent() {
 
   const location = useRouter().state.location;
   const isLandingPage =
-    location.pathname.startsWith("/draincleaning") ||
+    location.pathname.startsWith("/drain-cleaning") ||
     location.pathname.startsWith("/emergency-plumber") ||
     location.pathname.startsWith("/hydro-jetting");
 

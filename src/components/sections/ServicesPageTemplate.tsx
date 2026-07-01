@@ -21,7 +21,6 @@ import {
   Search,
   Siren,
   Replace,
-  Gauge,
   Fuel,
   Filter,
   ShowerHead,
@@ -51,7 +50,7 @@ export const SERVICES_CATALOG: ServiceItem[] = [
     icon: Wrench,
   },
   {
-    name: "Drain Cleaning",
+    name: "Drain Cleaning & Hydro Jetting",
     description: "Hydro-jetting and snaking that clears any clog, with camera inspection.",
     href: "/services/drain-cleaning",
     icon: Droplets,
@@ -85,12 +84,6 @@ export const SERVICES_CATALOG: ServiceItem[] = [
     description: "Whole-home repipes in modern PEX and copper.",
     href: "/services/repiping",
     icon: Replace,
-  },
-  {
-    name: "Hydro Jetting",
-    description: "High-pressure jetting that blasts out grease, roots, and buildup.",
-    href: "/services/hydro-jetting",
-    icon: Gauge,
   },
   {
     name: "Gas Line Services",
