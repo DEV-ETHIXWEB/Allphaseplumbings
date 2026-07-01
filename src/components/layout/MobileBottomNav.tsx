@@ -4,10 +4,11 @@ import { Home, Info, MapPin, Wrench, CalendarCheck, X, Search } from "lucide-rea
 
 /* ── Plumbing services list (used by the bottom-sheet) ──────────────────── */
 const PLUMBING_SERVICES: { to: string; label: string }[] = [
-  { to: "/services/drain-cleaning", label: "Drain Cleaning" },
+  { to: "/residential", label: "Residential Plumbing" },
+  { to: "/commercial", label: "Commercial Plumbing" },
+  { to: "/services/drain-cleaning", label: "Drain Cleaning & Hydro Jetting" },
   { to: "/services/plumbing/emergency-plumber", label: "Emergency Plumber" },
   { to: "/services/plumbing/garbage-disposals", label: "Garbage Disposals" },
-  { to: "/services/plumbing/hydro-jetting", label: "Hydro Jetting" },
   { to: "/services/plumbing/repiping", label: "Repiping" },
   { to: "/services/plumbing/sump-pumps", label: "Sump Pumps" },
   { to: "/services/plumbing/toilets", label: "Toilets" },

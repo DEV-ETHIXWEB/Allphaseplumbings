@@ -537,7 +537,7 @@ export function LandingPageTemplate(props: LandingPageTemplateProps) {
         <BottomFormSection />
       </main>
       <LandingFooter trackingPhone={props.trackingPhone} />
-      <OfferBar offerText={props.offerText ?? "$50 Off Drain Cleaning"} trackingPhone={props.trackingPhone} />
+      <OfferBar offerText={props.offerText ?? "$25 Off Drain Cleaning"} trackingPhone={props.trackingPhone} />
     </div>
   );
 }

@@ -78,7 +78,7 @@ export default function EmergencyPlumberAdsLanding() {
       ctaTitle="Plumbing Emergency? Don't Wait."
       ctaDesc="Every minute water is where it shouldn't be, the damage compounds. Call All Phase Plumbing now and speak to a licensed plumber directly."
       faqs={[]}
-      offerText="$50 Off Emergency Service"
+      offerText="$25 Off Emergency Service"
     />
   );
 }

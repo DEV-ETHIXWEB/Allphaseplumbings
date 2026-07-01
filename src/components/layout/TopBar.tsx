@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/social-links";
+import { ServiceSearch } from "./ServiceSearch";
 
 const CITIES_COL1 = [
   "Auburn",
@@ -74,8 +75,10 @@ export function TopBar() {
   return (
     <div className="relative z-50 w-full bg-[#1E3A8A] hidden lg:block">
       <div className="grid w-full items-center grid-cols-[1fr_auto_1fr] px-4">
-        {/* Left spacer */}
-        <div />
+        {/* Left: service search (residential / commercial / any service) */}
+        <div className="justify-self-start py-1.5">
+          <ServiceSearch />
+        </div>
 
         {/* ── Center: Find All Phase Near Me ── */}
         <div ref={dropRef} className="relative shrink-0 justify-self-center">

@@ -10,10 +10,9 @@ type Tile = { label: string; href: string };
  * Plumbing overview page until that sub-page is built out.
  */
 const SERVICES: Tile[] = [
-  { label: "Drain Cleaning", href: "/services/drain-cleaning" },
+  { label: "Drain Cleaning & Hydro Jetting", href: "/services/drain-cleaning" },
   { label: "Emergency Plumber", href: "/services/plumbing/emergency-plumber" },
   { label: "Garbage Disposals", href: "/services/plumbing/garbage-disposals" },
-  { label: "Hydro Jetting", href: "/services/plumbing/hydro-jetting" },
   { label: "Repiping", href: "/services/plumbing/repiping" },
   { label: "Sump Pumps", href: "/services/plumbing/sump-pumps" },
   { label: "Toilets", href: "/services/plumbing/toilets" },

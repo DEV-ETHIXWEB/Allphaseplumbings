@@ -146,6 +146,10 @@ export function Footer() {
         <img
           src={mascot}
           alt="All Phase Plumbing Mascot"
+          loading="lazy"
+          decoding="async"
+          width={190}
+          height={240}
           className="h-[240px] w-auto object-contain drop-shadow-[0_8px_32px_rgba(0,0,0,0.5)] translate-y-[0.5px]"
         />
       </div>
