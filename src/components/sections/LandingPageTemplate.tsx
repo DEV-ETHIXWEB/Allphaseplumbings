@@ -513,7 +513,7 @@ function LandingFooter({ trackingPhone }: { trackingPhone?: string }) {
   const phoneToUse = trackingPhone || opts.phone;
   return (
     <footer className="bg-white py-12 pb-28 sm:pb-12 border-t border-gray-200 relative overflow-hidden">
-      <img src={mascot} alt="All Phase Plumbing Mascot" className="absolute bottom-0 right-2 left-auto ml-0 sm:right-auto sm:left-1/2 sm:ml-[200px] lg:ml-[250px] h-20 sm:h-48 lg:h-56 object-contain pointer-events-none opacity-40 sm:opacity-90" />
+      <img src={mascot} alt="All Phase Plumbing Mascot" className="absolute bottom-0 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-1/2 sm:ml-[200px] lg:ml-[250px] h-24 sm:h-48 lg:h-56 object-contain pointer-events-none opacity-90" />
       <div className="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
         <img src={textLogo} alt="All Phase Plumbing" className="h-[60px] w-auto object-contain mb-6 grayscale opacity-80" />
         <p className="text-gray-500 font-medium mb-2">Licensed &amp; Insured Plumbers serving Seattle</p>
@@ -561,8 +561,25 @@ function OfferBar({ offerText, trackingPhone }: { offerText: string, trackingPho
 
 /* ── Main Layout Assembly ── */
 export function LandingPageTemplate(props: LandingPageTemplateProps) {
+  // The global mobile rule (styles.css) reserves 92px at the bottom of every
+  // page for the main-site bottom nav. Landing pages don't render that nav —
+  // they use OfferBar — so on mobile we drop that reserve and let the footer
+  // (and its mascot) sit flush on the OfferBar instead of a white gap.
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => {
+      document.body.style.paddingBottom = mq.matches ? "0px" : "";
+    };
+    apply();
+    mq.addEventListener("change", apply);
+    return () => {
+      document.body.style.paddingBottom = "";
+      mq.removeEventListener("change", apply);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white pb-[72px] sm:pb-[84px]">
+    <div className="min-h-screen bg-white pb-[60px] sm:pb-[84px]">
       <LandingHeader trackingPhone={props.trackingPhone} />
       <main>
         <LandingHero title={props.heroTitle} subtitle={props.heroSubtitle} trackingPhone={props.trackingPhone} />
