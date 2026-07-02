@@ -8,8 +8,6 @@ import Particles from "@/components/ui/Particles";
 import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 import { useZipGeocode } from "@/hooks/use-zip-geocode";
 import type { ZipLocation } from "@/lib/service-area-geo";
-import { Recaptcha, type RecaptchaHandle } from "@/components/ui/Recaptcha";
-import { verifyRecaptcha } from "@/lib/recaptcha.functions";
 
 /* ── Leaflet dynamic import (avoids SSR issues) ───────────────────────────── */
 declare global {
@@ -209,68 +207,22 @@ function ServiceMap({ zipLocation }: { zipLocation: ZipLocation | null }) {
   );
 }
 
-/* ── ZIP search + availability check, gated by reCAPTCHA to keep the
-   Nominatim lookup from being spammed by bots ─────────────────────── */
-type CheckStatus = "idle" | "loading" | "ok" | "out" | "error" | "needs-captcha" | "verifying";
-
+/* ── ZIP search + availability check ──────────────────────────────────
+   Live debounced lookup (mirrors the contact page): the visitor types a
+   ZIP, useZipGeocode resolves it, the map flies to the pin and the banner
+   reports whether we serve the area. No button / reCAPTCHA gate. ─────── */
 function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null) => void }) {
   const [zip, setZip] = useState("");
-  const [captchaToken, setCaptchaToken] = useState("");
-  const [status, setStatus] = useState<CheckStatus>("idle");
-  const [result, setResult] = useState<{ served: boolean; location: ZipLocation } | null>(null);
-  const captchaRef = useRef<RecaptchaHandle>(null);
+  const { status, location } = useZipGeocode(zip);
 
-  const { status: geoStatus, location: geoLocation } = useZipGeocode(
-    status === "loading" ? zip : "",
-  );
-
-  // Once the debounced geocode resolves, surface the result and hand the
-  // pin off to the map.
+  // Hand the resolved pin off to the map (or clear it while typing/idle).
   useEffect(() => {
-    if (status !== "loading") return;
-    if (geoStatus === "ok" || geoStatus === "out") {
-      setResult({ served: geoStatus === "ok", location: geoLocation! });
-      setStatus(geoStatus);
-      onResult(geoLocation);
-    } else if (geoStatus === "error") {
-      setStatus("error");
-      onResult(null);
-    }
+    onResult(status === "ok" || status === "out" ? location : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [geoStatus, geoLocation, status]);
+  }, [status, location]);
 
-  function reset() {
-    setZip("");
-    setResult(null);
-    setStatus("idle");
-    setCaptchaToken("");
-    captchaRef.current?.reset();
-    onResult(null);
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!/^\d{5}$/.test(zip)) return;
-
-    if (!captchaToken) {
-      setStatus("needs-captcha");
-      return;
-    }
-
-    setStatus("verifying");
-    const verify = await verifyRecaptcha({ data: { token: captchaToken } });
-    captchaRef.current?.reset();
-    setCaptchaToken("");
-
-    if (!verify.success) {
-      setStatus("needs-captcha");
-      return;
-    }
-
-    setStatus("loading");
-  }
-
-  const showBanner = status === "ok" || status === "out";
+  const served = status === "ok";
+  const showBanner = (status === "ok" || status === "out") && location;
 
   return (
     <div
@@ -287,60 +239,34 @@ function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null
         Do we service your ZIP code?
       </h3>
 
-      <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              inputMode="numeric"
-              maxLength={5}
-              pattern="\d{5}"
-              placeholder="ENTER ZIP CODE*"
-              required
-              value={zip}
-              onChange={(e) => {
-                setZip(e.target.value.replace(/\D/g, "").slice(0, 5));
-                if (status !== "idle") {
-                  setStatus("idle");
-                  setResult(null);
-                  onResult(null);
-                }
-              }}
-              className={`w-full rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm px-4 py-3.5 text-[14px] sm:text-[15px] font-semibold text-white placeholder:text-white/45 focus:outline-none focus:border-[#F5C842] focus:bg-white/15 transition-all duration-200
-                ${status === "ok" ? "!border-emerald-400 !bg-emerald-500/10" : ""}
-                ${status === "out" ? "!border-amber-400 !bg-amber-500/10" : ""}
-                ${status === "error" ? "!border-red-400 !bg-red-500/10" : ""}`}
-            />
-            {(status === "loading" || status === "verifying") && (
-              <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-white/60 animate-spin" />
-            )}
-            {status === "ok" && (
-              <Check className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-emerald-400" strokeWidth={3} />
-            )}
-          </div>
-          <button
-            type="submit"
-            disabled={zip.length !== 5 || status === "loading" || status === "verifying"}
-            className="shrink-0 inline-flex items-center justify-center bg-[#F5C842] text-[#1E3A6E] font-black text-[14px] sm:text-[15px] uppercase tracking-wide px-6 py-3.5 rounded-xl hover:bg-[#eec136] active:scale-[0.98] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            Check Availability
-          </button>
+      <div className="mt-4">
+        <div className="relative">
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={5}
+            pattern="\d{5}"
+            placeholder="ENTER ZIP CODE*"
+            value={zip}
+            onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
+            className={`w-full rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm px-4 py-3.5 text-[14px] sm:text-[15px] font-semibold text-white placeholder:text-white/45 focus:outline-none focus:border-[#F5C842] focus:bg-white/15 transition-all duration-200
+              ${status === "ok" ? "!border-emerald-400 !bg-emerald-500/10" : ""}
+              ${status === "out" ? "!border-amber-400 !bg-amber-500/10" : ""}
+              ${status === "error" ? "!border-red-400 !bg-red-500/10" : ""}`}
+          />
+          {status === "loading" && (
+            <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-white/60 animate-spin" />
+          )}
+          {status === "ok" && (
+            <Check className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-emerald-400" strokeWidth={3} />
+          )}
         </div>
+      </div>
 
-        {status === "needs-captcha" && (
-          <div className="flex flex-col gap-2">
-            <p className="text-[13px] text-amber-300 font-semibold">
-              Please confirm you're not a robot to continue.
-            </p>
-            <Recaptcha ref={captchaRef} onVerify={setCaptchaToken} />
-          </div>
-        )}
-      </form>
-
-      {showBanner && result && (
+      {showBanner && (
         <div
           className={`mt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 rounded-2xl px-5 py-4 border animate-in fade-in slide-in-from-bottom-2 duration-300 ${
-            result.served
+            served
               ? "border-emerald-400/40 bg-emerald-500/10"
               : "border-amber-400/40 bg-amber-500/10"
           }`}
@@ -349,22 +275,22 @@ function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null
           <div className="flex items-start gap-3 flex-1 min-w-0">
             <div
               className={`flex items-center justify-center size-9 rounded-xl shrink-0 font-black ${
-                result.served ? "text-white bg-emerald-500" : "text-[#1E3A6E]"
+                served ? "text-white bg-emerald-500" : "text-[#1E3A6E]"
               }`}
-              style={!result.served ? { background: "linear-gradient(135deg,#F5C842,#e6b228)" } : undefined}
+              style={!served ? { background: "linear-gradient(135deg,#F5C842,#e6b228)" } : undefined}
             >
-              {result.served ? <Check className="size-5" strokeWidth={3} /> : "!"}
+              {served ? <Check className="size-5" strokeWidth={3} /> : "!"}
             </div>
             <div className="text-white/90 text-[14px] leading-relaxed min-w-0">
-              <p className="font-bold text-white truncate">{result.location.label}</p>
+              <p className="font-bold text-white truncate">{location!.label}</p>
               <p className="text-white/75 mt-0.5">
-                {result.served
+                {served
                   ? "Great news, we serve your area! Same-day service available."
                   : "Sorry, we don't currently serve this area."}
               </p>
             </div>
           </div>
-          {result.served ? (
+          {served ? (
             <a
               href="tel:+12067726077"
               className="shrink-0 inline-flex items-center justify-center gap-2 bg-white text-[#1E3A6E] font-bold text-[13px] px-4 py-2.5 rounded-xl hover:bg-[#F5C842] transition-colors duration-150"
@@ -374,7 +300,7 @@ function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null
           ) : (
             <button
               type="button"
-              onClick={reset}
+              onClick={() => setZip("")}
               className="shrink-0 inline-flex items-center justify-center gap-2 bg-[#F5C842] text-[#1E3A6E] font-bold text-[13px] px-4 py-2.5 rounded-xl hover:bg-[#eec136] transition-colors duration-150"
             >
               Try Another ZIP
