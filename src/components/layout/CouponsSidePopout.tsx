@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
-import { Tag } from "lucide-react";
+import { Tag, X } from "lucide-react";
 import { CouponCard } from "@/components/sections/CouponCard";
 import { COUPONS } from "@/data/coupons";
 import { isCommercialPath } from "@/lib/page-type";
@@ -134,13 +134,28 @@ export function CouponsSidePopout() {
 
       {/* Panel, sits to the RIGHT of the tab, pinned to viewport right edge */}
       <div
-        className="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-4"
+        className="relative bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] p-4 pt-11 lg:pt-4"
         style={{
           width: PANEL_WIDTH,
           pointerEvents: childPointerEvents,
           ["--coupon-notch-bg" as string]: "#ffffff",
         }}
       >
+        {/* Mobile-only close affordance. Touch devices never fire a hover-out,
+            so without a visible control the drawer looks stuck open. Desktop
+            still closes on mouse-leave and doesn't need this. */}
+        {open && (
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close coupons"
+            className="lg:hidden absolute right-2 top-2 z-10 inline-flex size-8 items-center justify-center
+                       bg-[#1E3A6E] text-white shadow-md transition-transform active:scale-95"
+          >
+            <X className="size-4" aria-hidden="true" />
+          </button>
+        )}
+
         <div className="flex flex-col gap-3">
           {COUPONS.map((c) => (
             <Link

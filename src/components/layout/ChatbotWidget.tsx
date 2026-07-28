@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { X, Send, Phone, MapPin } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
+import { sendLeadEmail } from "@/lib/lead-email.functions";
+import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * All Phase Chatbot Widget with Conversational Flow
@@ -28,6 +30,51 @@ type UserData = {
 };
 
 const QUICK_REPLIES = ["Book a service", "Emergency help", "Get a quote", "Hours & areas"];
+
+/**
+ * Deliver a completed chatbot booking to the shop team through the same
+ * Resend-backed server function the site forms use, so chat leads are no longer
+ * silently dropped. Fire-and-forget: a send failure is logged but never
+ * interrupts the conversation (mirrors the forms' "never block the user" rule).
+ *
+ * In-area bookings also report GA4 `form_submit` + the Google Ads lead
+ * conversion, exactly like the forms, so chat leads are attributed to the
+ * campaign. Out-of-area leads (ZIP outside the service area) are still emailed
+ * so the team can honor the bot's "we'll reach out" promise, but are NOT
+ * counted as a conversion.
+ */
+async function submitChatbotLead(
+  data: UserData,
+  { outOfArea = false }: { outOfArea?: boolean } = {},
+): Promise<void> {
+  const source = outOfArea ? "Chatbot Booking (Out of Area)" : "Chatbot Booking";
+
+  if (!outOfArea) {
+    trackFormSubmit({
+      form_location: source,
+      form_type: "chatbot_booking",
+      page_path: typeof window !== "undefined" ? window.location.pathname : "",
+    });
+  }
+
+  try {
+    const result = await sendLeadEmail({
+      data: {
+        source,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        zip: data.zip,
+        service: data.type,
+      },
+    });
+    if (result.success && !outOfArea) {
+      trackAdsLeadConversion();
+    }
+  } catch (err) {
+    console.error("Chatbot lead failed to send:", err);
+  }
+}
 
 /* Circular avatar: accent-yellow message bubble on the brand navy, with a
    brand-gradient ring so it separates from both the navy header and the
@@ -183,6 +230,11 @@ export function ChatbotWidget() {
         // 98xxx is Washington State. Just an example validation for our service areas.
         if (!/^98\d{3}$/.test(trimmed)) {
            setFlowState("ASK_RESTART");
+           // Still a real lead — name/phone/email were already captured, so email
+           // the team (flagged out-of-area, not counted as a conversion) to honor
+           // the "we'll reach out" promise. userData lacks the just-typed zip
+           // (setUserData is async), so pass it explicitly.
+           void submitChatbotLead({ ...userData, zip: trimmed }, { outOfArea: true });
            addBotMsg(
              <div className="flex flex-col gap-2">
                <p>We are not serving there currently but we will reach you out for solution.</p>
@@ -199,8 +251,8 @@ export function ChatbotWidget() {
         const newData = { ...userData, type: trimmed };
         setUserData(newData);
         setFlowState("ASK_RESTART");
-        // Simulated storing data
-        console.log("Chatbot stored booking data:", newData);
+        // Deliver the completed booking to the shop team (Resend email + analytics).
+        void submitChatbotLead(newData);
         addBotMsg(
           <div className="flex flex-col gap-2">
             <p>Thank you! We've received your request for {newData.type}. Our team will contact you shortly at {newData.phone} or {newData.email} to confirm your appointment.</p>
