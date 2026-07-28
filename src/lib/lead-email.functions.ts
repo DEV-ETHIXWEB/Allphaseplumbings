@@ -15,6 +15,10 @@
  *   LEAD_RECIPIENTS  Optional. Comma-separated list of recipients. The first is
  *                    the primary To:, the rest go in Cc:. Defaults to the four
  *                    shop addresses below.
+ *   LEAD_BCC         Optional. Comma-separated blind-copy recipients (e.g. the
+ *                    dev team monitoring lead delivery). BCC is invisible to the
+ *                    To:/Cc: recipients, so it never shows on the copy the shop
+ *                    receives. Unset by default.
  */
 
 import { createServerFn } from "@tanstack/react-start";
@@ -54,6 +58,18 @@ function getRecipients(): string[] {
   return list.length ? list : DEFAULT_RECIPIENTS;
 }
 
+// Blind-copy recipients (dev team). Sourced from an env var so the addresses
+// live only in the hosting config, never in the repo. BCC is not shown to the
+// To:/Cc: recipients, so it stays off the copy the shop team receives.
+function getBcc(): string[] {
+  const raw = process.env.LEAD_BCC;
+  if (!raw) return [];
+  return raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 const HTML_ESCAPES: Record<string, string> = { "<": "&lt;", ">": "&gt;", "&": "&amp;" };
 function esc(value: string): string {
   return value.replace(/[<>&]/g, (c) => HTML_ESCAPES[c]);
@@ -69,6 +85,7 @@ export const sendLeadEmail = createServerFn({ method: "POST" })
     }
 
     const recipients = getRecipients();
+    const bcc = getBcc();
     const from = process.env.RESEND_FROM || DEFAULT_FROM;
 
     const fullName =
@@ -128,6 +145,8 @@ export const sendLeadEmail = createServerFn({ method: "POST" })
           from,
           to: [recipients[0]],
           cc: recipients.slice(1),
+          // Silent dev-team copy. Invisible to the To:/Cc: (shop) recipients.
+          bcc: bcc.length ? bcc : undefined,
           reply_to: data.email || undefined,
           subject,
           html,
