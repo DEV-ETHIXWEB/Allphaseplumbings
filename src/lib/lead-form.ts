@@ -22,7 +22,7 @@
  */
 
 import { sendLeadEmail, type LeadPayload } from "@/lib/lead-email.functions";
-import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
+import { trackFormSubmit, trackAdsLeadConversion, trackMetaLead } from "@/lib/analytics";
 
 export async function submitLeadFromForm(
   form: HTMLFormElement,
@@ -64,11 +64,13 @@ export async function submitLeadFromForm(
 
   try {
     const result = await sendLeadEmail({ data: payload });
-    // Google Ads conversion — strictly after API success: only when the server
-    // function confirms the lead was delivered. Validation failures never reach
-    // this helper, and a failed/unconfigured send records no conversion.
+    // Google Ads + Meta Pixel conversions — strictly after API success: only
+    // when the server function confirms the lead was delivered. Validation
+    // failures never reach this helper, and a failed/unconfigured send records
+    // no conversion on either platform.
     if (result.success) {
       trackAdsLeadConversion();
+      trackMetaLead();
     }
   } catch (err) {
     console.error("Lead email failed to send:", err);

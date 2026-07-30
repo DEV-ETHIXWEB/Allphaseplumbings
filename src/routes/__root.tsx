@@ -11,7 +11,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { isLandingPath, getPageType } from "@/lib/page-type";
-import { trackPageView, trackPhoneClick, trackCtaClick } from "@/lib/analytics";
+import { trackPageView, trackPhoneClick, trackCtaClick, trackMetaPageView } from "@/lib/analytics";
 
 /* Floating overlay widgets are code-split and mounted after the page is loaded
    and idle: none of them are part of the first paint, and keeping them out of
@@ -171,6 +171,25 @@ const ADS_GTAG_INIT =
   "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}" +
   `gtag('js',new Date());gtag('config','${ADS_ID}');`;
 
+/* ── Meta Pixel (1931193014119752) ───────────────────────────────────────────
+   The client's pre-existing pixel — reused as-is (never swap for a new ID) so
+   its historical event history and ad audiences stay attached. Runs entirely
+   outside GTM: base code + initial PageView load inline here, same
+   script-injection pattern as gtag.js above. fbq has no built-in SPA-navigation
+   trigger (unlike GTM's own history-change trigger), so route-change PageViews
+   are fired explicitly from RootComponent's existing SPA navigation effect via
+   analytics.trackMetaPageView. Lead fires from src/lib/lead-form.ts, gated on
+   the identical "server confirmed success" condition as the Google Ads
+   conversion — see analytics.trackMetaLead. */
+const META_PIXEL_ID = "1931193014119752";
+const META_PIXEL_INIT =
+  "!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?" +
+  "n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;" +
+  "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;" +
+  "t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}" +
+  "(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');" +
+  `fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`;
+
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -185,6 +204,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
             SPA navigations. */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: ADS_GTAG_INIT }} />
+        {/* Meta Pixel — base code + initial PageView. Loaded once here, so it
+            can never duplicate on SPA navigations (route-change PageViews are
+            fired separately, see RootComponent below). */}
+        <script dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT }} />
         {/* Non-render-blocking webfont load: inject a print-media stylesheet and
             flip it to "all" once it has downloaded (text shows immediately in a
             fallback font via display=swap, then upgrades). */}
@@ -208,6 +231,17 @@ function RootShell({ children }: { children: React.ReactNode }) {
             width="0"
             style={{ display: "none", visibility: "hidden" }}
             title="Google Tag Manager"
+          />
+        </noscript>
+        {/* Meta Pixel (noscript fallback) — required alongside the script
+            bootstrap above so the pixel still fires with JS disabled. */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
           />
         </noscript>
         {children}
@@ -325,6 +359,7 @@ function RootComponent() {
     if (lastTrackedPath.current !== path) {
       lastTrackedPath.current = path;
       trackPageView({ page_type: getPageType(path), page_path: path });
+      trackMetaPageView();
     }
   }, [location.pathname]);
 

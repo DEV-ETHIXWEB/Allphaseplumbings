@@ -21,6 +21,17 @@
  * global gtag() command queue (trackAdsLeadConversion below). gtag pushes
  * Arguments objects onto the shared dataLayer, which GTM triggers ignore — the
  * two stacks coexist without seeing each other's events.
+ *
+ * Meta Pixel (1931193014119752) is the client's pre-existing pixel — same ID
+ * their Meta Ads/Events Manager already has history and audiences attached to,
+ * so it is never to be swapped for a new one. It also does NOT go through GTM:
+ * base code + the initial PageView load inline in __root.tsx (same pattern as
+ * gtag.js), route-change PageViews are fired from RootComponent's existing SPA
+ * navigation effect (fbq has no built-in history-change trigger the way GTM
+ * does), and Lead fires below using the exact same "server confirmed success"
+ * gate as trackAdsLeadConversion, so Meta and Google Ads always agree on what
+ * counts as a lead. No server-side Conversions API exists in this codebase —
+ * browser-side fbq is the only Meta integration.
  */
 
 type DataLayerObject = Record<string, unknown>;
@@ -30,6 +41,8 @@ declare global {
     dataLayer?: DataLayerObject[];
     /** Defined by the inline gtag.js bootstrap in __root.tsx. */
     gtag?: (...args: unknown[]) => void;
+    /** Defined by the inline Meta Pixel bootstrap in __root.tsx. */
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -97,4 +110,28 @@ const ADS_LEAD_CONVERSION_LABEL = "AW-10953093685/5A30CPTwj9YDELXk6-Yo";
 export function trackAdsLeadConversion(): void {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", "conversion", { send_to: ADS_LEAD_CONVERSION_LABEL });
+}
+
+/**
+ * Meta Pixel SPA-navigation PageView. The inline bootstrap in __root.tsx
+ * already fires the first PageView; this covers client-side route changes,
+ * called from the same effect (and skipped on the same first run) as
+ * trackPageView. No-op during SSR or if the pixel bootstrap didn't run (e.g.
+ * blocked script).
+ */
+export function trackMetaPageView(): void {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+  window.fbq("track", "PageView");
+}
+
+/**
+ * Meta Pixel lead event. Called from lead-form.ts only under the identical
+ * condition as trackAdsLeadConversion — after the lead has actually reached
+ * the server and the server function reported success — never on click, page
+ * load, or a failed submit. No-op during SSR or if the pixel bootstrap didn't
+ * run.
+ */
+export function trackMetaLead(): void {
+  if (typeof window === "undefined" || typeof window.fbq !== "function") return;
+  window.fbq("track", "Lead");
 }
