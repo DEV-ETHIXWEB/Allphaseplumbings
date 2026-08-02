@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { X, Send, Phone, MapPin } from "lucide-react";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { sendLeadEmail } from "@/lib/lead-email.functions";
 import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
 
@@ -109,6 +109,7 @@ function MascotAvatar({ size = 44, ring = true }: { size?: number; ring?: boolea
 
 export function ChatbotWidget() {
   const opts = useSiteOptions();
+  const trackedPhone = useTrackedPhone();
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
 
@@ -337,7 +338,7 @@ export function ChatbotWidget() {
           <p>This is an emergency! We are available 24/7.</p>
           <p>Tap below to call us immediately, and we'll dispatch a technician.</p>
           <a
-            href={opts.phone_href}
+            href={trackedPhone.phone_href}
             onClick={() => {
               // Trigger email logic for emergency
               window.location.href = `mailto:${opts.email}?subject=EMERGENCY PLUMBING HELP&body=I need immediate plumbing help!`;
@@ -472,7 +473,7 @@ export function ChatbotWidget() {
             }}
           >
             <a
-              href={opts.phone_href}
+              href={trackedPhone.phone_href}
               aria-label="Call us"
               className="inline-flex size-11 shrink-0 items-center justify-center bg-[#F5C842] text-[#1E3A6E] transition-transform duration-200 hover:scale-110 active:scale-95"
             >

@@ -13,6 +13,10 @@ import {
   Type,
   X,
 } from "lucide-react";
+import { isGoogleAdsPath } from "@/lib/page-type";
+
+const GOOGLE_ADS_PHONE = "(206) 309-1088";
+const GOOGLE_ADS_PHONE_HREF = "tel:2063091088";
 
 interface A11ySettings {
   textZoom: 0 | 1 | 2;
@@ -56,6 +60,9 @@ export function AccessibilityWidget() {
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const location = useRouter().state.location;
+  const onGoogleAdsPage = isGoogleAdsPath(location.pathname);
+  const supportPhone = onGoogleAdsPage ? GOOGLE_ADS_PHONE : "(206) 772-6077";
+  const supportPhoneHref = onGoogleAdsPage ? GOOGLE_ADS_PHONE_HREF : "tel:+12067726077";
 
   // Load persisted settings once on mount (client only)
   useEffect(() => {
@@ -222,11 +229,11 @@ export function AccessibilityWidget() {
             <p className="text-[13px] font-medium text-[#1f2937]">
               Trouble using this site?{" "}
               <a
-                href="tel:+12067726077"
+                href={supportPhoneHref}
                 className="inline-flex items-center gap-1 font-bold text-[#1E3A6E] underline underline-offset-2 hover:text-[#2a4a85]"
               >
                 <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-                Call (206) 772-6077
+                Call {supportPhone}
               </a>
             </p>
           </div>

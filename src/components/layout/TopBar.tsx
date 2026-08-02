@@ -52,7 +52,13 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-export function TopBar() {
+export function TopBar({
+  phone = "(206) 772-6077",
+  phoneHref = "tel:+12067726077",
+}: {
+  phone?: string;
+  phoneHref?: string;
+} = {}) {
   const [nearMeOpen, setNearMeOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
 
@@ -127,10 +133,10 @@ export function TopBar() {
                   Same-day dispatch across King &amp; Pierce counties
                 </span>
                 <a
-                  href="tel:+12067726077"
+                  href={phoneHref}
                   className="text-xs font-extrabold text-[#F5C842] hover:text-[#d4a835] transition-colors uppercase tracking-wider"
                 >
-                  Call (206) 772-6077 ✆
+                  Call {phone} ✆
                 </a>
               </div>
             </div>
