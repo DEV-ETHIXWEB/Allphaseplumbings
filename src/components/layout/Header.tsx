@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, Phone, ChevronDown, CalendarCheck } from "lucide-react";
 import { TopBar } from "./TopBar";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 import { isCommercialPath } from "@/lib/page-type";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 import textLogo from "@/assets/app-text-logo.webp";
@@ -145,7 +145,7 @@ export function Header() {
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -213,7 +213,7 @@ export function Header() {
           shouldShrinkTopBar ? "lg:max-h-0 lg:opacity-0 lg:overflow-hidden" : "lg:max-h-12"
         }`}
       >
-        <TopBar />
+        <TopBar phone={opts.phone} phoneHref={opts.phone_href} />
       </div>
 
       {/* ── Phone-only header: logo (left) · socials (right) ── */}

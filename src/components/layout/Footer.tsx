@@ -4,6 +4,7 @@ import logo from "@/assets/app-logo-white.svg";
 import mascot from "@/assets/better-mascot.webp";
 import { slugify } from "@/data/area-content";
 import { isCommercialPath } from "@/lib/page-type";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 
 const CITIES = [
   "Seattle",
@@ -23,6 +24,7 @@ export function Footer() {
   // Homeowner coupons are a residential-only offer — don't surface them on
   // commercial-facing pages.
   const isCommercial = isCommercialPath(pathname);
+  const { phone, phone_href } = useTrackedPhone();
 
   return (
     <footer className="relative bg-[#1E3A6E] text-white overflow-hidden">
@@ -52,11 +54,11 @@ export function Footer() {
               Lic. #ALLPHPS793PE
             </p>
             <a
-              href="tel:+12067726077"
+              href={phone_href}
               className="inline-flex items-center gap-2 mt-1 bg-[#F5C842] text-[#1E3A6E] font-black text-[14px] px-4 py-2.5 rounded-none hover:bg-[#eec136] transition-colors w-fit"
             >
               <Phone className="size-3.5" strokeWidth={3} />
-              (206) 772-6077
+              {phone}
             </a>
           </div>
 

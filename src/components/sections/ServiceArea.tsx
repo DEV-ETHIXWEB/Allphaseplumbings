@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Check, Loader2, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { slugify } from "@/data/area-content";
 import { useEffect, useRef, useState } from "react";
 import Particles from "@/components/ui/Particles";
@@ -225,7 +225,13 @@ function ServiceMap({ zipLocation }: { zipLocation: ZipLocation | null }) {
    Live debounced lookup (mirrors the contact page): the visitor types a
    ZIP, useZipGeocode resolves it, the map flies to the pin and the banner
    reports whether we serve the area. No button / reCAPTCHA gate. ─────── */
-function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null) => void }) {
+function ZipAvailabilityCheck({
+  onResult,
+  phoneHref,
+}: {
+  onResult: (loc: ZipLocation | null) => void;
+  phoneHref: string;
+}) {
   const [zip, setZip] = useState("");
   const { status, location } = useZipGeocode(zip);
 
@@ -311,7 +317,7 @@ function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null
           </div>
           {served ? (
             <a
-              href="tel:+12067726077"
+              href={phoneHref}
               className="shrink-0 inline-flex items-center justify-center gap-2 bg-white text-[#1E3A6E] font-bold text-[13px] px-4 py-2.5 rounded-xl hover:bg-[#F5C842] transition-colors duration-150"
             >
               <Phone className="size-4" /> Call Now
@@ -340,6 +346,7 @@ function ZipAvailabilityCheck({ onResult }: { onResult: (loc: ZipLocation | null
 export function ServiceArea() {
   const opts = useSiteOptions();
   const cities = opts.service_area_cities;
+  const trackedPhone = useTrackedPhone();
   const [zipLocation, setZipLocation] = useState<ZipLocation | null>(null);
 
   return (
@@ -383,7 +390,7 @@ export function ServiceArea() {
         </div>
 
         {/* ZIP search + availability check */}
-        <ZipAvailabilityCheck onResult={setZipLocation} />
+        <ZipAvailabilityCheck onResult={setZipLocation} phoneHref={trackedPhone.phone_href} />
 
         {/* Two-column layout: map LEFT, city list RIGHT */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -423,7 +430,7 @@ export function ServiceArea() {
               </p>
               <StarBorder
                 as="a"
-                href="tel:+12067726077"
+                href={trackedPhone.phone_href}
                 className="inline-block transition-all"
                 innerClassName="text-base font-bold text-[#1E3A6E]"
                 innerStyle={{

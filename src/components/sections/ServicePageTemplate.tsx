@@ -10,7 +10,7 @@ import {
   CalendarCheck,
   Tag,
 } from "lucide-react";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascotWatermark from "@/assets/mascot watermark.svg";
@@ -66,7 +66,7 @@ export type ServicePageContent = {
 /* ───── Hero: service photo under an ~80% navy overlay, with breadcrumb,
    keyword-rich H1, a single phone CTA, and three trust chips. ───── */
 function ServicePageHero({ content }: { content: ServicePageContent }) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative overflow-hidden bg-[#1E3A6E] border-b-2 border-white/10">
       {content.heroImage && (
