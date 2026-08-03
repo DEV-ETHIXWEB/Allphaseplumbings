@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, ReactNode } from "react";
-import { X, Send, Phone, MapPin } from "lucide-react";
+import { MessageCircle, X, Send, Phone, MapPin } from "lucide-react";
 import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { sendLeadEmail } from "@/lib/lead-email.functions";
 import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
@@ -76,32 +76,27 @@ async function submitChatbotLead(
   }
 }
 
-/* Circular avatar: accent-yellow message bubble on the brand navy, with a
-   brand-gradient ring so it separates from both the navy header and the
-   light chat background. */
-function MascotAvatar({ size = 44, ring = true }: { size?: number; ring?: boolean }) {
+/* Circular avatar: white speech-bubble icon on the brand-navy disc, with a
+   medium-blue ring so it separates from both the navy header and the light
+   chat background. `ringWidth` thickens the ring for the large launcher
+   size so the brand ring reads clearly at rest, not just up close. */
+function MascotAvatar({ size = 44, ring = true, ringWidth = 2.5 }: { size?: number; ring?: boolean; ringWidth?: number }) {
   return (
     <span
       className="ap-circle relative inline-block shrink-0"
       style={{
         width: size,
         height: size,
-        padding: ring ? 2.5 : 0,
-        background: ring
-          ? "conic-gradient(from 150deg, #4A7BC4, #1E3A6E, #F5C842, #4A7BC4)"
-          : "transparent",
+        padding: ring ? ringWidth : 0,
+        background: ring ? "#6B9FE4" : "transparent",
       }}
     >
       <span
-        className="ap-circle block h-full w-full overflow-hidden"
+        className="ap-circle flex h-full w-full items-center justify-center overflow-hidden"
         style={{ background: "linear-gradient(135deg,#0f2246 0%,#1E3A6E 55%,#2d5fa8 100%)" }}
         aria-hidden="true"
       >
-        <svg viewBox="0 0 40 40" className="block h-full w-full" fill="#F5C842">
-          {/* speech-bubble body + tail (same fill, so they merge into one shape) */}
-          <ellipse cx="20" cy="18.5" rx="13.5" ry="10.5" />
-          <path d="M13.5 25.5 L13.5 33.8 L20 27.2 Z" />
-        </svg>
+        <MessageCircle className="h-[55%] w-[55%] text-white" strokeWidth={2} />
       </span>
     </span>
   );
@@ -385,7 +380,7 @@ export function ChatbotWidget() {
         <div
           role="dialog"
           aria-label="All Phase chat assistant"
-          className={`ap-chat-panel ${closing ? "ap-chat-out" : "ap-chat-in"}
+          className={`ap-chat-panel ap-chat-radius ${closing ? "ap-chat-out" : "ap-chat-in"}
                      mb-3 flex h-[min(680px,calc(100dvh-120px))] w-[min(440px,calc(100vw-2rem))] flex-col
                      overflow-hidden border border-black/10 bg-white
                      shadow-[0_24px_60px_-12px_rgba(15,34,70,0.5)]`}
@@ -399,7 +394,10 @@ export function ChatbotWidget() {
             <div className="min-w-0 flex-1">
               <p className="text-[17px] font-bold leading-tight">All Phase Assistant</p>
               <p className="flex items-center gap-1.5 text-[13px] text-white/80">
-                <span className="ap-circle inline-block size-2 bg-[#4ade80]" />
+                <span className="relative flex size-2">
+                  <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
+                  <span className="ap-circle relative inline-flex size-2 bg-[#4ade80]" />
+                </span>
                 Online · replies instantly
               </p>
             </div>
@@ -407,7 +405,7 @@ export function ChatbotWidget() {
               type="button"
               onClick={closeChat}
               aria-label="Close chat"
-              className="inline-flex size-9 items-center justify-center text-white/80 transition-colors hover:bg-white/15 hover:text-white"
+              className="ap-icon-btn inline-flex size-9 items-center justify-center text-white/80 transition-colors duration-200 hover:bg-white/15 hover:text-white active:scale-90"
             >
               <X className="size-6" />
             </button>
@@ -497,20 +495,20 @@ export function ChatbotWidget() {
         </div>
       )}
 
-      {/* ── "Yes I'm looking" Circular pop up bubble ── */}
+      {/* ── "Need plumbing help?" speech bubble ── */}
       {!open && !hintGone && (
         <div
-          className={`mb-3 mr-1 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+          className={`ap-hint-wrap mb-3 mr-1 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
             hintShown ? "scale-100 opacity-100 translate-y-0" : "pointer-events-none scale-90 opacity-0 translate-y-2"
           }`}
         >
           <button
             onClick={openChat}
-            className="ap-circle-bubble relative bg-white px-5 py-3 text-[14px] font-bold text-[#1E3A6E] shadow-[0_12px_30px_-8px_rgba(15,34,70,0.5)] transition-transform hover:scale-105 active:scale-95"
+            className="ap-circle-bubble ap-hint-bubble relative bg-white px-5 py-3 text-[14px] font-bold text-[#1E3A6E] shadow-[0_12px_30px_-8px_rgba(15,34,70,0.45)] ring-1 ring-black/5 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-8px_rgba(15,34,70,0.55)] active:scale-95"
           >
             Need plumbing help?
             {/* tail pointing down toward the launcher */}
-            <span className="absolute -bottom-1 right-7 size-3 rotate-45 bg-white" />
+            <span className="absolute -bottom-1 right-7 size-3 rotate-45 bg-white ring-1 ring-black/5" />
           </button>
         </div>
       )}
@@ -521,32 +519,40 @@ export function ChatbotWidget() {
         onClick={() => (open ? closeChat() : openChat())}
         aria-label={open ? "Close chat" : "Open chat"}
         aria-expanded={open}
-        className="group relative flex items-center justify-center transition-transform duration-200 hover:scale-105 active:scale-95"
+        className="ap-launcher group relative flex items-center justify-center transition-transform duration-200 hover:-translate-y-1 active:translate-y-0 active:scale-95"
       >
-        {open ? (
+        <span className="ap-launcher-glow" aria-hidden="true" />
+        <span className="relative grid place-items-center">
           <span
-            className="ap-circle flex size-[58px] sm:size-[84px] items-center justify-center text-white shadow-[0_10px_28px_-6px_rgba(15,34,70,0.6)] transition-transform duration-200"
-            style={{ background: "linear-gradient(135deg,#0f2246,#2d5fa8)" }}
+            className={`ap-icon-swap ${open ? "" : "ap-icon-swap-out"} absolute inset-0 grid place-items-center`}
           >
-            <X className="size-6 sm:size-8" />
+            <span
+              className="ap-circle flex size-[58px] sm:size-[84px] items-center justify-center text-white"
+              style={{ background: "linear-gradient(135deg,#0f2246,#2d5fa8)" }}
+            >
+              <X className="size-6 sm:size-8" />
+            </span>
           </span>
-        ) : (
-          <span className="relative">
+          <span className={`ap-icon-swap ${open ? "ap-icon-swap-out" : ""}`}>
             {/* Smaller launcher on phones so it doesn't dominate the screen;
-                full size from sm up. */}
-            <span className="inline-block sm:hidden">
-              <MascotAvatar size={58} />
+                full size from sm up. Thicker gradient ring (ringWidth) so the
+                brand halo reads clearly at rest, not just up close. */}
+            <span className="relative inline-block sm:hidden">
+              <MascotAvatar size={58} ringWidth={4} />
+              <span className="absolute right-0 top-0 flex size-4">
+                <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
+                <span className="ap-circle relative inline-flex size-4 border-2 border-white bg-[#4ade80]" />
+              </span>
             </span>
-            <span className="hidden sm:inline-block">
-              <MascotAvatar size={84} />
-            </span>
-            {/* online pulse dot */}
-            <span className="absolute right-0.5 top-0.5 sm:right-1 sm:top-1 flex size-3.5 sm:size-4">
-              <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
-              <span className="ap-circle relative inline-flex size-3.5 sm:size-4 border-2 border-white bg-[#4ade80]" />
+            <span className="relative hidden sm:inline-block">
+              <MascotAvatar size={84} ringWidth={5} />
+              <span className="absolute right-0.5 top-0.5 flex size-[18px]">
+                <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
+                <span className="ap-circle relative inline-flex size-[18px] border-2 border-white bg-[#4ade80]" />
+              </span>
             </span>
           </span>
-        )}
+        </span>
       </button>
 
       <style>{`
@@ -554,6 +560,8 @@ export function ChatbotWidget() {
            !important). Re-enable rounded/circular shapes ONLY for specific elements. */
         .ap-chatbot-root .ap-circle { border-radius: 50% !important; }
         .ap-chatbot-root .ap-circle-bubble { border-radius: 9999px !important; }
+        .ap-chatbot-root .ap-chat-radius { border-radius: 22px !important; }
+        .ap-chatbot-root .ap-icon-btn { border-radius: 9999px !important; }
 
         .ap-chat-panel { transform-origin: bottom right; will-change: transform, opacity; }
         .ap-chat-in { animation: apChatPop 0.34s cubic-bezier(0.34, 1.4, 0.64, 1) both; }
@@ -575,8 +583,64 @@ export function ChatbotWidget() {
           0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
           30% { transform: translateY(-4px); opacity: 1; }
         }
+
+        /* Launcher glow ring: soft brand-navy/gold halo behind the button,
+           on at rest (not just hover) so the launcher reads as a premium
+           "always on" affordance even in a static screenshot, with a slow
+           breathing pulse and a brighter flare on hover/focus. */
+        .ap-launcher-glow {
+          position: absolute;
+          inset: -14px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(107,159,228,0.6) 0%, rgba(30,58,110,0.28) 55%, transparent 72%);
+          filter: blur(10px);
+          opacity: 0.85;
+          animation: apGlowPulse 3.6s ease-in-out infinite;
+          transition: opacity 0.25s ease, filter 0.25s ease;
+          pointer-events: none;
+        }
+        .ap-launcher:hover .ap-launcher-glow,
+        .ap-launcher:focus-visible .ap-launcher-glow {
+          opacity: 1;
+          filter: blur(12px);
+        }
+        @keyframes apGlowPulse {
+          0%, 100% { opacity: 0.7; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.08); }
+        }
+        .ap-launcher > span.relative {
+          filter: drop-shadow(0 16px 30px rgba(15,34,70,0.55)) drop-shadow(0 4px 10px rgba(107,159,228,0.3));
+          transition: filter 0.2s ease;
+        }
+        .ap-launcher:hover > span.relative {
+          filter: drop-shadow(0 20px 38px rgba(15,34,70,0.65)) drop-shadow(0 6px 14px rgba(107,159,228,0.4));
+        }
         @media (prefers-reduced-motion: reduce) {
-          .ap-chat-in, .ap-chat-out, .ap-msg { animation: none; }
+          .ap-launcher-glow { animation: none; opacity: 0.85; }
+        }
+
+        /* Icon swap: chat bubble <-> close X, rotate/fade through the center
+           instead of an abrupt visibility toggle. */
+        .ap-icon-swap {
+          transition: opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1), transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+        .ap-icon-swap-out {
+          opacity: 0;
+          transform: scale(0.6) rotate(45deg);
+          pointer-events: none;
+        }
+
+        /* Speech bubble: gentle idle float so it reads as alive, not static. */
+        .ap-hint-bubble { animation: apHintFloat 3.2s ease-in-out 0.6s infinite; }
+        @keyframes apHintFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .ap-chat-in, .ap-chat-out, .ap-msg, .ap-hint-bubble, .ap-icon-swap { animation: none; transition: none; }
         }
       `}</style>
     </div>
