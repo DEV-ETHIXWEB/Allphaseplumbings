@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-// Base (rest) icons — the new bold "Group" service icons.
-import group36 from "@/assets/Group 36 (1).svg"; // Plumbing (faucet)
-import group37 from "@/assets/Group 37 (1).svg"; // Water Heaters (tank)
-import group38 from "@/assets/Group 38 (1).svg"; // Sewer (pipe)
-import group39 from "@/assets/Group 39 (1).svg"; // Drain Cleaning (drum)
+// Base (rest) icons — the flat service icons.
+import plumbingIcon from "@/assets/svc-plumbing-repair.svg"; // Plumbing (faucet)
+import drainIcon from "@/assets/svc-drain-cleaning.svg"; // Drain Cleaning (drain cover)
+import waterHeaterIcon from "@/assets/svc-water-heaters.svg"; // Water Heaters (tank)
+import sewerIcon from "@/assets/svc-sewer-service.svg"; // Sewer (pipe)
 // Hover icons — the lighter shade revealed on hover.
-import wwd1Dark from "@/assets/wwd-1-dark.svg";
-import wwd2Dark from "@/assets/wwd-2-dark.svg";
-import wwd3Dark from "@/assets/wwd-3-dark.svg";
-import wwd4Dark from "@/assets/wwd-4-dark.svg";
+import plumbingIconHover from "@/assets/svc-plumbing-repair-hover.svg";
+import drainIconHover from "@/assets/svc-drain-cleaning-hover.svg";
+import waterHeaterIconHover from "@/assets/svc-water-heaters-hover.svg";
+import sewerIconHover from "@/assets/svc-sewer-service-hover.svg";
 
 export const SERVICES = [
   {
@@ -17,33 +17,32 @@ export const SERVICES = [
     description:
       "From leaky faucets to burst pipes, we fix it right the first time with upfront pricing and no hidden fees.",
     href: "/services/plumbing" as const,
-    iconBase: group36,
-    iconHover: wwd1Dark,
+    iconBase: plumbingIcon,
+    iconHover: plumbingIconHover,
   },
   {
     title: "Drain Cleaning",
     description:
       "Slow or fully blocked drains cleared fast. We tackle kitchen, bathroom, and main sewer line clogs.",
     href: "/services/drain-cleaning" as const,
-    iconBase: group39,
-    iconHover: wwd4Dark,
+    iconBase: drainIcon,
+    iconHover: drainIconHover,
   },
   {
     title: "Water Heaters",
     description:
       "Tank and tankless installation, repair, and replacement. Hot water when you need it, guaranteed.",
     href: "/services/water-heaters" as const,
-    iconBase: group37,
-    iconHover: wwd2Dark,
+    iconBase: waterHeaterIcon,
+    iconHover: waterHeaterIconHover,
   },
   {
     title: "Sewer Service",
     description:
       "Camera inspections, hydro-jetting, and sewer line repair to keep everything flowing smoothly.",
     href: "/services/sewer-services" as const,
-    iconBase: group38,
-    iconHover: wwd3Dark,
-    iconScale: 0.95,
+    iconBase: sewerIcon,
+    iconHover: sewerIconHover,
   },
 ] as const;
 
@@ -67,7 +66,6 @@ export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain
                        opacity-100 group-hover:opacity-0 transition-opacity duration-150 ease-out"
-            style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
             width={150}
             height={150}
             loading="lazy"
@@ -79,7 +77,6 @@ export function ServiceCard({ svc }: { svc: (typeof SERVICES)[number] }) {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain
                        opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-out"
-            style={"iconScale" in svc ? { transform: `scale(${svc.iconScale})` } : undefined}
             width={150}
             height={150}
             loading="lazy"
