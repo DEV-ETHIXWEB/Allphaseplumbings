@@ -536,6 +536,10 @@ html.a11y-big-cursor * {
 .reveal-on-scroll.reveal-in {
   opacity: 1;
   transform: translateY(0);
+  /* Release the compositor layer once the entrance animation is done —
+     a permanent will-change keeps a texture alive per element for the whole
+     session, which Lighthouse counts against main-thread/memory. */
+  will-change: auto;
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll {
