@@ -17,7 +17,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { resolveIcon } from "@/lib/icon-map";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
+import { TrackedPhoneText } from "@/components/ui/TrackedPhoneText";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { CityHighlightMap } from "@/components/sections/CityHighlightMap";
 import { SERVICES, ServiceCard } from "@/components/sections/Services";
@@ -36,7 +37,7 @@ const GOLD_GRADIENT = "linear-gradient(135deg, #F5C842 0%, #d4a82e 100%)";
    so the white copy stays readable. The image is the intended LCP element,
    so it loads eagerly at high priority. */
 function Hero({ area }: { area: AreaContent }) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative overflow-hidden bg-[#1E3A6E]">
       {/* City skyline background */}
@@ -468,7 +469,7 @@ function Testimonials({ area }: { area: AreaContent }) {
 
 /* ───────────────────────── 7. EMERGENCY CTA BANNER ───────────────────────── */
 function EmergencyBanner({ area }: { area: AreaContent }) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative overflow-hidden bg-[#1E3A6E]">
       {/* Particle backdrop */}
@@ -554,7 +555,9 @@ function FAQ({ area }: { area: AreaContent }) {
                   style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
+                    <div className="px-5 pb-5 text-[15px] text-gray-700 leading-relaxed">
+                      <TrackedPhoneText text={f.a} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -576,6 +579,7 @@ const HERO_INPUT_CLS =
 
 function Contact({ area }: { area: AreaContent }) {
   const opts = useSiteOptions();
+  const trackedPhone = useTrackedPhone();
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [sent, setSent] = useState(false);
@@ -609,7 +613,7 @@ function Contact({ area }: { area: AreaContent }) {
             </p>
 
             <a
-              href={opts.phone_href}
+              href={trackedPhone.phone_href}
               className="mt-6 inline-flex items-center gap-3 text-[#1E3A6E] hover:text-[#4A7BC4] transition-colors"
             >
               <span className="inline-flex items-center justify-center size-12 bg-[#1E3A6E] text-[#F5C842]">
@@ -619,7 +623,7 @@ function Contact({ area }: { area: AreaContent }) {
                 <span className="block text-[13px] font-semibold uppercase tracking-wide text-gray-500">
                   Call Us
                 </span>
-                <span className="block text-[24px] font-black">{opts.phone}</span>
+                <span className="block text-[24px] font-black">{trackedPhone.phone}</span>
               </span>
             </a>
 

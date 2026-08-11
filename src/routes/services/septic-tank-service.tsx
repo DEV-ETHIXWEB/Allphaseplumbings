@@ -143,7 +143,7 @@ export const Route = createFileRoute("/services/septic-tank-service")({
       {
         name: "description",
         content:
-          "Expert septic tank pumping, inspection, and maintenance. Protect your property from backups and failures. Call (206) 772-6077.",
+          "Expert septic tank pumping, inspection, and maintenance. Protect your property from backups and failures. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Septic Tank Service | All Phase Plumbing" },
       {

@@ -10,13 +10,13 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { CTABanner } from "@/components/sections/CTABanner";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 import type { ServiceLandingContent } from "@/data/service-landing";
 
 /* ── The single "about this service" intro section, in the home design
    language (navy headings, gold accent, Poppins). ── */
 function ServiceIntro({ content }: { content: ServiceLandingContent }) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative bg-white py-16 sm:py-20 overflow-hidden">
       {/* subtle dot-grid backdrop, same as the About intro */}

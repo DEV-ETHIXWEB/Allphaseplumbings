@@ -109,7 +109,7 @@ export const Route = createFileRoute("/services/toilets")({
       {
         name: "description",
         content:
-          "Expert Seattle toilet repair, replacement, and installation. Licensed plumbers, fast service, upfront pricing. Call (206) 772-6077.",
+          "Expert Seattle toilet repair, replacement, and installation. Licensed plumbers, fast service, upfront pricing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Toilets | All Phase Plumbing" },
       {

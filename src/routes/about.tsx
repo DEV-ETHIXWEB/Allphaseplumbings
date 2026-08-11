@@ -7,7 +7,7 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { Badges } from "@/components/sections/Badges";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { StarBorder } from "@/components/ui/StarBorder";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { Play, Phone, ShieldCheck, Clock, Award, Wrench } from "lucide-react";
 import skylineBg from "@/assets/seattle-skyline.webp";
 import teamImg from "@/assets/team.webp";
@@ -68,6 +68,7 @@ function AboutHero() {
 
 /* ── 2. Core Intro Section ("We Protect Your Home") ── */
 function AboutIntro() {
+  const { phone, phone_href } = useTrackedPhone();
   const points = [
     {
       Icon: ShieldCheck,
@@ -151,7 +152,7 @@ function AboutIntro() {
             {/* Stylish CALL US strip */}
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
               <a
-                href="tel:+12067726077"
+                href={phone_href}
                 className="group relative inline-flex items-center gap-3 overflow-hidden
                            rounded-xl px-7 py-4 text-white font-extrabold tracking-wide
                            shadow-[0_10px_25px_-8px_rgba(30,58,110,0.55)]
@@ -172,7 +173,7 @@ function AboutIntro() {
                   <span className="text-[10px] uppercase tracking-[0.22em] opacity-80">
                     Call us 24/7
                   </span>
-                  <span className="text-[19px] font-black">(206) 772-6077</span>
+                  <span className="text-[19px] font-black">{phone}</span>
                 </span>
               </a>
 

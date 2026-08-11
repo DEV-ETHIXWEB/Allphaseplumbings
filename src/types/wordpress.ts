@@ -94,8 +94,8 @@ export interface WPWhyUsReason {
 
 export interface WPSiteOptions {
   // Contact
-  phone?: string; // "(206) 772-6077"
-  phone_href?: string; // "tel:+12067726077"
+  phone?: string; // "(206) 309-1088"
+  phone_href?: string; // "tel:+12063091088"
   email?: string;
   address_line1?: string;
   address_city?: string;

@@ -29,7 +29,7 @@ import {
   Layers,
   type LucideIcon,
 } from "lucide-react";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { GOOGLE_REVIEWS } from "@/data/area-content";
 import { GoogleReviewsMarquee } from "@/components/sections/GoogleReviewsMarquee";
 import { CTABanner } from "@/components/sections/CTABanner";
@@ -182,7 +182,7 @@ export const SERVICE_FAQS = [
    Two-column split: copy + CTAs on the left, a real photo of the crew on
    the right. Distinct from the area pages' full-bleed skyline hero. */
 function Hero() {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative overflow-hidden bg-[#1E3A6E]">
       <div
@@ -502,7 +502,7 @@ export function WhyChooseUs() {
 
 /* ───────────────────────── 6. EMERGENCY BANNER ───────────────────────── */
 function EmergencyBanner() {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="relative overflow-hidden bg-[#1E3A6E]">
       <div className="absolute inset-0 z-0" aria-hidden="true">

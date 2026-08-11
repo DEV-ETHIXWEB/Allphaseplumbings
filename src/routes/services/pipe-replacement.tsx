@@ -123,7 +123,7 @@ export const Route = createFileRoute("/services/pipe-replacement")({
       {
         name: "description",
         content:
-          "Expert pipe replacement for corroded, aging, or repeatedly failing pipes. Quality materials, upfront pricing. Call (206) 772-6077.",
+          "Expert pipe replacement for corroded, aging, or repeatedly failing pipes. Quality materials, upfront pricing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Pipe Replacement | All Phase Plumbing" },
       {

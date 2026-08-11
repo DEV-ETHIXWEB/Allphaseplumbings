@@ -19,7 +19,7 @@ function buildSchema(area: AreaContent): string {
     name: "All Phase Plumbing",
     image: `${SITE_URL}/favicon.svg`,
     url: pageUrl,
-    telephone: "+1-206-772-6077",
+    telephone: "+1-206-309-1088",
     email: "info@allphaseplumbing.com",
     priceRange: "$$",
     address: {
@@ -68,11 +68,27 @@ function buildSchema(area: AreaContent): string {
   return JSON.stringify([localBusiness, faqPage]);
 }
 
+/* The site's phone number moved to CallRail tracking sitewide, but FAQ copy
+   in area-content.ts still spells out the old number in plain English. Scrub
+   it once here, before the loader payload gets serialized for hydration, so
+   neither the SSR HTML nor the client-hydration data ever carries the old
+   number — TrackedPhoneText's runtime swap is for page-type-specific
+   numbers, not for retiring a number outright. */
+function sanitizeArea(area: AreaContent): AreaContent {
+  return {
+    ...area,
+    faqs: area.faqs.map((f) => ({
+      ...f,
+      a: f.a.replace(/\(206\)\s*772-6077/g, "(206) 309-1088"),
+    })),
+  };
+}
+
 export const Route = createFileRoute("/areas/$city")({
   loader: ({ params }) => {
     const area = getAreaContent(params.city);
     if (!area) throw notFound();
-    return { area };
+    return { area: sanitizeArea(area) };
   },
   head: ({ loaderData }) => {
     const area = loaderData?.area;

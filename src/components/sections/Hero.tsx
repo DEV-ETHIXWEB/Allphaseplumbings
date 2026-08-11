@@ -3,8 +3,8 @@ import { Home, Building2, Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascot from "@/assets/better-mascot.webp";
-import googleRatingCard from "@/assets/Group 55.png";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import googleRatingCard from "@/assets/google-rating-card.webp";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
@@ -176,7 +176,7 @@ export function Hero({
   subtitle?: string;
   badge?: string;
 } = {}) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [mascotIn, setMascotIn] = useState(false);
@@ -189,6 +189,9 @@ export function Hero({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [showParticles, setShowParticles] = useState(false);
+  /* Phones pay far more per particle (WebGL draw + rAF on a weak GPU), so the
+     count is cut there rather than dropping the effect entirely. */
+  const [particleCount, setParticleCount] = useState(170);
   useEffect(() => {
     if (typeof window === "undefined") return;
     const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
@@ -200,6 +203,7 @@ export function Hero({
         if (window.innerWidth >= 1024) {
           setVideoSrc("/videos/seattle-bg.mp4");
         }
+        setParticleCount(window.innerWidth >= 1024 ? 170 : 60);
         setShowParticles(true);
       });
     if (document.readyState === "complete") {
@@ -238,7 +242,31 @@ export function Hero({
 
   return (
     <section className="relative overflow-hidden bg-[#cdd9e8] min-h-[820px]">
-      {/* ── Video background at 50% opacity ── */}
+      {/* ── Background still ──
+          This image is the LCP element on phones (the video never loads below
+          1024px). It is a real <img> rather than the video's `poster`
+          attribute so it can carry a srcSet: `poster` takes a single URL, which
+          meant phones downloaded the full 1280px still. */}
+      <picture>
+        {/* Explicit media rules rather than srcSet widths: with `sizes="100vw"`
+            a 412px phone at DPR 1.75 still resolves to the 1280px file. These
+            two breakpoints mirror the preload hints in the route head exactly,
+            so the preloaded file is always the one that gets used. */}
+        <source media="(max-width: 1023px)" srcSet="/videos/seattle-bg-poster-800.webp" />
+        <img
+          src="/videos/seattle-bg-poster.webp"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          width={1280}
+          height={720}
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          style={{ opacity: 0.8 }}
+        />
+      </picture>
+
+      {/* ── Video background, desktop only, fades in over the still ── */}
       <video
         ref={videoRef}
         autoPlay
@@ -246,9 +274,8 @@ export function Hero({
         loop
         playsInline
         preload="none"
-        poster="/videos/seattle-bg-poster.webp"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-        style={{ opacity: 0.8 }}
+        style={{ opacity: videoSrc ? 0.8 : 0, transition: "opacity 0.6s ease" }}
         aria-hidden="true"
       >
         {videoSrc && <source src={videoSrc} type="video/mp4" />}
@@ -344,10 +371,11 @@ export function Hero({
                 alt="Google 5.0 star rating — 50+ reviews"
                 className="w-full max-w-[300px] sm:max-w-[340px] h-auto select-none
                            drop-shadow-[0_10px_28px_rgba(15,34,70,0.45)]"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
-                width={800}
-                height={290}
+                fetchPriority="low"
+                width={700}
+                height={250}
               />
             </div>
           </div>
@@ -391,7 +419,7 @@ export function Hero({
             <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
               {showParticles && (
                 <Particles
-                  particleCount={170}
+                  particleCount={particleCount}
                   particleSpread={13}
                   speed={0.45}
                   particleBaseSize={130}

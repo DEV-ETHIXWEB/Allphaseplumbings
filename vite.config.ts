@@ -11,6 +11,15 @@ export default defineConfig({
   server: {
     port: process.env.PORT ? Number(process.env.PORT) : undefined,
   },
+  /* Ship modern syntax rather than down-levelled helpers. Every browser this
+     site supports handles ES2022 natively, and the transpiled equivalents were
+     showing up in Lighthouse's "legacy JavaScript" audit. */
+  build: {
+    target: "es2022",
+  },
+  esbuild: {
+    target: "es2022",
+  },
   plugins: [
     tsconfigPaths(),
     tanstackStart({

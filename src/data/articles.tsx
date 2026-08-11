@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { TrackedPhoneLink } from "@/components/ui/TrackedPhoneText";
 
 export type StaticArticle = {
   slug: string;
@@ -368,7 +369,7 @@ STATIC_ARTICLES.push({
       </p>
       <p>
         For any plumbing job in Seattle, big or small, trust the professionals. Call{" "}
-        <strong>(206) 772-6077</strong>.
+        <TrackedPhoneLink />.
       </p>
     </>
   ),
@@ -484,7 +485,7 @@ STATIC_ARTICLES.push({
         code-compliant installation.
       </p>
       <p>
-        Ready to explore your options? Call <strong>(206) 772-6077</strong> to find out if a
+        Ready to explore your options? Call <TrackedPhoneLink /> to find out if a
         tankless water heater is the right fit for you.
       </p>
     </>
@@ -629,7 +630,7 @@ STATIC_ARTICLES.push({
       </p>
       <p>
         Protect your home investment from the hidden threat beneath the surface. Call{" "}
-        <strong>(206) 772-6077</strong> to schedule a sewer camera inspection and save yourself from
+        <TrackedPhoneLink /> to schedule a sewer camera inspection and save yourself from
         a future plumbing catastrophe!
       </p>
     </>
@@ -819,7 +820,7 @@ STATIC_ARTICLES.push({
         <strong>Q: How much does a backflow test cost in the Seattle area?</strong>
         <br />
         A: For a standard residential assembly it's a small, flat fee, one of the least expensive
-        plumbing services you'll pay for all year. Call <strong>(206) 772-6077</strong> for an exact
+        plumbing services you'll pay for all year. Call <TrackedPhoneLink /> for an exact
         quote for your city and assembly type.
       </p>
       <p>
@@ -852,7 +853,7 @@ STATIC_ARTICLES.push({
       </p>
       <p>
         Don't let that water-district notice turn into a shut-off. Call{" "}
-        <strong>(206) 772-6077</strong> or{" "}
+        <TrackedPhoneLink /> or{" "}
         <a href="/services/plumbing/backflow-testing">schedule your backflow test online</a> today,
         and cross one more thing off your summer list.
       </p>

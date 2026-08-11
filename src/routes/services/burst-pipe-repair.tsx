@@ -138,7 +138,7 @@ export const Route = createFileRoute("/services/burst-pipe-repair")({
       {
         name: "description",
         content:
-          "Fast burst pipe repair available 24/7. Stop flooding, protect your home. Licensed plumbers throughout Greater Seattle. Call (206) 772-6077.",
+          "Fast burst pipe repair available 24/7. Stop flooding, protect your home. Licensed plumbers throughout Greater Seattle. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Burst Pipe Repair | All Phase Plumbing" },
       {

@@ -11,6 +11,7 @@ import {
   Tag,
 } from "lucide-react";
 import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
+import { TrackedPhoneText } from "@/components/ui/TrackedPhoneText";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascotWatermark from "@/assets/mascot watermark.svg";
@@ -302,7 +303,9 @@ function ServiceFAQ({ faqs, title }: { faqs: ServiceFAQ[]; title: string }) {
                 style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
               >
                 <div className="overflow-hidden">
-                  <div className="px-5 py-4 text-[15px] text-gray-700 leading-relaxed">{f.a}</div>
+                  <div className="px-5 py-4 text-[15px] text-gray-700 leading-relaxed">
+                    <TrackedPhoneText text={f.a} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -379,7 +382,7 @@ export function ServicePageTemplate({ content }: { content: ServicePageContent }
                   )}
                   {block.paragraphs?.map((p, pIdx) => (
                     <p key={pIdx} className="text-[16px] text-gray-700 leading-relaxed mb-4">
-                      {p}
+                      <TrackedPhoneText text={p} />
                     </p>
                   ))}
                   {block.list && (

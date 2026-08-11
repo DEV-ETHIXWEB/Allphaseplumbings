@@ -129,7 +129,7 @@ export function CityHighlightMap({ name, lat, lon, themed = false }: Props) {
         .bindPopup(
           `<div style="font-family:Inter,sans-serif;font-weight:700;color:#1E3A6E;font-size:13px;line-height:1.4">
             ${name}, WA<br>
-            <span style="font-weight:400;color:#555;font-size:12px">All Phase Plumbing · (206) 772-6077</span>
+            <span style="font-weight:400;color:#555;font-size:12px">All Phase Plumbing · (206) 309-1088</span>
           </div>`,
           { maxWidth: 220 },
         )

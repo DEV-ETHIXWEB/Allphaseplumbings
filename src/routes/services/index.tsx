@@ -16,7 +16,7 @@ function buildSchema(): string {
     name: "All Phase Plumbing",
     image: `${SITE_URL}/favicon.svg`,
     url: `${SITE_URL}/services`,
-    telephone: "+1-206-772-6077",
+    telephone: "+1-206-309-1088",
     email: "info@allphaseplumbing.com",
     priceRange: "$$",
     address: {

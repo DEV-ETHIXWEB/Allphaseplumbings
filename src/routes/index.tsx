@@ -27,11 +27,22 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
-      // Hero video poster is the LCP image — fetch it at top priority
+      /* The hero background still is the LCP element. Preload the exact
+         variant each viewport will actually request — a single href here would
+         make phones fetch the 1280px file *in addition* to the 800px one the
+         <picture> resolves to. */
+      {
+        rel: "preload",
+        as: "image",
+        href: "/videos/seattle-bg-poster-800.webp",
+        media: "(max-width: 1023px)",
+        fetchPriority: "high",
+      },
       {
         rel: "preload",
         as: "image",
         href: "/videos/seattle-bg-poster.webp",
+        media: "(min-width: 1024px)",
         fetchPriority: "high",
       },
     ],

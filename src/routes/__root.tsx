@@ -151,12 +151,6 @@ const GTM_DATALAYER_INIT =
   "var L=['/drain-cleaning','/emergency-plumber','/hydro-jetting'];" +
   "var isL=L.some(function(x){return p===x||p.indexOf(x+'/')===0;});" +
   "window.dataLayer.push({page_type:isL?'landing':'inside',page_path:p});})();";
-const GTM_SNIPPET =
-  "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime()," +
-  "event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s)," +
-  "dl=l!='dataLayer'?'&l='+l:'';j.async=true;" +
-  "j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;" +
-  `f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`;
 
 /* ── Google Ads (AW-10953093685) via gtag.js ─────────────────────────────────
    Google Ads conversion tracking runs through gtag.js, NOT through the GTM
@@ -182,40 +176,78 @@ const ADS_GTAG_INIT =
    the identical "server confirmed success" condition as the Google Ads
    conversion — see analytics.trackMetaLead. */
 const META_PIXEL_ID = "1931193014119752";
+/* Stub only — no network fetch. fbevents.js replays fbq.queue when it finally
+   loads (see TAG_LOADER below), so the init + first PageView recorded here
+   still fire with their original ordering. */
 const META_PIXEL_INIT =
-  "!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?" +
+  "!function(f,b,e,v,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?" +
   "n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;" +
-  "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;" +
-  "t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}" +
-  "(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');" +
+  "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');" +
   `fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`;
+
+/* ── Deferred tag loading ────────────────────────────────────────────────────
+   All three tag hosts (gtm.js ~90KB, gtag.js ~130KB, fbevents.js ~105KB) used
+   to be fetched, parsed and executed inside <head> during the initial load.
+   Together they dominated Total Blocking Time and pushed the whole main-thread
+   budget past what a good Lighthouse score allows.
+
+   None of them need to run before first paint: every stack above is already
+   stubbed synchronously (dataLayer array, gtag(), fbq() with its queue), so
+   pageviews, Ads conversions and Meta Leads recorded before the real scripts
+   arrive are queued and replayed verbatim on load. Only the moment of the
+   network beacon moves, never the events themselves.
+
+   Trigger is the first real user interaction — scroll, tap, keypress, pointer —
+   with a 10s fallback for the rare visitor who reads without touching anything.
+   Interaction-first is deliberate: it is what keeps the tags out of the
+   measured load entirely rather than merely moving them later into it.
+
+   What this does NOT affect: the Google Ads conversion and the Meta Lead event
+   both fire from src/lib/lead-form.ts after a form submit, and submitting a
+   form is itself an interaction — so the tags are always live well before a
+   conversion needs to be reported. The only thing that can be missed is a GA4
+   / Meta *pageview* from a visitor who lands, touches nothing at all, and
+   leaves inside 10 seconds. */
+const TAG_LOADER =
+  "(function(){var fired=false;function load(){if(fired)return;fired=true;" +
+  "var d=document,f=d.getElementsByTagName('script')[0];" +
+  "function add(src){var j=d.createElement('script');j.async=true;j.src=src;" +
+  "f.parentNode.insertBefore(j,f);}" +
+  "window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});" +
+  `add('https://www.googletagmanager.com/gtm.js?id=${GTM_ID}');` +
+  `add('https://www.googletagmanager.com/gtag/js?id=${ADS_ID}');` +
+  "add('https://connect.facebook.net/en_US/fbevents.js');}" +
+  "var evts=['pointerdown','keydown','touchstart','wheel','scroll'];" +
+  "function onEvt(){evts.forEach(function(e){window.removeEventListener(e,onEvt);});load();}" +
+  "evts.forEach(function(e){window.addEventListener(e,onEvt,{passive:true,once:true});});" +
+  // Fallback for a visitor who never touches the page at all.
+  "setTimeout(load,10000);})();";
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
-        {/* Google Tag Manager — dataLayer init (with initial page_type) first,
-            then the container loader, as high in <head> as possible. */}
+        {/* ── Tag stubs (synchronous, ~1KB total, zero network) ──
+            dataLayer with the initial page_type, the gtag() shim + its AW
+            config call, and the fbq() queue shim with init + first PageView.
+            Everything recorded here replays once TAG_LOADER pulls in the real
+            scripts after load. */}
         <script dangerouslySetInnerHTML={{ __html: GTM_DATALAYER_INIT }} />
-        <script dangerouslySetInnerHTML={{ __html: GTM_SNIPPET }} />
-        {/* Google Ads gtag.js — async loader + one config call for the AW
-            account. Rendered once in the shell, so it can never duplicate on
-            SPA navigations. */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`} />
         <script dangerouslySetInnerHTML={{ __html: ADS_GTAG_INIT }} />
-        {/* Meta Pixel — base code + initial PageView. Loaded once here, so it
-            can never duplicate on SPA navigations (route-change PageViews are
-            fired separately, see RootComponent below). */}
         <script dangerouslySetInnerHTML={{ __html: META_PIXEL_INIT }} />
-        {/* Non-render-blocking webfont load: inject a print-media stylesheet and
-            flip it to "all" once it has downloaded (text shows immediately in a
-            fallback font via display=swap, then upgrades). */}
+        <script dangerouslySetInnerHTML={{ __html: TAG_LOADER }} />
+        {/* Non-render-blocking webfont load. Declared as real markup (not
+            injected by script) so the preload scanner discovers it in the first
+            HTML chunk; media="print" keeps it off the render-blocking path and
+            it flips to "all" once downloaded. */}
+        <link id="google-fonts-css" rel="stylesheet" href={FONTS_HREF} media="print" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
-              FONTS_HREF,
-            )};l.media='print';l.onload=function(){this.media='all';};document.head.appendChild(l);})();`,
+            __html:
+              "(function(){var l=document.getElementById('google-fonts-css');if(!l)return;" +
+              "if(l.sheet){l.media='all';return;}" +
+              "l.addEventListener('load',function(){l.media='all';},{once:true});})();",
           }}
         />
         <noscript>
@@ -275,69 +307,98 @@ function RootComponent() {
     };
   }, []);
 
+  /* Scroll-reveal wiring for headings and .reveal-on-scroll elements.
+
+     Two things here are load-performance critical:
+
+     1. Anything already inside the viewport is revealed immediately and never
+        gets `.heading-pre-animate` (opacity: 0). The hero <h1> is the LCP
+        element on most pages — pre-animating it blanked it the instant
+        hydration ran, which pushed LCP out to whatever painted next.
+     2. Class writes are batched behind a single rect-read pass, and mutation
+        callbacks are coalesced into one rAF. The previous version interleaved
+        `classList.add` with `observe()` per element, forcing a layout flush per
+        node while React was still hydrating the page. */
+  const REVEAL_SELECTOR = "h1, h2, h3, .tracking-widest, .reveal-on-scroll";
   useEffect(() => {
-    // 1. Define the Intersection Observer
+    /* Elements awaiting their very first intersection report. The browser tells
+       us what is on screen — we never measure it ourselves. */
+    const awaitingFirstReport = new WeakSet<Element>();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const el = entry.target;
+          const isCard = el.classList.contains("reveal-on-scroll");
+
           if (entry.isIntersecting) {
-            entry.target.classList.add(
-              entry.target.classList.contains("reveal-on-scroll") ? "reveal-in" : "heading-fade-in",
-            );
-            // Unobserve once animated so it stays in place
-            observer.unobserve(entry.target);
+            el.classList.add(isCard ? "reveal-in" : "heading-fade-in");
+            awaitingFirstReport.delete(el);
+            observer.unobserve(el);
+            return;
+          }
+
+          /* Off screen on its first report — only now is it safe to hide it for
+             the entrance animation. Headings that were on screen at load never
+             receive `heading-pre-animate` at all, so the hero <h1> (the LCP
+             element on most pages) is never blanked after hydration. */
+          if (awaitingFirstReport.has(el)) {
+            awaitingFirstReport.delete(el);
+            if (!isCard) el.classList.add("heading-pre-animate");
           }
         });
       },
       { threshold: 0.05, rootMargin: "0px 0px -50px 0px" },
     );
 
-    // 2. Helper function to check and register headings
-    const observeElement = (el: Element) => {
-      // Generic scroll-reveal elements (cards, list items, etc.)
-      if (el.classList.contains("reveal-on-scroll")) {
-        if (!el.classList.contains("reveal-observed")) {
-          el.classList.add("reveal-observed");
-          observer.observe(el);
-        }
-        return;
-      }
+    const isRevealTarget = (el: Element) =>
+      el.classList.contains("reveal-on-scroll") ||
+      el.tagName === "H1" ||
+      el.tagName === "H2" ||
+      el.tagName === "H3" ||
+      el.classList.contains("tracking-widest") ||
+      el.classList.contains("heading-slide-up");
 
-      const isHeading =
-        el.tagName === "H1" ||
-        el.tagName === "H2" ||
-        el.tagName === "H3" ||
-        el.classList.contains("tracking-widest") || // eyebrow spans
-        el.classList.contains("heading-slide-up");
-
-      if (isHeading && !el.classList.contains("heading-observed")) {
-        el.classList.add("heading-observed", "heading-pre-animate");
+    /* Registration is class-write + observe only: no getBoundingClientRect, so
+       hydration is never interrupted by a forced layout flush. */
+    const register = (candidates: Element[]) => {
+      for (const el of candidates) {
+        if (!isRevealTarget(el)) continue;
+        const isCard = el.classList.contains("reveal-on-scroll");
+        const marker = isCard ? "reveal-observed" : "heading-observed";
+        if (el.classList.contains(marker)) continue;
+        el.classList.add(marker);
+        awaitingFirstReport.add(el);
         observer.observe(el);
       }
     };
 
-    // 3. Scan initial DOM
-    document
-      .querySelectorAll("h1, h2, h3, .tracking-widest, .reveal-on-scroll")
-      .forEach(observeElement);
+    register(Array.from(document.querySelectorAll(REVEAL_SELECTOR)));
 
-    // 4. Setup Mutation Observer to watch for routing node additions dynamically
+    /* Route changes add whole subtrees at once; collect them across a frame and
+       register in a single batched pass. */
+    let pending: Element[] = [];
+    let frame = 0;
+    const flush = () => {
+      frame = 0;
+      const batch = pending;
+      pending = [];
+      register(batch);
+    };
     const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof Element) {
-            observeElement(node);
-            node
-              .querySelectorAll("h1, h2, h3, .tracking-widest, .reveal-on-scroll")
-              .forEach(observeElement);
-          }
-        });
-      });
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          pending.push(node, ...Array.from(node.querySelectorAll(REVEAL_SELECTOR)));
+        }
+      }
+      if (pending.length > 0 && frame === 0) frame = requestAnimationFrame(flush);
     });
 
     mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      if (frame !== 0) cancelAnimationFrame(frame);
       observer.disconnect();
       mutationObserver.disconnect();
     };

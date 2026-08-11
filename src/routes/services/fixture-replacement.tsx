@@ -113,7 +113,7 @@ export const Route = createFileRoute("/services/fixture-replacement")({
       {
         name: "description",
         content:
-          "Expert plumbing fixture replacement for faucets, toilets, showers, and more. Improve efficiency and appearance. Call (206) 772-6077.",
+          "Expert plumbing fixture replacement for faucets, toilets, showers, and more. Improve efficiency and appearance. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Fixture Replacement | All Phase Plumbing" },
       {

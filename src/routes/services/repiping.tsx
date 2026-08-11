@@ -104,7 +104,7 @@ export const Route = createFileRoute("/services/repiping")({
       {
         name: "description",
         content:
-          "Expert repiping services in Seattle. Replace aging, corroded pipes with modern materials. Licensed specialists, upfront pricing. Call (206) 772-6077.",
+          "Expert repiping services in Seattle. Replace aging, corroded pipes with modern materials. Licensed specialists, upfront pricing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Repiping | All Phase Plumbing" },
       {

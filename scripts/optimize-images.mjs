@@ -31,6 +31,14 @@ const jobs = [
     width: 480,
     quality: 85,
   },
+  // Google rating card: a 1612x576 PNG (1MB) rendered at ≤340 CSS px in the
+  // hero, i.e. above the fold on every page that uses <Hero>. 2x DPR = 700px.
+  {
+    in: "src/assets/Group 55.png",
+    out: "src/assets/google-rating-card.webp",
+    width: 700,
+    quality: 82,
+  },
   // ── src/assets: recompress in place ──
   {
     in: "src/assets/better-mascot.webp",
@@ -43,6 +51,14 @@ const jobs = [
   { in: "src/assets/team-3.webp", out: "src/assets/team-3.webp", width: 880, quality: 68 },
   { in: "src/assets/team-4.webp", out: "src/assets/team-4.webp", width: 880, quality: 68 },
   { in: "src/assets/badge-phcc.webp", out: "src/assets/badge-phcc.webp", width: 400, quality: 80 },
+  // Phone-sized hero still. 800px covers a 412px viewport at ~2x DPR without
+  // upscaling, at less than half the bytes of the 1280px desktop file.
+  {
+    in: "public/videos/seattle-bg-poster.webp",
+    out: "public/videos/seattle-bg-poster-800.webp",
+    width: 800,
+    quality: 55,
+  },
   // ── public/videos: hero poster (LCP image) ──
   {
     in: "public/videos/seattle-bg-poster.jpg",
@@ -56,6 +72,13 @@ const jobs = [
     width: 800,
     quality: 68,
   })),
+  // PHCC badge: 1239x453 rendered at ≤144 CSS px tall → 300px at 2x DPR.
+  {
+    in: "public/images/afd74bdf0d77437784a458bcf7b606df.webp",
+    out: "public/images/afd74bdf0d77437784a458bcf7b606df.webp",
+    height: 300,
+    quality: 78,
+  },
   // ── public/images: JPEG bytes inside .png names; keep names (may be hot-linked),
   //    re-encode as smaller JPEG so behavior (content sniffing) is unchanged ──
   {

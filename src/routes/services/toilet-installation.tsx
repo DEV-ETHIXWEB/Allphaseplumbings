@@ -143,7 +143,7 @@ export const Route = createFileRoute("/services/toilet-installation")({
       {
         name: "description",
         content:
-          "Expert toilet installation and replacement. Proper sealing, secure fitting, and leak testing. Licensed plumbers. Call (206) 772-6077.",
+          "Expert toilet installation and replacement. Proper sealing, secure fitting, and leak testing. Licensed plumbers. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Toilet Installation | All Phase Plumbing" },
       {
