@@ -39,29 +39,3 @@ export const COMMERCIAL_PATH_PREFIXES = ["/commercial"] as const;
 export function isCommercialPath(pathname: string): boolean {
   return COMMERCIAL_PATH_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
-
-/**
- * Google Ads service/landing pages. These are the exact destination URLs
- * configured in the Google Ads account for the Drain Cleaning, Emergency
- * Plumbing, Leak Detection, Repiping, Sewer Line Repair, and Water Heater
- * campaigns (confirmed against the live Ads account, not guessed from naming).
- * Every customer-facing phone CTA on these pages must show the Google Ads
- * CallRail tracking number instead of the site's normal number — see
- * useTrackedPhone() in src/hooks/use-site-options.ts. This list is
- * deliberately separate from LANDING_PATH_PREFIXES above (a different,
- * pre-existing set of pages already wired for CallRail dynamic number
- * insertion) and from COMMERCIAL_PATH_PREFIXES.
- */
-export const GOOGLE_ADS_PATH_PREFIXES = [
-  "/drain-cleaning",
-  "/services/drain-cleaning",
-  "/services/plumbing/emergency-plumber",
-  "/services/plumbing/leak-detection",
-  "/services/plumbing/repiping",
-  "/services/plumbing/sewer-line-repair",
-  "/services/water-heaters",
-] as const;
-
-export function isGoogleAdsPath(pathname: string): boolean {
-  return GOOGLE_ADS_PATH_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
-}

@@ -10,6 +10,7 @@ import type { ZipLocation } from "@/lib/service-area-geo";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 
 /* ── Custom styled service select ───────────────────────────── */
 const SERVICE_OPTIONS = [
@@ -93,10 +94,10 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call (206) 772-6077 or request a tech online. Same-day plumbing service across Greater Seattle.",
+          "Call (206) 309-1088 or request a tech online. Same-day plumbing service across Greater Seattle.",
       },
       { property: "og:title", content: "Contact All Phase Plumbing" },
-      { property: "og:description", content: "Call (206) 772-6077, speak to a real person." },
+      { property: "og:description", content: "Call (206) 309-1088, speak to a real person." },
     ],
   }),
   component: ContactPage,
@@ -191,7 +192,7 @@ function ContactServiceMap({ zipLocation }: { zipLocation: ZipLocation | null })
           .bindPopup(
             `<div style="font-family:Inter,sans-serif;font-weight:700;color:#1E3A6E;font-size:13px;line-height:1.4">
             All Phase Plumbing<br>
-            <span style="font-weight:400;color:#555;font-size:12px">Tukwila, WA · (206) 772-6077</span>
+            <span style="font-weight:400;color:#555;font-size:12px">Tukwila, WA · (206) 309-1088</span>
           </div>`,
             { maxWidth: 220 },
           )
@@ -530,6 +531,7 @@ function ContactServiceAreaSection({
   const showInfo = zipStatus === "ok" && zipLocation;
   const showOutOfArea = zipStatus === "out" && zipLocation;
   const showCities = !showInfo && !showOutOfArea;
+  const { phone, phone_href } = useTrackedPhone();
 
   return (
     <div className="py-20">
@@ -660,7 +662,7 @@ function ContactServiceAreaSection({
             {showInfo && (
               <div className="mt-6 space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-400">
                 <a
-                  href="tel:+12067726077"
+                  href={phone_href}
                   className="group flex items-center gap-4 rounded-2xl px-5 py-4 text-white
                              shadow-[0_10px_25px_-8px_rgba(0,0,0,0.45)]
                              hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
@@ -673,7 +675,7 @@ function ContactServiceAreaSection({
                     <span className="text-[10px] uppercase tracking-[0.25em] opacity-80">
                       Call us now
                     </span>
-                    <span className="text-[22px] sm:text-[24px] font-black">(206) 772-6077</span>
+                    <span className="text-[22px] sm:text-[24px] font-black">{phone}</span>
                   </span>
                 </a>
 

@@ -110,7 +110,7 @@ export const Route = createFileRoute("/services/water-softeners")({
       {
         name: "description",
         content:
-          "Professional water softener installation, repair, and maintenance in Seattle. Protect your plumbing and enjoy cleaner water. Call (206) 772-6077.",
+          "Professional water softener installation, repair, and maintenance in Seattle. Protect your plumbing and enjoy cleaner water. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Water Softeners | All Phase Plumbing" },
       {

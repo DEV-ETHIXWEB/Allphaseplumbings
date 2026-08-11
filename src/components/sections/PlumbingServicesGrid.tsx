@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, ArrowUpRight } from "lucide-react";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 
 type Tile = { label: string; href: string };
 
@@ -42,7 +42,7 @@ const SERVICES: Tile[] = [
 ];
 
 export function PlumbingServicesGrid() {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   return (
     <section className="bg-white py-12 sm:py-16">
       <div className="container mx-auto px-4 max-w-[1305px]">

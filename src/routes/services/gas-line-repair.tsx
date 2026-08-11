@@ -145,7 +145,7 @@ export const Route = createFileRoute("/services/gas-line-repair")({
       {
         name: "description",
         content:
-          "Expert gas line repair and leak detection. Licensed, code-compliant work with safety-first procedures. Call (206) 772-6077.",
+          "Expert gas line repair and leak detection. Licensed, code-compliant work with safety-first procedures. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Gas Line Repair | All Phase Plumbing" },
       {

@@ -100,7 +100,7 @@ export const Route = createFileRoute("/services/plumbing/burst-pipe-repair")({
       {
         name: "description",
         content:
-          "24/7 burst pipe repair in Seattle. Stop the water and call (206) 772-6077, licensed emergency plumbers on the way.",
+          "24/7 burst pipe repair in Seattle. Stop the water and call (206) 309-1088, licensed emergency plumbers on the way.",
       },
     ],
   }),

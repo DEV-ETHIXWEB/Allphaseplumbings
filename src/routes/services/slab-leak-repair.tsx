@@ -122,7 +122,7 @@ export const Route = createFileRoute("/services/slab-leak-repair")({
       {
         name: "description",
         content:
-          "Expert slab leak detection and repair. Protect your foundation and plumbing system. Licensed plumbers throughout Seattle. Call (206) 772-6077.",
+          "Expert slab leak detection and repair. Protect your foundation and plumbing system. Licensed plumbers throughout Seattle. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Slab Leak Repair | All Phase Plumbing" },
       {

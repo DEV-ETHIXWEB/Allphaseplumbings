@@ -148,7 +148,7 @@ export const Route = createFileRoute("/services/pipe-repair")({
       {
         name: "description",
         content:
-          "Expert pipe repair services for leaks, bursts, corrosion, and joint failures. Licensed plumbers, 24/7 emergency service. Call (206) 772-6077.",
+          "Expert pipe repair services for leaks, bursts, corrosion, and joint failures. Licensed plumbers, 24/7 emergency service. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Pipe Repair | All Phase Plumbing" },
       {

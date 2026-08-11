@@ -113,7 +113,7 @@ export const Route = createFileRoute("/services/water-lines")({
       {
         name: "description",
         content:
-          "Expert Seattle water line repair and replacement. Trenchless options available. Licensed plumbers, upfront pricing. Call (206) 772-6077.",
+          "Expert Seattle water line repair and replacement. Trenchless options available. Licensed plumbers, upfront pricing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Water Line Replacement | All Phase Plumbing" },
       {

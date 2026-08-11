@@ -12,8 +12,8 @@ import type { WPSiteOptions, ServiceCard } from "@/types/wordpress";
 
 export const WP_DEFAULTS: Required<WPSiteOptions> = {
   // Contact
-  phone: "(206) 772-6077",
-  phone_href: "tel:+12067726077",
+  phone: "(206) 309-1088",
+  phone_href: "tel:+12063091088",
   email: "info@allphaseplumbing.com",
   address_line1: "14101 Interurban Ave S, Unit 78-A",
   address_city: "Tukwila",

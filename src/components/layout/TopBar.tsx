@@ -53,8 +53,8 @@ function FacebookIcon({ className }: { className?: string }) {
 }
 
 export function TopBar({
-  phone = "(206) 772-6077",
-  phoneHref = "tel:+12067726077",
+  phone = "(206) 309-1088",
+  phoneHref = "tel:+12063091088",
 }: {
   phone?: string;
   phoneHref?: string;

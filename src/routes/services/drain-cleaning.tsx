@@ -112,7 +112,7 @@ export const Route = createFileRoute("/services/drain-cleaning")({
       {
         name: "description",
         content:
-          "Seattle's trusted drain cleaning experts. Hydro jetting, sewer line cleaning, and camera inspection by licensed plumbers. Same-day service, call (206) 772-6077.",
+          "Seattle's trusted drain cleaning experts. Hydro jetting, sewer line cleaning, and camera inspection by licensed plumbers. Same-day service, call (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Drain Cleaning | All Phase Plumbing" },
       {

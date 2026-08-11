@@ -136,7 +136,7 @@ export const Route = createFileRoute("/services/hot-water-system-repair")({
       {
         name: "description",
         content:
-          "Professional hot water system repair for gas and electric units. Fast diagnosis, reliable repairs, upfront pricing. Call (206) 772-6077.",
+          "Professional hot water system repair for gas and electric units. Fast diagnosis, reliable repairs, upfront pricing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Hot Water System Repair | All Phase Plumbing" },
       {

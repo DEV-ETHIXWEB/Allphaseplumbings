@@ -4,7 +4,7 @@ import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascot from "@/assets/better-mascot.webp";
 import googleRatingCard from "@/assets/google-rating-card.webp";
-import { useSiteOptions } from "@/hooks/use-site-options";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
@@ -176,7 +176,7 @@ export function Hero({
   subtitle?: string;
   badge?: string;
 } = {}) {
-  const opts = useSiteOptions();
+  const opts = useTrackedPhone();
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [mascotIn, setMascotIn] = useState(false);

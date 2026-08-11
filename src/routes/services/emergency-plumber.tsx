@@ -107,7 +107,7 @@ export const Route = createFileRoute("/services/emergency-plumber")({
       {
         name: "description",
         content:
-          "Seattle emergency plumber available 24/7. Burst pipes, sewer backups, water heater failures, and more. Call now: (206) 772-6077.",
+          "Seattle emergency plumber available 24/7. Burst pipes, sewer backups, water heater failures, and more. Call now: (206) 309-1088.",
       },
       { property: "og:title", content: "Seattle Emergency Plumber | All Phase Plumbing" },
       {

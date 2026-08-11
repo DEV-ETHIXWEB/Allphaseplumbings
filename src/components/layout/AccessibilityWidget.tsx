@@ -13,10 +13,7 @@ import {
   Type,
   X,
 } from "lucide-react";
-import { isGoogleAdsPath } from "@/lib/page-type";
-
-const GOOGLE_ADS_PHONE = "(206) 309-1088";
-const GOOGLE_ADS_PHONE_HREF = "tel:2063091088";
+import { useTrackedPhone } from "@/hooks/use-site-options";
 
 interface A11ySettings {
   textZoom: 0 | 1 | 2;
@@ -60,9 +57,7 @@ export function AccessibilityWidget() {
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const location = useRouter().state.location;
-  const onGoogleAdsPage = isGoogleAdsPath(location.pathname);
-  const supportPhone = onGoogleAdsPage ? GOOGLE_ADS_PHONE : "(206) 772-6077";
-  const supportPhoneHref = onGoogleAdsPage ? GOOGLE_ADS_PHONE_HREF : "tel:+12067726077";
+  const { phone: supportPhone, phone_href: supportPhoneHref } = useTrackedPhone();
 
   // Load persisted settings once on mount (client only)
   useEffect(() => {

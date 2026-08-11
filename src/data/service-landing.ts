@@ -43,7 +43,7 @@ export const SERVICE_LANDINGS: Record<string, ServiceLandingContent> = {
     name: "Drain Cleaning",
     metaTitle: "Drain Cleaning Seattle | All Phase Plumbing",
     metaDescription:
-      "Professional drain cleaning in Seattle. Licensed plumbers clear any clog with hydro jetting, snaking & camera inspection. Same-day service — call (206) 772-6077.",
+      "Professional drain cleaning in Seattle. Licensed plumbers clear any clog with hydro jetting, snaking & camera inspection. Same-day service — call (206) 309-1088.",
 
     // Single static headline; "Any Tough Clog." rendered in brand gold.
     heroTaglinesPc: [
