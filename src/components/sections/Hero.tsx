@@ -262,11 +262,14 @@ export function Hero({
           width={1280}
           height={720}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          style={{ opacity: 0.8 }}
         />
       </picture>
 
-      {/* ── Video background, desktop only, fades in over the still ── */}
+      {/* ── Video background, desktop only, fades in over the still ──
+          Full opacity: the still/video carry the image itself, contrast for
+          the white hero text comes entirely from the single tint layer below.
+          The old 0.8 opacity on both layers let the light section background
+          bleed through and washed the footage out like a haze filter. */}
       <video
         ref={videoRef}
         autoPlay
@@ -275,23 +278,16 @@ export function Hero({
         playsInline
         preload="none"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-        style={{ opacity: videoSrc ? 0.8 : 0, transition: "opacity 0.6s ease" }}
+        style={{ opacity: videoSrc ? 1 : 0, transition: "opacity 0.6s ease" }}
         aria-hidden="true"
       >
         {videoSrc && <source src={videoSrc} type="video/mp4" />}
       </video>
 
-      {/* ── #6B9FE4 colour filter at 10% opacity ── */}
+      {/* ── Navy tint, single layer, for hero-text contrast ── */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "#6B9FE4", opacity: 0.1 }}
-        aria-hidden="true"
-      />
-
-      {/* ── Navy-blue tint at 10% opacity ── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "#1E3A6E", opacity: 0.1 }}
+        style={{ background: "#1E3A6E", opacity: 0.16 }}
         aria-hidden="true"
       />
 
