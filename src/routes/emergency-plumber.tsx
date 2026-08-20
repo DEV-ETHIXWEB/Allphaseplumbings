@@ -2,12 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Droplets, ShieldAlert, ThermometerSnowflake, Waves, AlertTriangle, BatteryWarning, Flame, Slash } from "lucide-react";
 import { LandingPageTemplate } from "@/components/sections/LandingPageTemplate";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/emergency-plumber")({
   head: () => ({
     meta: [
       { title: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing" },
-      { name: "description", content: "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now." }
+      { name: "description", content: "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now." },
+      { property: "og:title", content: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing" },
+      { property: "og:description", content: "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/emergency-plumber` }],
   }),
   component: EmergencyPlumberAdsLanding,
 });

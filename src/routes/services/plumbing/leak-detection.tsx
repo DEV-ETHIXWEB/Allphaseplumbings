@@ -139,6 +139,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/leak-detection")({
   head: () => ({
     meta: [
@@ -148,7 +151,10 @@ export const Route = createFileRoute("/services/plumbing/leak-detection")({
         content:
           "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage.",
       },
+      { property: "og:title", content: "Seattle Leak Detection, All Phase Plumbing" },
+      { property: "og:description", content: "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/leak-detection` }],
   }),
   component: () => (
     <PageShell>

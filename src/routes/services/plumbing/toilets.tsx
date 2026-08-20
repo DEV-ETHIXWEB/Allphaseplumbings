@@ -120,6 +120,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/toilets")({
   head: () => ({
     meta: [
@@ -129,7 +132,10 @@ export const Route = createFileRoute("/services/plumbing/toilets")({
         content:
           "Seattle toilet repair, replacement, and installation. Licensed plumbers, modern fixtures, fast service.",
       },
+      { property: "og:title", content: "Seattle Toilet Repair, Replacement & Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle toilet repair, replacement, and installation. Licensed plumbers, modern fixtures, fast service." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/toilets` }],
   }),
   component: () => (
     <PageShell>

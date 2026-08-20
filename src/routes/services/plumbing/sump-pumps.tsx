@@ -86,6 +86,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/sump-pumps")({
   head: () => ({
     meta: [
@@ -95,7 +98,10 @@ export const Route = createFileRoute("/services/plumbing/sump-pumps")({
         content:
           "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry.",
       },
+      { property: "og:title", content: "Sump Pump Repair, Replacement & Installation Seattle, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/sump-pumps` }],
   }),
   component: () => (
     <PageShell>

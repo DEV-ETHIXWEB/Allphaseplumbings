@@ -80,6 +80,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/shower-installation")({
   head: () => ({
     meta: [
@@ -89,7 +92,10 @@ export const Route = createFileRoute("/services/plumbing/shower-installation")({
         content:
           "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work.",
       },
+      { property: "og:title", content: "Seattle Shower Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/shower-installation` }],
   }),
   component: () => (
     <PageShell>

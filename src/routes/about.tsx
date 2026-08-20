@@ -14,6 +14,9 @@ import teamImg from "@/assets/team.webp";
 import { Masonry } from "@/components/ui/Masonry";
 import Particles from "@/components/ui/Particles";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -29,6 +32,7 @@ export const Route = createFileRoute("/about")({
         content: "Family-owned plumbing serving Greater Seattle since 1989.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/about` }],
   }),
   component: AboutPage,
 });

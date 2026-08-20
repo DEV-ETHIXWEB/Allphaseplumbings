@@ -108,6 +108,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/sewer-services/sewer-replacement")({
   head: () => ({
     meta: [
@@ -123,6 +126,7 @@ export const Route = createFileRoute("/services/sewer-services/sewer-replacement
         content: "Trenchless and traditional sewer replacement across Greater Seattle.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/sewer-services/sewer-replacement` }],
   }),
   component: () => (
     <PageShell>

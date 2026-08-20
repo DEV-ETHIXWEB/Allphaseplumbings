@@ -91,6 +91,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/water-heaters")({
   head: () => ({
     meta: [
@@ -106,6 +109,7 @@ export const Route = createFileRoute("/services/water-heaters")({
         content: "Tank and tankless installation, repair, and service.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/water-heaters` }],
   }),
   component: () => (
     <PageShell>

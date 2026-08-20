@@ -136,6 +136,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/toilet-installation")({
   head: () => ({
     meta: [
@@ -152,6 +155,7 @@ export const Route = createFileRoute("/services/toilet-installation")({
           "Professional toilet installation services, reliable, leak-free, and built to last.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/toilet-installation` }],
   }),
   component: () => (
     <PageShell>

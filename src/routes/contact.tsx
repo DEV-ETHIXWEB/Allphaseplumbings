@@ -87,6 +87,9 @@ declare global {
   }
 }
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -99,6 +102,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact All Phase Plumbing" },
       { property: "og:description", content: "Call (206) 309-1088, speak to a real person." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),
   component: ContactPage,
 });

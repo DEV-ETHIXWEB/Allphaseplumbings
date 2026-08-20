@@ -136,6 +136,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/septic-tank-service")({
   head: () => ({
     meta: [
@@ -151,6 +154,7 @@ export const Route = createFileRoute("/services/septic-tank-service")({
         content: "Professional septic tank service, pumping, inspection, and maintenance.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/septic-tank-service` }],
   }),
   component: () => (
     <PageShell>

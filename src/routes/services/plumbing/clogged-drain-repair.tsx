@@ -149,6 +149,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")({
   head: () => ({
     meta: [
@@ -158,7 +161,10 @@ export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")(
         content:
           "Seattle clogged drain repair, kitchen, bathroom, toilet, and recurring drain issues solved at the root cause.",
       },
+      { property: "og:title", content: "Clogged Drain Repair Seattle, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle clogged drain repair, kitchen, bathroom, toilet, and recurring drain issues solved at the root cause." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/clogged-drain-repair` }],
   }),
   component: () => (
     <PageShell>

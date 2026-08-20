@@ -151,6 +151,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/bathtub-installation")({
   head: () => ({
     meta: [
@@ -160,7 +163,10 @@ export const Route = createFileRoute("/services/plumbing/bathtub-installation")(
         content:
           "Professional bathtub installation in Seattle, standard, soaking, and walk-in tubs. Watertight, leak-tested, code-compliant.",
       },
+      { property: "og:title", content: "Seattle Bathtub Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Professional bathtub installation in Seattle, standard, soaking, and walk-in tubs. Watertight, leak-tested, code-compliant." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/bathtub-installation` }],
   }),
   component: () => (
     <PageShell>

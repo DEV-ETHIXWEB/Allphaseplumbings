@@ -80,6 +80,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/water-filtration")({
   head: () => ({
     meta: [
@@ -89,7 +92,10 @@ export const Route = createFileRoute("/services/plumbing/water-filtration")({
         content:
           "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test.",
       },
+      { property: "og:title", content: "Seattle Water Filtration System Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-filtration` }],
   }),
   component: () => (
     <PageShell>

@@ -78,6 +78,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
   head: () => ({
     meta: [
@@ -87,7 +90,10 @@ export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
         content:
           "Fast, reliable garbage disposal repair, replacement, and installation in Seattle from All Phase Plumbing.",
       },
+      { property: "og:title", content: "Seattle Garbage Disposal Repair, Replacement & Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Fast, reliable garbage disposal repair, replacement, and installation in Seattle from All Phase Plumbing." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/garbage-disposals` }],
   }),
   component: () => (
     <PageShell>

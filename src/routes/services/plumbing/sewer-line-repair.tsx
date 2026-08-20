@@ -150,6 +150,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/sewer-line-repair")({
   head: () => ({
     meta: [
@@ -159,7 +162,10 @@ export const Route = createFileRoute("/services/plumbing/sewer-line-repair")({
         content:
           "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available.",
       },
+      { property: "og:title", content: "Seattle Sewer Line Repair, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/sewer-line-repair` }],
   }),
   component: () => (
     <PageShell>

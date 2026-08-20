@@ -178,6 +178,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/faucet-installation")({
   head: () => ({
     meta: [
@@ -187,7 +190,10 @@ export const Route = createFileRoute("/services/plumbing/faucet-installation")({
         content:
           "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing.",
       },
+      { property: "og:title", content: "Seattle Faucet Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/faucet-installation` }],
   }),
   component: () => (
     <PageShell>

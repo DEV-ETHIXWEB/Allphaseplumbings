@@ -138,6 +138,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/gas-line-repair")({
   head: () => ({
     meta: [
@@ -153,6 +156,7 @@ export const Route = createFileRoute("/services/gas-line-repair")({
         content: "Professional gas line repair, safe, code-compliant, and reliable.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/gas-line-repair` }],
   }),
   component: () => (
     <PageShell>

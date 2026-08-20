@@ -11,6 +11,9 @@ import { ServiceArea } from "@/components/sections/ServiceArea";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { CTABanner } from "@/components/sections/CTABanner";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -27,6 +30,7 @@ export const Route = createFileRoute("/")({
       },
     ],
     links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
       /* The hero background still is the LCP element. Preload the exact
          variant each viewport will actually request — a single href here would
          make phones fetch the 1280px file *in addition* to the 800px one the
