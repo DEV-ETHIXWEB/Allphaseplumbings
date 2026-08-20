@@ -29,10 +29,16 @@ export const Route = createFileRoute("/sitemap.xml")({
           // /services/water-lines, /services/water-softeners, /services/toilets,
           // /services/toilet-installation, /services/fixture-replacement, /services/pipe-repair,
           // /services/pipe-replacement, /services/slab-leak-repair, /services/septic-tank-service,
-          // and /services/burst-pipe-repair are NOT linked from the header, mobile nav, or
-          // PlumbingServicesGrid (which all point at the /services/plumbing/* equivalents below)
-          // — they're orphaned duplicate pages, deliberately left out of the sitemap so they
-          // aren't submitted to Google as if they were the canonical page for that service.
+          // and /services/burst-pipe-repair are separate, real pages from their
+          // /services/plumbing/* namesakes below (different copy, not redirects). The header,
+          // mobile nav, and PlumbingServicesGrid all link to the /services/plumbing/* version;
+          // ServicesPageTemplate's SERVICES_CATALOG (rendered on /services) links to 5 of the
+          // /services/* versions instead (emergency-plumber, repiping, gas-line-repair,
+          // water-softeners, toilets) — an existing inconsistency in which URL is "canonical"
+          // for those 5, predating this change. Deliberately left out of the sitemap either way:
+          // submitting both URLs for the same service would only reinforce the duplicate-content
+          // signal. Picking one URL as canonical and redirecting/removing the other is a content
+          // architecture decision for the site owner, not a mechanical fix.
           // Individual plumbing sub-service pages (/services/plumbing/*)
           { path: "/services/plumbing/leak-detection", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/backflow-testing", changefreq: "monthly", priority: "0.6" },
