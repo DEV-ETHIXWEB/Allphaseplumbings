@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { SERVICE_AREA_CITIES } from "@/data/service-area-cities";
 
-const BASE_URL = "";
+const BASE_URL = "https://www.allphaseplumbing.com";
 
 interface SitemapEntry {
   path: string;
