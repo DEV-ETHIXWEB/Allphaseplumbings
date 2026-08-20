@@ -129,6 +129,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/hot-water-system-repair")({
   head: () => ({
     meta: [
@@ -144,6 +147,7 @@ export const Route = createFileRoute("/services/hot-water-system-repair")({
         content: "Expert hot water system repair, gas and electric, throughout Greater Seattle.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/hot-water-system-repair` }],
   }),
   component: () => (
     <PageShell>

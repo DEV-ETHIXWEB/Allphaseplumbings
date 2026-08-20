@@ -85,6 +85,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/backflow-testing")({
   head: () => ({
     meta: [
@@ -94,7 +97,10 @@ export const Route = createFileRoute("/services/plumbing/backflow-testing")({
         content:
           "Annual backflow testing in Seattle by certified BATs. Results filed directly with your water utility. Repair and replacement available.",
       },
+      { property: "og:title", content: "Seattle Backflow Testing & Certification, All Phase Plumbing" },
+      { property: "og:description", content: "Annual backflow testing in Seattle by certified BATs. Results filed directly with your water utility. Repair and replacement available." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/backflow-testing` }],
   }),
   component: () => (
     <PageShell>

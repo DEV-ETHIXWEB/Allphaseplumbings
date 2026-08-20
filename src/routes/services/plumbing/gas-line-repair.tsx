@@ -86,6 +86,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/gas-line-repair")({
   head: () => ({
     meta: [
@@ -95,7 +98,10 @@ export const Route = createFileRoute("/services/plumbing/gas-line-repair")({
         content:
           "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe.",
       },
+      { property: "og:title", content: "Seattle Gas Line Repair & Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/gas-line-repair` }],
   }),
   component: () => (
     <PageShell>

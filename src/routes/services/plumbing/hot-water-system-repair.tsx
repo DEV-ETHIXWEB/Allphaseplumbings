@@ -157,6 +157,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/hot-water-system-repair")({
   head: () => ({
     meta: [
@@ -166,7 +169,10 @@ export const Route = createFileRoute("/services/plumbing/hot-water-system-repair
         content:
           "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service.",
       },
+      { property: "og:title", content: "Hot Water System Repair Seattle, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/hot-water-system-repair` }],
   }),
   component: () => (
     <PageShell>

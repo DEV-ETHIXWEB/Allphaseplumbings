@@ -124,6 +124,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/tankless-water-heaters")({
   head: () => ({
     meta: [
@@ -133,7 +136,10 @@ export const Route = createFileRoute("/services/plumbing/tankless-water-heaters"
         content:
           "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation.",
       },
+      { property: "og:title", content: "Seattle Tankless Water Heaters, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/tankless-water-heaters` }],
   }),
   component: () => (
     <PageShell>

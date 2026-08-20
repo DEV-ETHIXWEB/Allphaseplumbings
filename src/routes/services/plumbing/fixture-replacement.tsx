@@ -86,6 +86,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/fixture-replacement")({
   head: () => ({
     meta: [
@@ -95,7 +98,10 @@ export const Route = createFileRoute("/services/plumbing/fixture-replacement")({
         content:
           "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work.",
       },
+      { property: "og:title", content: "Seattle Fixture Replacement, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/fixture-replacement` }],
   }),
   component: () => (
     <PageShell>

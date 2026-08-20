@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/layout/PageShell";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/service-area/")({
   head: () => ({
     meta: [
@@ -14,6 +17,7 @@ export const Route = createFileRoute("/service-area/")({
       { property: "og:title", content: "Service Area, All Phase Plumbing" },
       { property: "og:description", content: "Serving the Greater Seattle area." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/service-area` }],
   }),
   component: () => (
     <PageShell>

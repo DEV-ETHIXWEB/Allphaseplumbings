@@ -97,6 +97,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/repiping")({
   head: () => ({
     meta: [
@@ -112,6 +115,7 @@ export const Route = createFileRoute("/services/repiping")({
         content: "Professional repiping services throughout Greater Seattle.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/repiping` }],
   }),
   component: () => (
     <PageShell>

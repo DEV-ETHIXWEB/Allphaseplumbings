@@ -84,6 +84,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/toilet-installation")({
   head: () => ({
     meta: [
@@ -93,7 +96,10 @@ export const Route = createFileRoute("/services/plumbing/toilet-installation")({
         content:
           "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation.",
       },
+      { property: "og:title", content: "Seattle Toilet Installation, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/toilet-installation` }],
   }),
   component: () => (
     <PageShell>

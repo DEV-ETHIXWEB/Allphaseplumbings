@@ -88,6 +88,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/commercial/drain-cleaning")({
   head: () => ({
     meta: [
@@ -103,6 +106,7 @@ export const Route = createFileRoute("/commercial/drain-cleaning")({
         content: "Hydro jetting and camera inspection for Seattle businesses.",
       },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/commercial/drain-cleaning` }],
   }),
   component: () => (
     <PageShell>

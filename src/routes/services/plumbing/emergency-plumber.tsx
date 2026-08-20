@@ -91,6 +91,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/emergency-plumber")({
   head: () => ({
     meta: [
@@ -100,7 +103,10 @@ export const Route = createFileRoute("/services/plumbing/emergency-plumber")({
         content:
           "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties.",
       },
+      { property: "og:title", content: "24/7 Emergency Plumber Seattle, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/emergency-plumber` }],
   }),
   component: () => (
     <PageShell>

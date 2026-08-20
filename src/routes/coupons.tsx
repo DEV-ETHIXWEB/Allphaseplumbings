@@ -5,6 +5,9 @@ import { Coupons } from "@/components/sections/Coupons";
 import { WhyUs } from "@/components/sections/WhyUs";
 import skylineBg from "@/assets/seattle-skyline.webp";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/coupons")({
   head: () => ({
     meta: [
@@ -17,6 +20,7 @@ export const Route = createFileRoute("/coupons")({
       { property: "og:title", content: "Plumbing Coupons, All Phase" },
       { property: "og:description", content: "Save on your next plumbing visit." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/coupons` }],
   }),
   component: CouponsPage,
 });

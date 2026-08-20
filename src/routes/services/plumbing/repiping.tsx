@@ -83,6 +83,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/repiping")({
   head: () => ({
     meta: [
@@ -92,7 +95,10 @@ export const Route = createFileRoute("/services/plumbing/repiping")({
         content:
           "Whole-home repiping in Seattle, PEX and copper. Replace failing galvanized or old copper water lines for decades of clean, reliable plumbing.",
       },
+      { property: "og:title", content: "Seattle Whole-Home Repiping, All Phase Plumbing" },
+      { property: "og:description", content: "Whole-home repiping in Seattle, PEX and copper. Replace failing galvanized or old copper water lines for decades of clean, reliable plumbing." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/repiping` }],
   }),
   component: () => (
     <PageShell>

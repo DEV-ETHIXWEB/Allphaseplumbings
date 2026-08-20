@@ -80,6 +80,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/water-lines")({
   head: () => ({
     meta: [
@@ -89,7 +92,10 @@ export const Route = createFileRoute("/services/plumbing/water-lines")({
         content:
           "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard.",
       },
+      { property: "og:title", content: "Seattle Water Line Repair & Replacement, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-lines` }],
   }),
   component: () => (
     <PageShell>

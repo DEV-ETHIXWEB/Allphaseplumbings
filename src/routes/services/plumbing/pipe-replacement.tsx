@@ -133,6 +133,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/pipe-replacement")({
   head: () => ({
     meta: [
@@ -142,7 +145,10 @@ export const Route = createFileRoute("/services/plumbing/pipe-replacement")({
         content:
           "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches.",
       },
+      { property: "og:title", content: "Seattle Pipe Replacement & Repiping, All Phase Plumbing" },
+      { property: "og:description", content: "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/pipe-replacement` }],
   }),
   component: () => (
     <PageShell>

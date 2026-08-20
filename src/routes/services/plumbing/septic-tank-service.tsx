@@ -84,6 +84,9 @@ const CONTENT: ServicePageContent = {
   ],
 };
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/services/plumbing/septic-tank-service")({
   head: () => ({
     meta: [
@@ -93,7 +96,10 @@ export const Route = createFileRoute("/services/plumbing/septic-tank-service")({
         content:
           "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers.",
       },
+      { property: "og:title", content: "Septic Tank Service Seattle Area, All Phase Plumbing" },
+      { property: "og:description", content: "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/septic-tank-service` }],
   }),
   component: () => (
     <PageShell>

@@ -6,6 +6,9 @@ import { PageShell } from "@/components/layout/PageShell";
 import { fetchPosts } from "@/lib/wordpress.functions";
 import skylineBg from "@/assets/seattle-skyline.webp";
 
+/** Canonical site origin (matches the rest of the site's SEO tags). */
+const SITE_URL = "https://www.allphaseplumbing.com";
+
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
@@ -18,6 +21,7 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: "Plumbing Blog, All Phase" },
       { property: "og:description", content: "Plumbing know-how from licensed Seattle plumbers." },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
   }),
   component: BlogIndex,
 });
