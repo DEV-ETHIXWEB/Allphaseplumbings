@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react";
-import { Home, Building2, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascot from "@/assets/better-mascot.webp";
@@ -177,7 +177,7 @@ export function Hero({
   badge?: string;
 } = {}) {
   const opts = useTrackedPhone();
-  const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
+  const serviceType = "residential" as const;
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [mascotIn, setMascotIn] = useState(false);
   const [sent, setSent] = useState(false);
@@ -434,32 +434,6 @@ export function Hero({
               )}
             </div>
 
-            {/* Residential / Commercial tabs */}
-            <div className="relative z-10 flex border-b border-white/15">
-              <button
-                type="button"
-                onClick={() => setServiceType("residential")}
-                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 sm:gap-3 px-3 py-3.5 sm:px-10 sm:py-5 text-base sm:text-[26px] font-semibold transition-all duration-300 border-b-4 ${
-                  serviceType === "residential"
-                    ? "border-white text-white bg-white/25 shadow-[inset_0_-3px_0_#ffffff,0_4px_12px_rgba(0,0,0,0.25)] -translate-y-[1px] scale-[1.02]"
-                    : "border-transparent text-white/70 hover:text-white hover:bg-white/10 bg-transparent"
-                }`}
-              >
-                <Home className="size-4 sm:size-7" /> Residential
-              </button>
-              <button
-                type="button"
-                onClick={() => setServiceType("commercial")}
-                className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 sm:gap-3 px-3 py-3.5 sm:px-10 sm:py-5 text-base sm:text-[26px] font-semibold transition-all duration-300 border-b-4 ${
-                  serviceType === "commercial"
-                    ? "border-white text-white bg-white/25 shadow-[inset_0_-3px_0_#ffffff,0_4px_12px_rgba(0,0,0,0.25)] -translate-y-[1px] scale-[1.02]"
-                    : "border-transparent text-white/70 hover:text-white hover:bg-white/10 bg-transparent"
-                }`}
-              >
-                <Building2 className="size-4 sm:size-7" /> Commercial
-              </button>
-            </div>
-
             {/* Form body, split into promo (left) + form (right) on large screens */}
             <div className="relative z-10 px-4 py-4 sm:px-8 sm:py-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:gap-8">
               {/* Contact promo (left column on lg) */}
@@ -513,13 +487,6 @@ export function Hero({
 
               {/* Form (right column on lg) */}
               <div>
-                <h2
-                  className="text-lg sm:text-[26px] font-bold text-white mb-3 sm:mb-4"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  Let Us Call You
-                </h2>
-
                 <form
                   data-gtm-form="quote_request"
                   onSubmit={async (e) => {
