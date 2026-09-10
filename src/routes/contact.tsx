@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { PageShell } from "@/components/layout/PageShell";
 import { Badges } from "@/components/sections/Badges";
-import { MapPin, Phone, Clock, Loader2, ChevronDown, Check } from "lucide-react";
+import { MapPin, Phone, Clock, Loader2 } from "lucide-react";
 import Particles from "@/components/ui/Particles";
 import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 import { useZipGeocode } from "@/hooks/use-zip-geocode";
@@ -11,75 +11,9 @@ import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
 import { useTrackedPhone } from "@/hooks/use-site-options";
-
-/* ── Custom styled service select ───────────────────────────── */
-const SERVICE_OPTIONS = [
-  "Plumbing Repair",
-  "Drain Cleaning",
-  "Water Heater",
-  "Sewer Service",
-  "Other",
-];
-
-function ServiceSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  return (
-    <div ref={ref} className="relative w-full select-none">
-      {/* Trigger */}
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className={`w-full flex items-center justify-between rounded-xl border-2 bg-white/10 backdrop-blur-sm px-4 py-3.5 text-[14px] sm:text-[15px] font-semibold transition-all duration-200
-          ${open ? "border-[#F5C842] bg-white/15" : "border-white/20"}
-          ${value ? "text-white" : "text-white/50"}`}
-      >
-        <span>{value || "SERVICE NEEDED"}</span>
-        <ChevronDown
-          className={`size-5 transition-transform duration-200 ${open ? "rotate-180 text-[#F5C842]" : "text-white/60"}`}
-          strokeWidth={2.5}
-        />
-      </button>
-
-      {/* Dropdown panel */}
-      {open && (
-        <div
-          className="absolute left-0 right-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl border border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.5)] backdrop-blur-sm"
-          style={{ background: "#0f2246" }}
-        >
-          {SERVICE_OPTIONS.map((opt) => (
-            <button
-              key={opt}
-              type="button"
-              onClick={() => {
-                onChange(opt);
-                setOpen(false);
-              }}
-              className="group w-full flex items-center justify-between px-4 py-3.5 text-left text-[14px] sm:text-[15px] font-semibold text-white/80 transition-colors duration-150 hover:bg-[#F5C842] hover:text-[#1E3A6E] border-b border-white/10 last:border-b-0"
-            >
-              <span>{opt}</span>
-              {value === opt && (
-                <Check
-                  className="size-4 shrink-0 text-[#F5C842] group-hover:text-[#1E3A6E]"
-                  strokeWidth={3}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 
 declare global {
   interface Window {
@@ -343,7 +277,7 @@ function ContactFormBox({
 }) {
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [status, setStatus] = useState<"idle" | "sent">("idle");
-  const [service, setService] = useState("");
+  const servicePicker = useServicePicker();
   const captcha = useRecaptchaGate();
 
   const inputBase =
@@ -373,14 +307,17 @@ function ContactFormBox({
             onSubmit={async (e) => {
               e.preventDefault();
               const form = e.currentTarget;
+              const services = servicePicker.resolve();
+              if (!services) return;
               if (await captcha.verify()) {
                 await submitLeadFromForm(form, {
                   source: "Contact Page",
                   zip,
-                  service,
+                  service: services,
                   smsOptIn,
                 });
                 setStatus("sent");
+                servicePicker.reset();
               }
             }}
             className="space-y-4 sm:space-y-5"
@@ -443,8 +380,22 @@ function ContactFormBox({
               <input type="tel" name="phone" placeholder="PHONE*" required className={inputBase} />
             </div>
 
-            {/* Service dropdown */}
-            <ServiceSelect value={service} onChange={setService} />
+            {/* Service picker — icon buttons, multi-select, with an Other option */}
+            <div>
+              <p className="text-white/70 text-[12px] sm:text-[13px] font-bold uppercase tracking-wide mb-2">
+                Service needed*
+              </p>
+              <ServicePicker
+                options={RESIDENTIAL_SERVICES}
+                selected={servicePicker.selected}
+                onToggle={servicePicker.toggle}
+                otherText={servicePicker.otherText}
+                onOtherTextChange={servicePicker.setOtherText}
+                error={servicePicker.error}
+                ariaLabel="Service needed"
+                columns="grid-cols-3 sm:grid-cols-4"
+              />
+            </div>
 
             {/* SMS opt-in */}
             <div className="flex items-start gap-3">

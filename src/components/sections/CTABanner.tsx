@@ -5,24 +5,18 @@ import { StarBorder } from "@/components/ui/StarBorder";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
-
-const SERVICE_OPTIONS = [
-  "Plumbing Repair",
-  "Drain Cleaning",
-  "Water Heater",
-  "Sewer Service",
-  "Emergency Service",
-  "Other",
-];
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 
 export function CTABanner() {
   const opts = useSiteOptions();
+  const servicePicker = useServicePicker();
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    service: "",
   });
 
   const [isAnimated, setIsAnimated] = useState(false);
@@ -68,15 +62,18 @@ export function CTABanner() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const el = e.currentTarget as HTMLFormElement;
+    const services = servicePicker.resolve();
+    if (!services) return;
     if (await captcha.verify()) {
       await submitLeadFromForm(el, {
         source: "CTA Banner",
         name: form.name,
         email: form.email,
         phone: form.phone,
-        service: form.service,
+        service: services,
       });
       setSent(true);
+      servicePicker.reset();
     }
   }
 
@@ -181,23 +178,20 @@ export function CTABanner() {
                       className={inputCls}
                     />
                   </div>
-                  <select
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    aria-label="Service needed"
-                    className={`${inputCls} text-gray-500`}
-                    required
-                  >
-                    <option value="" disabled>
-                      Service Needed
-                    </option>
-                    {SERVICE_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt} className="text-gray-900">
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
+                  <div>
+                    <p className="text-gray-500 text-[13px] font-semibold mb-1.5">Service needed</p>
+                    <ServicePicker
+                      options={RESIDENTIAL_SERVICES}
+                      selected={servicePicker.selected}
+                      onToggle={servicePicker.toggle}
+                      otherText={servicePicker.otherText}
+                      onOtherTextChange={servicePicker.setOtherText}
+                      error={servicePicker.error}
+                      theme="light"
+                      ariaLabel="Service needed"
+                      columns="grid-cols-3 sm:grid-cols-4"
+                    />
+                  </div>
 
                   <Recaptcha ref={captcha.ref} onVerify={captcha.setToken} />
                   {captcha.error && (
@@ -206,8 +200,8 @@ export function CTABanner() {
                     </p>
                   )}
                   <p className="text-[12px] leading-snug text-gray-500">
-                    By submitting this form and signing up for texts, you consent to receive messages
-                    from All Phase Plumbing. Msg &amp; data rates may apply. Reply STOP to
+                    By submitting this form and signing up for texts, you consent to receive
+                    messages from All Phase Plumbing. Msg &amp; data rates may apply. Reply STOP to
                     unsubscribe. Reply HELP for help.
                   </p>
                   <StarBorder

@@ -27,6 +27,9 @@ import { GOOGLE_REVIEWS, slugify, type AreaContent } from "@/data/area-content";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { COMMERCIAL_SERVICES, type ServiceOption } from "@/data/service-options";
 
 /* Shared heading font treatment used across the site (Poppins, navy, heavy). */
 const HEADING_FONT = { fontFamily: "'Poppins', sans-serif" } as const;
@@ -386,7 +389,10 @@ function Testimonials({ area }: { area: AreaContent }) {
           <span className="inline-block text-[13px] sm:text-[15px] font-bold tracking-widest text-[#6B9FE4] mb-3">
             Reviews
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight" style={HEADING_FONT}>
+          <h2
+            className="text-3xl sm:text-4xl font-black text-white leading-tight"
+            style={HEADING_FONT}
+          >
             What {area.name} Customers Say
           </h2>
 
@@ -584,6 +590,13 @@ function Contact({ area }: { area: AreaContent }) {
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [sent, setSent] = useState(false);
   const captcha = useRecaptchaGate();
+  const servicePicker = useServicePicker();
+
+  const residentialOptions: ServiceOption[] = area.services.map((s) => ({
+    value: s.name,
+    label: s.name,
+    icon: resolveIcon(s.icon),
+  }));
 
   const tabCls = (active: boolean) =>
     `flex-1 flex items-center justify-center gap-2 px-3 py-3.5 text-[15px] sm:text-[18px] font-semibold transition-all duration-300 border-b-4 ${
@@ -651,14 +664,20 @@ function Contact({ area }: { area: AreaContent }) {
             <div className="flex border-b border-[#1E3A6E]/30">
               <button
                 type="button"
-                onClick={() => setServiceType("residential")}
+                onClick={() => {
+                  setServiceType("residential");
+                  servicePicker.reset();
+                }}
                 className={tabCls(serviceType === "residential")}
               >
                 <Home className="size-5" /> Residential
               </button>
               <button
                 type="button"
-                onClick={() => setServiceType("commercial")}
+                onClick={() => {
+                  setServiceType("commercial");
+                  servicePicker.reset();
+                }}
                 className={tabCls(serviceType === "commercial")}
               >
                 <Building2 className="size-5" /> Commercial
@@ -677,12 +696,16 @@ function Contact({ area }: { area: AreaContent }) {
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const form = e.currentTarget;
+                  const services = servicePicker.resolve();
+                  if (!services) return;
                   if (await captcha.verify()) {
                     await submitLeadFromForm(form, {
                       source: `Area Page — ${area.name}`,
                       serviceType,
+                      service: services,
                     });
                     setSent(true);
+                    servicePicker.reset();
                   }
                 }}
               >
@@ -715,43 +738,24 @@ function Contact({ area }: { area: AreaContent }) {
                     aria-label="City"
                     className={HERO_INPUT_CLS}
                   />
-                  <select
-                    required
-                    name="service"
-                    defaultValue=""
-                    aria-label="Service needed"
-                    className={`${HERO_INPUT_CLS} sm:col-span-2 appearance-none`}
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "right 12px center",
-                      backgroundSize: "16px",
-                      paddingRight: "36px",
-                    }}
-                  >
-                    <option value="" disabled>
-                      SERVICE NEEDED*
-                    </option>
-                    {serviceType === "residential" ? (
-                      <>
-                        {area.services.map((s) => (
-                          <option key={s.name} value={s.name}>
-                            {s.name}
-                          </option>
-                        ))}
-                        <option value="Other">Other Service</option>
-                      </>
-                    ) : (
-                      <>
-                        <option value="Commercial Plumbing Repair">Commercial Plumbing Repair</option>
-                        <option value="Commercial Drain Cleaning">Commercial Drain Cleaning</option>
-                        <option value="Commercial Sewer Services">Commercial Sewer Services</option>
-                        <option value="Backflow Testing">Backflow Testing</option>
-                        <option value="Gas Line Service">Gas Line Service</option>
-                        <option value="Other Commercial">Other Commercial Service</option>
-                      </>
-                    )}
-                  </select>
+                </div>
+
+                {/* Service picker — icon buttons, multi-select, Other with
+                   free text. Options follow the active Residential/Commercial
+                   tab above. */}
+                <div className="mt-2.5 sm:mt-3">
+                  <ServicePicker
+                    options={
+                      serviceType === "residential" ? residentialOptions : COMMERCIAL_SERVICES
+                    }
+                    selected={servicePicker.selected}
+                    onToggle={servicePicker.toggle}
+                    otherText={servicePicker.otherText}
+                    onOtherTextChange={servicePicker.setOtherText}
+                    error={servicePicker.error}
+                    ariaLabel="Service needed"
+                    columns="grid-cols-3"
+                  />
                 </div>
 
                 <div className="mt-4 flex flex-col items-center gap-3">
@@ -792,8 +796,8 @@ function Contact({ area }: { area: AreaContent }) {
                     htmlFor="area-sms-optin"
                     className="text-[12px] sm:text-[13px] text-white cursor-pointer leading-relaxed"
                   >
-                    By submitting this form and signing up for texts, you consent to receive messages
-                    from All Phase Plumbing. Msg &amp; data rates may apply. Reply STOP to
+                    By submitting this form and signing up for texts, you consent to receive
+                    messages from All Phase Plumbing. Msg &amp; data rates may apply. Reply STOP to
                     unsubscribe, HELP for help.
                   </label>
                 </div>

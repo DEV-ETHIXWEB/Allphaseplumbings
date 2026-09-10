@@ -18,6 +18,9 @@ import mascotWatermark from "@/assets/mascot watermark.svg";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 
 /* Shared treatments reused across the service page. */
 const HEADING_FONT = { fontFamily: "'Poppins', sans-serif" } as const;
@@ -146,8 +149,9 @@ function SidebarContactCard() {
   const opts = useSiteOptions();
   const [sent, setSent] = useState(false);
   const captcha = useRecaptchaGate();
+  const servicePicker = useServicePicker();
   return (
-    <div 
+    <div
       className="relative rounded-xl overflow-hidden"
       style={{
         background: "linear-gradient(150deg, #25497f 0%, #1E3A6E 45%, #15294e 100%)",
@@ -186,9 +190,12 @@ function SidebarContactCard() {
         onSubmit={async (e) => {
           e.preventDefault();
           const form = e.currentTarget;
+          const services = servicePicker.resolve();
+          if (!services) return;
           if (await captcha.verify()) {
-            await submitLeadFromForm(form, { source: "Service Page" });
+            await submitLeadFromForm(form, { source: "Service Page", service: services });
             setSent(true);
+            servicePicker.reset();
           }
         }}
       >
@@ -222,22 +229,16 @@ function SidebarContactCard() {
             required
           />
         </div>
-        <select
-          required
-          name="service"
-          defaultValue=""
-          aria-label="Service needed"
-          className="w-full rounded-md border-2 border-[#1E3A6E] bg-white px-4 py-3.5 text-[15px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E]"
-        >
-          <option value="" disabled>
-            SERVICE NEEDED*
-          </option>
-          <option>Plumbing Repair</option>
-          <option>Drain Cleaning</option>
-          <option>Water Heater</option>
-          <option>Sewer Service</option>
-          <option>Other</option>
-        </select>
+        <ServicePicker
+          options={RESIDENTIAL_SERVICES}
+          selected={servicePicker.selected}
+          onToggle={servicePicker.toggle}
+          otherText={servicePicker.otherText}
+          onOtherTextChange={servicePicker.setOtherText}
+          error={servicePicker.error}
+          ariaLabel="Service needed"
+          columns="grid-cols-3"
+        />
         <p className="text-[12px] text-white/85 leading-snug">
           By submitting this form and signing up for texts, you consent to receive messages from All
           Phase Plumbing. Msg &amp; data rates may apply. Reply STOP to unsubscribe. Reply HELP for
