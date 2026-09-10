@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react";
-import { Phone } from "lucide-react";
+import { Phone, Home, Building2 } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascot from "@/assets/better-mascot.webp";
@@ -8,6 +8,9 @@ import { useTrackedPhone } from "@/hooks/use-site-options";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES, COMMERCIAL_SERVICES } from "@/data/service-options";
 
 /* PC (lg+) keeps every tagline to two lines. */
 const HERO_TAGLINES_PC: readonly (readonly string[])[] = [
@@ -177,11 +180,12 @@ export function Hero({
   badge?: string;
 } = {}) {
   const opts = useTrackedPhone();
-  const serviceType = "residential" as const;
+  const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [mascotIn, setMascotIn] = useState(false);
   const [sent, setSent] = useState(false);
   const captcha = useRecaptchaGate();
+  const servicePicker = useServicePicker();
 
   /* Defer the background video + WebGL particles until the page is loaded and
      idle. Poster image is the LCP element; video/particles must not compete
@@ -488,17 +492,21 @@ export function Hero({
                   onSubmit={async (e) => {
                     e.preventDefault();
                     const form = e.currentTarget;
+                    const services = servicePicker.resolve();
+                    if (!services) return;
                     if (await captcha.verify()) {
                       await submitLeadFromForm(form, {
                         source: "Homepage Hero",
                         serviceType,
+                        service: services,
                         smsOptIn,
                       });
                       setSent(true);
+                      servicePicker.reset();
                     }
                   }}
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 items-stretch">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 items-stretch">
                     <input
                       type="text"
                       name="name"
@@ -531,56 +539,49 @@ export function Hero({
                       maxLength={10}
                       className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                     />
+                  </div>
 
-                    <select
-                      required
-                      name="service"
-                      defaultValue=""
-                      aria-label="Service needed"
-                      className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow sm:col-span-2 lg:col-span-1 appearance-none"
-                      style={{
-                        backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A6E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "right 12px center",
-                        backgroundSize: "16px",
-                        paddingRight: "36px",
-                      }}
-                    >
-                      <option value="" disabled>
-                        SERVICE NEEDED*
-                      </option>
-                      {serviceType === "residential" ? (
-                        <>
-                          <option value="Drain Cleaning">Drain Cleaning</option>
-                          <option value="Emergency Plumber">Emergency Plumber</option>
-                          <option value="Garbage Disposals">Garbage Disposals</option>
-                          <option value="Hydro Jetting">Hydro Jetting</option>
-                          <option value="Repiping">Repiping</option>
-                          <option value="Sump Pumps">Sump Pumps</option>
-                          <option value="Toilets & Faucets">Toilets &amp; Faucets</option>
-                          <option value="Water Heaters">Water Heaters</option>
-                          <option value="Leak Detection">Leak Detection</option>
-                          <option value="Water Softeners">Water Softeners &amp; Filtration</option>
-                          <option value="Sewer Repair">Sewer Line Repair</option>
-                          <option value="Other">Other Service</option>
-                        </>
-                      ) : (
-                        <>
-                          <option value="Commercial Drain Cleaning">
-                            Commercial Drain Cleaning
-                          </option>
-                          <option value="Commercial Plumbing Repair">
-                            Commercial Plumbing Repair
-                          </option>
-                          <option value="Commercial Sewer Services">
-                            Commercial Sewer Services
-                          </option>
-                          <option value="Backflow Testing">Backflow Testing</option>
-                          <option value="Gas Line Service">Gas Line Service</option>
-                          <option value="Other Commercial">Other Commercial Service</option>
-                        </>
-                      )}
-                    </select>
+                  {/* Service picker — icon-button MCQ, multi-select, with a
+                     Residential/Commercial toggle above it (the old <select>
+                     only ever showed the residential list; this makes the
+                     commercial one actually reachable). */}
+                  <div className="mt-3 sm:mt-3.5">
+                    <div className="mb-2 flex gap-2">
+                      {(["residential", "commercial"] as const).map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => {
+                            setServiceType(t);
+                            servicePicker.reset();
+                          }}
+                          className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-1.5 text-[12px] sm:text-[13px] font-bold uppercase tracking-wide transition-all ${
+                            serviceType === t
+                              ? "border-[#F5C842] bg-[#F5C842] text-[#1E3A6E]"
+                              : "border-white/30 bg-white/5 text-white/80 hover:bg-white/10"
+                          }`}
+                        >
+                          {t === "residential" ? (
+                            <Home className="size-3.5" strokeWidth={2.5} />
+                          ) : (
+                            <Building2 className="size-3.5" strokeWidth={2.5} />
+                          )}
+                          {t === "residential" ? "Residential" : "Commercial"}
+                        </button>
+                      ))}
+                    </div>
+                    <ServicePicker
+                      options={
+                        serviceType === "residential" ? RESIDENTIAL_SERVICES : COMMERCIAL_SERVICES
+                      }
+                      selected={servicePicker.selected}
+                      onToggle={servicePicker.toggle}
+                      otherText={servicePicker.otherText}
+                      onOtherTextChange={servicePicker.setOtherText}
+                      error={servicePicker.error}
+                      ariaLabel="Service needed"
+                      columns="grid-cols-3 sm:grid-cols-4 lg:grid-cols-6"
+                    />
                   </div>
 
                   <div className="mt-3.5 sm:mt-4 flex flex-col items-center gap-3">

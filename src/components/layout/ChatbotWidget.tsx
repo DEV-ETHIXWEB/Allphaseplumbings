@@ -3,6 +3,9 @@ import { MessageCircle, X, Send, Phone, MapPin } from "lucide-react";
 import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { sendLeadEmail } from "@/lib/lead-email.functions";
 import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * All Phase Chatbot Widget with Conversational Flow
@@ -45,7 +48,7 @@ const QUICK_REPLIES = ["Book a service", "Emergency help", "Get a quote", "Hours
  */
 async function submitChatbotLead(
   data: UserData,
-  { outOfArea = false }: { outOfArea?: boolean } = {},
+  { outOfArea = false, services }: { outOfArea?: boolean; services?: string[] } = {},
 ): Promise<void> {
   const source = outOfArea ? "Chatbot Booking (Out of Area)" : "Chatbot Booking";
 
@@ -65,7 +68,10 @@ async function submitChatbotLead(
         phone: data.phone,
         email: data.email,
         zip: data.zip,
-        service: data.type,
+        // `services` (from the icon-picker) renders as separate chips in the
+        // email; `data.type` is the fallback when the visitor free-typed an
+        // answer instead of using the picker.
+        service: services ?? data.type,
       },
     });
     if (result.success && !outOfArea) {
@@ -80,7 +86,15 @@ async function submitChatbotLead(
    medium-blue ring so it separates from both the navy header and the light
    chat background. `ringWidth` thickens the ring for the large launcher
    size so the brand ring reads clearly at rest, not just up close. */
-function MascotAvatar({ size = 44, ring = true, ringWidth = 2.5 }: { size?: number; ring?: boolean; ringWidth?: number }) {
+function MascotAvatar({
+  size = 44,
+  ring = true,
+  ringWidth = 2.5,
+}: {
+  size?: number;
+  ring?: boolean;
+  ringWidth?: number;
+}) {
   return (
     <span
       className="ap-circle relative inline-block shrink-0"
@@ -114,6 +128,7 @@ export function ChatbotWidget() {
   const [typing, setTyping] = useState(false);
   const [flowState, setFlowState] = useState<ChatFlowState>("INIT");
   const [userData, setUserData] = useState<UserData>({});
+  const servicePicker = useServicePicker();
 
   // Comic bubble lifecycle
   const [hintShown, setHintShown] = useState(false);
@@ -173,6 +188,37 @@ export function ChatbotWidget() {
     timers.current.push(t);
   }
 
+  /**
+   * Completes the BOOK_TYPE step, whether the visitor picked icon chips
+   * (possibly several — MCQ, not single-choice) or free-typed an answer in
+   * the composer. `services` is the finished list of service strings (an
+   * "Other" pick already resolved to "Other: <what they typed>").
+   */
+  function finishBookType(services: string[]) {
+    const label = services.join(", ");
+    const newData = { ...userData, type: label };
+    setUserData(newData);
+    setFlowState("ASK_RESTART");
+    void submitChatbotLead(newData, { services });
+    addBotMsg(
+      <div className="flex flex-col gap-2">
+        <p>
+          Thank you! We've received your request for {label}. Our team will contact you shortly at{" "}
+          {newData.phone} or {newData.email} to confirm your appointment.
+        </p>
+        <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
+      </div>,
+    );
+  }
+
+  function handleBookTypeContinue() {
+    const services = servicePicker.resolve();
+    if (!services) return;
+    setMessages((m) => [...m, { from: "user", text: services.join(", ") }]);
+    servicePicker.reset();
+    finishBookType(services);
+  }
+
   function handleInput(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
@@ -225,36 +271,30 @@ export function ChatbotWidget() {
         setUserData((prev) => ({ ...prev, zip: trimmed }));
         // 98xxx is Washington State. Just an example validation for our service areas.
         if (!/^98\d{3}$/.test(trimmed)) {
-           setFlowState("ASK_RESTART");
-           // Still a real lead — name/phone/email were already captured, so email
-           // the team (flagged out-of-area, not counted as a conversion) to honor
-           // the "we'll reach out" promise. userData lacks the just-typed zip
-           // (setUserData is async), so pass it explicitly.
-           void submitChatbotLead({ ...userData, zip: trimmed }, { outOfArea: true });
-           addBotMsg(
-             <div className="flex flex-col gap-2">
-               <p>We are not serving there currently but we will reach you out for solution.</p>
-               <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-             </div>
-           );
-           return;
+          setFlowState("ASK_RESTART");
+          // Still a real lead — name/phone/email were already captured, so email
+          // the team (flagged out-of-area, not counted as a conversion) to honor
+          // the "we'll reach out" promise. userData lacks the just-typed zip
+          // (setUserData is async), so pass it explicitly.
+          void submitChatbotLead({ ...userData, zip: trimmed }, { outOfArea: true });
+          addBotMsg(
+            <div className="flex flex-col gap-2">
+              <p>We are not serving there currently but we will reach you out for solution.</p>
+              <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
+            </div>,
+          );
+          return;
         }
+        servicePicker.reset();
         setFlowState("BOOK_TYPE");
         addBotMsg("Perfect. Finally, what type of service do you need?");
         break;
 
       case "BOOK_TYPE": {
-        const newData = { ...userData, type: trimmed };
-        setUserData(newData);
-        setFlowState("ASK_RESTART");
-        // Deliver the completed booking to the shop team (Resend email + analytics).
-        void submitChatbotLead(newData);
-        addBotMsg(
-          <div className="flex flex-col gap-2">
-            <p>Thank you! We've received your request for {newData.type}. Our team will contact you shortly at {newData.phone} or {newData.email} to confirm your appointment.</p>
-            <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-          </div>
-        );
+        // Free-typed fallback for a visitor who ignores the icon picker and
+        // just types their answer in the composer instead.
+        servicePicker.reset();
+        finishBookType([trimmed]);
         break;
       }
 
@@ -265,32 +305,41 @@ export function ChatbotWidget() {
         }
         setFlowState("ASK_RESTART");
         if (!/^98\d{3}$/.test(trimmed)) {
-           addBotMsg(
-             <div className="flex flex-col gap-2">
-               <p>We are not serving there currently but we will reach you out for solution.</p>
-               <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-             </div>
-           );
-           return;
+          addBotMsg(
+            <div className="flex flex-col gap-2">
+              <p>We are not serving there currently but we will reach you out for solution.</p>
+              <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
+            </div>,
+          );
+          return;
         }
         // Simulate checking zip against available service areas
         addBotMsg(
           <div className="flex flex-col gap-2">
             <p>Yes, we serve the {trimmed} area! Here are some of our primary service zones:</p>
             <div className="flex flex-col gap-1.5 mt-1">
-              <a href="/service-areas" className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium">
+              <a
+                href="/service-areas"
+                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
+              >
                 <MapPin className="size-4" /> Greater Seattle
               </a>
-              <a href="/service-areas" className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium">
+              <a
+                href="/service-areas"
+                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
+              >
                 <MapPin className="size-4" /> Tukwila
               </a>
-              <a href="/service-areas" className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium">
+              <a
+                href="/service-areas"
+                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
+              >
                 <MapPin className="size-4" /> Bellevue
               </a>
             </div>
             <p className="text-[13px] italic">We are available 24/7 for all areas.</p>
             <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-          </div>
+          </div>,
         );
         break;
 
@@ -343,7 +392,7 @@ export function ChatbotWidget() {
             <Phone className="size-4" /> Call Now
           </a>
           <p className="mt-2 font-semibold">Is there anything else I can help you with?</p>
-        </div>
+        </div>,
       );
     } else if (c.includes("quote")) {
       setFlowState("ASK_RESTART");
@@ -357,7 +406,7 @@ export function ChatbotWidget() {
             Go to Quote Form
           </a>
           <p className="mt-2 font-semibold">Is there anything else I can help you with?</p>
-        </div>
+        </div>,
       );
     } else if (c.includes("hour") || c.includes("area")) {
       setFlowState("HOURS_ZIP");
@@ -366,9 +415,12 @@ export function ChatbotWidget() {
       setFlowState("ASK_RESTART");
       addBotMsg(
         <div className="flex flex-col gap-2">
-          <p>Thanks for your message! A team member will follow up shortly. In the meantime, you can call us any time for immediate help.</p>
+          <p>
+            Thanks for your message! A team member will follow up shortly. In the meantime, you can
+            call us any time for immediate help.
+          </p>
           <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-        </div>
+        </div>,
       );
     }
   }
@@ -412,7 +464,10 @@ export function ChatbotWidget() {
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 space-y-3.5 overflow-y-auto bg-[#f4f7fb] px-4 py-4">
+          <div
+            ref={scrollRef}
+            className="flex-1 space-y-3.5 overflow-y-auto bg-[#f4f7fb] px-4 py-4"
+          >
             {messages.map((m, i) =>
               m.from === "bot" ? (
                 <div key={i} className="ap-msg flex items-end gap-2">
@@ -462,6 +517,33 @@ export function ChatbotWidget() {
             </div>
           )}
 
+          {/* Service picker (BOOK_TYPE step): icon-button MCQ, multi-select,
+             with an Other chip that reveals free text. Typing an answer in
+             the composer instead still works (handled in handleInput). */}
+          {flowState === "BOOK_TYPE" && !typing && (
+            <div className="border-t border-black/5 bg-white px-4 pt-3.5 pb-1">
+              <ServicePicker
+                options={RESIDENTIAL_SERVICES}
+                selected={servicePicker.selected}
+                onToggle={servicePicker.toggle}
+                otherText={servicePicker.otherText}
+                onOtherTextChange={servicePicker.setOtherText}
+                error={servicePicker.error}
+                theme="light"
+                ariaLabel="What type of service do you need?"
+                columns="grid-cols-2"
+              />
+              <button
+                type="button"
+                onClick={handleBookTypeContinue}
+                disabled={servicePicker.selected.length === 0}
+                className="mt-2.5 mb-1 w-full border border-[#1E3A6E]/25 bg-[#1E3A6E] px-4 py-2.5 text-[14px] font-bold text-white transition-all duration-200 hover:bg-[#16305c] active:scale-95 disabled:opacity-40"
+              >
+                Continue
+              </button>
+            </div>
+          )}
+
           {/* Composer */}
           <form
             className="flex items-center gap-2 bg-white p-3.5"
@@ -499,7 +581,9 @@ export function ChatbotWidget() {
       {!open && !hintGone && (
         <div
           className={`ap-hint-wrap mb-3 mr-1 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-            hintShown ? "scale-100 opacity-100 translate-y-0" : "pointer-events-none scale-90 opacity-0 translate-y-2"
+            hintShown
+              ? "scale-100 opacity-100 translate-y-0"
+              : "pointer-events-none scale-90 opacity-0 translate-y-2"
           }`}
         >
           <button

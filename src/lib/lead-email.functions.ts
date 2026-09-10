@@ -33,7 +33,14 @@ export interface LeadPayload {
   email?: string;
   zip?: string;
   city?: string;
-  service?: string;
+  /**
+   * Which service(s) the visitor picked from the icon-button MCQ picker.
+   * A plain string is still accepted (older callers, the chatbot's free-text
+   * flow) — the handler normalizes either shape before rendering the email.
+   * A chosen "Other" is expected to already be formatted as
+   * "Other: <what they typed>" by the client (see useServicePicker).
+   */
+  service?: string | string[];
   /** "residential" | "commercial" where the form distinguishes. */
   serviceType?: string;
   smsOptIn?: boolean;
@@ -93,6 +100,14 @@ export const sendLeadEmail = createServerFn({ method: "POST" })
       [data.firstName, data.lastName].filter(Boolean).join(" ").trim() ||
       "Website lead";
 
+    // The service picker sends an array when one or more chips are selected
+    // (MCQ, so multiple is normal); older/simpler callers (e.g. the chatbot)
+    // may still send a single string. Normalize to a clean array either way.
+    const services = (Array.isArray(data.service) ? data.service : [data.service])
+      .filter((s): s is string => !!s && s.trim().length > 0)
+      .map((s) => s.trim());
+    const serviceSummary = services.join(", ");
+
     // Ordered field list; blanks are dropped so each email only shows what was
     // actually filled in (forms vary — some have email, some ZIP, etc.).
     const fields: [string, string | undefined][] = [
@@ -101,22 +116,31 @@ export const sendLeadEmail = createServerFn({ method: "POST" })
       ["Email", data.email],
       ["ZIP code", data.zip],
       ["City", data.city],
-      ["Service needed", data.service],
       ["Request type", data.serviceType],
       ["SMS opt-in", data.smsOptIn ? "Yes" : undefined],
       ["Submitted from", data.source],
     ];
     const shown = fields.filter(([, v]) => v && v.toString().trim());
 
-    const htmlRows = shown
+    const fieldRow = (k: string, v: string) =>
+      `<tr>` +
+      `<td style="padding:9px 14px;background:#f4f7fb;font-weight:700;color:#1E3A6E;border-bottom:1px solid #e6edf6;white-space:nowrap;vertical-align:top">${esc(k)}</td>` +
+      `<td style="padding:9px 14px;color:#222;border-bottom:1px solid #e6edf6">${v}</td>` +
+      `</tr>`;
+
+    // Services render as their own tag-styled row (one email column, one or
+    // more visual chips inside it) rather than a plain comma-joined string,
+    // so a multi-select submission is still easy to scan at a glance. Placed
+    // right after Name so what they need reads before the rest of the fields.
+    const serviceChips = services
       .map(
-        ([k, v]) =>
-          `<tr>` +
-          `<td style="padding:9px 14px;background:#f4f7fb;font-weight:700;color:#1E3A6E;border-bottom:1px solid #e6edf6;white-space:nowrap;vertical-align:top">${esc(k)}</td>` +
-          `<td style="padding:9px 14px;color:#222;border-bottom:1px solid #e6edf6">${esc(v!.toString())}</td>` +
-          `</tr>`,
+        (s) =>
+          `<span style="display:inline-block;margin:2px 4px 2px 0;padding:4px 10px;background:#F5C842;color:#1E3A6E;font-weight:700;font-size:13px;border-radius:999px;white-space:nowrap">${esc(s)}</span>`,
       )
       .join("");
+
+    const htmlRows = shown.map(([k, v]) => fieldRow(k, esc(v!.toString())));
+    if (services.length) htmlRows.splice(1, 0, fieldRow("Service(s) needed", serviceChips));
 
     const html =
       `<div style="font-family:Inter,Arial,sans-serif;max-width:560px;margin:0 auto;color:#222">` +
@@ -124,15 +148,17 @@ export const sendLeadEmail = createServerFn({ method: "POST" })
       `<h2 style="margin:0;font-size:20px;color:#ffffff">New service request</h2>` +
       `<p style="margin:4px 0 0;color:#F5C842;font-weight:600;font-size:13px">From the All Phase Plumbing website</p>` +
       `</div>` +
-      `<table style="width:100%;border-collapse:collapse;font-size:15px;border:1px solid #e6edf6;border-top:none">${htmlRows}</table>` +
+      `<table style="width:100%;border-collapse:collapse;font-size:15px;border:1px solid #e6edf6;border-top:none">${htmlRows.join("")}</table>` +
       (data.email
         ? `<p style="font-size:13px;color:#666;margin:14px 2px">Tip: just hit Reply to email the customer back directly.</p>`
         : "") +
       `</div>`;
 
-    const text = shown.map(([k, v]) => `${k}: ${v}`).join("\n");
+    const textRows = shown.map(([k, v]) => `${k}: ${v}`);
+    if (services.length) textRows.splice(1, 0, `Service(s) needed: ${serviceSummary}`);
+    const text = textRows.join("\n");
 
-    const subject = `New lead: ${fullName}${data.service ? ` — ${data.service}` : ""}`;
+    const subject = `New lead: ${fullName}${serviceSummary ? ` — ${serviceSummary}` : ""}`;
 
     try {
       const res = await fetch("https://api.resend.com/emails", {

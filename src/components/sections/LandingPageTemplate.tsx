@@ -21,6 +21,9 @@ import { ServiceArea } from "@/components/sections/ServiceArea";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ServicePicker } from "@/components/ui/ServicePicker";
+import { useServicePicker } from "@/hooks/use-service-picker";
+import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 
 import textLogo from "@/assets/app-text-logo.webp";
 import teamImg from "@/assets/team.webp";
@@ -139,6 +142,7 @@ function LeadForm({
 }) {
   const [sent, setSent] = useState(false);
   const captcha = useRecaptchaGate();
+  const servicePicker = useServicePicker();
   return (
     <div className={`relative bg-[#1E3A6E] p-8 sm:p-12 text-white ${className}`}>
       <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
@@ -172,9 +176,18 @@ function LeadForm({
           onSubmit={async (e) => {
             e.preventDefault();
             const form = e.currentTarget;
+            // Not required: this form is tuned for minimum ad-conversion
+            // friction, so an empty pick still submits — it just sends
+            // whatever (if anything) was selected.
+            const services = servicePicker.resolve({ required: false });
+            if (!services) return;
             if (await captcha.verify()) {
-              await submitLeadFromForm(form, { source: `Landing Page — ${title}` });
+              await submitLeadFromForm(form, {
+                source: `Landing Page — ${title}`,
+                service: services,
+              });
               setSent(true);
+              servicePicker.reset();
             }
           }}
           className="space-y-4"
@@ -209,6 +222,26 @@ function LeadForm({
               className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all"
             />
           </div>
+
+          {/* Service picker — optional here (ad landing pages are tuned for
+             minimum submit friction) but present for consistency + better
+             lead context when the visitor does tell us. */}
+          <div>
+            <p className="text-white/70 text-[12px] font-bold uppercase tracking-wide mb-2">
+              Service needed (optional)
+            </p>
+            <ServicePicker
+              options={RESIDENTIAL_SERVICES}
+              selected={servicePicker.selected}
+              onToggle={servicePicker.toggle}
+              otherText={servicePicker.otherText}
+              onOtherTextChange={servicePicker.setOtherText}
+              error={servicePicker.error}
+              ariaLabel="Service needed"
+              columns="grid-cols-3 sm:grid-cols-4"
+            />
+          </div>
+
           <div className="flex items-start gap-3 mt-6 pt-2">
             <input
               id={`sms-optin-${title.replace(/\s+/g, "")}`}
