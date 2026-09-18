@@ -1,85 +1,122 @@
-import { useState, useRef, useEffect, ReactNode } from "react";
-import { MessageCircle, X, Send, Phone, MapPin } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, Fragment, type ReactNode } from "react";
+import { useRouter } from "@tanstack/react-router";
+import { MessageCircle, X, Send, Phone, ArrowRight, RotateCcw } from "lucide-react";
 import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
 import { sendLeadEmail } from "@/lib/lead-email.functions";
 import { trackFormSubmit, trackAdsLeadConversion } from "@/lib/analytics";
 import { ServicePicker } from "@/components/ui/ServicePicker";
 import { useServicePicker } from "@/hooks/use-service-picker";
 import { RESIDENTIAL_SERVICES } from "@/data/service-options";
+import { ChatEngine, type EngineState } from "@/lib/chatbot/engine";
+import type { BotMessage, ChatAction, LeadRequest, Turn } from "@/lib/chatbot/types";
 
 /* ──────────────────────────────────────────────────────────────────────────
- * All Phase Chatbot Widget with Conversational Flow
+ * All Phase Chatbot Widget
+ *
+ * The UI shell for the rule-based assistant in src/lib/chatbot. The engine
+ * decides what to say; this component paces the replies (typing indicator,
+ * delay scaled to message length), renders the light markup, action buttons,
+ * quick replies and the service picker, and delivers finished leads.
  * ────────────────────────────────────────────────────────────────────────── */
 
-type Msg = { from: "bot" | "user"; text: string | ReactNode };
-
-type ChatFlowState =
-  | "INIT"
-  | "BOOK_NAME"
-  | "BOOK_PHONE"
-  | "BOOK_EMAIL"
-  | "BOOK_ZIP"
-  | "BOOK_TYPE"
-  | "HOURS_ZIP"
-  | "ASK_RESTART"
-  | "DONE";
-
-type UserData = {
-  name?: string;
-  phone?: string;
-  email?: string;
-  zip?: string;
-  type?: string;
+type Msg = {
+  id: number;
+  from: "bot" | "user";
+  text: string;
+  actions?: ChatAction[];
+  tone?: BotMessage["tone"];
 };
 
-const QUICK_REPLIES = ["Book a service", "Emergency help", "Get a quote", "Hours & areas"];
+type Persisted = {
+  v: 2;
+  messages: Msg[];
+  engine: EngineState;
+  quickReplies: string[];
+  showPicker: boolean;
+  input: Turn["input"];
+};
+
+const STORAGE_KEY = "ap-chatbot-v2";
+const DEFAULT_INPUT: Turn["input"] = { placeholder: "Type a message…", mode: "text" };
 
 /**
- * Deliver a completed chatbot booking to the shop team through the same
- * Resend-backed server function the site forms use, so chat leads are no longer
- * silently dropped. Fire-and-forget: a send failure is logged but never
- * interrupts the conversation (mirrors the forms' "never block the user" rule).
+ * Delivers a finished chatbot request through the same Resend-backed server
+ * function the site forms use. Returns whether the email actually went out,
+ * so the bot only tells the visitor "you're all set" when it's true.
  *
- * In-area bookings also report GA4 `form_submit` + the Google Ads lead
- * conversion, exactly like the forms, so chat leads are attributed to the
- * campaign. Out-of-area leads (ZIP outside the service area) are still emailed
- * so the team can honor the bot's "we'll reach out" promise, but are NOT
- * counted as a conversion.
+ * In-area requests report GA4 `form_submit` + the Google Ads lead conversion,
+ * exactly like the forms. Out-of-area requests are still emailed so the team
+ * can follow up, but are not counted as a conversion.
  */
-async function submitChatbotLead(
-  data: UserData,
-  { outOfArea = false, services }: { outOfArea?: boolean; services?: string[] } = {},
-): Promise<void> {
-  const source = outOfArea ? "Chatbot Booking (Out of Area)" : "Chatbot Booking";
+async function deliverLead(lead: LeadRequest): Promise<boolean> {
+  const { outOfArea, ...payload } = lead;
 
   if (!outOfArea) {
     trackFormSubmit({
-      form_location: source,
+      form_location: lead.source,
       form_type: "chatbot_booking",
       page_path: typeof window !== "undefined" ? window.location.pathname : "",
     });
   }
 
   try {
-    const result = await sendLeadEmail({
-      data: {
-        source,
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-        zip: data.zip,
-        // `services` (from the icon-picker) renders as separate chips in the
-        // email; `data.type` is the fallback when the visitor free-typed an
-        // answer instead of using the picker.
-        service: services ?? data.type,
-      },
-    });
-    if (result.success && !outOfArea) {
-      trackAdsLeadConversion();
-    }
+    const result = await sendLeadEmail({ data: payload });
+    if (result.success && !outOfArea) trackAdsLeadConversion();
+    return result.success;
   } catch (err) {
     console.error("Chatbot lead failed to send:", err);
+    return false;
   }
+}
+
+function loadPersisted(): Persisted | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const p = JSON.parse(raw) as Persisted;
+    return p && p.v === 2 && Array.isArray(p.messages) && p.engine ? p : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Renders the engine's tiny markup: **bold**, line breaks and "• " bullets. */
+function RichText({ text }: { text: string }) {
+  const inline = (line: string): ReactNode[] =>
+    line.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+      part.startsWith("**") && part.endsWith("**") ? (
+        <strong key={i} className="font-bold">
+          {part.slice(2, -2)}
+        </strong>
+      ) : (
+        <Fragment key={i}>{part}</Fragment>
+      ),
+    );
+
+  const blocks = text.split(/\n{2,}/);
+  return (
+    <div className="flex flex-col gap-2">
+      {blocks.map((block, bi) => {
+        const lines = block.split("\n");
+        return (
+          <div key={bi} className="flex flex-col gap-1">
+            {lines.map((line, li) =>
+              line.startsWith("• ") ? (
+                <div key={li} className="flex gap-2 pl-0.5">
+                  <span className="text-[#4A7BC4]" aria-hidden="true">
+                    •
+                  </span>
+                  <span>{inline(line.slice(2))}</span>
+                </div>
+              ) : (
+                <p key={li}>{inline(line)}</p>
+              ),
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 /* Circular avatar: white speech-bubble icon on the brand-navy disc, with a
@@ -119,15 +156,17 @@ function MascotAvatar({
 export function ChatbotWidget() {
   const opts = useSiteOptions();
   const trackedPhone = useTrackedPhone();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
 
-  // State for conversation
+  // Conversation state
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
-  const [flowState, setFlowState] = useState<ChatFlowState>("INIT");
-  const [userData, setUserData] = useState<UserData>({});
+  const [quickReplies, setQuickReplies] = useState<string[]>([]);
+  const [showPicker, setShowPicker] = useState(false);
+  const [inputSpec, setInputSpec] = useState<Turn["input"]>(DEFAULT_INPUT);
   const servicePicker = useServicePicker();
 
   // Comic bubble lifecycle
@@ -135,28 +174,128 @@ export function ChatbotWidget() {
   const [hintGone, setHintGone] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const engineRef = useRef<ChatEngine | null>(null);
+  const nextId = useRef(1);
+  const busy = useRef(false);
 
-  // Initialize greeting when opening
+  const biz = {
+    phone: trackedPhone.phone,
+    email: opts.email,
+    address: `${opts.address_line1}, ${opts.address_city}, ${opts.address_state} ${opts.address_zip}`,
+  };
+
+  const engine = useCallback((): ChatEngine => {
+    if (!engineRef.current) engineRef.current = new ChatEngine({ biz });
+    return engineRef.current;
+    // biz is rebuilt each render; the engine only needs the values at creation.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* Show a turn: bot bubbles appear one at a time behind a typing indicator
+     (paced by length so it reads naturally), then the quick replies / picker. */
+  const playTurn = useCallback(
+    (turn: Turn, onDone?: () => void) => {
+      busy.current = true;
+      setQuickReplies([]);
+      setShowPicker(false);
+      let elapsed = 0;
+      turn.messages.forEach((m, i) => {
+        const delay = Math.min(1500, 450 + m.text.length * 7) + (i === 0 ? 0 : 250);
+        elapsed += delay;
+        timers.current.push(
+          setTimeout(() => setTyping(true), elapsed - delay + (i === 0 ? 0 : 150)),
+        );
+        timers.current.push(
+          setTimeout(() => {
+            setTyping(false);
+            setMessages((prev) => [
+              ...prev,
+              { id: nextId.current++, from: "bot", text: m.text, actions: m.actions, tone: m.tone },
+            ]);
+          }, elapsed),
+        );
+      });
+      timers.current.push(
+        setTimeout(() => {
+          setQuickReplies(turn.quickReplies);
+          setShowPicker(turn.showServicePicker);
+          setInputSpec(turn.input);
+          if (turn.showServicePicker) servicePicker.reset();
+          busy.current = false;
+          if (onDone) onDone();
+          else if (typeof window !== "undefined" && window.matchMedia?.("(pointer: fine)").matches)
+            inputRef.current?.focus();
+        }, elapsed + 30),
+      );
+    },
+    [servicePicker],
+  );
+
+  /* A turn that carries a finished lead: show its messages, send the email
+     (typing indicator while it's in flight), then show the real outcome. */
+  const runTurn = useCallback(
+    (turn: Turn) => {
+      if (!turn.lead) {
+        playTurn(turn);
+        return;
+      }
+      const lead = turn.lead;
+      playTurn(turn, () => {
+        busy.current = true;
+        setTyping(true);
+        void deliverLead(lead).then((ok) => {
+          setTyping(false);
+          runTurn(engine().leadDelivered(ok));
+        });
+      });
+    },
+    [engine, playTurn],
+  );
+
+  // Start (or restore) the conversation when the panel first opens.
   useEffect(() => {
-    if (open && messages.length === 0) {
-      setMessages([
-        {
-          from: "bot",
-          text: "Hi there! I'm the All Phase assistant. How can I help with your plumbing today?",
-        },
-      ]);
+    if (!open || messages.length > 0) return;
+    const saved = loadPersisted();
+    if (saved && saved.messages.length) {
+      engineRef.current = new ChatEngine({ biz, state: saved.engine });
+      nextId.current = Math.max(...saved.messages.map((m) => m.id)) + 1;
+      setMessages(saved.messages);
+      setQuickReplies(saved.quickReplies);
+      setShowPicker(saved.showPicker);
+      setInputSpec(saved.input ?? DEFAULT_INPUT);
+      return;
     }
-  }, [open, messages.length]);
+    runTurn(engine().start());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  // Persist the conversation for this tab so a page reload doesn't wipe it.
+  useEffect(() => {
+    if (!messages.length || !engineRef.current || typing) return;
+    try {
+      const data: Persisted = {
+        v: 2,
+        messages: messages.slice(-100),
+        engine: engineRef.current.state,
+        quickReplies,
+        showPicker,
+        input: inputSpec,
+      };
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {
+      /* storage unavailable (private mode, quota) — chat still works */
+    }
+  }, [messages, quickReplies, showPicker, inputSpec, typing]);
 
   // Auto-scroll to the newest message.
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, typing, open]);
+  }, [messages, typing, open, quickReplies, showPicker]);
 
   // Comic bubble pop-up timing
   useEffect(() => {
-    // Show quick popup shortly after load
     const t1 = setTimeout(() => setHintShown(true), 1000);
     return () => clearTimeout(t1);
   }, []);
@@ -179,251 +318,84 @@ export function ChatbotWidget() {
     timers.current.push(t);
   }
 
-  function addBotMsg(content: string | ReactNode, delay = 600) {
-    setTyping(true);
-    const t = setTimeout(() => {
-      setTyping(false);
-      setMessages((m) => [...m, { from: "bot", text: content }]);
-    }, delay);
-    timers.current.push(t);
+  function restart() {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+    busy.current = false;
+    setTyping(false);
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+    engineRef.current = new ChatEngine({ biz });
+    setMessages([]);
+    setQuickReplies([]);
+    setShowPicker(false);
+    setInputSpec(DEFAULT_INPUT);
+    servicePicker.reset();
+    runTurn(engineRef.current.start());
   }
 
-  /**
-   * Completes the BOOK_TYPE step, whether the visitor picked icon chips
-   * (possibly several — MCQ, not single-choice) or free-typed an answer in
-   * the composer. `services` is the finished list of service strings (an
-   * "Other" pick already resolved to "Other: <what they typed>").
-   */
-  function finishBookType(services: string[]) {
-    const label = services.join(", ");
-    const newData = { ...userData, type: label };
-    setUserData(newData);
-    setFlowState("ASK_RESTART");
-    void submitChatbotLead(newData, { services });
-    addBotMsg(
-      <div className="flex flex-col gap-2">
-        <p>
-          Thank you! We've received your request for {label}. Our team will contact you shortly at{" "}
-          {newData.phone} or {newData.email} to confirm your appointment.
-        </p>
-        <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-      </div>,
+  function handleSend(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed || busy.current) return;
+    setMessages((m) => [...m, { id: nextId.current++, from: "user", text: trimmed }]);
+    setInput("");
+    runTurn(engine().send(trimmed));
+  }
+
+  function handlePickerContinue() {
+    if (busy.current) return;
+    const services = servicePicker.resolve();
+    if (!services) return;
+    setMessages((m) => [...m, { id: nextId.current++, from: "user", text: services.join(", ") }]);
+    servicePicker.reset();
+    runTurn(engine().pickServices(services));
+  }
+
+  function followLink(e: React.MouseEvent, href: string) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    router.history.push(href);
+    // On phones the panel covers the page, so get out of the way.
+    if (typeof window !== "undefined" && window.innerWidth < 640) closeChat();
+  }
+
+  function renderAction(a: ChatAction, i: number, tone?: BotMessage["tone"]) {
+    if (a.type === "call") {
+      return (
+        <a
+          key={i}
+          href={trackedPhone.phone_href}
+          className={`inline-flex items-center gap-2 px-3.5 py-2 text-[13.5px] font-bold shadow-sm transition-transform hover:scale-105 active:scale-95 ${
+            tone === "alert" ? "bg-[#ef4444] text-white" : "bg-[#F5C842] text-[#1E3A6E]"
+          }`}
+        >
+          <Phone className="size-4" strokeWidth={2.4} />
+          {a.label ?? `Call ${trackedPhone.phone}`}
+        </a>
+      );
+    }
+    return (
+      <a
+        key={i}
+        href={a.href}
+        onClick={(e) => followLink(e, a.href)}
+        className="inline-flex items-center gap-1.5 border border-[#1E3A6E]/20 bg-[#eef4fb] px-3 py-2 text-[13px] font-semibold text-[#1E3A6E] transition-colors hover:bg-[#1E3A6E] hover:text-white"
+      >
+        {a.label}
+        <ArrowRight className="size-3.5" />
+      </a>
     );
   }
 
-  function handleBookTypeContinue() {
-    const services = servicePicker.resolve();
-    if (!services) return;
-    setMessages((m) => [...m, { from: "user", text: services.join(", ") }]);
-    servicePicker.reset();
-    finishBookType(services);
-  }
-
-  function handleInput(text: string) {
-    const trimmed = text.trim();
-    if (!trimmed) return;
-
-    // Add user message immediately
-    setMessages((m) => [...m, { from: "user", text: trimmed }]);
-    setInput("");
-
-    switch (flowState) {
-      case "INIT":
-        handleInitChoice(trimmed);
-        break;
-
-      case "BOOK_NAME":
-        if (trimmed.length < 2 || !/^[a-zA-Z\s]+$/.test(trimmed)) {
-          addBotMsg("Please enter a valid name (letters and spaces only).");
-          return;
-        }
-        setUserData((prev) => ({ ...prev, name: trimmed }));
-        setFlowState("BOOK_PHONE");
-        addBotMsg(`Thanks, ${trimmed}. What is the best phone number to reach you?`);
-        break;
-
-      case "BOOK_PHONE":
-        const digits = trimmed.replace(/\D/g, "");
-        if (digits.length !== 10) {
-          addBotMsg("Please enter a valid 10-digit phone number.");
-          return;
-        }
-        setUserData((prev) => ({ ...prev, phone: trimmed }));
-        setFlowState("BOOK_EMAIL");
-        addBotMsg("Got it. And your email address?");
-        break;
-
-      case "BOOK_EMAIL":
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
-          addBotMsg("Please enter a valid email address.");
-          return;
-        }
-        setUserData((prev) => ({ ...prev, email: trimmed }));
-        setFlowState("BOOK_ZIP");
-        addBotMsg("Thanks! What is your zip code?");
-        break;
-
-      case "BOOK_ZIP":
-        if (!/^\d{5}$/.test(trimmed)) {
-          addBotMsg("Please enter a valid 5-digit zip code.");
-          return;
-        }
-        setUserData((prev) => ({ ...prev, zip: trimmed }));
-        // 98xxx is Washington State. Just an example validation for our service areas.
-        if (!/^98\d{3}$/.test(trimmed)) {
-          setFlowState("ASK_RESTART");
-          // Still a real lead — name/phone/email were already captured, so email
-          // the team (flagged out-of-area, not counted as a conversion) to honor
-          // the "we'll reach out" promise. userData lacks the just-typed zip
-          // (setUserData is async), so pass it explicitly.
-          void submitChatbotLead({ ...userData, zip: trimmed }, { outOfArea: true });
-          addBotMsg(
-            <div className="flex flex-col gap-2">
-              <p>We are not serving there currently but we will reach you out for solution.</p>
-              <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-            </div>,
-          );
-          return;
-        }
-        servicePicker.reset();
-        setFlowState("BOOK_TYPE");
-        addBotMsg("Perfect. Finally, what type of service do you need?");
-        break;
-
-      case "BOOK_TYPE": {
-        // Free-typed fallback for a visitor who ignores the icon picker and
-        // just types their answer in the composer instead.
-        servicePicker.reset();
-        finishBookType([trimmed]);
-        break;
-      }
-
-      case "HOURS_ZIP":
-        if (!/^\d{5}$/.test(trimmed)) {
-          addBotMsg("Please enter a valid 5-digit zip code.");
-          return;
-        }
-        setFlowState("ASK_RESTART");
-        if (!/^98\d{3}$/.test(trimmed)) {
-          addBotMsg(
-            <div className="flex flex-col gap-2">
-              <p>We are not serving there currently but we will reach you out for solution.</p>
-              <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-            </div>,
-          );
-          return;
-        }
-        // Simulate checking zip against available service areas
-        addBotMsg(
-          <div className="flex flex-col gap-2">
-            <p>Yes, we serve the {trimmed} area! Here are some of our primary service zones:</p>
-            <div className="flex flex-col gap-1.5 mt-1">
-              <a
-                href="/service-areas"
-                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
-              >
-                <MapPin className="size-4" /> Greater Seattle
-              </a>
-              <a
-                href="/service-areas"
-                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
-              >
-                <MapPin className="size-4" /> Tukwila
-              </a>
-              <a
-                href="/service-areas"
-                className="flex items-center gap-2 text-[14px] text-[#4A7BC4] hover:underline font-medium"
-              >
-                <MapPin className="size-4" /> Bellevue
-              </a>
-            </div>
-            <p className="text-[13px] italic">We are available 24/7 for all areas.</p>
-            <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-          </div>,
-        );
-        break;
-
-      case "ASK_RESTART":
-        const ans = trimmed.toLowerCase();
-        if (ans === "yes" || ans === "y") {
-          // Clear chat and restart
-          setMessages([
-            {
-              from: "bot",
-              text: "Hi there! I'm the All Phase assistant. How can I help with your plumbing today?",
-            },
-          ]);
-          setUserData({});
-          setFlowState("INIT");
-        } else if (ans === "no" || ans === "n") {
-          // Close chat immediately
-          closeChat();
-        } else {
-          addBotMsg("Please answer Yes or No. Is there anything else I can help you with?");
-        }
-        break;
-
-      default:
-        addBotMsg("If you need more help, please call us directly or use the contact form!");
-        break;
-    }
-  }
-
-  function handleInitChoice(choice: string) {
-    const c = choice.toLowerCase();
-
-    if (c.includes("book")) {
-      setFlowState("BOOK_NAME");
-      addBotMsg("Great! Let's get you booked. To start, what is your name?");
-    } else if (c.includes("emergency") || c.includes("urgent")) {
-      setFlowState("ASK_RESTART");
-      addBotMsg(
-        <div className="flex flex-col gap-2">
-          <p>This is an emergency! We are available 24/7.</p>
-          <p>Tap below to call us immediately, and we'll dispatch a technician.</p>
-          <a
-            href={trackedPhone.phone_href}
-            onClick={() => {
-              // Trigger email logic for emergency
-              window.location.href = `mailto:${opts.email}?subject=EMERGENCY PLUMBING HELP&body=I need immediate plumbing help!`;
-            }}
-            className="mt-2 inline-flex items-center justify-center gap-2 bg-[#ef4444] px-4 py-2 text-[14px] font-bold text-white shadow-md transition-transform hover:scale-105"
-          >
-            <Phone className="size-4" /> Call Now
-          </a>
-          <p className="mt-2 font-semibold">Is there anything else I can help you with?</p>
-        </div>,
-      );
-    } else if (c.includes("quote")) {
-      setFlowState("ASK_RESTART");
-      addBotMsg(
-        <div className="flex flex-col gap-2">
-          <p>We give flat-rate, upfront quotes with no surprises.</p>
-          <a
-            href="/contact"
-            className="mt-1 inline-block bg-[#1E3A6E] px-4 py-2 text-center text-[14px] font-bold text-white transition-transform hover:scale-105"
-          >
-            Go to Quote Form
-          </a>
-          <p className="mt-2 font-semibold">Is there anything else I can help you with?</p>
-        </div>,
-      );
-    } else if (c.includes("hour") || c.includes("area")) {
-      setFlowState("HOURS_ZIP");
-      addBotMsg("We proudly serve many areas. What is your zip code to check availability?");
-    } else {
-      setFlowState("ASK_RESTART");
-      addBotMsg(
-        <div className="flex flex-col gap-2">
-          <p>
-            Thanks for your message! A team member will follow up shortly. In the meantime, you can
-            call us any time for immediate help.
-          </p>
-          <p className="mt-1 font-semibold">Is there anything else I can help you with?</p>
-        </div>,
-      );
-    }
-  }
+  const bubbleTone = (tone?: BotMessage["tone"]) =>
+    tone === "alert"
+      ? "border-l-4 border-[#ef4444] bg-[#fff5f5]"
+      : tone === "success"
+        ? "border-l-4 border-[#22c55e] bg-[#f3fbf6]"
+        : "bg-white";
 
   return (
     <div className="ap-chatbot-root fixed bottom-[88px] right-4 z-[60] flex flex-col items-end sm:right-6 lg:bottom-6">
@@ -433,26 +405,42 @@ export function ChatbotWidget() {
           role="dialog"
           aria-label="All Phase chat assistant"
           className={`ap-chat-panel ap-chat-radius ${closing ? "ap-chat-out" : "ap-chat-in"}
-                     mb-3 flex h-[min(680px,calc(100dvh-120px))] w-[min(440px,calc(100vw-2rem))] flex-col
+                     mb-3 flex h-[min(680px,calc(100dvh-116px))] sm:h-[min(680px,calc(100dvh-120px))] w-[min(440px,calc(100vw-2rem))] flex-col
                      overflow-hidden border border-black/10 bg-white
                      shadow-[0_24px_60px_-12px_rgba(15,34,70,0.5)]`}
         >
           {/* Header */}
           <div
-            className="flex items-center gap-3 px-4 py-3.5 text-white"
+            className="flex items-center gap-2.5 px-3.5 py-2.5 text-white sm:gap-3 sm:px-4 sm:py-3.5"
             style={{ background: "linear-gradient(135deg,#0f2246 0%,#1E3A6E 55%,#2d5fa8 100%)" }}
           >
-            <MascotAvatar size={48} />
+            <span className="sm:hidden">
+              <MascotAvatar size={38} />
+            </span>
+            <span className="hidden sm:inline-block">
+              <MascotAvatar size={48} />
+            </span>
             <div className="min-w-0 flex-1">
-              <p className="text-[17px] font-bold leading-tight">All Phase Assistant</p>
-              <p className="flex items-center gap-1.5 text-[13px] text-white/80">
-                <span className="relative flex size-2">
+              <p className="truncate text-[16px] font-bold leading-tight sm:text-[17px]">
+                All Phase Assistant
+              </p>
+              <p className="flex min-w-0 items-center gap-1.5 text-[12.5px] text-white/80 sm:text-[13px]">
+                <span className="relative flex size-2 shrink-0">
                   <span className="ap-circle absolute inline-flex size-full animate-ping bg-[#4ade80] opacity-75" />
                   <span className="ap-circle relative inline-flex size-2 bg-[#4ade80]" />
                 </span>
-                Online · replies instantly
+                <span className="truncate">Online · replies instantly</span>
               </p>
             </div>
+            <button
+              type="button"
+              onClick={restart}
+              aria-label="Start a new conversation"
+              title="Start over"
+              className="ap-icon-btn inline-flex size-9 items-center justify-center text-white/80 transition-colors duration-200 hover:bg-white/15 hover:text-white active:scale-90"
+            >
+              <RotateCcw className="size-5" />
+            </button>
             <button
               type="button"
               onClick={closeChat}
@@ -466,19 +454,27 @@ export function ChatbotWidget() {
           {/* Messages */}
           <div
             ref={scrollRef}
+            aria-live="polite"
             className="flex-1 space-y-3.5 overflow-y-auto bg-[#f4f7fb] px-4 py-4"
           >
-            {messages.map((m, i) =>
+            {messages.map((m) =>
               m.from === "bot" ? (
-                <div key={i} className="ap-msg flex items-end gap-2">
+                <div key={m.id} className="ap-msg flex items-end gap-2" data-from="bot">
                   <MascotAvatar size={32} ring={false} />
-                  <div className="max-w-[80%] bg-white px-4 py-3 text-[15px] leading-snug text-[#1E3A6E] shadow-sm">
-                    {m.text}
+                  <div
+                    className={`max-w-[82%] px-4 py-3 text-[15px] leading-snug text-[#1E3A6E] shadow-sm ${bubbleTone(m.tone)}`}
+                  >
+                    <RichText text={m.text} />
+                    {m.actions?.length ? (
+                      <div className="mt-2.5 flex flex-wrap gap-2">
+                        {m.actions.map((a, i) => renderAction(a, i, m.tone))}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               ) : (
-                <div key={i} className="ap-msg flex justify-end">
-                  <div className="max-w-[80%] bg-[#1E3A6E] px-4 py-3 text-[15px] leading-snug text-white shadow-sm">
+                <div key={m.id} className="ap-msg flex justify-end" data-from="user">
+                  <div className="max-w-[80%] whitespace-pre-wrap break-words bg-[#1E3A6E] px-4 py-3 text-[15px] leading-snug text-white shadow-sm">
                     {m.text}
                   </div>
                 </div>
@@ -486,7 +482,7 @@ export function ChatbotWidget() {
             )}
 
             {typing && (
-              <div className="ap-msg flex items-end gap-2">
+              <div className="ap-msg flex items-end gap-2" aria-label="Assistant is typing">
                 <MascotAvatar size={32} ring={false} />
                 <div className="flex items-center gap-1 bg-white px-3.5 py-3 shadow-sm">
                   {[0, 1, 2].map((d) => (
@@ -501,14 +497,14 @@ export function ChatbotWidget() {
             )}
           </div>
 
-          {/* Quick replies (only show when INIT or ASK_RESTART) */}
-          {(flowState === "INIT" || flowState === "ASK_RESTART") && !typing && (
-            <div className="flex flex-wrap gap-2 border-t border-black/5 bg-white px-4 pt-3.5">
-              {(flowState === "INIT" ? QUICK_REPLIES : ["Yes", "No"]).map((q) => (
+          {/* Quick replies */}
+          {quickReplies.length > 0 && !typing && !showPicker && (
+            <div className="flex max-h-[112px] flex-wrap gap-2 overflow-y-auto border-t border-black/5 bg-white px-4 pt-3.5">
+              {quickReplies.map((q) => (
                 <button
                   key={q}
                   type="button"
-                  onClick={() => handleInput(q)}
+                  onClick={() => handleSend(q)}
                   className="border border-[#1E3A6E]/25 bg-[#eef4fb] px-3.5 py-2 text-[13.5px] font-semibold text-[#1E3A6E] transition-all duration-200 hover:scale-105 hover:bg-[#1E3A6E] hover:text-white active:scale-95"
                 >
                   {q}
@@ -517,11 +513,11 @@ export function ChatbotWidget() {
             </div>
           )}
 
-          {/* Service picker (BOOK_TYPE step): icon-button MCQ, multi-select,
+          {/* Service picker (service step): icon-button MCQ, multi-select,
              with an Other chip that reveals free text. Typing an answer in
-             the composer instead still works (handled in handleInput). */}
-          {flowState === "BOOK_TYPE" && !typing && (
-            <div className="border-t border-black/5 bg-white px-4 pt-3.5 pb-1">
+             the composer instead still works (the engine parses it). */}
+          {showPicker && !typing && (
+            <div className="max-h-[46%] overflow-y-auto border-t border-black/5 bg-white px-4 pt-3.5 pb-1">
               <ServicePicker
                 options={RESIDENTIAL_SERVICES}
                 selected={servicePicker.selected}
@@ -535,7 +531,7 @@ export function ChatbotWidget() {
               />
               <button
                 type="button"
-                onClick={handleBookTypeContinue}
+                onClick={handlePickerContinue}
                 disabled={servicePicker.selected.length === 0}
                 className="mt-2.5 mb-1 w-full border border-[#1E3A6E]/25 bg-[#1E3A6E] px-4 py-2.5 text-[14px] font-bold text-white transition-all duration-200 hover:bg-[#16305c] active:scale-95 disabled:opacity-40"
               >
@@ -549,7 +545,7 @@ export function ChatbotWidget() {
             className="flex items-center gap-2 bg-white p-3.5"
             onSubmit={(e) => {
               e.preventDefault();
-              handleInput(input);
+              handleSend(input);
             }}
           >
             <a
@@ -560,15 +556,22 @@ export function ChatbotWidget() {
               <Phone className="size-5" strokeWidth={2.4} />
             </a>
             <input
+              ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type a message…"
+              placeholder={inputSpec.placeholder}
+              inputMode={inputSpec.mode === "numeric" ? "numeric" : inputSpec.mode}
+              autoComplete={
+                inputSpec.mode === "tel" ? "tel" : inputSpec.mode === "email" ? "email" : "off"
+              }
+              maxLength={1000}
+              aria-label="Message"
               className="min-w-0 flex-1 border-2 border-[#1E3A6E]/15 bg-[#f4f7fb] px-4 py-3 text-[15px] text-[#1E3A6E] placeholder:text-gray-400 transition-colors duration-200 focus:border-[#1E3A6E] focus:bg-white focus:outline-none"
             />
             <button
               type="submit"
               aria-label="Send message"
-              disabled={!input.trim()}
+              disabled={!input.trim() || typing}
               className="inline-flex size-11 shrink-0 items-center justify-center bg-[#1E3A6E] text-white transition-all duration-200 hover:scale-110 hover:bg-[#16305c] active:scale-95 disabled:scale-100 disabled:opacity-40"
             >
               <Send className="size-5" />
@@ -603,7 +606,9 @@ export function ChatbotWidget() {
         onClick={() => (open ? closeChat() : openChat())}
         aria-label={open ? "Close chat" : "Open chat"}
         aria-expanded={open}
-        className="ap-launcher group relative flex items-center justify-center transition-transform duration-200 hover:-translate-y-1 active:translate-y-0 active:scale-95"
+        // On phones the open panel's own close button replaces the launcher,
+        // which frees that space for the conversation.
+        className={`ap-launcher group relative ${open ? "max-sm:hidden" : ""} flex items-center justify-center transition-transform duration-200 hover:-translate-y-1 active:translate-y-0 active:scale-95`}
       >
         <span className="ap-launcher-glow" aria-hidden="true" />
         <span className="relative grid place-items-center">
