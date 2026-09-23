@@ -52,12 +52,24 @@ function ServiceMap({ zipLocation }: { zipLocation: ZipLocation | null }) {
         });
         mapInstanceRef.current = map;
 
-        /* ── Tile layer (CartoDB light, crisp & neutral) ── */
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-          maxZoom: 19,
-        }).addTo(map);
+        /* ── Tile layer (Esri Light Gray Canvas, crisp & neutral, no API key needed) ──
+           CartoDB's free anonymous basemap tiles now require a signed-up API key
+           (they render an "API KEY REQUIRED" watermark without one), so we use
+           Esri's free Community Basemaps instead: a base layer plus a labels
+           layer on top, which together look the same as the old single tile. */
+        L.tileLayer(
+          "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+          {
+            attribution:
+              '&copy; <a href="https://www.esri.com/">Esri</a> — Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
+            maxZoom: 19,
+            maxNativeZoom: 16,
+          },
+        ).addTo(map);
+        L.tileLayer(
+          "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+          { maxZoom: 19, maxNativeZoom: 16 },
+        ).addTo(map);
 
         /* ── Service-area polygon (King + southern Pierce) in navy blue ── */
         const serviceAreaCoords: [number, number][] = [
