@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { servicePageSchema } from "@/lib/seo";
+import { blogCardsForService, type BlogCard } from "@/data/blog-cards";
+import { Link, useLocation } from "@tanstack/react-router";
 import {
   Phone,
   Plus,
@@ -318,9 +320,72 @@ function ServiceFAQ({ faqs, title }: { faqs: ServiceFAQ[]; title: string }) {
 }
 
 /* ───── Main template ───── */
+/* ───── Helpful guides: links this service page to related blog posts ───── */
+function ServiceGuides({ guides }: { guides: BlogCard[] }) {
+  if (guides.length === 0) return null;
+  return (
+    <div className="reveal-on-scroll mt-12 border-2 border-[#1E3A6E]/15 bg-[#f7f9fc] p-6 sm:p-7">
+      <p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#3A66AD]">
+        Helpful guides
+      </p>
+      <h2
+        className="mt-1.5 text-[22px] sm:text-[24px] font-black text-[#1E3A6E] leading-tight"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+      >
+        From the All Phase blog
+      </h2>
+      <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+        {guides.map((g) => (
+          <li key={g.slug}>
+            <Link
+              to="/blog/$slug"
+              params={{ slug: g.slug }}
+              className="group flex h-full items-center gap-4 border border-[#1E3A6E]/10 bg-white p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#1E3A6E]/40 hover:shadow-[0_14px_30px_-16px_rgba(30,58,110,0.45)]"
+            >
+              <span className="relative size-16 shrink-0 overflow-hidden bg-[#1E3A6E]">
+                <img
+                  src={g.thumb ?? g.img}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </span>
+              <span className="text-[14.5px] font-bold leading-snug text-[#1E3A6E] group-hover:text-[#4A7BC4] transition-colors">
+                {g.title}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function ServicePageTemplate({ content }: { content: ServicePageContent }) {
+  const { pathname } = useLocation();
+  const crumbs = [
+    { name: "Home", path: "/" },
+    ...(content.parentBreadcrumb
+      ? [{ name: content.parentBreadcrumb.label, path: content.parentBreadcrumb.href }]
+      : []),
+    { name: content.breadcrumbLabel, path: pathname },
+  ];
   return (
     <>
+      {/* Service + BreadcrumbList + FAQPage structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: servicePageSchema({
+            name: content.heroH1 ?? content.title,
+            description: content.hook,
+            path: pathname,
+            crumbs,
+            faqs: content.faqs,
+          }),
+        }}
+      />
       <ServicePageHero content={content} />
 
       <section className="bg-white py-12 sm:py-16">
@@ -389,12 +454,16 @@ export function ServicePageTemplate({ content }: { content: ServicePageContent }
                   {block.list && (
                     <ul className="list-disc list-inside text-[16px] text-gray-700 space-y-1.5 my-4 marker:text-[#1E3A6E] pl-2">
                       {block.list.map((item) => (
-                        <li key={item}>{item}</li>
+                        <li key={item}>
+                          <TrackedPhoneText text={item} />
+                        </li>
                       ))}
                     </ul>
                   )}
                 </div>
               ))}
+
+              <ServiceGuides guides={blogCardsForService(pathname)} />
             </div>
 
             {/* Sidebar */}

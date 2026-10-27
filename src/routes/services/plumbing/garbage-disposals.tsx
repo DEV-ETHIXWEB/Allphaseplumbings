@@ -84,14 +84,14 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
   head: () => ({
     meta: [
-      { title: "Seattle Garbage Disposal Repair, Replacement & Installation, All Phase Plumbing" },
+      { title: "Garbage Disposal Repair & Installation Seattle | All Phase" },
       {
         name: "description",
         content:
-          "Fast, reliable garbage disposal repair, replacement, and installation in Seattle from All Phase Plumbing.",
+          "Garbage disposal repair, replacement, and installation in Seattle. Jammed, leaking, or humming units fixed fast by licensed plumbers. Call (206) 309-1088.",
       },
-      { property: "og:title", content: "Seattle Garbage Disposal Repair, Replacement & Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Fast, reliable garbage disposal repair, replacement, and installation in Seattle from All Phase Plumbing." },
+      { property: "og:title", content: "Garbage Disposal Repair & Installation Seattle | All Phase" },
+      { property: "og:description", content: "Garbage disposal repair, replacement, and installation in Seattle. Jammed, leaking, or humming units fixed fast by licensed plumbers. Call (206) 309-1088." },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/garbage-disposals` }],
   }),

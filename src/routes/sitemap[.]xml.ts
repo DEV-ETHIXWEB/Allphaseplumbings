@@ -2,11 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { SERVICE_AREA_CITIES } from "@/data/service-area-cities";
 import { STATIC_ARTICLES } from "@/data/articles";
+import { toIsoDate } from "@/lib/article-outline";
 
 const BASE_URL = "https://www.allphaseplumbing.com";
 
 interface SitemapEntry {
   path: string;
+  /** YYYY-MM-DD */
+  lastmod?: string;
   changefreq?: "weekly" | "monthly";
   priority?: string;
 }
@@ -24,7 +27,11 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/services/water-heaters", changefreq: "monthly", priority: "0.8" },
           { path: "/services/sewer-services", changefreq: "monthly", priority: "0.8" },
           { path: "/services/sewer-services/sewer-repair", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/sewer-services/sewer-replacement", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/sewer-services/sewer-replacement",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           // NOTE: /services/emergency-plumber, /services/repiping, /services/gas-line-repair,
           // /services/water-lines, /services/water-softeners, /services/toilets,
           // /services/toilet-installation, /services/fixture-replacement, /services/pipe-repair,
@@ -42,26 +49,66 @@ export const Route = createFileRoute("/sitemap.xml")({
           // Individual plumbing sub-service pages (/services/plumbing/*)
           { path: "/services/plumbing/leak-detection", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/backflow-testing", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/bathtub-installation", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/bathtub-installation",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/burst-pipe-repair", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/clogged-drain-repair", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/clogged-drain-repair",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/emergency-plumber", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/faucet-installation", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/fixture-replacement", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/faucet-installation",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
+          {
+            path: "/services/plumbing/fixture-replacement",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/garbage-disposals", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/gas-line-repair", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/hot-water-system-repair", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/outdoor-faucet-repair", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/hot-water-system-repair",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
+          {
+            path: "/services/plumbing/outdoor-faucet-repair",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/pipe-repair", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/pipe-replacement", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/repiping", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/septic-tank-service", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/septic-tank-service",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/sewer-line-repair", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/shower-installation", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/shower-installation",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/slab-leak-repair", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/sump-pumps", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/tankless-water-heaters", changefreq: "monthly", priority: "0.6" },
-          { path: "/services/plumbing/toilet-installation", changefreq: "monthly", priority: "0.6" },
+          {
+            path: "/services/plumbing/tankless-water-heaters",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
+          {
+            path: "/services/plumbing/toilet-installation",
+            changefreq: "monthly",
+            priority: "0.6",
+          },
           { path: "/services/plumbing/toilets", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/water-filtration", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/water-lines", changefreq: "monthly", priority: "0.6" },
@@ -74,21 +121,18 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
           // Static (non-WordPress) blog articles
-          ...STATIC_ARTICLES.map(
-            (a): SitemapEntry => ({
-              path: `/blog/${a.slug}`,
-              changefreq: "monthly",
-              priority: "0.5",
-            }),
-          ),
+          ...STATIC_ARTICLES.map((a): SitemapEntry => ({
+            path: `/blog/${a.slug}`,
+            lastmod: toIsoDate(a.date),
+            changefreq: "monthly",
+            priority: "0.5",
+          })),
           // Per-city area landing pages
-          ...SERVICE_AREA_CITIES.map(
-            (c): SitemapEntry => ({
-              path: `/areas/${c.slug}`,
-              changefreq: "monthly",
-              priority: "0.7",
-            }),
-          ),
+          ...SERVICE_AREA_CITIES.map((c): SitemapEntry => ({
+            path: `/areas/${c.slug}`,
+            changefreq: "monthly",
+            priority: "0.7",
+          })),
         ];
 
         const urls = entries
@@ -96,6 +140,7 @@ export const Route = createFileRoute("/sitemap.xml")({
             [
               ` <url>`,
               ` <loc>${BASE_URL}${e.path}</loc>`,
+              e.lastmod ? ` <lastmod>${e.lastmod}</lastmod>` : null,
               e.changefreq ? ` <changefreq>${e.changefreq}</changefreq>` : null,
               e.priority ? ` <priority>${e.priority}</priority>` : null,
               ` </url>`,

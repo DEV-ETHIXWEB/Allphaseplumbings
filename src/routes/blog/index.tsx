@@ -5,6 +5,7 @@ import { Wrench } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { fetchPosts } from "@/lib/wordpress.functions";
 import skylineBg from "@/assets/seattle-skyline.webp";
+import { BLOG_CARDS } from "@/data/blog-cards";
 
 /** Canonical site origin (matches the rest of the site's SEO tags). */
 const SITE_URL = "https://www.allphaseplumbing.com";
@@ -16,7 +17,7 @@ export const Route = createFileRoute("/blog/")({
       {
         name: "description",
         content:
-          "Plumbing guides, maintenance tips, and Seattle-specific advice from licensed local plumbers.",
+          "Plumbing guides, maintenance tips, and Seattle-specific advice from licensed local plumbers: winter pipe prep, water heaters, sewer lines, and more.",
       },
       { property: "og:title", content: "Plumbing Blog, All Phase" },
       { property: "og:description", content: "Plumbing know-how from licensed Seattle plumbers." },
@@ -41,69 +42,6 @@ function formatDate(iso: string): string {
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim();
 }
-
-const STATIC_ARTICLES = [
-  {
-    slug: "winterize-plumbing-seattle",
-    title: "Winterize Plumbing in Seattle: Why a Short Cold Snap Bursts Pipes",
-    excerpt:
-      "The forecast says two cold nights, maybe three. It doesn't sound like much to worry about. Then the temperature drops into the twenties…",
-    date: "October 27, 2026",
-    comments: "No Comments",
-    img: "/images/blog/winterize-plumbing-seattle/short-cold-snap-burst-pipes-hero.webp",
-    imgAlt: "Illustration of a frozen pipe cracking above the Seattle skyline",
-  },
-  {
-    slug: "puget-sound-winter-plumbing-survival-guide",
-    title:
-      "The 2026 Puget Sound Winter Plumbing Survival Guide: Performance, Prevention, and Technology",
-    excerpt:
-      "January in the Pacific Northwest is often deceptive. While our neighbors in the Midwest are…",
-    date: "January 6, 2026",
-    comments: "No Comments",
-    img: "https://images.unsplash.com/photo-1704915171712-41bd8b5652a0?w=800&q=80",
-    imgAlt: "Frozen outdoor faucet covered in snow and ice",
-  },
-  {
-    slug: "handyman-vs-professional-plumber-seattle",
-    title: "The Difference Between a Handyman and a Professional Plumber in Seattle",
-    excerpt:
-      "As a homeowner in Seattle, you've probably faced a leaky faucet, a running toilet, or…",
-    date: "November 10, 2025",
-    comments: "No Comments",
-    img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&q=80",
-    imgAlt: "Professional plumber working under a kitchen sink",
-  },
-  {
-    slug: "tankless-water-heaters-seattle-worth-upgrade",
-    title: "Tankless Water Heaters in Seattle: Is It Worth the Upgrade?",
-    excerpt: "As a homeowner in Seattle, you're always looking for ways to make your home more…",
-    date: "November 10, 2025",
-    comments: "No Comments",
-    img: "https://images.unsplash.com/photo-1575299737366-39c143459bc5?w=800&q=80",
-    imgAlt: "Tankless water heater mounted on wall above sink",
-  },
-  {
-    slug: "preventing-tree-root-damage-sewer-lines",
-    title: "Preventing Tree Root Damage in Seattle Sewer Lines",
-    excerpt:
-      "If you live in the Seattle Metro Area, you're surrounded by beautiful, mature trees. From…",
-    date: "November 10, 2025",
-    comments: "1 Comment",
-    img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
-    imgAlt: "Tangled tree roots spreading across the ground",
-  },
-  {
-    slug: "backflow-testing-seattle-annual-guide",
-    title: "Annual Backflow Testing in Seattle: 2026 Homeowner's Guide",
-    excerpt:
-      "If a postcard from your water district just reminded you that your annual backflow test is due, you're not alone. Every July…",
-    date: "July 18, 2026",
-    comments: "No Comments",
-    img: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80",
-    imgAlt: "Lawn irrigation sprinkler running on a green Seattle lawn",
-  },
-];
 
 function BlogIndex() {
   const fetchPostsFn = useServerFn(fetchPosts);
@@ -216,7 +154,7 @@ function BlogIndex() {
             </div>
           ) : useStatic ? (
             <div className="grid md:grid-cols-3 gap-8">
-              {STATIC_ARTICLES.map((a) => (
+              {BLOG_CARDS.map((a) => (
                 <article
                   key={a.slug}
                   className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-md hover:shadow-[0_20px_50px_rgba(30,58,110,0.25)] hover:-translate-y-2 hover:border-[#1E3A6E]/40 transition-all duration-300 ease-out"

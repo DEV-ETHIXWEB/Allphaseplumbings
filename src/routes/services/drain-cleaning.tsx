@@ -111,7 +111,7 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/services/drain-cleaning")({
   head: () => ({
     meta: [
-      { title: "Seattle Drain Cleaning, Hydro Jetting & Sewer Inspection | All Phase Plumbing" },
+      { title: "Seattle Drain Cleaning & Hydro Jetting | All Phase Plumbing" },
       {
         name: "description",
         content:

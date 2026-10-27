@@ -24,6 +24,7 @@ import { CityHighlightMap } from "@/components/sections/CityHighlightMap";
 import { SERVICES, ServiceCard } from "@/components/sections/Services";
 import Particles from "@/components/ui/Particles";
 import { GOOGLE_REVIEWS, slugify, type AreaContent } from "@/data/area-content";
+import { getCityBySlug } from "@/data/service-area-cities";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
@@ -301,24 +302,36 @@ function AreasWeCover({ area }: { area: AreaContent }) {
         <div
           className={`max-w-5xl mx-auto grid grid-cols-1 gap-6 ${hasZips ? "lg:grid-cols-2" : ""}`}
         >
-          {/* Neighborhoods / nearby areas (each links to its own area page) */}
+          {/* Neighborhoods / nearby areas. Only names with their own area page are
+              linked; the rest (e.g. Seattle neighborhoods) render as plain text so
+              we never link to a 404. */}
           <div className="bg-white border-2 border-[#1E3A6E]/15 p-6 sm:p-8">
             <h3 className="text-[16px] font-extrabold tracking-wide text-[#1E3A6E] mb-4">
               Neighborhoods &amp; Nearby Areas
             </h3>
             <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1">
-              {area.neighborhoods.map((n) => (
-                <li key={n}>
-                  <Link
-                    to="/areas/$city"
-                    params={{ city: slugify(n) }}
-                    className="group flex items-center gap-2 py-1.5 text-[15px] font-medium text-[#1E3A6E] hover:text-[#4A7BC4] transition-colors"
-                  >
-                    <MapPin className="size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className="underline-offset-2 group-hover:underline">{n}</span>
-                  </Link>
-                </li>
-              ))}
+              {area.neighborhoods.map((n) => {
+                const city = slugify(n);
+                return (
+                  <li key={n}>
+                    {getCityBySlug(city) ? (
+                      <Link
+                        to="/areas/$city"
+                        params={{ city }}
+                        className="group flex items-center gap-2 py-1.5 text-[15px] font-medium text-[#1E3A6E] hover:text-[#4A7BC4] transition-colors"
+                      >
+                        <MapPin className="size-4 text-[#F5C842] shrink-0 group-hover:scale-110 transition-transform" />
+                        <span className="underline-offset-2 group-hover:underline">{n}</span>
+                      </Link>
+                    ) : (
+                      <span className="flex items-center gap-2 py-1.5 text-[15px] font-medium text-[#1E3A6E]">
+                        <MapPin className="size-4 text-[#F5C842] shrink-0" />
+                        {n}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
             {!hasZips && (
               <p className="mt-5 text-[14px] text-gray-500 italic">

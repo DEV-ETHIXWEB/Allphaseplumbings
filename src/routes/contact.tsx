@@ -31,7 +31,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Call (206) 309-1088 or request a tech online. Same-day plumbing service across Greater Seattle.",
+          "Call (206) 309-1088 or request a plumber online. Same-day plumbing service and 24/7 emergency response across Seattle, Tacoma, and the Puget Sound.",
       },
       { property: "og:title", content: "Contact All Phase Plumbing" },
       { property: "og:description", content: "Call (206) 309-1088, speak to a real person." },

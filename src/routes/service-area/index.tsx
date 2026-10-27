@@ -12,7 +12,7 @@ export const Route = createFileRoute("/service-area/")({
       {
         name: "description",
         content:
-          "All Phase Plumbing serves Seattle, Tacoma, Bellevue, Renton, Kent, and the greater Puget Sound region.",
+          "All Phase Plumbing serves Seattle, Tacoma, Bellevue, Renton, Kent, Auburn, Federal Way, and the Puget Sound. Same-day service and 24/7 emergencies.",
       },
       { property: "og:title", content: "Service Area, All Phase Plumbing" },
       { property: "og:description", content: "Serving the Greater Seattle area." },

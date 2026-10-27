@@ -142,7 +142,7 @@ export const Route = createFileRoute("/services/plumbing/")({
       {
         name: "description",
         content:
-          "Leaks, fixtures, pipes, water pressure, diagnosed and repaired by licensed Seattle plumbers.",
+          "Plumbing repair in Seattle for leaks, fixtures, pipes, and low water pressure. Licensed plumbers, upfront pricing, same-day service. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Plumbing Repair Seattle" },
       { property: "og:description", content: "Licensed plumbing repair across Greater Seattle." },
