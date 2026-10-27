@@ -52,7 +52,7 @@ export const BLOG_CARDS: BlogCard[] = [
     date: "January 6, 2026",
     comments: "No Comments",
     img: "https://images.unsplash.com/photo-1704915171712-41bd8b5652a0?w=800&q=80",
-    imgAlt: "Frozen outdoor faucet covered in snow and ice",
+    imgAlt: "Close-up of an icy stream of water",
     services: [
       "/services/plumbing/burst-pipe-repair",
       "/services/plumbing/outdoor-faucet-repair",

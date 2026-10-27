@@ -45,13 +45,15 @@ function stripHtml(html: string): string {
 
 function BlogIndex() {
   const fetchPostsFn = useServerFn(fetchPosts);
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["wp-posts", 12],
     queryFn: () => fetchPostsFn({ data: { perPage: 12 } }),
   });
 
   const posts = data?.posts ?? [];
-  const useStatic = !isLoading && posts.length === 0;
+  // Static cards render on the server (crawlable links); WordPress posts
+  // replace them only if the CMS actually returns some.
+  const useStatic = posts.length === 0;
 
   return (
     <PageShell>
@@ -143,16 +145,7 @@ function BlogIndex() {
       {/* ── Posts grid ── */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          {isLoading ? (
-            <div className="grid md:grid-cols-3 gap-8">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl border border-border bg-secondary/40 animate-pulse h-96"
-                />
-              ))}
-            </div>
-          ) : useStatic ? (
+          {useStatic ? (
             <div className="grid md:grid-cols-3 gap-8">
               {BLOG_CARDS.map((a) => (
                 <article
