@@ -24,7 +24,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Family-owned plumbing company in Tukwila, WA. Licensed technicians serving Greater Seattle for over 35 years.",
+          "Family-owned plumbing company in Tukwila, WA. Licensed, insured technicians serving Seattle and the Puget Sound since 1989, with 24/7 emergency service.",
       },
       { property: "og:title", content: "About All Phase Plumbing" },
       {

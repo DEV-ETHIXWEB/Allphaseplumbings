@@ -5,25 +5,7 @@ import { ArrowRight, Wrench } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { fetchPosts } from "@/lib/wordpress.functions";
 import type { WPPost } from "@/types/wordpress";
-
-/* Unsplash images matched to each placeholder blog title */
-const PLACEHOLDER_DATA = [
-  {
-    title: "5 signs your water heater needs replacing",
-    img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=700&q=75",
-    imgAlt: "Water heater in a utility room",
-  },
-  {
-    title: "What to do when a drain backs up at 2am",
-    img: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=75",
-    imgAlt: "Drain pipes and plumbing repair work",
-  },
-  {
-    title: "Tankless vs traditional water heaters in Seattle",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75",
-    imgAlt: "Modern plumbing pipes and fittings",
-  },
-];
+import { latestBlogCards, type BlogCard } from "@/data/blog-cards";
 
 /**
  * Image-overlay blog card — same design across mobile and desktop.
@@ -118,15 +100,15 @@ function PostCard({ post }: { post: WPPost }) {
   );
 }
 
-function PlaceholderCard({ i }: { i: number }) {
-  const data = PLACEHOLDER_DATA[i];
+function StaticCard({ card }: { card: BlogCard }) {
   return (
     <OverlayBlogCard
-      img={data.img}
-      imgAlt={data.imgAlt}
+      img={card.thumb ?? card.img}
+      imgAlt={card.imgAlt}
       category="Plumbing Tips"
-      title={data.title}
-      href="/blog"
+      title={card.title}
+      href="/blog/$slug"
+      hrefParams={{ slug: card.slug }}
     />
   );
 }
@@ -153,17 +135,11 @@ export function BlogPreview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {isLoading
-            ? Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="border-[3px] border-[#1E3A6E]/30 bg-white/60 backdrop-blur-sm animate-pulse"
-                  style={{ aspectRatio: "600 / 350" }}
-                />
-              ))
-            : posts.length > 0
-              ? posts.map((p) => <PostCard key={p.id} post={p} />)
-              : [0, 1, 2].map((i) => <PlaceholderCard key={i} i={i} />)}
+          {/* Real articles render on the server (crawlable links); WordPress
+              posts replace them only if the CMS actually returns some. */}
+          {!isLoading && posts.length > 0
+            ? posts.map((p) => <PostCard key={p.id} post={p} />)
+            : latestBlogCards(3).map((c) => <StaticCard key={c.slug} card={c} />)}
         </div>
 
         <div className="text-center mt-12">

@@ -10,6 +10,7 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { ServiceArea } from "@/components/sections/ServiceArea";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { homepageSchema } from "@/lib/seo";
 
 /** Canonical site origin (matches the rest of the site's SEO tags). */
 const SITE_URL = "https://www.allphaseplumbing.com";
@@ -59,6 +60,8 @@ function Index() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        {/* LocalBusiness (Plumber) + WebSite structured data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: homepageSchema() }} />
         <Hero />
         <Services />
         <WhyUs />

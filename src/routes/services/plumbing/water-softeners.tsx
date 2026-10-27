@@ -118,13 +118,13 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/services/plumbing/water-softeners")({
   head: () => ({
     meta: [
-      { title: "Seattle Water Softener Repair, Installation & Maintenance, All Phase Plumbing" },
+      { title: "Water Softener Installation & Repair Seattle | All Phase" },
       {
         name: "description",
         content:
           "Seattle water softener repair, installation, and maintenance. Protect your plumbing and appliances from hard water damage.",
       },
-      { property: "og:title", content: "Seattle Water Softener Repair, Installation & Maintenance, All Phase Plumbing" },
+      { property: "og:title", content: "Water Softener Installation & Repair Seattle | All Phase" },
       { property: "og:description", content: "Seattle water softener repair, installation, and maintenance. Protect your plumbing and appliances from hard water damage." },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-softeners` }],

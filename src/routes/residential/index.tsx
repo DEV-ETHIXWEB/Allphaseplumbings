@@ -133,7 +133,7 @@ export const Route = createFileRoute("/residential/")({
       {
         name: "description",
         content:
-          "Trusted residential plumber in Seattle. Drain cleaning, water heaters, leak detection, repiping, sewer service, and 24/7 emergency plumbing for your home. Call (206) 309-1088.",
+          "Trusted residential plumber in Seattle: drain cleaning, water heaters, leak detection, repiping, and 24/7 emergency plumbing. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Residential Plumbing, All Phase Plumbing" },
       {

@@ -101,7 +101,7 @@ export const Route = createFileRoute("/services/water-heaters")({
       {
         name: "description",
         content:
-          "Tank and tankless water heater installation, repair, and maintenance across Greater Seattle.",
+          "Water heater repair and installation in Seattle. Tank and tankless units serviced by licensed plumbers, with same-day service. Call (206) 309-1088.",
       },
       { property: "og:title", content: "Water Heaters Seattle" },
       {

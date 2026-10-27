@@ -174,16 +174,17 @@ export const Route = createFileRoute("/blog/$slug")({
     }
 
     const description = articleDescription(article);
+    const metaTitle = article.metaTitle ?? article.title;
     const canonical = `${SITE_URL}/blog/${article.slug}`;
     const shareImage = article.image ? absoluteUrl(article.ogImage ?? article.image) : undefined;
     const published = toIsoDate(article.date);
 
     return {
       meta: [
-        { title: article.title },
+        { title: metaTitle },
         { name: "description", content: description },
         { property: "og:type", content: "article" },
-        { property: "og:title", content: article.title },
+        { property: "og:title", content: metaTitle },
         { property: "og:description", content: description },
         { property: "og:url", content: canonical },
         ...(shareImage
@@ -195,7 +196,7 @@ export const Route = createFileRoute("/blog/$slug")({
           : []),
         ...(published ? [{ property: "article:published_time", content: published }] : []),
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: article.title },
+        { name: "twitter:title", content: metaTitle },
         { name: "twitter:description", content: description },
       ],
       links: [{ rel: "canonical", href: canonical }],

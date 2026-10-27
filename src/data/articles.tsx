@@ -5,6 +5,8 @@ import { ArticleFigure } from "@/components/ui/ArticleFigure";
 export type StaticArticle = {
   slug: string;
   title: string;
+  /** Shorter <title>/og:title when `title` would be truncated in search (~60 chars). */
+  metaTitle?: string;
   /** ~155-char SEO meta description; falls back to a generated one if omitted. */
   description?: string;
   date: string;
@@ -23,6 +25,7 @@ export type StaticArticle = {
 export const STATIC_ARTICLES: StaticArticle[] = [
   {
     slug: "puget-sound-winter-plumbing-survival-guide",
+    metaTitle: "Puget Sound Winter Plumbing Survival Guide (2026)",
     description:
       "Protect your Puget Sound home this winter. Learn how freeze-thaw cycles burst pipes, plus 2026 smart-plumbing tips from All Phase Plumbing in Seattle.",
     title:
@@ -249,6 +252,7 @@ export const STATIC_ARTICLES: StaticArticle[] = [
 
 STATIC_ARTICLES.push({
   slug: "handyman-vs-professional-plumber-seattle",
+  metaTitle: "Handyman vs. Professional Plumber in Seattle",
   description:
     "Handyman or licensed plumber for your Seattle home? Learn the real differences in licensing, code, and cost so you hire right the first time.",
   title: "The Difference Between a Handyman and a Professional Plumber in Seattle",

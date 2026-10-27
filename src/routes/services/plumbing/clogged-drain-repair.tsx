@@ -159,10 +159,10 @@ export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")(
       {
         name: "description",
         content:
-          "Seattle clogged drain repair, kitchen, bathroom, toilet, and recurring drain issues solved at the root cause.",
+          "Clogged drain repair in Seattle for kitchen, bathroom, and toilet drains. We fix recurring clogs at the root cause. Same-day service, call (206) 309-1088.",
       },
       { property: "og:title", content: "Clogged Drain Repair Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle clogged drain repair, kitchen, bathroom, toilet, and recurring drain issues solved at the root cause." },
+      { property: "og:description", content: "Clogged drain repair in Seattle for kitchen, bathroom, and toilet drains. We fix recurring clogs at the root cause. Same-day service, call (206) 309-1088." },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/clogged-drain-repair` }],
   }),

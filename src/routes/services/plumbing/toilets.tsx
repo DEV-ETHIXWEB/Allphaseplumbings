@@ -126,14 +126,14 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/services/plumbing/toilets")({
   head: () => ({
     meta: [
-      { title: "Seattle Toilet Repair, Replacement & Installation, All Phase Plumbing" },
+      { title: "Toilet Repair & Installation Seattle | All Phase Plumbing" },
       {
         name: "description",
         content:
-          "Seattle toilet repair, replacement, and installation. Licensed plumbers, modern fixtures, fast service.",
+          "Toilet repair, replacement, and installation in Seattle. Running, leaking, or clogged toilets fixed by licensed plumbers. Same-day service, call (206) 309-1088.",
       },
-      { property: "og:title", content: "Seattle Toilet Repair, Replacement & Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle toilet repair, replacement, and installation. Licensed plumbers, modern fixtures, fast service." },
+      { property: "og:title", content: "Toilet Repair & Installation Seattle | All Phase Plumbing" },
+      { property: "og:description", content: "Toilet repair, replacement, and installation in Seattle. Running, leaking, or clogged toilets fixed by licensed plumbers. Same-day service, call (206) 309-1088." },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/toilets` }],
   }),
