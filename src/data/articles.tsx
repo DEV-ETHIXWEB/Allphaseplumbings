@@ -8,6 +8,8 @@ export type StaticArticle = {
   /** ~155-char SEO meta description; falls back to a generated one if omitted. */
   description?: string;
   date: string;
+  /** Hero eyebrow tag; defaults to "Plumbing Tips". */
+  category?: string;
   comments: string;
   heroGradient: string;
   image?: string;
@@ -26,6 +28,7 @@ export const STATIC_ARTICLES: StaticArticle[] = [
     title:
       "The 2026 Puget Sound Winter Plumbing Survival Guide: Performance, Prevention, and Technology",
     date: "January 6, 2026",
+    category: "Winter Prep",
     comments: "No Comments",
     heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
     body: (
@@ -250,6 +253,7 @@ STATIC_ARTICLES.push({
     "Handyman or licensed plumber for your Seattle home? Learn the real differences in licensing, code, and cost so you hire right the first time.",
   title: "The Difference Between a Handyman and a Professional Plumber in Seattle",
   date: "November 10, 2025",
+  category: "Homeowner Tips",
   comments: "No Comments",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
   image:
@@ -386,6 +390,7 @@ STATIC_ARTICLES.push({
     "Are tankless water heaters worth it in Seattle? Compare costs, energy savings, and lifespan to decide if an upgrade fits your Puget Sound home.",
   title: "Tankless Water Heaters in Seattle: Is It Worth the Upgrade?",
   date: "November 10, 2025",
+  category: "Water Heaters",
   comments: "No Comments",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
   image:
@@ -503,6 +508,7 @@ STATIC_ARTICLES.push({
     "Seattle's mature trees can wreck your sewer line. Learn the warning signs of root intrusion and how to prevent costly damage before it starts.",
   title: "Preventing Tree Root Damage in Seattle Sewer Lines",
   date: "November 10, 2025",
+  category: "Sewer & Drains",
   comments: "1 Comment",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
   image:
@@ -648,6 +654,7 @@ STATIC_ARTICLES.push({
     "Got a backflow test notice from your Seattle water district? Learn what annual backflow testing is, who needs it, and how to stay compliant this July.",
   title: "Annual Backflow Testing in Seattle: 2026 Homeowner's Guide",
   date: "July 18, 2026",
+  category: "Compliance",
   comments: "No Comments",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
   image:
@@ -901,6 +908,7 @@ STATIC_ARTICLES.push({
     "Seattle homes aren't built for a hard freeze. Here's how to winterize plumbing in Seattle, with a short checklist that protects your home this winter.",
   title: "Winterize Plumbing in Seattle: Why a Short Cold Snap Bursts Pipes",
   date: "October 27, 2026",
+  category: "Winter Prep",
   comments: "No Comments",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
   image: `${WINTERIZE_IMG_DIR}/short-cold-snap-burst-pipes-hero.webp`,

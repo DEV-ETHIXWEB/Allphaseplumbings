@@ -1,11 +1,21 @@
+import { useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
+import {
+  AboutBox,
+  ArticleCtaCard,
+  ArticleHero,
+  ReadingProgress,
+  RelatedArticles,
+  ShareButtons,
+  TableOfContents,
+} from "@/components/sections/BlogArticle";
+import { toIsoDate, useArticleOutline } from "@/lib/article-outline";
 import { fetchPostBySlug } from "@/lib/wordpress.functions";
-import { getStaticArticle, type StaticArticle } from "@/data/articles";
-import skylineBg from "@/assets/seattle-skyline.webp";
+import { STATIC_ARTICLES, getStaticArticle, type StaticArticle } from "@/data/articles";
 
 const SITE_URL = "https://www.allphaseplumbing.com";
 
@@ -14,15 +24,14 @@ function absoluteUrl(src: string): string {
   return src.startsWith("/") ? `${SITE_URL}${src}` : src;
 }
 
-/** "October 27, 2026" → "2026-10-27" without a timezone shift. */
-function toIsoDate(display: string): string | undefined {
-  const d = new Date(display);
-  if (Number.isNaN(d.getTime())) return undefined;
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+function articleDescription(article: StaticArticle): string {
+  return (
+    article.description ??
+    `${article.title}. Expert plumbing advice from All Phase Plumbing, serving Seattle & the Puget Sound since 1989.`
+  );
 }
 
-function buildArticleSchema(article: StaticArticle, description: string): string {
+function buildArticleSchema(article: StaticArticle): string {
   const url = `${SITE_URL}/blog/${article.slug}`;
   const published = toIsoDate(article.date);
   const publisher = {
@@ -32,16 +41,121 @@ function buildArticleSchema(article: StaticArticle, description: string): string
   };
   return JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: article.title,
-    description,
-    mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    url,
-    ...(article.image ? { image: absoluteUrl(article.ogImage ?? article.image) } : {}),
-    ...(published ? { datePublished: published, dateModified: published } : {}),
-    author: publisher,
-    publisher,
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: article.title,
+        description: articleDescription(article),
+        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        url,
+        ...(article.image ? { image: absoluteUrl(article.ogImage ?? article.image) } : {}),
+        ...(published ? { datePublished: published, dateModified: published } : {}),
+        author: publisher,
+        publisher,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: article.title, item: url },
+        ],
+      },
+    ],
   }).replace(/</g, "\\u003c");
+}
+
+/** Up to three other articles, ones with a cover image first. */
+function relatedTo(article: StaticArticle): StaticArticle[] {
+  return STATIC_ARTICLES.filter((a) => a.slug !== article.slug)
+    .sort((a, b) => Number(!!b.image) - Number(!!a.image))
+    .slice(0, 3);
+}
+
+const PROSE_CLASSES = [
+  "prose prose-slate prose-lg max-w-none",
+  // Headings: navy serif with a yellow rule; offset so TOC jumps clear the sticky header
+  "prose-headings:text-[#1E3A6E] prose-h2:mt-14 prose-h2:mb-5 prose-h2:text-[26px] lg:prose-h2:text-[31px]",
+  "prose-h2:border-l-4 prose-h2:border-[#F5C842] prose-h2:pl-4 prose-h2:scroll-mt-32",
+  "prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl",
+  // Lead paragraph
+  "[&>p:first-child]:text-[19px] lg:[&>p:first-child]:text-[21px] [&>p:first-child]:text-slate-700",
+  "[&_p]:leading-[1.85] [&_li]:leading-[1.8]",
+  // Links, emphasis, lists
+  "prose-a:text-[#1E3A6E] prose-a:font-semibold prose-a:underline-offset-4 prose-a:decoration-2 prose-a:decoration-[#F5C842]",
+  "prose-a:transition-colors prose-a:hover:text-[#4A7BC4]",
+  "prose-strong:text-[#1E3A6E] prose-ul:my-6 prose-ol:my-6 [&_ul>li]:marker:text-[#4A7BC4]",
+].join(" ");
+
+function StaticArticleView({ article }: { article: StaticArticle }) {
+  const articleRef = useRef<HTMLElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const { toc, readMinutes } = useArticleOutline(bodyRef, article.slug);
+  const hasImage = !!article.image;
+
+  return (
+    <PageShell>
+      <ReadingProgress targetRef={articleRef} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: buildArticleSchema(article) }}
+      />
+      <ArticleHero article={article} readMinutes={readMinutes} overlap={hasImage} />
+
+      <div className="container mx-auto px-4 max-w-[1240px]">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_320px] xl:gap-20">
+          <article
+            ref={articleRef}
+            className={`relative z-10 min-w-0 pb-16 lg:pb-24 ${hasImage ? "-mt-20 lg:-mt-32" : "pt-12"}`}
+          >
+            {article.image && (
+              <div className="article-settle overflow-hidden rounded-2xl lg:rounded-3xl bg-[#1E3A6E] ring-1 ring-black/5 shadow-[0_30px_60px_-24px_rgba(15,34,70,0.55)]">
+                <img
+                  src={article.image}
+                  alt={article.imageAlt ?? article.title}
+                  width={1600}
+                  height={900}
+                  className="w-full aspect-[16/9] object-cover"
+                  fetchPriority="high"
+                  decoding="async"
+                />
+              </div>
+            )}
+
+            <div ref={bodyRef} className={`${PROSE_CLASSES} ${hasImage ? "mt-10 lg:mt-14" : ""}`}>
+              {article.body}
+            </div>
+
+            <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-y border-[#1E3A6E]/10 py-6">
+              <p className="text-[14px] font-bold uppercase tracking-[0.14em] text-[#1E3A6E]">
+                Share this article
+              </p>
+              <ShareButtons url={`${SITE_URL}/blog/${article.slug}`} title={article.title} />
+            </div>
+
+            <AboutBox />
+            <ArticleCtaCard className="mt-10 lg:hidden" />
+          </article>
+
+          <aside
+            className={`relative z-10 hidden lg:block pb-24 ${hasImage ? "-mt-32" : "pt-12"}`}
+            aria-label="Article tools"
+          >
+            <div className="sticky top-[84px] space-y-5">
+              <ArticleCtaCard />
+              {toc.length > 0 && (
+                <div className="rounded-2xl border border-[#1E3A6E]/10 bg-white p-5 shadow-sm">
+                  <TableOfContents items={toc} />
+                </div>
+              )}
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <RelatedArticles articles={relatedTo(article)} />
+    </PageShell>
+  );
 }
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -59,9 +173,7 @@ export const Route = createFileRoute("/blog/$slug")({
       };
     }
 
-    const description =
-      article.description ??
-      `${article.title}. Expert plumbing advice from All Phase Plumbing, serving Seattle & the Puget Sound since 1989.`;
+    const description = articleDescription(article);
     const canonical = `${SITE_URL}/blog/${article.slug}`;
     const shareImage = article.image ? absoluteUrl(article.ogImage ?? article.image) : undefined;
     const published = toIsoDate(article.date);
@@ -92,50 +204,6 @@ export const Route = createFileRoute("/blog/$slug")({
   component: BlogPost,
 });
 
-function ArticleHero({ title, gradient }: { title: string; gradient: string }) {
-  return (
-    <section
-      className="relative border-b border-border py-[51px] lg:py-16 overflow-hidden"
-      style={{ background: gradient }}
-    >
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          backgroundImage: `url(${skylineBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.18,
-          mixBlendMode: "overlay",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full z-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 70%)",
-          filter: "blur(40px)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-1/2 right-[6%] w-56 h-32 z-0 pointer-events-none border-2 border-white/20 rounded-md"
-        style={{ transform: "rotate(12deg)" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-8 left-[8%] w-40 h-24 z-0 pointer-events-none border-2 border-white/15 rounded-md"
-        style={{ transform: "rotate(-18deg)" }}
-        aria-hidden="true"
-      />
-      <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
-        <h1 className="text-[19px] sm:text-[24px] lg:text-[29px] font-black tracking-wide text-white leading-tight">
-          {title}
-        </h1>
-      </div>
-    </section>
-  );
-}
-
 function BlogPost() {
   const { slug } = Route.useParams();
   const staticArticle = getStaticArticle(slug);
@@ -147,50 +215,7 @@ function BlogPost() {
     enabled: !staticArticle,
   });
 
-  // ── Static article path ──
-  if (staticArticle) {
-    const description =
-      staticArticle.description ??
-      `${staticArticle.title}. Expert plumbing advice from All Phase Plumbing, serving Seattle & the Puget Sound since 1989.`;
-    return (
-      <PageShell>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: buildArticleSchema(staticArticle, description) }}
-        />
-        <ArticleHero title={staticArticle.title} gradient={staticArticle.heroGradient} />
-        <article className="py-12 sm:py-16 bg-background">
-          <div className="container mx-auto px-4 max-w-3xl">
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary mb-8"
-            >
-              <ArrowLeft className="size-4" /> Back to blog
-            </Link>
-            <div className="text-sm text-muted-foreground mb-6">
-              {staticArticle.date}
-              <span className="mx-2">-</span>
-              {staticArticle.comments}
-            </div>
-            {staticArticle.image && (
-              <img
-                src={staticArticle.image}
-                alt={staticArticle.imageAlt ?? staticArticle.title}
-                width={1600}
-                height={900}
-                className="w-full aspect-[16/9] object-cover rounded-2xl mb-10 border border-border shadow-md"
-                fetchPriority="high"
-                decoding="async"
-              />
-            )}
-            <div className="prose prose-slate max-w-none prose-lg prose-headings:text-primary prose-h2:mt-12 prose-h2:mb-5 prose-h2:text-3xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-a:text-[#1E3A6E] prose-a:font-semibold prose-a:underline-offset-2 prose-a:hover:text-[#4A7BC4] prose-strong:text-primary prose-ul:my-5 prose-ol:my-5 [&_p]:text-justify [&_p]:leading-[1.85] [&_li]:text-justify [&_li]:leading-[1.8] hyphens-auto">
-              {staticArticle.body}
-            </div>
-          </div>
-        </article>
-      </PageShell>
-    );
-  }
+  if (staticArticle) return <StaticArticleView article={staticArticle} />;
 
   // ── WordPress fallback ──
   const post = data?.post;
