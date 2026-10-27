@@ -4,8 +4,45 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { fetchPostBySlug } from "@/lib/wordpress.functions";
-import { getStaticArticle } from "@/data/articles";
+import { getStaticArticle, type StaticArticle } from "@/data/articles";
 import skylineBg from "@/assets/seattle-skyline.webp";
+
+const SITE_URL = "https://www.allphaseplumbing.com";
+
+/** og:image and schema.org need absolute URLs; local images are site-relative. */
+function absoluteUrl(src: string): string {
+  return src.startsWith("/") ? `${SITE_URL}${src}` : src;
+}
+
+/** "October 27, 2026" → "2026-10-27" without a timezone shift. */
+function toIsoDate(display: string): string | undefined {
+  const d = new Date(display);
+  if (Number.isNaN(d.getTime())) return undefined;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+function buildArticleSchema(article: StaticArticle, description: string): string {
+  const url = `${SITE_URL}/blog/${article.slug}`;
+  const published = toIsoDate(article.date);
+  const publisher = {
+    "@type": "Organization",
+    name: "All Phase Plumbing",
+    url: SITE_URL,
+  };
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    ...(article.image ? { image: absoluteUrl(article.ogImage ?? article.image) } : {}),
+    ...(published ? { datePublished: published, dateModified: published } : {}),
+    author: publisher,
+    publisher,
+  }).replace(/</g, "\\u003c");
+}
 
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => {
@@ -25,7 +62,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const description =
       article.description ??
       `${article.title}. Expert plumbing advice from All Phase Plumbing, serving Seattle & the Puget Sound since 1989.`;
-    const canonical = `https://www.allphaseplumbing.com/blog/${article.slug}`;
+    const canonical = `${SITE_URL}/blog/${article.slug}`;
+    const shareImage = article.image ? absoluteUrl(article.ogImage ?? article.image) : undefined;
+    const published = toIsoDate(article.date);
 
     return {
       meta: [
@@ -35,7 +74,14 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: article.title },
         { property: "og:description", content: description },
         { property: "og:url", content: canonical },
-        ...(article.image ? [{ property: "og:image", content: article.image }] : []),
+        ...(shareImage
+          ? [
+              { property: "og:image", content: shareImage },
+              { property: "og:image:alt", content: article.imageAlt ?? article.title },
+              { name: "twitter:image", content: shareImage },
+            ]
+          : []),
+        ...(published ? [{ property: "article:published_time", content: published }] : []),
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: article.title },
         { name: "twitter:description", content: description },
@@ -103,8 +149,15 @@ function BlogPost() {
 
   // ── Static article path ──
   if (staticArticle) {
+    const description =
+      staticArticle.description ??
+      `${staticArticle.title}. Expert plumbing advice from All Phase Plumbing, serving Seattle & the Puget Sound since 1989.`;
     return (
       <PageShell>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: buildArticleSchema(staticArticle, description) }}
+        />
         <ArticleHero title={staticArticle.title} gradient={staticArticle.heroGradient} />
         <article className="py-12 sm:py-16 bg-background">
           <div className="container mx-auto px-4 max-w-3xl">
@@ -122,12 +175,15 @@ function BlogPost() {
             {staticArticle.image && (
               <img
                 src={staticArticle.image}
-                alt={staticArticle.title}
+                alt={staticArticle.imageAlt ?? staticArticle.title}
+                width={1600}
+                height={900}
                 className="w-full aspect-[16/9] object-cover rounded-2xl mb-10 border border-border shadow-md"
-                loading="lazy"
+                fetchPriority="high"
+                decoding="async"
               />
             )}
-            <div className="prose prose-slate max-w-none prose-lg prose-headings:text-primary prose-h2:mt-12 prose-h2:mb-5 prose-h2:text-3xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-a:text-accent prose-strong:text-primary prose-ul:my-5 prose-ol:my-5 [&_p]:text-justify [&_p]:leading-[1.85] [&_li]:text-justify [&_li]:leading-[1.8] hyphens-auto">
+            <div className="prose prose-slate max-w-none prose-lg prose-headings:text-primary prose-h2:mt-12 prose-h2:mb-5 prose-h2:text-3xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-a:text-[#1E3A6E] prose-a:font-semibold prose-a:underline-offset-2 prose-a:hover:text-[#4A7BC4] prose-strong:text-primary prose-ul:my-5 prose-ol:my-5 [&_p]:text-justify [&_p]:leading-[1.85] [&_li]:text-justify [&_li]:leading-[1.8] hyphens-auto">
               {staticArticle.body}
             </div>
           </div>
@@ -185,7 +241,7 @@ function BlogPost() {
                 />
               )}
               <div
-                className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-accent"
+                className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-[#1E3A6E] prose-a:font-semibold prose-a:underline-offset-2 prose-a:hover:text-[#4A7BC4]"
                 dangerouslySetInnerHTML={{ __html: post.content.rendered }}
               />
             </>
