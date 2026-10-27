@@ -65,10 +65,12 @@ function buildArticleSchema(article: StaticArticle): string {
   }).replace(/</g, "\\u003c");
 }
 
-/** Up to three other articles, ones with a cover image first. */
+/** Up to three other articles: same category first, then ones with a cover, then newest. */
 function relatedTo(article: StaticArticle): StaticArticle[] {
+  const score = (a: StaticArticle) =>
+    (a.category && a.category === article.category ? 2 : 0) + (a.image ? 1 : 0);
   return STATIC_ARTICLES.filter((a) => a.slug !== article.slug)
-    .sort((a, b) => Number(!!b.image) - Number(!!a.image))
+    .sort((a, b) => score(b) - score(a) || new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 }
 

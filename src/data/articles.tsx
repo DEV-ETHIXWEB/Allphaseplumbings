@@ -27,13 +27,16 @@ export const STATIC_ARTICLES: StaticArticle[] = [
     slug: "puget-sound-winter-plumbing-survival-guide",
     metaTitle: "Puget Sound Winter Plumbing Survival Guide (2026)",
     description:
-      "Protect your Puget Sound home this winter. Learn how freeze-thaw cycles burst pipes, plus 2026 smart-plumbing tips from All Phase Plumbing in Seattle.",
+      "A Puget Sound winter plumbing guide: how freeze-thaw cycles stress pipes and water heaters, plus 2026 upgrades like smart leak detection and heat pump water heaters.",
     title:
       "The 2026 Puget Sound Winter Plumbing Survival Guide: Performance, Prevention, and Technology",
     date: "January 6, 2026",
     category: "Winter Prep",
     comments: "No Comments",
     heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+    image:
+      "https://images.unsplash.com/photo-1704915171712-41bd8b5652a0?auto=format&fit=crop&w=1400&q=80",
+    imageAlt: "Close-up of an icy stream of water",
     body: (
       <>
         <p>
@@ -186,8 +189,12 @@ export const STATIC_ARTICLES: StaticArticle[] = [
           </table>
         </div>
 
-        <h2>The "All Phase" Winterization Checklist</h2>
-        <p>This is what you can do today to protect your home.</p>
+        <h2>The "All Phase" Freeze-Thaw Checklist</h2>
+        <p>
+          This is what you can do today to protect your home. For the full step-by-step prep list
+          before a cold front, see our guide on{" "}
+          <a href="/blog/winterize-plumbing-seattle">how to winterize plumbing in Seattle</a>.
+        </p>
         <ol>
           <li>
             <strong>The Faucet Drip:</strong> If the forecast calls for a "Hard Freeze" (below 28°F)
@@ -957,6 +964,14 @@ STATIC_ARTICLES.push({
         height={973}
         caption="Why a frozen pipe splits where the ice is not."
       />
+      <p>
+        Freezing isn't the only way winter strains a Puget Sound home. Cold incoming water also
+        works your water heater harder, which our{" "}
+        <a href="/blog/puget-sound-winter-plumbing-survival-guide">
+          Puget Sound winter plumbing survival guide
+        </a>{" "}
+        covers in detail.
+      </p>
 
       <h2>How to Winterize Plumbing in Seattle</h2>
       <p>
