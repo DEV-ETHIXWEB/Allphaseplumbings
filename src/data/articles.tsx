@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { TrackedPhoneLink } from "@/components/ui/TrackedPhoneText";
+import { ArticleFigure } from "@/components/ui/ArticleFigure";
 
 export type StaticArticle = {
   slug: string;
@@ -10,6 +11,10 @@ export type StaticArticle = {
   comments: string;
   heroGradient: string;
   image?: string;
+  /** Alt text for `image`; falls back to the title. */
+  imageAlt?: string;
+  /** JPG/PNG for og:image when `image` is WebP (some social crawlers skip WebP). */
+  ogImage?: string;
   body: ReactNode;
 };
 
@@ -856,6 +861,158 @@ STATIC_ARTICLES.push({
         <TrackedPhoneLink /> or{" "}
         <a href="/services/plumbing/backflow-testing">schedule your backflow test online</a> today,
         and cross one more thing off your summer list.
+      </p>
+    </>
+  ),
+});
+
+const WINTERIZE_IMG_DIR = "/images/blog/winterize-plumbing-seattle";
+
+const FREEZE_PREP_STEPS: { title: string; text: string }[] = [
+  {
+    title: "Insulate exposed pipe.",
+    text: "Foam pipe sleeves from any hardware store cover crawl space and attic pipe in minutes and cost very little.",
+  },
+  {
+    title: "Disconnect garden hoses.",
+    text: "A hose left attached traps water in the outdoor faucet behind it, one of the most common freeze points in this area.",
+  },
+  {
+    title: "Know where your main shutoff valve is,",
+    text: "and make sure everyone in the house does too. If a pipe does split, shutting off the water fast is what limits the damage.",
+  },
+  {
+    title: "Let a faucet drip during a hard freeze.",
+    text: "Moving water is far less likely to freeze than water sitting still in the pipe.",
+  },
+  {
+    title: "Seal crawl space vents",
+    text: "before a cold stretch, then open them again once it passes so moisture doesn't build up underneath the house.",
+  },
+  {
+    title: "Protect outdoor faucets",
+    text: "with an insulated cover, especially on the side of the house that gets the most wind.",
+  },
+];
+
+STATIC_ARTICLES.push({
+  slug: "winterize-plumbing-seattle",
+  description:
+    "Seattle homes aren't built for a hard freeze. Here's how to winterize plumbing in Seattle, with a short checklist that protects your home this winter.",
+  title: "Winterize Plumbing in Seattle: Why a Short Cold Snap Bursts Pipes",
+  date: "October 27, 2026",
+  comments: "No Comments",
+  heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+  image: `${WINTERIZE_IMG_DIR}/short-cold-snap-burst-pipes-hero.webp`,
+  imageAlt:
+    "Illustration of a frozen pipe cracking above the Seattle skyline: why a short cold snap can burst your pipes",
+  ogImage: `${WINTERIZE_IMG_DIR}/short-cold-snap-burst-pipes-og.jpg`,
+  body: (
+    <>
+      <p>
+        The forecast says two cold nights, maybe three. It doesn't sound like much to worry about.
+        Then the temperature drops into the twenties, the wind picks up, and somewhere behind a wall
+        or under the house, a pipe that has never frozen in thirty years finally does. By the next
+        morning, water is running down through the ceiling instead of through the tap.
+      </p>
+      <p>
+        This is the part that catches a lot of homeowners off guard here. Seattle doesn't get weeks
+        of hard freeze the way Minneapolis or Denver does, so most homes in King and Pierce counties
+        were never built to handle one. Pipes run through crawl spaces and attics with little or no
+        insulation, outdoor faucets sit exposed on the wall, and nobody thinks twice about any of
+        it, until the one week a year it actually matters.
+      </p>
+      <p>
+        Here's what surprises people most: it isn't the long, steady cold that causes the damage.
+        It's the short, sudden snap. A deep freeze that lasts two or three days gives a pipe no
+        warning, and most homeowners haven't done a single thing to prepare for it, because it so
+        rarely happens. Taking an hour to <strong>winterize plumbing in Seattle</strong> before the
+        first cold front is what keeps a two-day freeze from becoming a repair bill.
+      </p>
+
+      <h2>What Actually Happens When a Pipe Freezes</h2>
+      <p>
+        Water expands as it turns to ice. Inside a closed pipe, that expansion has nowhere to go, so
+        pressure builds up between the ice and the nearest closed tap. The pipe usually doesn't
+        split where the ice is. It splits somewhere else along the line, often behind a wall, where
+        nobody sees it until the ice thaws and the water starts moving again. That's why a frozen
+        pipe is often a bigger problem the day after the cold snap ends, not during it.
+      </p>
+      <ArticleFigure
+        src={`${WINTERIZE_IMG_DIR}/why-frozen-pipe-splits-diagram.webp`}
+        alt="Diagram: ice forms in the coldest run of pipe, pressure builds between the ice and a closed tap, and the pipe splits behind the wall where the ice is not"
+        width={1600}
+        height={973}
+        caption="Why a frozen pipe splits where the ice is not."
+      />
+
+      <h2>How to Winterize Plumbing in Seattle</h2>
+      <p>
+        You don't need to do much to protect a home here. A few simple steps, done before the
+        forecast turns cold, cover almost every case:
+      </p>
+      <ul>
+        {FREEZE_PREP_STEPS.map((step, i) => (
+          <li
+            key={step.title}
+            className="reveal-on-scroll"
+            style={{ transitionDelay: `${i * 80}ms` }}
+          >
+            <strong>{step.title}</strong> {step.text}
+          </li>
+        ))}
+      </ul>
+      <ArticleFigure
+        src={`${WINTERIZE_IMG_DIR}/seattle-freeze-prep-checklist.webp`}
+        alt="Seattle freeze-prep checklist: insulate exposed pipe, disconnect garden hoses, find your main shutoff valve, let a faucet drip, seal crawl space vents, and cover outdoor faucets"
+        width={1600}
+        height={933}
+        caption="Seattle freeze-prep checklist: six simple things to do before the forecast turns cold."
+      />
+
+      <h2>What a Burst Pipe Actually Costs</h2>
+      <p>
+        A straightforward <a href="/services/plumbing/pipe-repair">pipe repair</a>, the kind where a
+        plumber opens one section of wall and replaces the damaged piece, typically runs a few
+        hundred dollars. The real cost almost never comes from the pipe itself. It comes from the
+        water that got out before anyone noticed: soaked drywall, warped flooring, and in bad cases,
+        mold remediation weeks later. That's the gap this checklist is really meant to close. A pipe
+        sleeve that costs a few dollars is a lot cheaper than a flooded hallway.
+      </p>
+
+      <h2>How to Tell a Pipe Has Already Frozen</h2>
+      <p>
+        If a faucet that worked fine yesterday suddenly gives you nothing, not even a trickle,
+        that's usually a frozen line, not a dead faucet. Leave it turned on, so you'll know the
+        moment water starts moving again, and check nearby pipe for any bulging or a hairline crack.
+        If you find one, shut off the main valve before it thaws completely. A pipe that's already
+        split will only leak once the ice inside melts and the pressure behind it has somewhere to
+        go.
+      </p>
+
+      <h2>When to Call a Plumber Instead of Waiting It Out</h2>
+      <p>
+        A dripping faucet or a slow trickle usually sorts itself out once the temperature climbs
+        back up. A pipe that's already cracked, a wall that's wet, or water with nowhere obvious to
+        shut off is a different situation, and it's worth a same-day call rather than a wait-and-see
+        approach. The faster the water stops moving through a damaged pipe, the smaller the repair.
+      </p>
+      <p>
+        <strong>All Phase Plumbing</strong> has handled exactly this kind of call across{" "}
+        <a href="/areas/tukwila">Tukwila</a>, <a href="/areas/kent">Kent</a>,{" "}
+        <a href="/areas/auburn">Auburn</a>, <a href="/areas/federal-way">Federal Way</a>, and the
+        rest of the Seattle area since 1989, including the nights a cold snap catches everyone off
+        guard. If a pipe has already burst, the team's{" "}
+        <a href="/services/plumbing/burst-pipe-repair">burst pipe repair</a> crews run a{" "}
+        <a href="/services/plumbing/emergency-plumber">24/7 emergency line</a> and can usually be on
+        site within 60 to 90 minutes. For pipe that's holding but clearly at risk, same-day
+        appointments are available for insulation,{" "}
+        <a href="/services/plumbing/pipe-repair">pipe repair</a>, or a shutoff valve that's hard to
+        reach.
+      </p>
+      <p>
+        Call <TrackedPhoneLink /> any time, day or night, if a pipe has burst or you're not sure
+        whether one already has.
       </p>
     </>
   ),

@@ -44,6 +44,16 @@ function stripHtml(html: string): string {
 
 const STATIC_ARTICLES = [
   {
+    slug: "winterize-plumbing-seattle",
+    title: "Winterize Plumbing in Seattle: Why a Short Cold Snap Bursts Pipes",
+    excerpt:
+      "The forecast says two cold nights, maybe three. It doesn't sound like much to worry about. Then the temperature drops into the twenties…",
+    date: "October 27, 2026",
+    comments: "No Comments",
+    img: "/images/blog/winterize-plumbing-seattle/short-cold-snap-burst-pipes-hero.webp",
+    imgAlt: "Illustration of a frozen pipe cracking above the Seattle skyline",
+  },
+  {
     slug: "puget-sound-winter-plumbing-survival-guide",
     title:
       "The 2026 Puget Sound Winter Plumbing Survival Guide: Performance, Prevention, and Technology",

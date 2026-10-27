@@ -2,6 +2,8 @@
    Poppins — a CSS @import here would render-block every page. */
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
+/* Styles the `prose` blog-article bodies (headings, lists, spacing, links). */
+@plugin "@tailwindcss/typography";
 @source "../src";
 
 @custom-variant dark (&:is(.dark *));
