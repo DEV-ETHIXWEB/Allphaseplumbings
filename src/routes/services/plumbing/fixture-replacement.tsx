@@ -77,6 +77,21 @@ const CONTENT: ServicePageContent = {
       q: "What if I notice a leak after install?",
       a: "Call us, if we installed it and it's leaking, we fix it. We stand behind our work.",
     },
+    /* Merged from the retired duplicate at /services/fixture-replacement, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know when to replace vs. repair a fixture?",
+      a: "If a fixture requires repeated repairs, has visible cracks or corrosion, is more than 15-20 years old, or lacks modern water-efficiency features, replacement is usually the better investment. We'll give you an honest assessment.",
+    },
+    {
+      q: "What types of faucets do you install?",
+      a: "We install all styles and brands, single-handle, double-handle, pull-down kitchen faucets, bathroom vanity faucets, tub fillers, and more. We can also help you select a fixture that matches your existing hardware.",
+    },
+    {
+      q: "Can fixture replacement reduce my water bill?",
+      a: "Yes. Modern WaterSense certified fixtures use significantly less water than older models. Replacing a 3.5 GPF toilet with a 1.28 GPF model, for example, can save thousands of gallons per year.",
+    },
   ],
   related: [
     { label: "Faucet Installation", href: "/services/plumbing/faucet-installation" },
@@ -99,7 +114,11 @@ export const Route = createFileRoute("/services/plumbing/fixture-replacement")({
           "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work.",
       },
       { property: "og:title", content: "Seattle Fixture Replacement, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work." },
+      {
+        property: "og:description",
+        content:
+          "Seattle plumbing fixture replacement, faucets, toilets, valves, shower trim, sinks. Clean installs and leak-tested work.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/fixture-replacement` }],
   }),
@@ -125,4 +144,3 @@ export const Route = createFileRoute("/services/plumbing/fixture-replacement")({
     </PageShell>
   ),
 });
-

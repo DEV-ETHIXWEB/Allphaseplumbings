@@ -56,12 +56,12 @@ const INDEX: SearchItem[] = [
   },
   {
     label: "Repiping",
-    to: "/services/repiping",
+    to: "/services/plumbing/repiping",
     keywords: "repipe repiping pipe replacement copper pex",
   },
   {
     label: "Gas Line Services",
-    to: "/services/gas-line-repair",
+    to: "/services/plumbing/gas-line-repair",
     keywords: "gas line repair installation leak",
   },
 ];
@@ -76,9 +76,7 @@ export function ServiceSearch({ className = "" }: { className?: string }) {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return INDEX.filter((i) => i.primary);
-    return INDEX.filter(
-      (i) => i.label.toLowerCase().includes(q) || i.keywords.includes(q),
-    );
+    return INDEX.filter((i) => i.label.toLowerCase().includes(q) || i.keywords.includes(q));
   }, [query]);
 
   // Keep the highlighted row in range as results change.
@@ -149,9 +147,7 @@ export function ServiceSearch({ className = "" }: { className?: string }) {
             </p>
           )}
           {results.length === 0 ? (
-            <p className="px-4 py-4 text-[14px] text-[#1E3A6E]/60">
-              No services match “{query}”.
-            </p>
+            <p className="px-4 py-4 text-[14px] text-[#1E3A6E]/60">No services match “{query}”.</p>
           ) : (
             <ul className="py-1">
               {results.map((r, i) => {

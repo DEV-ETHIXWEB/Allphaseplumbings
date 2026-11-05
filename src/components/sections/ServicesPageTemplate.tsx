@@ -8,7 +8,6 @@ import {
   Clock3,
   CalendarCheck,
   Award,
-  Star,
   Plus,
   PhoneCall,
   ClipboardCheck,
@@ -30,7 +29,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useSiteOptions, useTrackedPhone } from "@/hooks/use-site-options";
-import { GOOGLE_REVIEWS } from "@/data/area-content";
+import { GoogleReviewProof } from "@/components/ui/GoogleReviewProof";
 import { GoogleReviewsMarquee } from "@/components/sections/GoogleReviewsMarquee";
 import { CTABanner } from "@/components/sections/CTABanner";
 import Particles from "@/components/ui/Particles";
@@ -76,31 +75,31 @@ export const SERVICES_CATALOG: ServiceItem[] = [
   {
     name: "Emergency Plumbing",
     description: "24/7 response for burst pipes, backups, and flooding.",
-    href: "/services/emergency-plumber",
+    href: "/services/plumbing/emergency-plumber",
     icon: Siren,
   },
   {
     name: "Repiping",
     description: "Whole-home repipes in modern PEX and copper.",
-    href: "/services/repiping",
+    href: "/services/plumbing/repiping",
     icon: Replace,
   },
   {
     name: "Gas Line Services",
     description: "Safe gas line repair, installation, and leak checks.",
-    href: "/services/gas-line-repair",
+    href: "/services/plumbing/gas-line-repair",
     icon: Fuel,
   },
   {
     name: "Water Softeners & Filtration",
     description: "Cleaner, softer water that protects your pipes and fixtures.",
-    href: "/services/water-softeners",
+    href: "/services/plumbing/water-softeners",
     icon: Filter,
   },
   {
     name: "Toilets & Fixtures",
     description: "Toilet, faucet, and fixture repair and installation.",
-    href: "/services/toilets",
+    href: "/services/plumbing/toilets",
     icon: ShowerHead,
   },
   {
@@ -238,21 +237,7 @@ function Hero() {
               </a>
             </div>
 
-            <a
-              href={GOOGLE_REVIEWS.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2.5 text-white/90 hover:text-white transition-colors"
-            >
-              <span className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-[18px] fill-[#FBBC05] text-[#FBBC05]" />
-                ))}
-              </span>
-              <span className="text-[14px] sm:text-[15px] font-semibold">
-                {GOOGLE_REVIEWS.rating} rating &middot; {GOOGLE_REVIEWS.count}+ Google reviews
-              </span>
-            </a>
+            <GoogleReviewProof />
           </div>
 
           {/* RIGHT: crew photo */}

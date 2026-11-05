@@ -39,13 +39,22 @@ function buildSchema(area: AreaContent): string {
       "@type": "City",
       name: `${area.name}, WA`,
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: GOOGLE_REVIEWS.rating,
-      reviewCount: GOOGLE_REVIEWS.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
+    /* Published only once the review figures are verified against the live
+       Google Business Profile. This page builds its own Plumber schema rather
+       than using businessSchema(), so the same gate has to be repeated here, or
+       the placeholder rating would keep shipping on all 21 city pages.
+       See GOOGLE_REVIEWS in data/area-content.ts. */
+    ...(GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: GOOGLE_REVIEWS.rating,
+            reviewCount: GOOGLE_REVIEWS.count,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -111,10 +120,7 @@ function AreaPage() {
   return (
     <PageShell>
       {/* LocalBusiness + FAQPage structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: buildSchema(area) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: buildSchema(area) }} />
       <AreaPageTemplate area={area} />
     </PageShell>
   );

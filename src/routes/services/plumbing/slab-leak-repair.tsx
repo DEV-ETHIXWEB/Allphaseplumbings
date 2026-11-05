@@ -83,6 +83,17 @@ const CONTENT: ServicePageContent = {
       q: "Can I keep using water while you work?",
       a: "Sometimes, depends which line is leaking. We'll let you know what's affected so you can plan.",
     },
+    /* Merged from the retired duplicate at /services/slab-leak-repair, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "Can a slab leak be repaired without breaking the concrete?",
+      a: "In some cases, yes. Pipe rerouting, running new pipes through walls or ceilings to bypass the damaged section, can avoid concrete breaking. In other cases, targeted concrete cutting is necessary but we minimize the area affected.",
+    },
+    {
+      q: "What causes slab leaks?",
+      a: "Common causes include pipe corrosion, shifting soil or foundation movement, poor original installation, abrasion from the concrete, and high water pressure. Copper pipes in older homes are especially prone to pinhole leaks under slabs.",
+    },
   ],
   related: [
     { label: "Leak Detection", href: "/services/plumbing/leak-detection" },
@@ -105,7 +116,11 @@ export const Route = createFileRoute("/services/plumbing/slab-leak-repair")({
           "Seattle slab leak detection and repair, non-invasive location, spot repair or rerouting. Stop hidden water damage before it spreads.",
       },
       { property: "og:title", content: "Seattle Slab Leak Detection & Repair, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle slab leak detection and repair, non-invasive location, spot repair or rerouting. Stop hidden water damage before it spreads." },
+      {
+        property: "og:description",
+        content:
+          "Seattle slab leak detection and repair, non-invasive location, spot repair or rerouting. Stop hidden water damage before it spreads.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/slab-leak-repair` }],
   }),
@@ -131,4 +146,3 @@ export const Route = createFileRoute("/services/plumbing/slab-leak-repair")({
     </PageShell>
   ),
 });
-

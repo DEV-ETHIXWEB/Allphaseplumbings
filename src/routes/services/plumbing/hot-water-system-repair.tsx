@@ -148,6 +148,21 @@ const CONTENT: ServicePageContent = {
       q: "Do you handle gas water heaters?",
       a: "Yes, burner, valve, venting, and safety inspections included. All repairs are done to code by licensed plumbers.",
     },
+    /* Merged from the retired duplicate at /services/hot-water-system-repair, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "Is it normal for a hot water heater to make noise?",
+      a: "Popping, rumbling, or banging sounds usually indicate sediment buildup at the bottom of the tank. Flushing the tank can help, but if noises persist, a professional inspection is recommended.",
+    },
+    {
+      q: "Can I repair a leaking water heater?",
+      a: "Small leaks from fittings or valves can often be repaired. However, leaks from the tank itself usually mean the tank has corroded through and replacement is necessary. We'll assess which option is right for you.",
+    },
+    {
+      q: "How do I know when to repair vs. replace my hot water system?",
+      a: "If your system is under 8 years old and the repair cost is under half the cost of a new unit, repair is usually the better choice. For older systems with recurring problems, replacement often provides better long-term value.",
+    },
   ],
   related: [
     { label: "Water Heaters", href: "/services/water-heaters" },
@@ -170,7 +185,11 @@ export const Route = createFileRoute("/services/plumbing/hot-water-system-repair
           "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service.",
       },
       { property: "og:title", content: "Hot Water System Repair Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service." },
+      {
+        property: "og:description",
+        content:
+          "Seattle hot water system repair, gas and electric tank units, leaks, sediment, no-hot-water diagnostics. Same-day service.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/hot-water-system-repair` }],
   }),
@@ -196,4 +215,3 @@ export const Route = createFileRoute("/services/plumbing/hot-water-system-repair
     </PageShell>
   ),
 });
-

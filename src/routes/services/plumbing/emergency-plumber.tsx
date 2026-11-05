@@ -82,6 +82,13 @@ const CONTENT: ServicePageContent = {
       q: "Can you fix it on the first visit?",
       a: "We stock our trucks for the most common emergencies, so yes in most cases. For specialty parts we'll stabilize the situation and return same-day or next morning to finish.",
     },
+    /* Merged from the retired duplicate at /services/emergency-plumber, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "What should I do while waiting for the emergency plumber?",
+      a: "Shut off the main water valve to stop flooding. For gas leaks, evacuate immediately and call 911 or your gas company first. Document the damage with photos if it's safe to do so.",
+    },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -104,7 +111,11 @@ export const Route = createFileRoute("/services/plumbing/emergency-plumber")({
           "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties.",
       },
       { property: "og:title", content: "24/7 Emergency Plumber Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties." },
+      {
+        property: "og:description",
+        content:
+          "Seattle 24/7 emergency plumber, burst pipes, sewer backups, water heater failures, leaks. Same-day dispatch across King & Pierce counties.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/emergency-plumber` }],
   }),
@@ -130,4 +141,3 @@ export const Route = createFileRoute("/services/plumbing/emergency-plumber")({
     </PageShell>
   ),
 });
-

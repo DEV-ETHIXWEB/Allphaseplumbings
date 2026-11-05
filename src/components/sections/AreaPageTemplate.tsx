@@ -24,6 +24,7 @@ import { CityHighlightMap } from "@/components/sections/CityHighlightMap";
 import { SERVICES, ServiceCard } from "@/components/sections/Services";
 import Particles from "@/components/ui/Particles";
 import { GOOGLE_REVIEWS, slugify, type AreaContent } from "@/data/area-content";
+import { GoogleReviewProof } from "@/components/ui/GoogleReviewProof";
 import { getCityBySlug } from "@/data/service-area-cities";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
@@ -114,22 +115,7 @@ function Hero({ area }: { area: AreaContent }) {
             </a>
           </div>
 
-          {/* Google rating proof */}
-          <a
-            href={GOOGLE_REVIEWS.profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2.5 text-white/90 hover:text-white transition-colors"
-          >
-            <span className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="size-[18px] fill-[#FBBC05] text-[#FBBC05]" />
-              ))}
-            </span>
-            <span className="text-[14px] sm:text-[15px] font-semibold">
-              {GOOGLE_REVIEWS.rating} rating &middot; {GOOGLE_REVIEWS.count}+ Google reviews
-            </span>
-          </a>
+          <GoogleReviewProof />
         </div>
 
         {/* Trust bar, moved into the hero directly below the CTAs */}
@@ -373,6 +359,10 @@ function AreasWeCover({ area }: { area: AreaContent }) {
 const REVIEW_AVATAR_COLORS = ["#4285F4", "#EA4335", "#34A853", "#FBBC05"];
 
 function Testimonials({ area }: { area: AreaContent }) {
+  /* No section at all rather than an empty "What customers say" heading.
+     area.testimonials is empty until genuine, attributable reviews are added
+     (see the note on `testimonials` in data/area-content.ts). */
+  if (area.testimonials.length === 0) return null;
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20 border-y border-white"
@@ -409,37 +399,41 @@ function Testimonials({ area }: { area: AreaContent }) {
             What {area.name} Customers Say
           </h2>
 
-          {/* Aggregate Google rating, links to the Google Business Profile */}
-          <a
-            href={GOOGLE_REVIEWS.profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-1 py-1 hover:opacity-90 transition-opacity"
-          >
-            <span
-              className="text-[20px] font-normal leading-none"
-              style={{
-                fontFamily: "'Product Sans','Google Sans','Inter',sans-serif",
-                letterSpacing: "-0.02em",
-              }}
+          {/* Aggregate Google rating, links to the Google Business Profile.
+              Rendered only once the figures have been verified against the live
+              profile, see GOOGLE_REVIEWS in data/area-content.ts. */}
+          {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0 && (
+            <a
+              href={GOOGLE_REVIEWS.profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-1 py-1 hover:opacity-90 transition-opacity"
             >
-              <span className="text-[#8AB4F8]">G</span>
-              <span className="text-[#EA4335]">o</span>
-              <span className="text-[#FBBC05]">o</span>
-              <span className="text-[#8AB4F8]">g</span>
-              <span className="text-[#34A853]">l</span>
-              <span className="text-[#EA4335]">e</span>
-            </span>
-            <span className="text-[18px] font-black text-white">{GOOGLE_REVIEWS.rating}</span>
-            <span className="flex gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="size-[18px] fill-[#FBBC05] text-[#FBBC05]" />
-              ))}
-            </span>
-            <span className="text-[14px] font-semibold text-white">
-              {GOOGLE_REVIEWS.count}+ reviews
-            </span>
-          </a>
+              <span
+                className="text-[20px] font-normal leading-none"
+                style={{
+                  fontFamily: "'Product Sans','Google Sans','Inter',sans-serif",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                <span className="text-[#8AB4F8]">G</span>
+                <span className="text-[#EA4335]">o</span>
+                <span className="text-[#FBBC05]">o</span>
+                <span className="text-[#8AB4F8]">g</span>
+                <span className="text-[#34A853]">l</span>
+                <span className="text-[#EA4335]">e</span>
+              </span>
+              <span className="text-[18px] font-black text-white">{GOOGLE_REVIEWS.rating}</span>
+              <span className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="size-[18px] fill-[#FBBC05] text-[#FBBC05]" />
+                ))}
+              </span>
+              <span className="text-[14px] font-semibold text-white">
+                {GOOGLE_REVIEWS.count}+ reviews
+              </span>
+            </a>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">

@@ -32,20 +32,18 @@ export const Route = createFileRoute("/sitemap.xml")({
             changefreq: "monthly",
             priority: "0.6",
           },
-          // NOTE: /services/emergency-plumber, /services/repiping, /services/gas-line-repair,
-          // /services/water-lines, /services/water-softeners, /services/toilets,
-          // /services/toilet-installation, /services/fixture-replacement, /services/pipe-repair,
-          // /services/pipe-replacement, /services/slab-leak-repair, /services/septic-tank-service,
-          // and /services/burst-pipe-repair are separate, real pages from their
-          // /services/plumbing/* namesakes below (different copy, not redirects). The header,
-          // mobile nav, and PlumbingServicesGrid all link to the /services/plumbing/* version;
-          // ServicesPageTemplate's SERVICES_CATALOG (rendered on /services) links to 5 of the
-          // /services/* versions instead (emergency-plumber, repiping, gas-line-repair,
-          // water-softeners, toilets) — an existing inconsistency in which URL is "canonical"
-          // for those 5, predating this change. Deliberately left out of the sitemap either way:
-          // submitting both URLs for the same service would only reinforce the duplicate-content
-          // signal. Picking one URL as canonical and redirecting/removing the other is a content
-          // architecture decision for the site owner, not a mechanical fix.
+          // The bare /services/<service> URLs that used to duplicate these pages
+          // (emergency-plumber, repiping, gas-line-repair, water-lines, water-softeners,
+          // toilets, toilet-installation, fixture-replacement, pipe-repair,
+          // pipe-replacement, slab-leak-repair, septic-tank-service, burst-pipe-repair,
+          // hot-water-system-repair) now 301 to their /services/plumbing/* counterparts
+          // below, so there is exactly one indexable URL per service. Their unique FAQ
+          // answers were merged into the surviving pages before the redirects went in.
+          // Redirect targets only belong in a sitemap, never the redirecting URL.
+          //
+          // /drain-cleaning, /emergency-plumber and /hydro-jetting are Google Ads
+          // landing pages and are intentionally absent: they carry `noindex, follow`
+          // so they stop competing with the organic service pages for the same terms.
           // Individual plumbing sub-service pages (/services/plumbing/*)
           { path: "/services/plumbing/leak-detection", changefreq: "monthly", priority: "0.6" },
           { path: "/services/plumbing/backflow-testing", changefreq: "monthly", priority: "0.6" },

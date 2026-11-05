@@ -71,6 +71,25 @@ const CONTENT: ServicePageContent = {
       q: "How long does a typical pipe repair take?",
       a: "Most single-point repairs are 1–2 hours including testing. Repairs requiring drywall opening or harder-to-access pipes can take 3–4 hours.",
     },
+    /* Merged from the retired duplicate at /services/pipe-repair, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know if I need pipe repair?",
+      a: "Common signs include visible leaks, low water pressure, discolored water, damp walls or ceilings, unusual noises in pipes, or a spike in your water bill. If you notice any of these, schedule an inspection before the damage worsens.",
+    },
+    {
+      q: "Can pipe leaks be repaired without replacing the whole pipe?",
+      a: "Yes, in many cases. If the damage is isolated to a specific section, we can repair just that portion. We'll assess the overall condition of your pipes and recommend the most cost-effective solution.",
+    },
+    {
+      q: "What causes pipes to corrode?",
+      a: "Corrosion is caused by the chemical reaction between pipe material and water or soil. Galvanized steel and older copper pipes are especially prone to corrosion over time. Acidic water, high mineral content, and age all accelerate the process.",
+    },
+    {
+      q: "How long do pipe repairs last?",
+      a: "A proper pipe repair using quality materials should last many years. We focus on durable repairs, not temporary patches, to minimize the chance of the same problem recurring.",
+    },
   ],
   related: [
     { label: "Pipe Replacement", href: "/services/plumbing/pipe-replacement" },
@@ -93,7 +112,11 @@ export const Route = createFileRoute("/services/plumbing/pipe-repair")({
           "Pinhole leaks, joint failures, hidden pipe damage, fast, code-compliant Seattle pipe repair from licensed plumbers.",
       },
       { property: "og:title", content: "Seattle Pipe Repair, All Phase Plumbing" },
-      { property: "og:description", content: "Pinhole leaks, joint failures, hidden pipe damage, fast, code-compliant Seattle pipe repair from licensed plumbers." },
+      {
+        property: "og:description",
+        content:
+          "Pinhole leaks, joint failures, hidden pipe damage, fast, code-compliant Seattle pipe repair from licensed plumbers.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/pipe-repair` }],
   }),
@@ -119,4 +142,3 @@ export const Route = createFileRoute("/services/plumbing/pipe-repair")({
     </PageShell>
   ),
 });
-

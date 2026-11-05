@@ -16,6 +16,8 @@
 
 import seattleSkyline from "@/assets/seattle-skyline.webp";
 import { SERVICE_AREA_CITIES, getCityBySlug, type CityInfo } from "@/data/service-area-cities";
+import { WRITTEN_AREAS } from "@/data/area-content-written";
+import { getLocalProfile } from "@/data/area-local-profiles";
 
 export type AreaService = {
   /** Display name shown on the card. */
@@ -37,13 +39,29 @@ export type AreaWhyCard = {
 };
 
 /**
- * Business-wide Google review summary. PLACEHOLDER VALUES, replace with the
- * real aggregate rating, review count, and Google Business Profile URL before
- * launch. Schema.org aggregateRating must reflect genuine review data.
+ * Business-wide Google review summary.
+ *
+ * `verified` gates every public use of these numbers. While it is false the
+ * site shows a plain "Read our Google reviews" link instead of a star rating,
+ * and `businessSchema()` omits aggregateRating entirely.
+ *
+ * WHY THIS IS GATED: these figures were placeholders (4.9 / 50) that were never
+ * replaced with real data, but they were being published in schema.org
+ * aggregateRating on every page. Review counts in structured data have to match
+ * reviews the business actually received; inventing them risks a Google manual
+ * action that strips rich results sitewide, and in the US an invented rating is
+ * also an FTC testimonial-rule problem.
+ *
+ * TO TURN STAR RATINGS BACK ON: open the Google Business Profile dashboard,
+ * copy the live average rating and total review count into `rating` and
+ * `count`, paste the profile's own share URL into `profileUrl`, then set
+ * `verified: true`. Do not estimate these numbers from third-party directories,
+ * they disagree with each other and none of them is the GBP figure.
  */
 export const GOOGLE_REVIEWS = {
-  rating: 4.9,
-  count: 50,
+  verified: false,
+  rating: 0,
+  count: 0,
   profileUrl: "https://www.google.com/maps/search/?api=1&query=All+Phase+Plumbing+Tukwila+WA",
 };
 
@@ -177,7 +195,7 @@ const SEATTLE: AreaContent = {
       name: "Emergency Plumbing",
       description:
         "Burst pipes and sewer backups handled 24/7, with a Seattle technician on the way fast.",
-      href: "/services/emergency-plumber",
+      href: "/services/plumbing/emergency-plumber",
       icon: "ShieldAlert",
     },
   ],
@@ -230,29 +248,11 @@ const SEATTLE: AreaContent = {
     "98144",
     "98199",
   ],
-  testimonials: [
-    {
-      quote:
-        "Our water heater died on a Sunday and All Phase had a new one installed before dinner. Honest pricing, no upsell.",
-      name: "Marcus T.",
-      neighborhood: "Ballard",
-      rating: 5,
-    },
-    {
-      quote:
-        "They found a slab leak under our kitchen that two other plumbers had missed. Clean, professional, and on time.",
-      name: "Priya S.",
-      neighborhood: "Queen Anne",
-      rating: 5,
-    },
-    {
-      quote:
-        "Main line backed up into the basement and they were out within the hour. Absolute lifesavers.",
-      name: "Dawn R.",
-      neighborhood: "West Seattle",
-      rating: 5,
-    },
-  ],
+  /* Real customer reviews only. The three quotes that used to sit here were
+     written as placeholders (invented names and neighborhoods), so they have
+     been removed; the Reviews section hides itself while this is empty. Paste
+     genuine, attributable reviews here to bring it back. */
+  testimonials: [],
   faqs: [
     {
       q: "Do you serve all Seattle neighborhoods?",
@@ -287,6 +287,12 @@ const SEATTLE: AreaContent = {
  */
 export const AREA_CONTENT: Record<string, AreaContent> = {
   seattle: SEATTLE,
+  /* Hand-written core-market cities (Tukwila, Renton, Kent, Auburn, Federal Way,
+     Tacoma). These override buildGeneratedAreaContent for their slugs, which is
+     the point: generated pages reuse rotating phrasing and rank poorly, while
+     these are written around details only true of that city. See
+     data/area-content-written.ts. */
+  ...WRITTEN_AREAS,
 };
 
 /** Names of the N nearest other service-area cities (for internal linking). */
@@ -322,7 +328,7 @@ function variantIndex(slug: string, variantCount: number): number {
  * the city name swapped in, which is what search engines flag as thin or
  * duplicate content.
  *
- * NOTE: testimonials here are PLACEHOLDERS, swap for real reviews per city.
+ * Testimonials are intentionally empty, see the note at `testimonials` below.
  */
 export function buildGeneratedAreaContent(city: CityInfo): AreaContent {
   const name = city.name;
@@ -440,7 +446,26 @@ export function buildGeneratedAreaContent(city: CityInfo): AreaContent {
       },
     ],
   ];
-  const content = contentVariants[v4 % contentVariants.length];
+  const content = [...contentVariants[v4 % contentVariants.length]];
+
+  /* City-specific block, built from verified local facts (county, terrain, water
+     source, housing era) in data/area-local-profiles.ts.
+     WHY: the variants above rotate three phrasings across ~15 cities, which
+     reads as one template with the name swapped in, and search engines discount
+     it accordingly. This block is the part of the page that is true only of this
+     city, which is what gives it a reason to rank at all. Cities important
+     enough to deserve a fully hand-written page live in area-content-written.ts
+     and never reach this function. */
+  const profile = getLocalProfile(city.slug);
+  if (profile) {
+    content.push({
+      heading: `Plumbing in ${name}: What We Actually See Locally`,
+      paragraphs: [
+        `${name} sits in ${profile.county}, on ${profile.terrain}, and that geography decides most of what goes wrong with plumbing here. Housing in ${name} is ${profile.housing}. Knowing that before we arrive means we are checking the things that actually fail in ${name} rather than working through a generic checklist.`,
+        `On water, ${name} is served by ${profile.water}. That matters because the right answer to a water complaint is different depending on the source, and it is the reason we test before recommending any treatment equipment instead of selling a softener by default. The work we are called out for most often in ${name} is ${profile.focus}, so it is what our trucks are stocked for.`,
+      ],
+    });
+  }
 
   return {
     slug: city.slug,
@@ -487,7 +512,7 @@ export function buildGeneratedAreaContent(city: CityInfo): AreaContent {
       {
         name: "Emergency Plumbing",
         description: `Burst pipes and sewer backups in ${name} handled 24/7, with a technician on the way fast.`,
-        href: "/services/emergency-plumber",
+        href: "/services/plumbing/emergency-plumber",
         icon: "ShieldAlert",
       },
     ],
@@ -497,30 +522,29 @@ export function buildGeneratedAreaContent(city: CityInfo): AreaContent {
     })),
     neighborhoods: nearestCityNames(city, 8),
     zips: [],
-    testimonials: [
-      {
-        quote: `Fast, professional, and fairly priced. The plumber explained everything and fixed our issue the same day.`,
-        name: "James R.",
-        neighborhood: name,
-        rating: 5,
-      },
-      {
-        quote: `Showed up on time, kept everything clean, and the price matched the quote exactly. Highly recommend.`,
-        name: "Sarah M.",
-        neighborhood: name,
-        rating: 5,
-      },
-      {
-        quote: `Had an after-hours emergency and they were out quickly to stop the leak. Real lifesavers.`,
-        name: "David C.",
-        neighborhood: name,
-        rating: 5,
-      },
+    /* No invented testimonials. These were three placeholder quotes reused
+       across all ~20 generated city pages, which is both untrue and a
+       duplicate-content signal. AreaPageTemplate hides the Reviews section
+       while this list is empty. */
+    testimonials: [],
+    faqs: [
+      ...faqVariants[v4 % faqVariants.length].map((f) => ({
+        q: f.q(name),
+        a: f.a(name),
+      })),
+      /* One genuinely city-specific FAQ, so this page's FAQPage schema isn't
+         identical to every other generated city's. Water-source questions are
+         both the most common real question we get and the one whose answer
+         actually differs by city. */
+      ...(profile
+        ? [
+            {
+              q: `Do I need a water softener in ${name}?`,
+              a: `It depends on your water source, and in ${name} that means ${profile.water}. We test your water first and recommend treatment only when the result supports it. Across most of this region the water is soft and a softener is unnecessary, so we would rather tell you that than sell you equipment you will not benefit from.`,
+            },
+          ]
+        : []),
     ],
-    faqs: faqVariants[v4 % faqVariants.length].map((f) => ({
-      q: f.q(name),
-      a: f.a(name),
-    })),
     responseTime: "Minutes Away",
   };
 }
