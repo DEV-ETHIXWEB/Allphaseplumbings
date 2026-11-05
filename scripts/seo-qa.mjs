@@ -55,7 +55,19 @@ const LEGACY_REDIRECTS = [
 
 /* Google Ads landing pages: live and converting, but must stay out of the
    organic index so they stop competing with the service pages. */
-const MUST_NOINDEX = ["/drain-cleaning", "/emergency-plumber"];
+const MUST_NOINDEX = ["/drain-cleaning", "/emergency-plumber", "/water-heater"];
+
+/* Redirects configured in vercel.json rather than in the app: trailing-slash
+   normalisation and the legacy WordPress URLs Google still has indexed. These
+   are edge rules, so they do NOT exist on a local `vite preview` build and are
+   only asserted when running against the deployed site. */
+const EDGE_REDIRECTS = [
+  ["/contact-us", "/contact"],
+  ["/about-us", "/about"],
+  ["/hydro-jetting-bellevue-wa", "/services/drain-cleaning"],
+  ["/contact/", "/contact"],
+  ["/services/plumbing/", "/services/plumbing"],
+];
 
 const CITIES = [
   "auburn",
@@ -291,6 +303,25 @@ async function run() {
       `legacy ${from} → 301 ${to}`,
       r.status === 301 && got === to,
       `got ${r.status} -> ${r.location ?? "(none)"}`,
+    );
+  }
+
+  /* Edge-level redirects (vercel.json). Skipped on a local preview, where the
+     edge config does not run — asserting them there would fail misleadingly. */
+  const IS_DEPLOYED = /^https:\/\/(www\.)?allphaseplumbing\.com$/.test(BASE);
+  if (IS_DEPLOYED) {
+    for (const [from, to] of EDGE_REDIRECTS) {
+      const r = await head(from);
+      const got = (r.location ?? "").replace(BASE, "").replace(/\/$/, "") || "/";
+      check(
+        `edge ${from} → 301/308 ${to}`,
+        (r.status === 301 || r.status === 308) && got === to,
+        `got ${r.status} -> ${r.location ?? "(none)"}`,
+      );
+    }
+  } else if (!JSON_OUT) {
+    console.log(
+      "\x1b[33m  SKIP\x1b[0m  edge redirects (vercel.json) — not active on a local preview",
     );
   }
 
