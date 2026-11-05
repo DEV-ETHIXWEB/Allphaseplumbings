@@ -411,6 +411,28 @@ async function run() {
     .filter((x) => FABRICATED_NAMES.some((n) => x.body.includes(n)))
     .map((x) => x.p);
   check("no placeholder testimonial names on any page", withFake.length === 0, withFake.join(", "));
+  /* A rating claim does not have to be in JSON-LD to be a factual claim. The
+     first pass of this suite missed a "Google 5.0 star rating — 50+ reviews"
+     badge on the homepage hero because the numbers were baked into an image and
+     only restated in its alt text, so neither the AggregateRating check nor the
+     fabricated-name check saw it. This scans rendered text AND alt attributes
+     for any star-rating or review-count assertion. */
+  const RATING_CLAIM =
+    /(\b[1-5]\.\d\s*(star|★|rating)|\b\d{1,4}\+?\s*(google\s+)?reviews?\b|\bstraight from google\b)/i;
+  const altText = (h) => [...h.matchAll(/\balt="([^"]*)"/gi)].map((m) => decode(m[1])).join(" | ");
+  const ratingClaims = pages
+    .map((x) => {
+      const hay = `${strip(x.body)} ${altText(x.body)}`;
+      const m = hay.match(RATING_CLAIM);
+      return m ? `${x.p} ("${m[0].trim()}")` : null;
+    })
+    .filter(Boolean);
+  check(
+    "no star-rating or review-count claim in copy or alt text while unverified",
+    ratingClaims.length === 0,
+    ratingClaims.join("\n          "),
+  );
+
   const withOldPhone = pages.filter((x) => RETIRED_PHONE.test(strip(x.body))).map((x) => x.p);
   check(
     "retired phone number never reaches visible copy",
