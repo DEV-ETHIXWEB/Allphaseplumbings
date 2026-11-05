@@ -10,7 +10,7 @@ const CONTENT: ServicePageContent = {
   title: "Emergency Plumber",
   breadcrumbLabel: "Emergency Plumber",
   parentBreadcrumb: { label: "Plumbing", href: "/services/plumbing" },
-  heroImage: "https://images.unsplash.com/photo-1607400201515-c2c41c08d307?w=1600&q=80",
+  heroImage: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=1600&q=80",
   introHeading: "24/7 Emergency Plumber in Seattle",
   introBlocks: [
     {

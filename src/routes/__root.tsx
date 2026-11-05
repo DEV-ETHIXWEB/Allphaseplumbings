@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, SITE_URL } from "@/lib/seo";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -94,9 +94,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { charSet: "utf-8" },
+      /* Sitewide og:url from the deepest matched path, matching the canonical
+         format (www, https, no trailing slash). Routes that set their own
+         og:url override this. */
+      {
+        property: "og:url",
+        content: `${SITE_URL}${(matches[matches.length - 1]?.pathname ?? "/").replace(/(.)\/$/, "$1")}`,
+      },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "All Phase Plumbing" },
       {
