@@ -111,6 +111,17 @@ const CONTENT: ServicePageContent = {
       q: "Can you replace a toilet during a bathroom remodel?",
       a: "Absolutely. We coordinate with your remodel timeline so the new toilet goes in after flooring and is ready when the rest of the bathroom is finished.",
     },
+    /* Merged from the retired duplicate at /services/toilets, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "What causes a toilet to clog frequently?",
+      a: "Frequent clogs are often caused by flushing non-flushable items like wipes, paper towels, or excessive toilet paper. Partial blockages in the drain line or a weak flush can also lead to repeat clogging. Professional drain cleaning or a toilet inspection can identify the root cause.",
+    },
+    {
+      q: "Can I install a new toilet myself?",
+      a: "While DIY toilet installation is possible, improper sealing can lead to water damage and mold beneath the floor. Professional installation ensures the flange, wax seal, and supply lines are correctly set up, preventing costly problems later.",
+    },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -132,8 +143,15 @@ export const Route = createFileRoute("/services/plumbing/toilets")({
         content:
           "Toilet repair, replacement, and installation in Seattle. Running, leaking, or clogged toilets fixed by licensed plumbers. Same-day service, call (206) 309-1088.",
       },
-      { property: "og:title", content: "Toilet Repair & Installation Seattle | All Phase Plumbing" },
-      { property: "og:description", content: "Toilet repair, replacement, and installation in Seattle. Running, leaking, or clogged toilets fixed by licensed plumbers. Same-day service, call (206) 309-1088." },
+      {
+        property: "og:title",
+        content: "Toilet Repair & Installation Seattle | All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Toilet repair, replacement, and installation in Seattle. Running, leaking, or clogged toilets fixed by licensed plumbers. Same-day service, call (206) 309-1088.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/toilets` }],
   }),
@@ -159,4 +177,3 @@ export const Route = createFileRoute("/services/plumbing/toilets")({
     </PageShell>
   ),
 });
-

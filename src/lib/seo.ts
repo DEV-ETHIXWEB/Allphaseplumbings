@@ -49,13 +49,21 @@ export function businessSchema() {
       addressCountry: "US",
     },
     areaServed: SERVICE_AREA_CITIES.map((c) => ({ "@type": "City", name: `${c.name}, WA` })),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: GOOGLE_REVIEWS.rating,
-      reviewCount: GOOGLE_REVIEWS.count,
-      bestRating: 5,
-      worstRating: 1,
-    },
+    /* aggregateRating is published ONLY when the review figures have been
+       verified against the Google Business Profile (see GOOGLE_REVIEWS). Google
+       requires structured-data ratings to reflect reviews the business really
+       received, so an unverified placeholder is worse than no rating at all. */
+    ...(GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: GOOGLE_REVIEWS.rating,
+            reviewCount: GOOGLE_REVIEWS.count,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],

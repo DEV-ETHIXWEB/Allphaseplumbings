@@ -75,6 +75,21 @@ const CONTENT: ServicePageContent = {
       q: "Will you haul away the old toilet?",
       a: "Yes, old toilet disposal is included with installation.",
     },
+    /* Merged from the retired duplicate at /services/toilet-installation, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "Do I need a plumber to install a toilet?",
+      a: "Professional installation is strongly recommended. Improper sealing, flange issues, or incorrect supply line connections can lead to water damage and mold beneath the floor, often not discovered until significant damage has occurred.",
+    },
+    {
+      q: "What type of toilet should I choose?",
+      a: "The best toilet depends on your bathroom layout, comfort preferences, and water efficiency goals. We can help you select the right model, whether standard two-piece, comfort-height, low-flow, or dual-flush.",
+    },
+    {
+      q: "What is a toilet flange and why does it matter?",
+      a: "The toilet flange is the fitting that connects the toilet to the drain pipe and anchors it to the floor. A damaged or improperly sized flange is one of the most common causes of toilet leaks and rocking.",
+    },
   ],
   related: [
     { label: "Toilets", href: "/services/plumbing/toilets" },
@@ -97,7 +112,11 @@ export const Route = createFileRoute("/services/plumbing/toilet-installation")({
           "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation.",
       },
       { property: "og:title", content: "Seattle Toilet Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation." },
+      {
+        property: "og:description",
+        content:
+          "Seattle toilet installation, standard, dual-flush, wall-hung, smart, and ADA models. Leak-tested, code-compliant installation.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/toilet-installation` }],
   }),
@@ -123,4 +142,3 @@ export const Route = createFileRoute("/services/plumbing/toilet-installation")({
     </PageShell>
   ),
 });
-

@@ -124,6 +124,13 @@ const CONTENT: ServicePageContent = {
       q: "Is repiping covered by insurance?",
       a: "Standard policies usually cover water damage caused by sudden leaks but not the cost of replacing pipes. Some policies offer service-line endorsements, worth checking.",
     },
+    /* Merged from the retired duplicate at /services/pipe-replacement, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "Can pipe replacement increase my home's value?",
+      a: "Yes. Updated plumbing is a significant selling point for homebuyers and can increase your home's value by avoiding potential water damage disclosures during inspections.",
+    },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -146,7 +153,11 @@ export const Route = createFileRoute("/services/plumbing/pipe-replacement")({
           "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches.",
       },
       { property: "og:title", content: "Seattle Pipe Replacement & Repiping, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches." },
+      {
+        property: "og:description",
+        content:
+          "Seattle pipe replacement and full home repiping, PEX, copper, drain & sewer lines. Long-term reliability over endless patches.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/pipe-replacement` }],
   }),
@@ -172,4 +183,3 @@ export const Route = createFileRoute("/services/plumbing/pipe-replacement")({
     </PageShell>
   ),
 });
-

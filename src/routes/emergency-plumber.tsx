@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Droplets, ShieldAlert, ThermometerSnowflake, Waves, AlertTriangle, BatteryWarning, Flame, Slash } from "lucide-react";
+import {
+  Droplets,
+  ShieldAlert,
+  ThermometerSnowflake,
+  Waves,
+  AlertTriangle,
+  BatteryWarning,
+  Flame,
+  Slash,
+} from "lucide-react";
 import { LandingPageTemplate } from "@/components/sections/LandingPageTemplate";
 
 /** Canonical site origin (matches the rest of the site's SEO tags). */
@@ -8,10 +17,27 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/emergency-plumber")({
   head: () => ({
     meta: [
+      /* Google Ads landing page. Indexable copies of this page's keywords already
+         live on the organic service pages (/services/*), so letting Google index
+         this one too split the ranking signal between near-duplicate URLs.
+         `noindex, follow` keeps the page fully live for paid traffic while
+         removing it from the organic index; links on it still pass equity. */
+      { name: "robots", content: "noindex, follow" },
       { title: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing" },
-      { name: "description", content: "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now." },
-      { property: "og:title", content: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing" },
-      { property: "og:description", content: "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now." },
+      {
+        name: "description",
+        content:
+          "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now.",
+      },
+      {
+        property: "og:title",
+        content: "Emergency Plumber Renton, Kent, Auburn WA | All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "All Phase Plumbing provides 24-hour emergency plumbing in Renton, Kent, and Auburn WA. Licensed, insured, same-day response. Call (206) 309-1088 now.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/emergency-plumber` }],
   }),
@@ -76,9 +102,15 @@ export default function EmergencyPlumberAdsLanding() {
       whyUsTitle="Why Renton, Kent, and Auburn Homeowners Call All Phase First"
       whyUsText={
         <p>
-          All Phase Plumbing has been serving South King County for years, handling everything from routine drain cleaning to full emergency plumbing response across Renton, Kent, Auburn, Federal Way, and Des Moines. Every job is completed by a licensed, insured plumber, not a subcontractor, and we don't leave until the problem is fully resolved.
-          <br /><br />
-          When you call All Phase for an emergency plumbing situation, you get an honest assessment, an upfront price before any work starts, and a plumber who shows up on time. No surprise charges. No upselling. Just the fix your home needs.
+          All Phase Plumbing has been serving South King County for years, handling everything from
+          routine drain cleaning to full emergency plumbing response across Renton, Kent, Auburn,
+          Federal Way, and Des Moines. Every job is completed by a licensed, insured plumber, not a
+          subcontractor, and we don't leave until the problem is fully resolved.
+          <br />
+          <br />
+          When you call All Phase for an emergency plumbing situation, you get an honest assessment,
+          an upfront price before any work starts, and a plumber who shows up on time. No surprise
+          charges. No upselling. Just the fix your home needs.
         </p>
       }
       ctaTitle="Plumbing Emergency? Don't Wait."

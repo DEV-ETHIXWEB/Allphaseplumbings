@@ -18,16 +18,24 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "All Phase Plumbing, Seattle Plumber Since 1989" },
+      /* The title leads with the keyword people actually search ("Seattle
+         plumber"), not the brand name. Nobody searches "All Phase Plumbing"
+         who isn't already a customer, and the first words of a title carry the
+         most weight in both ranking and click-through on a local result. */
+      { title: "Seattle Plumber, Same-Day Service & 24/7 Emergency Repair" },
       {
         name: "description",
         content:
-          "Trusted plumbing repair, drain cleaning, water heaters and sewer services across Greater Seattle. Same-day service, licensed since 1989.",
+          "Licensed Seattle plumbers since 1989. Drain cleaning, water heaters, sewer repair and 24/7 emergency service across Tukwila, Renton, Kent and Greater Seattle.",
       },
-      { property: "og:title", content: "All Phase Plumbing, Seattle Plumber Since 1989" },
+      {
+        property: "og:title",
+        content: "Seattle Plumber, Same-Day Service & 24/7 Emergency Repair",
+      },
       {
         property: "og:description",
-        content: "Same-day plumbing service across Tukwila and Greater Seattle.",
+        content:
+          "Licensed, family-owned since 1989. Same-day plumbing repair and 24/7 emergency service across Greater Seattle.",
       },
     ],
     links: [

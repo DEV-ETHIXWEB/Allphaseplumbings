@@ -75,6 +75,21 @@ const CONTENT: ServicePageContent = {
       q: "Do I need a sewer camera inspection if I'm buying a septic home?",
       a: "Strongly recommended, along with a tank inspection by a licensed septic contractor. We do the line inspection portion.",
     },
+    /* Merged from the retired duplicate at /services/septic-tank-service, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "What are the signs my septic tank is full?",
+      a: "Signs include slow drains throughout the home, gurgling sounds, sewage odors indoors or outdoors, and wet or soggy areas near the drain field. Don't wait for a complete backup, schedule service at the first sign of trouble.",
+    },
+    {
+      q: "What should I never put in a septic system?",
+      a: "Avoid flushing wipes (even 'flushable' ones), feminine hygiene products, medications, cooking grease, or harsh chemicals. These can disrupt the bacterial balance in your tank or cause clogs.",
+    },
+    {
+      q: "How do I know if my drain field is failing?",
+      a: "Signs include soggy or unusually green grass over the drain field, sewage surfacing above ground, slow drains, or sewage backing up into the home. A failing drain field requires immediate professional attention.",
+    },
   ],
   related: [
     { label: "Sewer Services", href: "/services/sewer-services" },
@@ -97,7 +112,11 @@ export const Route = createFileRoute("/services/plumbing/septic-tank-service")({
           "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers.",
       },
       { property: "og:title", content: "Septic Tank Service Seattle Area, All Phase Plumbing" },
-      { property: "og:description", content: "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers." },
+      {
+        property: "og:description",
+        content:
+          "Septic system plumbing service across the Seattle area, drain line repair, cleanouts, baffles, and coordination with septic pumpers.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/septic-tank-service` }],
   }),
@@ -123,4 +142,3 @@ export const Route = createFileRoute("/services/plumbing/septic-tank-service")({
     </PageShell>
   ),
 });
-

@@ -103,6 +103,29 @@ const CONTENT: ServicePageContent = {
       q: "Can a softener fix iron or sulfur smells?",
       a: "Some softeners handle low levels of iron, but heavy iron or rotten-egg smells usually need a dedicated iron filter or aeration system. We'll test and recommend the right setup.",
     },
+    /* Merged from the retired duplicate at /services/water-softeners, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know if I have hard water?",
+      a: "Signs include white mineral deposits on faucets and showerheads, soap scum on tubs and sinks, stiff or faded laundry, spots on dishes, and dry or itchy skin after bathing. A water hardness test can confirm the level.",
+    },
+    {
+      q: "How does a water softener work?",
+      a: "Water softeners use an ion-exchange process to replace hard minerals (calcium and magnesium) with sodium or potassium ions. The result is 'soft' water that's gentler on your pipes, appliances, and skin.",
+    },
+    {
+      q: "How often does a water softener need maintenance?",
+      a: "We recommend annual maintenance including checking salt levels, cleaning the brine tank, and inspecting the resin bed. Regular upkeep ensures optimal performance and water quality.",
+    },
+    {
+      q: "Can a water softener damage my pipes?",
+      a: "No, in fact, softened water reduces mineral buildup inside pipes, which can extend their lifespan. Properly installed and maintained water softeners are safe for all standard plumbing.",
+    },
+    {
+      q: "How long does a water softener last?",
+      a: "A quality water softener typically lasts 10-15 years with proper maintenance. Regular servicing helps maximize lifespan and efficiency.",
+    },
   ],
   related: [
     { label: "Plumbing", href: "/services/plumbing" },
@@ -125,7 +148,11 @@ export const Route = createFileRoute("/services/plumbing/water-softeners")({
           "Seattle water softener repair, installation, and maintenance. Protect your plumbing and appliances from hard water damage.",
       },
       { property: "og:title", content: "Water Softener Installation & Repair Seattle | All Phase" },
-      { property: "og:description", content: "Seattle water softener repair, installation, and maintenance. Protect your plumbing and appliances from hard water damage." },
+      {
+        property: "og:description",
+        content:
+          "Seattle water softener repair, installation, and maintenance. Protect your plumbing and appliances from hard water damage.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-softeners` }],
   }),
@@ -151,4 +178,3 @@ export const Route = createFileRoute("/services/plumbing/water-softeners")({
     </PageShell>
   ),
 });
-

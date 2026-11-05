@@ -71,6 +71,29 @@ const CONTENT: ServicePageContent = {
       q: "What pipe material do you install?",
       a: "HDPE (high-density polyethylene) for buried mains, flexible, corrosion-proof, and rated for 50+ years.",
     },
+    /* Merged from the retired duplicate at /services/water-lines, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know if my main water line needs repair or replacement?",
+      a: "Signs include low pressure, rusty water, soggy areas in your yard, or an unusually high water bill. A professional inspection can determine whether repair or full replacement is necessary.",
+    },
+    {
+      q: "What causes water line damage?",
+      a: "Water lines can be damaged by aging and corrosion, tree root intrusion, shifting soil, freezing temperatures, or high water pressure. Older materials like galvanized steel are especially prone to deterioration over time.",
+    },
+    {
+      q: "What is trenchless water line replacement?",
+      a: "Trenchless replacement allows us to install new pipes underground with minimal digging, protecting your lawn, driveway, and landscaping. It's faster, less disruptive, and often more cost-effective than traditional excavation.",
+    },
+    {
+      q: "How much does Seattle water line replacement cost?",
+      a: "Costs vary based on pipe length, depth, material, and access. We provide honest upfront estimates after a thorough inspection, call (206) 772-6077 for a quote.",
+    },
+    {
+      q: "Can a leaking water line cause property damage?",
+      a: "Yes. A leaking main water line can saturate soil, damage your foundation, kill landscaping, and lead to mold growth if water enters the home. Early detection and repair are essential.",
+    },
   ],
   related: [
     { label: "Pipe Replacement", href: "/services/plumbing/pipe-replacement" },
@@ -92,8 +115,15 @@ export const Route = createFileRoute("/services/plumbing/water-lines")({
         content:
           "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard.",
       },
-      { property: "og:title", content: "Seattle Water Line Repair & Replacement, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard." },
+      {
+        property: "og:title",
+        content: "Seattle Water Line Repair & Replacement, All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Seattle water line repair and trenchless replacement. Diagnose pressure loss, leaks, and aging service lines without tearing up your yard.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-lines` }],
   }),
@@ -119,4 +149,3 @@ export const Route = createFileRoute("/services/plumbing/water-lines")({
     </PageShell>
   ),
 });
-

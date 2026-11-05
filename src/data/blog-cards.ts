@@ -39,8 +39,8 @@ export const BLOG_CARDS: BlogCard[] = [
       "/services/plumbing/pipe-replacement",
       "/services/plumbing/outdoor-faucet-repair",
       "/services/plumbing/emergency-plumber",
-      "/services/burst-pipe-repair",
-      "/services/emergency-plumber",
+      "/services/plumbing/burst-pipe-repair",
+      "/services/plumbing/emergency-plumber",
     ],
   },
   {
@@ -58,7 +58,7 @@ export const BLOG_CARDS: BlogCard[] = [
       "/services/plumbing/outdoor-faucet-repair",
       "/services/plumbing/hot-water-system-repair",
       "/services/plumbing/repiping",
-      "/services/burst-pipe-repair",
+      "/services/plumbing/burst-pipe-repair",
     ],
   },
   {
@@ -75,9 +75,9 @@ export const BLOG_CARDS: BlogCard[] = [
       "/services/plumbing/faucet-installation",
       "/services/plumbing/toilet-installation",
       "/services/plumbing/gas-line-repair",
-      "/services/fixture-replacement",
-      "/services/toilet-installation",
-      "/services/gas-line-repair",
+      "/services/plumbing/fixture-replacement",
+      "/services/plumbing/toilet-installation",
+      "/services/plumbing/gas-line-repair",
     ],
   },
   {
@@ -121,7 +121,7 @@ export const BLOG_CARDS: BlogCard[] = [
     services: [
       "/services/plumbing/backflow-testing",
       "/services/plumbing/water-lines",
-      "/services/water-lines",
+      "/services/plumbing/water-lines",
       "/services/plumbing/outdoor-faucet-repair",
     ],
   },

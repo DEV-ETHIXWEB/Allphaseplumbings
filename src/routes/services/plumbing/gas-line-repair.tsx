@@ -77,6 +77,25 @@ const CONTENT: ServicePageContent = {
       q: "How do you find a gas leak without taking apart the wall?",
       a: "Calibrated electronic gas detectors and bubble-soap testing on accessible joints. For hidden leaks we use pressure-drop testing to isolate the section before opening anything.",
     },
+    /* Merged from the retired duplicate at /services/gas-line-repair, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know if I have a gas leak?",
+      a: "A sulfur or rotten egg smell is the most common sign. You may also hear hissing near gas lines, notice dead plants near buried lines, see bubbling in water near your home, or experience symptoms like dizziness or nausea indoors.",
+    },
+    {
+      q: "Can I repair a gas line myself?",
+      a: "No. Gas line repairs must be performed by licensed professionals. DIY repairs can lead to leaks, fires, or explosions. Always call a licensed plumber like All Phase Plumbing for any gas line work.",
+    },
+    {
+      q: "How long does gas line repair take?",
+      a: "Simple repairs can take 1-3 hours. More complex work involving multiple sections or pressure testing may take longer. We'll give you an accurate estimate before starting any work.",
+    },
+    {
+      q: "Is gas line repair covered by homeowners insurance?",
+      a: "Coverage varies by policy. Most policies cover sudden and accidental damage but may not cover issues from age or corrosion. Check with your insurer and we can provide documentation to support your claim.",
+    },
   ],
   related: [
     { label: "Leak Detection", href: "/services/plumbing/leak-detection" },
@@ -98,8 +117,15 @@ export const Route = createFileRoute("/services/plumbing/gas-line-repair")({
         content:
           "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe.",
       },
-      { property: "og:title", content: "Seattle Gas Line Repair & Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe." },
+      {
+        property: "og:title",
+        content: "Seattle Gas Line Repair & Installation, All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Seattle gas line repair, installation, and leak detection by licensed plumbers. Code-compliant, permitted, safe.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/gas-line-repair` }],
   }),
@@ -125,4 +151,3 @@ export const Route = createFileRoute("/services/plumbing/gas-line-repair")({
     </PageShell>
   ),
 });
-

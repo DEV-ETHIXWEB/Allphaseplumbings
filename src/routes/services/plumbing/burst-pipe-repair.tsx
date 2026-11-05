@@ -84,6 +84,17 @@ const CONTENT: ServicePageContent = {
       q: "Should I shut off the water heater too?",
       a: "Yes, if water has reached it or if you've shut off the main and the heater is now empty. Running it dry can damage the heating elements.",
     },
+    /* Merged from the retired duplicate at /services/burst-pipe-repair, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I stop a burst pipe?",
+      a: "Immediately shut off your main water supply valve to stop water flow. Then call All Phase Plumbing at (206) 772-6077 for emergency repair. Don't attempt to patch the pipe yourself, temporary fixes can fail under pressure.",
+    },
+    {
+      q: "How much water damage can a burst pipe cause?",
+      a: "A burst pipe can release hundreds of gallons in minutes, damaging flooring, drywall, insulation, and electrical systems. The faster you shut off the water and call for help, the less damage occurs.",
+    },
   ],
   related: [
     { label: "Emergency Plumber", href: "/services/plumbing/emergency-plumber" },
@@ -106,7 +117,11 @@ export const Route = createFileRoute("/services/plumbing/burst-pipe-repair")({
           "24/7 burst pipe repair in Seattle. Stop the water and call (206) 309-1088, licensed emergency plumbers on the way.",
       },
       { property: "og:title", content: "Emergency Burst Pipe Repair Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "24/7 burst pipe repair in Seattle. Stop the water and call (206) 309-1088, licensed emergency plumbers on the way." },
+      {
+        property: "og:description",
+        content:
+          "24/7 burst pipe repair in Seattle. Stop the water and call (206) 309-1088, licensed emergency plumbers on the way.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/burst-pipe-repair` }],
   }),
@@ -132,4 +147,3 @@ export const Route = createFileRoute("/services/plumbing/burst-pipe-repair")({
     </PageShell>
   ),
 });
-

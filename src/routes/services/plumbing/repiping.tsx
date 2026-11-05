@@ -74,6 +74,17 @@ const CONTENT: ServicePageContent = {
       q: "Is repiping covered by insurance?",
       a: "Generally no, but the water damage from a sudden pipe failure usually is. A planned repipe avoids those emergencies.",
     },
+    /* Merged from the retired duplicate at /services/repiping, which now 301s
+       here. Keeping these answers preserves the long-tail queries that page
+       covered and feeds them into this page's FAQPage schema. */
+    {
+      q: "How do I know if my home needs repiping?",
+      a: "Signs include frequent leaks in multiple locations, consistently low water pressure, discolored or metallic-tasting water, visible corrosion on pipes, and pipes that are more than 40-50 years old. A professional inspection can confirm whether repiping is necessary.",
+    },
+    {
+      q: "Does repiping increase home value?",
+      a: "Yes. Updated plumbing is a strong selling point that can increase buyer confidence, reduce inspection concerns, and add real value to your home.",
+    },
   ],
   related: [
     { label: "Pipe Replacement", href: "/services/plumbing/pipe-replacement" },
@@ -96,7 +107,11 @@ export const Route = createFileRoute("/services/plumbing/repiping")({
           "Whole-home repiping in Seattle, PEX and copper. Replace failing galvanized or old copper water lines for decades of clean, reliable plumbing.",
       },
       { property: "og:title", content: "Seattle Whole-Home Repiping, All Phase Plumbing" },
-      { property: "og:description", content: "Whole-home repiping in Seattle, PEX and copper. Replace failing galvanized or old copper water lines for decades of clean, reliable plumbing." },
+      {
+        property: "og:description",
+        content:
+          "Whole-home repiping in Seattle, PEX and copper. Replace failing galvanized or old copper water lines for decades of clean, reliable plumbing.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/repiping` }],
   }),
@@ -122,4 +137,3 @@ export const Route = createFileRoute("/services/plumbing/repiping")({
     </PageShell>
   ),
 });
-
