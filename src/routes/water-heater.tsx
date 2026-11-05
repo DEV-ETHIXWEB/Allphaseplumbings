@@ -8,6 +8,10 @@ const SITE_URL = "https://www.allphaseplumbing.com";
 export const Route = createFileRoute("/water-heater")({
   head: () => ({
     meta: [
+      /* Google Ads landing page, same as /drain-cleaning and /emergency-plumber:
+         the organic copy of these keywords lives on /services/water-heaters, so
+         keep this page live for paid traffic but out of the organic index. */
+      { name: "robots", content: "noindex, follow" },
       { title: "Water Heater Repair & Installation in Renton, Kent & Auburn | All Phase Plumbing" },
       {
         name: "description",
