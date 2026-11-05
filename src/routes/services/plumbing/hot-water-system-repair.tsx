@@ -10,7 +10,7 @@ const CONTENT: ServicePageContent = {
   title: "Hot Water System Repair",
   breadcrumbLabel: "Hot Water System Repair",
   parentBreadcrumb: { label: "Plumbing", href: "/services/plumbing" },
-  heroImage: "https://images.unsplash.com/photo-1585351733588-d2f7e1066bf6?w=1600&q=80",
+  heroImage: "https://images.unsplash.com/photo-1701421047855-d7bafd8d6f69?w=1600&q=80",
   introHeading: "Hot Water System Repair",
   introBlocks: [
     {
