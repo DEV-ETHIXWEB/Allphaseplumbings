@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "When your drains slow down or back up, trust All Phase Plumbing, Seattle's local drain cleaning experts, to restore smooth, consistent flow. As a leading drain cleaning company in Seattle, we provide complete services to remove clogs, eliminate buildup, and prevent future blockages.",
         "From kitchen sinks and bathroom drains to floor drains and main sewer lines, our licensed plumbers use professional-grade tools like augers, hydro jetting equipment, and camera inspection technology to accurately diagnose and clean your plumbing system. No matter the clog or cause, we'll get your drains running clear again.",
-        "Call Us: (206) 772-6077 or schedule your Seattle drain cleaning online today!",
+        "Call Us: (206) 309-1088 or schedule your Seattle drain cleaning online today!",
       ],
     },
     {
@@ -67,7 +67,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Your Seattle Drain Cleaning Today",
       paragraphs: [
         "Don't let slow drains or backups disrupt your day. Trust the experts at All Phase Plumbing for fast, effective, and affordable drain cleaning in Seattle. We're available for same-day service, routine maintenance, and emergency drain repairs, always with upfront pricing and 100% satisfaction guaranteed.",
-        "Call Us: (206) 772-6077 or book online today to schedule your Seattle drain cleaning service and keep your water flowing freely.",
+        "Call Us: (206) 309-1088 or book online today to schedule your Seattle drain cleaning service and keep your water flowing freely.",
       ],
     },
   ],
@@ -94,7 +94,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "Do you offer emergency drain cleaning services in Seattle?",
-      a: "Yes, All Phase Plumbing is available 24/7 for emergency drain cleaning throughout the Greater Seattle area. A backed-up sewer or flooded floor can't wait. Call us anytime at (206) 772-6077 and we'll dispatch a technician right away.",
+      a: "Yes, All Phase Plumbing is available 24/7 for emergency drain cleaning throughout the Greater Seattle area. A backed-up sewer or flooded floor can't wait. Call us anytime at (206) 309-1088 and we'll dispatch a technician right away.",
     },
   ],
   related: [
@@ -134,4 +134,3 @@ export const Route = createFileRoute("/services/drain-cleaning")({
     </PageShell>
   ),
 });
-

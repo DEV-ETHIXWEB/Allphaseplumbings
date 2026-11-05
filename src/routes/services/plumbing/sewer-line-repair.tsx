@@ -18,7 +18,7 @@ const CONTENT: ServicePageContent = {
         "Sewer line problems can cause serious damage if they're not handled quickly. Unlike small plumbing issues, sewer line damage often affects multiple drains and can lead to backups, foul odors, and water damage throughout the property.",
         "Many homeowners first notice slow drains, recurring clogs, or sewage smells before realizing the sewer line itself is damaged. By the time sewage backs up into sinks, tubs, or floor drains, the issue usually requires immediate professional repair.",
         "Our sewer line repair services focus on identifying the damaged section, repairing it correctly, and restoring proper wastewater flow. We don't rely on temporary fixes. The goal is a reliable repair that protects your plumbing system and prevents future sewer problems.",
-        "Call (206) 772-6077 or book your sewer line repair service online today.",
+        "Call (206) 309-1088 or book your sewer line repair service online today.",
       ],
     },
     {
@@ -116,7 +116,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Your Sewer Line Repair Service Today",
       paragraphs: [
         "If you're dealing with sewer backups, slow drains, or sewage odors, professional sewer line repair can restore your plumbing system safely and effectively. Our experienced plumbers provide reliable sewer line repair services with clear communication and upfront pricing. From minor damage to major sewer failures, we're ready to help.",
-        "Call (206) 772-6077 or book online today to schedule your sewer line repair service.",
+        "Call (206) 309-1088 or book online today to schedule your sewer line repair service.",
       ],
     },
   ],
@@ -131,7 +131,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "How fast can you respond to a sewer backup?",
-      a: "Backups are an emergency, we dispatch same day across the Seattle area. Call (206) 772-6077 and we'll get a plumber out as quickly as possible.",
+      a: "Backups are an emergency, we dispatch same day across the Seattle area. Call (206) 309-1088 and we'll get a plumber out as quickly as possible.",
     },
     {
       q: "Will you need to dig up my yard?",
@@ -163,7 +163,11 @@ export const Route = createFileRoute("/services/plumbing/sewer-line-repair")({
           "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available.",
       },
       { property: "og:title", content: "Seattle Sewer Line Repair, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available." },
+      {
+        property: "og:description",
+        content:
+          "Seattle sewer line repair, broken, leaking, and collapsed sewer line solutions. Camera inspection and trenchless options available.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/sewer-line-repair` }],
   }),
@@ -189,4 +193,3 @@ export const Route = createFileRoute("/services/plumbing/sewer-line-repair")({
     </PageShell>
   ),
 });
-

@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Slab leaks happen when water pipes running through or under your home's concrete foundation crack, corrode, or shift. Because the leak is hidden under concrete, it often goes undetected until water bills spike, flooring warps, or warm spots show up underfoot. By then, structural damage is usually already underway.",
         "All Phase Plumbing uses non-invasive slab leak detection to pinpoint the exact location of the leak, then offers the right repair approach for your home, from spot repair to full rerouting that avoids the slab entirely.",
-        "Call (206) 772-6077 to schedule slab leak detection.",
+        "Call (206) 309-1088 to schedule slab leak detection.",
       ],
     },
     {
@@ -58,7 +58,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Slab Leak Service",
       paragraphs: [
-        "Suspect a slab leak? Call (206) 772-6077, we'll detect, locate, and repair with the least disruption possible to your floors and foundation.",
+        "Suspect a slab leak? Call (206) 309-1088, we'll detect, locate, and repair with the least disruption possible to your floors and foundation.",
       ],
     },
   ],

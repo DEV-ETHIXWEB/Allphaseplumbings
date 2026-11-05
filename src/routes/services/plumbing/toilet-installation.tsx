@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "A properly installed toilet should last 20+ years without leaking, rocking, or wasting water. Cutting corners on installation, bad wax ring, loose flange, no shutoff replacement, usually shows up as a leaking base or a soft floor a year later.",
         "All Phase Plumbing installs toilets across Seattle the right way: new wax ring, new supply line, flange checked and rebuilt if needed, level set, and leak-tested before we leave.",
-        "Call (206) 772-6077 to schedule toilet installation.",
+        "Call (206) 309-1088 to schedule toilet installation.",
       ],
     },
     {
@@ -50,7 +50,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Toilet Installation",
       paragraphs: [
-        "Whether you bought a new toilet or want us to recommend one, call (206) 772-6077 and we'll handle the install with leak-tested, code-compliant work.",
+        "Whether you bought a new toilet or want us to recommend one, call (206) 309-1088 and we'll handle the install with leak-tested, code-compliant work.",
       ],
     },
   ],

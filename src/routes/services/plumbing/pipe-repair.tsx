@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "From slow drips behind walls to pinhole leaks under sinks, pipe damage rarely fixes itself. The longer it sits, the more it costs, in water bills, drywall, flooring, and mold remediation. All Phase Plumbing provides fast, code-compliant pipe repair across the Seattle area for residential and small commercial properties.",
         "We diagnose the actual problem, explain your options, and complete the repair right the first time. No guesswork, no upselling.",
-        "Call (206) 772-6077 to schedule pipe repair.",
+        "Call (206) 309-1088 to schedule pipe repair.",
       ],
     },
     {
@@ -46,7 +46,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Pipe Repair",
       paragraphs: [
-        "Got a leak? Don't wait for it to spread. Call (206) 772-6077 and a licensed plumber will diagnose and repair the problem with upfront pricing.",
+        "Got a leak? Don't wait for it to spread. Call (206) 309-1088 and a licensed plumber will diagnose and repair the problem with upfront pricing.",
       ],
     },
   ],

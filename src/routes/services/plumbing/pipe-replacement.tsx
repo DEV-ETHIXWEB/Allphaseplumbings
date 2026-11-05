@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Pipes don't last forever. Over time, plumbing pipes wear down, corrode, crack, or fail completely. When repairs are no longer enough, pipe replacement becomes the safest way to protect your home and plumbing system.",
         "Pipe replacement focuses on removing damaged or outdated pipes and installing new, reliable plumbing lines. This helps restore proper water flow, prevent leaks, and avoid sudden pipe failures that can cause serious water damage.",
-        "Call (206) 772-6077 or book your Pipe Replacement service online today.",
+        "Call (206) 309-1088 or book your Pipe Replacement service online today.",
       ],
     },
     {
@@ -99,7 +99,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Pipe Replacement Service",
       paragraphs: [
         "If your plumbing system shows signs of aging, corrosion, or repeated leaks, pipe replacement provides a long-term solution. Replacing failing pipes helps protect your home, improve performance, and prevent costly damage.",
-        "Call (206) 772-6077 or book online today to schedule your Pipe Replacement service.",
+        "Call (206) 309-1088 or book online today to schedule your Pipe Replacement service.",
       ],
     },
   ],

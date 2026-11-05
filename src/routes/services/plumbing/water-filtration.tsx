@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Cleaner-tasting water, fewer mineral deposits, and peace of mind about what's coming out of your tap, that's what a properly chosen water filtration system delivers. All Phase Plumbing installs whole-home filters, under-sink filters, and reverse osmosis systems across the Seattle area.",
         "Every home's water is different. We start with a water test, recommend the right filtration approach for your concerns and budget, and handle the install cleanly with proper bypass valves and supply-line work.",
-        "Call (206) 772-6077 to schedule a filtration consultation.",
+        "Call (206) 309-1088 to schedule a filtration consultation.",
       ],
     },
     {
@@ -46,7 +46,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Filter Installation",
       paragraphs: [
-        "Ready to upgrade your water? Call (206) 772-6077 and we'll test your water, walk through your options, and install the right system.",
+        "Ready to upgrade your water? Call (206) 309-1088 and we'll test your water, walk through your options, and install the right system.",
       ],
     },
   ],
@@ -92,8 +92,15 @@ export const Route = createFileRoute("/services/plumbing/water-filtration")({
         content:
           "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test.",
       },
-      { property: "og:title", content: "Seattle Water Filtration System Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test." },
+      {
+        property: "og:title",
+        content: "Seattle Water Filtration System Installation, All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Whole-home and under-sink water filtration installation in Seattle. RO, carbon, sediment, and well-water systems matched to your water test.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/water-filtration` }],
   }),
@@ -119,4 +126,3 @@ export const Route = createFileRoute("/services/plumbing/water-filtration")({
     </PageShell>
   ),
 });
-

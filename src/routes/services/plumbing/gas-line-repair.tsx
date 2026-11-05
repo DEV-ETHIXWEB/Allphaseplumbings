@@ -16,7 +16,7 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "Natural gas lines power your water heater, furnace, range, dryer, and outdoor BBQ. They're safe when installed and maintained correctly, and dangerous when they're not. All Phase Plumbing's licensed plumbers handle gas line repair, installation, and leak testing across the Seattle area to code.",
-        "If you smell gas right now, leave the building, call your gas utility's emergency line first, and then call us at (206) 772-6077 once it's safe.",
+        "If you smell gas right now, leave the building, call your gas utility's emergency line first, and then call us at (206) 309-1088 once it's safe.",
       ],
     },
     {
@@ -52,7 +52,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Gas Line Service",
       paragraphs: [
-        "For non-emergency gas line repair, new installations, or appliance hookups, call (206) 772-6077, licensed plumbers, code-compliant work, and safe gas systems guaranteed.",
+        "For non-emergency gas line repair, new installations, or appliance hookups, call (206) 309-1088, licensed plumbers, code-compliant work, and safe gas systems guaranteed.",
       ],
     },
   ],

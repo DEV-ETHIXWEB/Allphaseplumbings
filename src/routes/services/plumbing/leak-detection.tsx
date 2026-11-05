@@ -18,7 +18,7 @@ const CONTENT: ServicePageContent = {
         "Leaks don't always show up as dripping pipes or puddles on the floor. Many leaks stay hidden behind walls, under floors, or beneath concrete for weeks or even months. During that time, water keeps running, damage keeps spreading, and utility bills keep climbing.",
         "Most customers reach out after noticing a higher water bill, damp drywall, or the sound of running water when nothing is turned on. In many cases, the leak has already caused more damage than expected.",
         "Our professional leak detection services are designed to locate the source of water or gas leaks quickly and accurately, without unnecessary damage to your home. We focus on finding the exact problem, explaining what's happening, and helping you stop the leak before it turns into a major repair.",
-        "Call (206) 772-6077 or book your leak detection service online today.",
+        "Call (206) 309-1088 or book your leak detection service online today.",
       ],
     },
     {
@@ -105,7 +105,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Your Leak Detection Service Today",
       paragraphs: [
         "If you suspect a hidden leak, don't wait for the damage to spread. Our experienced plumbers provide fast, accurate, and reliable leak detection services with honest recommendations and upfront pricing. Whether you're dealing with a suspected slab leak, water line issue, or unexplained water loss, our team is ready to help.",
-        "Call (206) 772-6077 or book online today to schedule your leak detection service.",
+        "Call (206) 309-1088 or book online today to schedule your leak detection service.",
       ],
     },
   ],
@@ -152,7 +152,11 @@ export const Route = createFileRoute("/services/plumbing/leak-detection")({
           "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage.",
       },
       { property: "og:title", content: "Seattle Leak Detection, All Phase Plumbing" },
-      { property: "og:description", content: "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage." },
+      {
+        property: "og:description",
+        content:
+          "Non-invasive Seattle leak detection, slab leaks, water lines, gas lines. Find leaks accurately before they cause major damage.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/leak-detection` }],
   }),
@@ -178,4 +182,3 @@ export const Route = createFileRoute("/services/plumbing/leak-detection")({
     </PageShell>
   ),
 });
-

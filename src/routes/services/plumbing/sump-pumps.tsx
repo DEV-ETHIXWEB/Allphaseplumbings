@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "In Seattle, your sump pump is one of the few things standing between heavy winter rain and a flooded basement. When it fails, you usually find out the hard way. All Phase Plumbing installs, repairs, and replaces sump pumps to keep your basement and crawl space dry year-round.",
         "Whether your existing pump is humming but not pumping, cycling constantly, or it's simply time for an upgrade, our licensed plumbers will get you a system you can rely on.",
-        "Call (206) 772-6077 to schedule sump pump service.",
+        "Call (206) 309-1088 to schedule sump pump service.",
       ],
     },
     {
@@ -52,7 +52,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Sump Pump Service",
       paragraphs: [
-        "Don't wait for the next big storm to find out your pump can't keep up. Call (206) 772-6077 for a sump pump check, repair, or new install.",
+        "Don't wait for the next big storm to find out your pump can't keep up. Call (206) 309-1088 for a sump pump check, repair, or new install.",
       ],
     },
   ],
@@ -98,8 +98,15 @@ export const Route = createFileRoute("/services/plumbing/sump-pumps")({
         content:
           "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry.",
       },
-      { property: "og:title", content: "Sump Pump Repair & Installation Seattle | All Phase Plumbing" },
-      { property: "og:description", content: "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry." },
+      {
+        property: "og:title",
+        content: "Sump Pump Repair & Installation Seattle | All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Seattle sump pump service, repair, replacement, and new installs with battery-backup options to keep your basement dry.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/sump-pumps` }],
   }),
@@ -125,4 +132,3 @@ export const Route = createFileRoute("/services/plumbing/sump-pumps")({
     </PageShell>
   ),
 });
-

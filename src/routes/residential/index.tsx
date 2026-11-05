@@ -85,14 +85,14 @@ const CONTENT: ServicePageContent = {
       heading: "Call Your Trusted Seattle Residential Plumber Today",
       paragraphs: [
         "When you need a dependable home plumber, trust All Phase Plumbing for quality work and peace of mind. From a quick repair to a whole-home upgrade, we'll keep your plumbing running the way it should.",
-        "Call (206) 772-6077 today or schedule service online for expert residential plumbing in Seattle, backed by experience, integrity, and results.",
+        "Call (206) 309-1088 today or schedule service online for expert residential plumbing in Seattle, backed by experience, integrity, and results.",
       ],
     },
   ],
   faqs: [
     {
       q: "What residential plumbing services do you offer?",
-      a: "We handle everything a home needs, including drain cleaning, hydro jetting, water heater repair and replacement, leak detection, pipe repair and repiping, sewer line service, fixture installation, water softeners, and 24/7 emergency plumbing. Call (206) 772-6077 to discuss your home.",
+      a: "We handle everything a home needs, including drain cleaning, hydro jetting, water heater repair and replacement, leak detection, pipe repair and repiping, sewer line service, fixture installation, water softeners, and 24/7 emergency plumbing. Call (206) 309-1088 to discuss your home.",
     },
     {
       q: "Do you offer emergency plumbing services for homeowners?",
