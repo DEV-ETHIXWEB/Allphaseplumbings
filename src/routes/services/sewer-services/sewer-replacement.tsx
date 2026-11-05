@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "When your sewer line starts backing up, leaking, or showing signs of age, Seattle trenchless sewer repair from All Phase Plumbing offers a faster, cleaner, and more efficient solution. Trenchless technology lets us replace or repair damaged sewer lines without the need for extensive digging, preserving your yard, driveway, and landscaping.",
         "If your sewer line is cracked, corroded, or frequently clogging, our experts can assess your system and provide a non-invasive trenchless replacement that restores flow and reliability without turning your property into a construction zone.",
-        "Call (206) 772-6077 or book online to schedule your Seattle plumbing service today!",
+        "Call (206) 309-1088 or book online to schedule your Seattle plumbing service today!",
       ],
     },
     {
@@ -70,14 +70,14 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "If you're experiencing recurring sewer problems, foul odors, or frequent backups, it may be time to replace your line entirely. All Phase Plumbing is Seattle's trusted choice for both trenchless sewer repair and full sewer replacement.",
         "We combine advanced technology with experienced craftsmanship to ensure your sewer system is repaired or replaced the right way, quickly, cleanly, and built to last.",
-        "Call (206) 772-6077, All Phase Plumbing, today to schedule your Seattle trenchless sewer repair or replacement service and restore your system with expert care.",
+        "Call (206) 309-1088, All Phase Plumbing, today to schedule your Seattle trenchless sewer repair or replacement service and restore your system with expert care.",
       ],
     },
   ],
   faqs: [
     {
       q: "How do I know if I need trenchless sewer repair?",
-      a: "If your drains are slow, you smell sewage, or your yard has unexplained wet spots, your sewer line may be damaged. Our camera inspection can determine if trenchless repair is the right solution. Call (206) 772-6077.",
+      a: "If your drains are slow, you smell sewage, or your yard has unexplained wet spots, your sewer line may be damaged. Our camera inspection can determine if trenchless repair is the right solution. Call (206) 309-1088.",
     },
     {
       q: "What's the difference between trenchless repair and trenchless replacement?",
@@ -153,4 +153,3 @@ export const Route = createFileRoute("/services/sewer-services/sewer-replacement
     </PageShell>
   ),
 });
-

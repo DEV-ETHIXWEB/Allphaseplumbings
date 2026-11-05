@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Homes outside Seattle's main sewer footprint, across parts of King, Pierce, and Snohomish counties, rely on septic systems to safely process household wastewater. A well-maintained septic system can last 25+ years; a neglected one can fail in 5.",
         "All Phase Plumbing helps homeowners with the plumbing side of septic systems, clogged lines into and out of the tank, baffle and tee repairs, and coordination with licensed septic pumpers and installers.",
-        "Call (206) 772-6077 to schedule septic-related plumbing service.",
+        "Call (206) 309-1088 to schedule septic-related plumbing service.",
       ],
     },
     {
@@ -50,7 +50,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Septic Service",
       paragraphs: [
-        "If you're seeing slow drains, odors, or wet spots in the yard, don't wait, septic failures get expensive fast. Call (206) 772-6077 and we'll diagnose the plumbing-side issue and coordinate any septic specialist work needed.",
+        "If you're seeing slow drains, odors, or wet spots in the yard, don't wait, septic failures get expensive fast. Call (206) 309-1088 and we'll diagnose the plumbing-side issue and coordinate any septic specialist work needed.",
       ],
     },
   ],

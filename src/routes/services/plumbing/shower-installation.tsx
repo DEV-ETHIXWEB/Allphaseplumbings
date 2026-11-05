@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Whether you're upgrading an old fiberglass shower to a tiled walk-in, converting a tub to a shower, or building one from scratch in a remodel, proper plumbing is what makes the difference between years of trouble-free use and a slow leak destroying your subfloor.",
         "All Phase Plumbing handles the plumbing side of new shower installations across Seattle, drain, water supply, valve, shower head, and waterproofing inspection, coordinated with your tile or shower-pan contractor.",
-        "Call (206) 772-6077 to schedule a shower installation consultation.",
+        "Call (206) 309-1088 to schedule a shower installation consultation.",
       ],
     },
     {
@@ -46,7 +46,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Shower Installation",
       paragraphs: [
-        "Planning a new shower or bathroom remodel? Call (206) 772-6077 and we'll walk through the plumbing scope, recommend the right valves and fixtures, and quote the work upfront.",
+        "Planning a new shower or bathroom remodel? Call (206) 309-1088 and we'll walk through the plumbing scope, recommend the right valves and fixtures, and quote the work upfront.",
       ],
     },
   ],
@@ -93,7 +93,11 @@ export const Route = createFileRoute("/services/plumbing/shower-installation")({
           "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work.",
       },
       { property: "og:title", content: "Seattle Shower Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work." },
+      {
+        property: "og:description",
+        content:
+          "Seattle shower installation, new builds, tub-to-shower conversions, valve replacement, ADA walk-ins. Licensed plumbers, code-compliant work.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/shower-installation` }],
   }),
@@ -119,4 +123,3 @@ export const Route = createFileRoute("/services/plumbing/shower-installation")({
     </PageShell>
   ),
 });
-

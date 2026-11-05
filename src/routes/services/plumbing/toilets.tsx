@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Seattle Toilet Repair, Replacement, and Installation are among the most requested plumbing services at All Phase Plumbing. Whether your toilet is leaking, running nonstop, or simply outdated, our licensed plumbers provide quick and reliable solutions. From simple repairs to complete replacements and new installations, we keep your bathroom working efficiently and comfortably.",
         "When you choose us, you're choosing expert service, quality workmanship, and a commitment to your satisfaction every time.",
-        "Call (206) 772-6077 or book online to schedule your Seattle plumbing service today!",
+        "Call (206) 309-1088 or book online to schedule your Seattle plumbing service today!",
       ],
     },
     {
@@ -86,7 +86,7 @@ const CONTENT: ServicePageContent = {
       heading: 'Need "Seattle Toilet Repair Near Me"? Call the Experts!',
       paragraphs: [
         "Searching for \"Seattle toilet repair near me\"? All Phase Plumbing is your local team for expert toilet repair, replacement, and installation throughout the Seattle area. Whether it's a leak, clog, or complete upgrade, we're ready to help fast.",
-        "Call (206) 772-6077 today or schedule online for prompt, professional toilet service you can count on.",
+        "Call (206) 309-1088 today or schedule online for prompt, professional toilet service you can count on.",
       ],
     },
   ],

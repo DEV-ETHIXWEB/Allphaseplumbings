@@ -60,14 +60,14 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Don't let sewer problems disrupt your daily routine. Whether you need a simple repair, trenchless restoration, or full line replacement, All Phase Plumbing is ready to help.",
         "Our expert plumbers are fully licensed, insured, and experienced in handling all types of sewer repair in Seattle. We'll accurately diagnose your issue, explain your options, and deliver a fast, reliable repair that gets your system flowing smoothly again.",
-        "Call (206) 772-6077, All Phase Plumbing, today to schedule your Seattle Sewer Repair service and restore your home's comfort and safety.",
+        "Call (206) 309-1088, All Phase Plumbing, today to schedule your Seattle Sewer Repair service and restore your home's comfort and safety.",
       ],
     },
   ],
   faqs: [
     {
       q: "What are common signs I need sewer repair in Seattle?",
-      a: "Watch for slow drains, frequent clogs, foul sewer odors, gurgling noises from toilets, or water pooling in your yard. These symptoms often indicate a break or blockage in your sewer line. Call (206) 772-6077.",
+      a: "Watch for slow drains, frequent clogs, foul sewer odors, gurgling noises from toilets, or water pooling in your yard. These symptoms often indicate a break or blockage in your sewer line. Call (206) 309-1088.",
     },
     {
       q: "What causes sewer line damage in Seattle homes?",
@@ -143,4 +143,3 @@ export const Route = createFileRoute("/services/sewer-services/sewer-repair")({
     </PageShell>
   ),
 });
-

@@ -85,14 +85,14 @@ const CONTENT: ServicePageContent = {
       heading: "Call Your Trusted Seattle Commercial Plumber Today",
       paragraphs: [
         "When you need a dependable Seattle commercial plumbing company, trust All Phase Plumbing to deliver quality service and peace of mind. From emergency repairs to preventative maintenance, we'll help keep your systems running efficiently.",
-        "Call (206) 772-6077 today or schedule service online for expert commercial plumbing in Seattle, backed by experience, integrity, and results.",
+        "Call (206) 309-1088 today or schedule service online for expert commercial plumbing in Seattle, backed by experience, integrity, and results.",
       ],
     },
   ],
   faqs: [
     {
       q: "What types of commercial properties do you service?",
-      a: "We work with all types of commercial clients, including offices, restaurants, retail centers, industrial facilities, and multi-family buildings. Call (206) 772-6077 to discuss your property.",
+      a: "We work with all types of commercial clients, including offices, restaurants, retail centers, industrial facilities, and multi-family buildings. Call (206) 309-1088 to discuss your property.",
     },
     {
       q: "Do you offer emergency commercial plumbing services in Seattle?",

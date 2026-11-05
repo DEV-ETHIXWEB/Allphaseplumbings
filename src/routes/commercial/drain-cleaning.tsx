@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Keeping your business running smoothly starts with clean, efficient drains. At All Phase Plumbing, we provide professional Seattle commercial drain cleaning services designed to prevent costly disruptions and maintain the flow of your plumbing systems. Our expert plumbers understand that clogged or slow drains can impact your business operations, customer experience, and overall productivity. That's why we offer reliable, high-performance drain cleaning solutions for restaurants, offices, retail spaces, and industrial facilities.",
         "Using advanced tools and techniques, we handle everything from stubborn grease buildup to deep-seated blockages. Our commercial hydro jetting service uses powerful, high-pressure water to eliminate grease, soap residue, and debris that traditional snaking can't remove. We also offer commercial drain camera inspection to accurately detect hidden issues like cracks, root intrusions, or collapsed pipes. When you choose All Phase Plumbing for commercial drain cleaning in Seattle, you're choosing efficiency, precision, and long-term protection for your plumbing system.",
-        "Call (206) 772-6077 or book online to schedule your Seattle plumbing service today!",
+        "Call (206) 309-1088 or book online to schedule your Seattle plumbing service today!",
       ],
     },
     {
@@ -57,7 +57,7 @@ const CONTENT: ServicePageContent = {
   faqs: [
     {
       q: "How often should commercial drains be cleaned in Seattle?",
-      a: "For most Seattle businesses, it's recommended to schedule professional commercial drain cleaning at least once or twice a year. Restaurants, hotels, and other high-use facilities may benefit from quarterly cleanings to prevent grease and debris buildup. Regular maintenance helps avoid costly plumbing emergencies and keeps operations running smoothly. Call (206) 772-6077.",
+      a: "For most Seattle businesses, it's recommended to schedule professional commercial drain cleaning at least once or twice a year. Restaurants, hotels, and other high-use facilities may benefit from quarterly cleanings to prevent grease and debris buildup. Regular maintenance helps avoid costly plumbing emergencies and keeps operations running smoothly. Call (206) 309-1088.",
     },
     {
       q: "What are the signs that my business needs commercial drain cleaning?",

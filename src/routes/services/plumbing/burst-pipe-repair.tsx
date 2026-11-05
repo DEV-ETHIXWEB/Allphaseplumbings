@@ -16,7 +16,7 @@ const CONTENT: ServicePageContent = {
     {
       paragraphs: [
         "A burst pipe is one of the most damaging plumbing emergencies a home can face. Water can dump into walls, ceilings, and floors at hundreds of gallons per hour. All Phase Plumbing dispatches emergency burst-pipe crews 24/7 across the Seattle area to stop the water, repair the line, and help you minimize damage.",
-        "If you have a burst pipe right now, shut off your main water valve and call us at (206) 772-6077, we'll be on the way.",
+        "If you have a burst pipe right now, shut off your main water valve and call us at (206) 309-1088, we'll be on the way.",
       ],
     },
     {
@@ -27,7 +27,7 @@ const CONTENT: ServicePageContent = {
         "Cut power to affected areas at the breaker if safe to do so",
         "Move belongings out of the wet area",
         "Take photos for your insurance claim",
-        "Call (206) 772-6077, 24/7 emergency line",
+        "Call (206) 309-1088, 24/7 emergency line",
       ],
     },
     {
@@ -59,7 +59,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Call Now for Burst Pipe Repair",
       paragraphs: [
-        "Every minute matters with a burst pipe. Call (206) 772-6077 right now, our 24/7 line answers immediately and a licensed plumber will be dispatched.",
+        "Every minute matters with a burst pipe. Call (206) 309-1088 right now, our 24/7 line answers immediately and a licensed plumber will be dispatched.",
       ],
     },
   ],
@@ -89,7 +89,7 @@ const CONTENT: ServicePageContent = {
        covered and feeds them into this page's FAQPage schema. */
     {
       q: "How do I stop a burst pipe?",
-      a: "Immediately shut off your main water supply valve to stop water flow. Then call All Phase Plumbing at (206) 772-6077 for emergency repair. Don't attempt to patch the pipe yourself, temporary fixes can fail under pressure.",
+      a: "Immediately shut off your main water supply valve to stop water flow. Then call All Phase Plumbing at (206) 309-1088 for emergency repair. Don't attempt to patch the pipe yourself, temporary fixes can fail under pressure.",
     },
     {
       q: "How much water damage can a burst pipe cause?",

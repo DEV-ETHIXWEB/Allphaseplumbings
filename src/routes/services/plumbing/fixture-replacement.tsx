@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Plumbing fixtures wear out, leak, and go out of style. Replacing them is one of the quickest ways to refresh a kitchen or bathroom, but it has to be done with care to avoid leaks behind walls and damaged supply lines. All Phase Plumbing replaces every fixture in the house, cleanly and code-compliantly.",
         "Whether it's a single faucet, a full bathroom refresh, or a kitchen remodel, we'll handle the demo, replacement, supply-line upgrades, and leak testing.",
-        "Call (206) 772-6077 to schedule fixture replacement.",
+        "Call (206) 309-1088 to schedule fixture replacement.",
       ],
     },
     {
@@ -52,7 +52,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Fixture Replacement",
       paragraphs: [
-        "Got fixtures already? We install. Need recommendations? We've installed every major brand and can point you to reliable models. Call (206) 772-6077.",
+        "Got fixtures already? We install. Need recommendations? We've installed every major brand and can point you to reliable models. Call (206) 309-1088.",
       ],
     },
   ],

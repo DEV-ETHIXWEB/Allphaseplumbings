@@ -113,14 +113,14 @@ const CONTENT: ServicePageContent = {
       heading: "Get Expert Help with Seattle Sewer Repair",
       paragraphs: [
         "Don't let sewer issues take over your day, or your yard. Whether you're facing a backup, odor, or broken line, All Phase Plumbing provides fast, affordable, and professional Seattle sewer repair. Our goal is to restore your system efficiently so you can get back to normal life with confidence.",
-        "Call (206) 772-6077 or schedule online to book your appointment today and experience the All Phase difference.",
+        "Call (206) 309-1088 or schedule online to book your appointment today and experience the All Phase difference.",
       ],
     },
   ],
   faqs: [
     {
       q: "What causes sewer line damage in Seattle homes?",
-      a: "Common causes include tree root intrusions, shifting soil, corrosion, grease buildup, or aging pipes. Heavy rain and ground movement can also lead to cracks or breaks. Call (206) 772-6077.",
+      a: "Common causes include tree root intrusions, shifting soil, corrosion, grease buildup, or aging pipes. Heavy rain and ground movement can also lead to cracks or breaks. Call (206) 309-1088.",
     },
     {
       q: "How do I know if my sewer line needs repair or replacement?",
@@ -193,4 +193,3 @@ export const Route = createFileRoute("/services/sewer-services/")({
     </PageShell>
   ),
 });
-

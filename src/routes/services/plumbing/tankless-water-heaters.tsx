@@ -90,7 +90,7 @@ const CONTENT: ServicePageContent = {
       heading: "Seattle Tankless Water Heaters: Upgrade to Efficiency",
       paragraphs: [
         "Searching for Seattle tankless water heaters near me? All Phase Plumbing offers comprehensive services, from repair to installation. Our skilled technicians are ready to provide expert care that keeps your system running smoothly.",
-        "Call (206) 772-6077 today or schedule online for professional tankless water heater service in Seattle and experience the comfort of endless, energy-efficient hot water.",
+        "Call (206) 309-1088 today or schedule online for professional tankless water heater service in Seattle and experience the comfort of endless, energy-efficient hot water.",
       ],
     },
   ],
@@ -137,7 +137,11 @@ export const Route = createFileRoute("/services/plumbing/tankless-water-heaters"
           "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation.",
       },
       { property: "og:title", content: "Seattle Tankless Water Heaters, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation." },
+      {
+        property: "og:description",
+        content:
+          "Seattle tankless water heater installation, replacement, and repair. Endless hot water, energy savings, expert installation.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/tankless-water-heaters` }],
   }),
@@ -163,4 +167,3 @@ export const Route = createFileRoute("/services/plumbing/tankless-water-heaters"
     </PageShell>
   ),
 });
-

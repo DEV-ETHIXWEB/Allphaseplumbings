@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Installing a new faucet may seem simple, but even small mistakes can lead to leaks, low water pressure, or damage under the sink. Many homeowners call us after dealing with dripping faucets, loose handles, or water pooling inside cabinets from a poor installation.",
         "Whether you're replacing an old faucet or installing a new one during a remodel, professional faucet installation helps make sure everything works properly from day one. Our goal is a clean install, solid connections, and smooth water flow without future problems.",
-        "Call (206) 772-6077 or book your faucet installation service online today.",
+        "Call (206) 309-1088 or book your faucet installation service online today.",
       ],
     },
     {
@@ -144,7 +144,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Your Faucet Installation Service Today",
       paragraphs: [
         "If you're installing a new faucet or replacing an old one, professional installation helps avoid leaks and future problems. Our experienced plumbers provide reliable faucet installation services with clear communication and upfront pricing.",
-        "From simple replacements to full upgrades, we're ready to help. Call (206) 772-6077 or book online today to schedule your faucet installation service.",
+        "From simple replacements to full upgrades, we're ready to help. Call (206) 309-1088 or book online today to schedule your faucet installation service.",
       ],
     },
   ],
@@ -191,7 +191,11 @@ export const Route = createFileRoute("/services/plumbing/faucet-installation")({
           "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing.",
       },
       { property: "og:title", content: "Seattle Faucet Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing." },
+      {
+        property: "og:description",
+        content:
+          "Professional kitchen, bathroom, and replacement faucet installation in Seattle. Clean installs, leak-free connections, upfront pricing.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/faucet-installation` }],
   }),
@@ -217,4 +221,3 @@ export const Route = createFileRoute("/services/plumbing/faucet-installation")({
     </PageShell>
   ),
 });
-

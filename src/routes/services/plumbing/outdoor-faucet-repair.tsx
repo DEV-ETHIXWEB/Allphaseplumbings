@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Outdoor faucets are used more than most homeowners realize. From watering lawns and washing cars to filling pools and cleaning outdoor spaces, these fixtures work hard year-round. Because they're exposed to weather and temperature changes, outdoor faucets are more likely to develop problems than indoor plumbing.",
         "Outdoor faucet repair focuses on fixing leaks, restoring proper water flow, and preventing damage caused by freezing, corrosion, or worn-out parts. Addressing these issues early helps avoid water waste, structural damage, and costly pipe repairs inside the home.",
-        "Call (206) 772-6077 or book your Outdoor Faucet Repair service online today.",
+        "Call (206) 309-1088 or book your Outdoor Faucet Repair service online today.",
       ],
     },
     {
@@ -73,7 +73,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Outdoor Faucet Repair Service",
       paragraphs: [
-        "If your outdoor faucet is leaking, frozen, or damaged, our licensed plumbers can repair or replace it quickly. Call (206) 772-6077 or book online to schedule outdoor faucet repair service.",
+        "If your outdoor faucet is leaking, frozen, or damaged, our licensed plumbers can repair or replace it quickly. Call (206) 309-1088 or book online to schedule outdoor faucet repair service.",
       ],
     },
   ],
@@ -119,8 +119,15 @@ export const Route = createFileRoute("/services/plumbing/outdoor-faucet-repair")
         content:
           "Seattle outdoor faucet and hose bib repair, leaks, freeze damage, low pressure, and frost-proof spigot upgrades.",
       },
-      { property: "og:title", content: "Outdoor Faucet & Hose Bib Repair Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "Seattle outdoor faucet and hose bib repair, leaks, freeze damage, low pressure, and frost-proof spigot upgrades." },
+      {
+        property: "og:title",
+        content: "Outdoor Faucet & Hose Bib Repair Seattle, All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Seattle outdoor faucet and hose bib repair, leaks, freeze damage, low pressure, and frost-proof spigot upgrades.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/outdoor-faucet-repair` }],
   }),
@@ -146,4 +153,3 @@ export const Route = createFileRoute("/services/plumbing/outdoor-faucet-repair")
     </PageShell>
   ),
 });
-

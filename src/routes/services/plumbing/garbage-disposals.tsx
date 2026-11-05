@@ -44,14 +44,14 @@ const CONTENT: ServicePageContent = {
       heading: "Call for Expert Garbage Disposal Repair, Replacement & Installation in Seattle",
       paragraphs: [
         "If your garbage disposal is acting up, completely broken, or you're ready for a new installation, All Phase Plumbing is here to help. We provide fast, reliable garbage disposal repair, replacement, and installation services in Seattle tailored to your kitchen's needs.",
-        "Call (206) 772-6077 today or schedule online to keep your plumbing system running smoothly and your kitchen functioning at its best.",
+        "Call (206) 309-1088 today or schedule online to keep your plumbing system running smoothly and your kitchen functioning at its best.",
       ],
     },
   ],
   faqs: [
     {
       q: "Why is my garbage disposal humming but not working?",
-      a: "A humming disposal usually means the motor has power but the grinding plate is jammed. Don't keep flipping the switch, it can burn out the motor. Call us at (206) 772-6077 and we'll safely free the jam and check for damage.",
+      a: "A humming disposal usually means the motor has power but the grinding plate is jammed. Don't keep flipping the switch, it can burn out the motor. Call us at (206) 309-1088 and we'll safely free the jam and check for damage.",
     },
     {
       q: "How long does a garbage disposal last?",
@@ -90,8 +90,15 @@ export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
         content:
           "Garbage disposal repair, replacement, and installation in Seattle. Jammed, leaking, or humming units fixed fast by licensed plumbers. Call (206) 309-1088.",
       },
-      { property: "og:title", content: "Garbage Disposal Repair & Installation Seattle | All Phase" },
-      { property: "og:description", content: "Garbage disposal repair, replacement, and installation in Seattle. Jammed, leaking, or humming units fixed fast by licensed plumbers. Call (206) 309-1088." },
+      {
+        property: "og:title",
+        content: "Garbage Disposal Repair & Installation Seattle | All Phase",
+      },
+      {
+        property: "og:description",
+        content:
+          "Garbage disposal repair, replacement, and installation in Seattle. Jammed, leaking, or humming units fixed fast by licensed plumbers. Call (206) 309-1088.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/garbage-disposals` }],
   }),
@@ -117,4 +124,3 @@ export const Route = createFileRoute("/services/plumbing/garbage-disposals")({
     </PageShell>
   ),
 });
-

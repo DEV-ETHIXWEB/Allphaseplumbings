@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "If you live in an older Seattle home, your water lines may be on borrowed time. Galvanized steel and old copper pipes corrode from the inside out, slowing water pressure, rusting the water you drink, and eventually springing leaks in random spots throughout the house.",
         "Whole-home repiping replaces all of your water supply lines with modern PEX or copper, giving you reliable pressure, clean water, and decades of peace of mind. Our licensed plumbers plan the route carefully to minimize wall openings and complete most jobs in 2–5 days.",
-        "Call (206) 772-6077 to schedule a repipe estimate.",
+        "Call (206) 309-1088 to schedule a repipe estimate.",
       ],
     },
     {
@@ -49,7 +49,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule a Repipe Estimate",
       paragraphs: [
-        "Tired of patching the same pipes over and over? Call (206) 772-6077 and we'll walk through your home, explain your options, and put a flat-rate quote in writing.",
+        "Tired of patching the same pipes over and over? Call (206) 309-1088 and we'll walk through your home, explain your options, and put a flat-rate quote in writing.",
       ],
     },
   ],

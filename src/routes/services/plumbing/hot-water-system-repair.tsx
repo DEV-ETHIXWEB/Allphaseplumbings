@@ -18,7 +18,7 @@ const CONTENT: ServicePageContent = {
         "A failing hot water system can disrupt your entire routine. From cold showers to inconsistent water temperature and strange noises from the tank, hot water problems often signal an issue that needs professional attention. Prompt hot water system repair helps restore comfort, prevent further damage, and extend the life of your unit.",
         "Hot water systems experience wear over time due to heat, pressure, mineral buildup, and regular use. Ignoring early warning signs can lead to higher energy bills, water damage, or complete system failure. Professional repair ensures the system is diagnosed correctly and fixed safely.",
         "Our hot water system repair services focus on accurate troubleshooting, reliable repairs, and long-term performance.",
-        "Call (206) 772-6077 to schedule hot water system repair.",
+        "Call (206) 309-1088 to schedule hot water system repair.",
       ],
     },
     {
@@ -123,7 +123,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Hot Water System Repair Today",
       paragraphs: [
         "If your hot water system isn't performing properly, professional repair can restore comfort and prevent bigger problems. Our experienced plumbers provide reliable hot water system repair using proven methods and quality parts.",
-        "Call (206) 772-6077 to schedule repair today.",
+        "Call (206) 309-1088 to schedule repair today.",
       ],
     },
   ],

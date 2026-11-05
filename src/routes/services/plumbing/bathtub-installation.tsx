@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Installing a new bathtub can completely change how your bathroom looks and functions. Whether you're replacing an old tub, upgrading for comfort, or remodeling your bathroom, proper bathtub installation is essential for long-term performance and water safety. A poorly installed bathtub can lead to leaks, drainage issues, and hidden water damage.",
         "Professional bathtub installation ensures the tub is set correctly, sealed properly, and connected to your plumbing system without issues. From standard tubs to modern soaking and walk-in options, correct installation protects your home and improves daily comfort.",
-        "If you're planning a bathroom upgrade or replacing a worn-out tub, professional bathtub installation makes all the difference. Call (206) 772-6077 or book your Bathtub Installation service online today.",
+        "If you're planning a bathroom upgrade or replacing a worn-out tub, professional bathtub installation makes all the difference. Call (206) 309-1088 or book your Bathtub Installation service online today.",
       ],
     },
     {
@@ -117,7 +117,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Bathtub Installation Today",
       paragraphs: [
         "If you're upgrading your bathroom or replacing an old tub, professional bathtub installation ensures lasting performance and comfort. A properly installed bathtub adds value to your home and improves everyday use.",
-        "Call (206) 772-6077 or book online today to schedule bathtub installation service.",
+        "Call (206) 309-1088 or book online today to schedule bathtub installation service.",
       ],
     },
   ],
@@ -164,7 +164,11 @@ export const Route = createFileRoute("/services/plumbing/bathtub-installation")(
           "Professional bathtub installation in Seattle, standard, soaking, and walk-in tubs. Watertight, leak-tested, code-compliant.",
       },
       { property: "og:title", content: "Seattle Bathtub Installation, All Phase Plumbing" },
-      { property: "og:description", content: "Professional bathtub installation in Seattle, standard, soaking, and walk-in tubs. Watertight, leak-tested, code-compliant." },
+      {
+        property: "og:description",
+        content:
+          "Professional bathtub installation in Seattle, standard, soaking, and walk-in tubs. Watertight, leak-tested, code-compliant.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/bathtub-installation` }],
   }),
@@ -190,4 +194,3 @@ export const Route = createFileRoute("/services/plumbing/bathtub-installation")(
     </PageShell>
   ),
 });
-

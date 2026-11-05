@@ -265,7 +265,7 @@ const SEATTLE: AreaContent = {
     },
     {
       q: "Do you offer same-day plumbing service in Seattle?",
-      a: "In most cases, yes. Book before 2pm Monday through Friday and we'll usually get a Seattle technician to you the same day. Call (206) 772-6077 to confirm a slot.",
+      a: "In most cases, yes. Book before 2pm Monday through Friday and we'll usually get a Seattle technician to you the same day. Call (206) 309-1088 to confirm a slot.",
     },
     {
       q: "Are you available for weekend and after-hours emergencies?",
@@ -633,10 +633,15 @@ const whyVariants: {
   ],
 ];
 
-/* FAQ copy, several variants selected per-city via v4. Keeps the literal
-   "(206) 772-6077" string in one answer intentionally: $city.tsx's
-   sanitizeArea() scrubs that exact pattern to the current CallRail number
-   before render, so every variant below must keep it verbatim. */
+/* FAQ copy, several variants selected per-city via v4.
+   These now spell out the current CallRail number, (206) 309-1088, directly.
+   They used to carry the retired (206) 772-6077 and rely on $city.tsx's
+   sanitizeArea() to swap it at render time, which worked but meant the source
+   of truth for the phone number was a find-and-replace rather than the text
+   itself: any new surface that rendered this copy without going through the
+   swap would have published a number that is no longer in service.
+   sanitizeArea() and TrackedPhoneText still run, now purely as a safety net
+   for any stray occurrence. */
 const faqVariants: {
   q: (name: string) => string;
   a: (name: string) => string;
@@ -645,7 +650,7 @@ const faqVariants: {
     {
       q: (name) => `Do you offer same-day plumbing service in ${name}?`,
       a: (name) =>
-        `In most cases, yes. Book before 2pm Monday through Friday and we'll usually get a technician to you in ${name} the same day. Call (206) 772-6077 to confirm a slot.`,
+        `In most cases, yes. Book before 2pm Monday through Friday and we'll usually get a technician to you in ${name} the same day. Call (206) 309-1088 to confirm a slot.`,
     },
     {
       q: (name) => `Are you available for weekend and after-hours emergencies in ${name}?`,
@@ -672,7 +677,7 @@ const faqVariants: {
     {
       q: (name) => `How fast can a plumber get to my ${name} home?`,
       a: (name) =>
-        `Book before 2pm on a weekday and we can usually get a technician out to ${name} the same day. For true emergencies we move faster than that. Call (206) 772-6077 to check current availability.`,
+        `Book before 2pm on a weekday and we can usually get a technician out to ${name} the same day. For true emergencies we move faster than that. Call (206) 309-1088 to check current availability.`,
     },
     {
       q: (name) => `Do you handle emergency calls in ${name} after hours?`,
@@ -699,7 +704,7 @@ const faqVariants: {
     {
       q: (name) => `Can I get same-day plumbing service in ${name}?`,
       a: (name) =>
-        `Usually, yes. Weekday bookings made before 2pm typically get a technician out to your ${name} address that same day. Call (206) 772-6077 to confirm a slot.`,
+        `Usually, yes. Weekday bookings made before 2pm typically get a technician out to your ${name} address that same day. Call (206) 309-1088 to confirm a slot.`,
     },
     {
       q: (name) => `Do you cover nights, weekends, and holidays in ${name}?`,

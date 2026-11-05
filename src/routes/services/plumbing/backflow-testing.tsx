@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Backflow prevention devices keep contaminated water from flowing backwards into the public drinking-water supply. In Seattle and most cities in King and Pierce counties, these devices must be tested annually by a certified tester and the results submitted to the water purveyor.",
         "All Phase Plumbing's certified backflow assembly testers (BATs) perform annual testing, send the report to your water utility, and repair or replace failed assemblies.",
-        "Call (206) 772-6077 to schedule annual backflow testing.",
+        "Call (206) 309-1088 to schedule annual backflow testing.",
       ],
     },
     {
@@ -51,7 +51,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Backflow Testing",
       paragraphs: [
-        "Backflow tests are due annually and missing the deadline can result in water-service shutoff. Call (206) 772-6077 and we'll get you tested and certified.",
+        "Backflow tests are due annually and missing the deadline can result in water-service shutoff. Call (206) 309-1088 and we'll get you tested and certified.",
       ],
     },
   ],
@@ -97,8 +97,15 @@ export const Route = createFileRoute("/services/plumbing/backflow-testing")({
         content:
           "Annual backflow testing in Seattle by certified BATs. Results filed directly with your water utility. Repair and replacement available.",
       },
-      { property: "og:title", content: "Seattle Backflow Testing & Certification, All Phase Plumbing" },
-      { property: "og:description", content: "Annual backflow testing in Seattle by certified BATs. Results filed directly with your water utility. Repair and replacement available." },
+      {
+        property: "og:title",
+        content: "Seattle Backflow Testing & Certification, All Phase Plumbing",
+      },
+      {
+        property: "og:description",
+        content:
+          "Annual backflow testing in Seattle by certified BATs. Results filed directly with your water utility. Repair and replacement available.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/backflow-testing` }],
   }),
@@ -124,4 +131,3 @@ export const Route = createFileRoute("/services/plumbing/backflow-testing")({
     </PageShell>
   ),
 });
-

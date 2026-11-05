@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Your main water line carries every gallon of water into your home, and when it fails, the whole house feels it. A buried main line leak can mean wet spots in the yard, dropping pressure, climbing water bills, or no water at all. All Phase Plumbing diagnoses, repairs, and replaces water service lines across the Seattle area.",
         "We use modern locating and leak-detection equipment so we can pinpoint problems and propose targeted fixes, not exploratory digging.",
-        "Call (206) 772-6077 to schedule water line service.",
+        "Call (206) 309-1088 to schedule water line service.",
       ],
     },
     {
@@ -46,7 +46,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Water Line Service",
       paragraphs: [
-        "If you suspect a water line problem, don't wait, small leaks become large losses fast. Call (206) 772-6077 and a licensed plumber will diagnose the issue and walk you through repair options.",
+        "If you suspect a water line problem, don't wait, small leaks become large losses fast. Call (206) 309-1088 and a licensed plumber will diagnose the issue and walk you through repair options.",
       ],
     },
   ],
@@ -88,7 +88,7 @@ const CONTENT: ServicePageContent = {
     },
     {
       q: "How much does Seattle water line replacement cost?",
-      a: "Costs vary based on pipe length, depth, material, and access. We provide honest upfront estimates after a thorough inspection, call (206) 772-6077 for a quote.",
+      a: "Costs vary based on pipe length, depth, material, and access. We provide honest upfront estimates after a thorough inspection, call (206) 309-1088 for a quote.",
     },
     {
       q: "Can a leaking water line cause property damage?",

@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "When a pipe bursts at 2 AM, water is flooding your basement, or your only toilet has stopped working, you need an emergency plumber who can actually get to you fast. All Phase Plumbing dispatches licensed emergency plumbers across the Greater Seattle area 24 hours a day, 7 days a week.",
         "Our trucks are stocked for common emergency repairs so we can stop the water, diagnose the problem, and get things working again in a single visit whenever possible.",
-        "Call (206) 772-6077, we answer the phone, day or night.",
+        "Call (206) 309-1088, we answer the phone, day or night.",
       ],
     },
     {
@@ -57,7 +57,7 @@ const CONTENT: ServicePageContent = {
     {
       heading: "Schedule Emergency Plumbing Service",
       paragraphs: [
-        "Don't wait, water damage gets worse by the minute. Call (206) 772-6077 right now and a licensed Seattle plumber will be on the way.",
+        "Don't wait, water damage gets worse by the minute. Call (206) 309-1088 right now and a licensed Seattle plumber will be on the way.",
       ],
     },
   ],

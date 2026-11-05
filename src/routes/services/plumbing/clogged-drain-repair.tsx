@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "A clogged drain can quickly turn into a major problem. Slow drainage, standing water, bad smells, or repeated backups are signs that something deeper is going on inside your pipes. While small clogs may seem harmless at first, untreated drain blockages can cause leaks, pipe damage, and costly water issues.",
         "Professional clogged drain repair focuses on fixing the root cause of the blockage, not just pushing it further down the line. Proper repair restores normal flow and helps prevent future clogs from returning.",
-        "If water is backing up or draining slower than usual, it's time to schedule clogged drain repair. Call (206) 772-6077 or book your Clogged Drain Repair service online today.",
+        "If water is backing up or draining slower than usual, it's time to schedule clogged drain repair. Call (206) 309-1088 or book your Clogged Drain Repair service online today.",
       ],
     },
     {
@@ -116,7 +116,7 @@ const CONTENT: ServicePageContent = {
       heading: "Schedule Clogged Drain Repair Today",
       paragraphs: [
         "A clogged drain doesn't fix itself. Delaying repair can lead to leaks, pipe damage, and water backups. Professional clogged drain repair restores proper drainage and keeps your plumbing system working the way it should.",
-        "If you're dealing with slow drains or repeated blockages, now is the time to act. Call (206) 772-6077 or book online today to schedule clogged drain repair.",
+        "If you're dealing with slow drains or repeated blockages, now is the time to act. Call (206) 309-1088 or book online today to schedule clogged drain repair.",
       ],
     },
   ],
@@ -162,7 +162,11 @@ export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")(
           "Clogged drain repair in Seattle for kitchen, bathroom, and toilet drains. We fix recurring clogs at the root cause. Same-day service, call (206) 309-1088.",
       },
       { property: "og:title", content: "Clogged Drain Repair Seattle, All Phase Plumbing" },
-      { property: "og:description", content: "Clogged drain repair in Seattle for kitchen, bathroom, and toilet drains. We fix recurring clogs at the root cause. Same-day service, call (206) 309-1088." },
+      {
+        property: "og:description",
+        content:
+          "Clogged drain repair in Seattle for kitchen, bathroom, and toilet drains. We fix recurring clogs at the root cause. Same-day service, call (206) 309-1088.",
+      },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/services/plumbing/clogged-drain-repair` }],
   }),
@@ -188,4 +192,3 @@ export const Route = createFileRoute("/services/plumbing/clogged-drain-repair")(
     </PageShell>
   ),
 });
-

@@ -17,7 +17,7 @@ const CONTENT: ServicePageContent = {
       paragraphs: [
         "Hard water can do more damage than you might think. It leaves behind mineral deposits, shortens the lifespan of your plumbing fixtures and appliances, and can even make your skin and hair feel dry and dull. That's why so many homeowners are turning to Seattle water softeners for a reliable, long-term solution.",
         "At All Phase Plumbing, we specialize in Seattle water softener repair, installation, and maintenance. Whether you're dealing with mineral buildup, inconsistent water quality, or ready to install a new system, our expert plumbers provide solutions tailored to your home's unique needs. Enjoy cleaner, softer water and protect your plumbing system for years to come.",
-        "Call (206) 772-6077 or book online to schedule your Seattle plumbing service today!",
+        "Call (206) 309-1088 or book online to schedule your Seattle plumbing service today!",
       ],
     },
     {
@@ -78,7 +78,7 @@ const CONTENT: ServicePageContent = {
       heading: "Call for Seattle Water Softener Services",
       paragraphs: [
         "Don't let hard water cause long-term damage to your plumbing or appliances. Whether you need water softener repair, installation, or maintenance, the team at All Phase Plumbing is ready to help.",
-        "Call (206) 772-6077 today or schedule your service online to enjoy cleaner, softer water throughout your Seattle home.",
+        "Call (206) 309-1088 today or schedule your service online to enjoy cleaner, softer water throughout your Seattle home.",
       ],
     },
   ],
