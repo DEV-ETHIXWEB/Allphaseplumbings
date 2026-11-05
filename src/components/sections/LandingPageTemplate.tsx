@@ -82,10 +82,14 @@ function LandingHeader({ trackingPhone }: { trackingPhone?: string }) {
 
           {/* Trust strip, fills the gap between logo and CTA (desktop only) */}
           <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-[#1E3A6E]">
+            {/* Rating claim only once verified against the Google Business
+                Profile; otherwise an equally strong claim we can substantiate. */}
             <div className="flex items-center gap-2">
               <Star className="size-5 text-[#F5C842] fill-current shrink-0" />
               <span className="font-bold text-[14px] leading-tight whitespace-nowrap">
-                4.9 Stars on Google
+                {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0
+                  ? `${GOOGLE_REVIEWS.rating} Stars on Google`
+                  : "Serving Seattle Since 1989"}
               </span>
             </div>
             <div className="h-8 w-px bg-gray-200" />
@@ -372,12 +376,28 @@ function LandingTrustBar({ location }: { location: string }) {
     <div className="bg-white border-b border-gray-200 py-6 sm:py-8 shadow-sm relative z-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center divide-x-0 md:divide-x divide-gray-100">
+          {/* Same gate: "4.9 Stars / 50+ verified reviews" were placeholder
+              figures, and calling them "verified" while they were invented made
+              it worse. Falls back to a claim that is demonstrably true. */}
           <div className="flex flex-col items-center justify-center px-4">
             <Star className="size-8 text-[#F5C842] fill-current mb-3" />
-            <p className="font-bold text-[#1E3A6E] text-[15px] leading-tight">
-              4.9 Stars on Google
-            </p>
-            <p className="text-gray-500 text-xs mt-1 font-medium">50+ verified reviews</p>
+            {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0 ? (
+              <>
+                <p className="font-bold text-[#1E3A6E] text-[15px] leading-tight">
+                  {GOOGLE_REVIEWS.rating} Stars on Google
+                </p>
+                <p className="text-gray-500 text-xs mt-1 font-medium">
+                  {GOOGLE_REVIEWS.count}+ Google reviews
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-bold text-[#1E3A6E] text-[15px] leading-tight">
+                  Family-Owned Since 1989
+                </p>
+                <p className="text-gray-500 text-xs mt-1 font-medium">Over 35 years in business</p>
+              </>
+            )}
           </div>
           <div className="flex flex-col items-center justify-center px-4">
             <ShieldCheck className="size-8 text-[#4A7BC4] mb-3" />

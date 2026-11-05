@@ -383,23 +383,43 @@ async function run() {
       .join("\n          "),
   );
 
+  /* Soft 404s: a single-page app will happily render a "not found" view while
+     returning HTTP 200, which Google logs as a soft 404 and treats as a site
+     quality signal. The status line has to say 404 too. */
+  const missing = await head("/this-page-does-not-exist-qa-check");
+  check(
+    "unknown URLs return a real 404 status (no soft 404)",
+    missing.status === 404,
+    `got ${missing.status} — a 200 on a not-found page is a soft 404`,
+  );
+  const missingCity = await head("/areas/not-a-real-city-qa");
+  check(
+    "unknown city slugs return 404 rather than an empty page",
+    missingCity.status === 404,
+    `got ${missingCity.status}`,
+  );
+
   // 5. No fabricated trust signals -------------------------------------------
   group("review-integrity");
   if (!JSON_OUT) console.log("\n\x1b[1m5. No fabricated review data\x1b[0m");
-  const sample = [
-    "/",
-    "/about",
-    "/contact",
-    "/services",
-    "/services/plumbing",
-    "/services/drain-cleaning",
-    "/services/water-heaters",
-    "/services/sewer-services",
-    "/residential",
-    "/commercial",
-    "/coupons",
-    ...CITIES.map((c) => `/areas/${c}`),
-  ];
+  /* Every indexable URL the site itself publishes, not a hand-picked sample.
+     A sample is how the first run of this suite missed a fabricated rating
+     badge on the homepage and let two defects through: the per-page checks
+     below (titles, descriptions, canonicals, H1s, duplicate detection,
+     structured data, fabricated claims) only prove something about pages they
+     actually fetched. Driving them from sitemap.xml plus the noindex pages
+     means coverage follows the site as it grows. */
+  /* Normalise via URL().pathname, not a string replace of BASE: the sitemap
+     always publishes the production origin, so replacing BASE leaves the full
+     URL intact whenever the suite runs against a local preview. */
+  const toPath = (l) => {
+    try {
+      return new URL(l).pathname.replace(/\/$/, "") || "/";
+    } catch {
+      return l;
+    }
+  };
+  const sample = [...new Set([...locs.map(toPath), ...MUST_NOINDEX])];
   const pages = await mapLimit(sample, CONCURRENCY, async (p) => ({ p, ...(await head(p)) }));
   const withRating = pages.filter((x) => /AggregateRating/i.test(x.body)).map((x) => x.p);
   check(
@@ -480,6 +500,28 @@ async function run() {
   );
   const missingCanon = indexable.filter((x) => !canonical(x.body)).map((x) => x.p);
   check("every indexable page has a canonical", missingCanon.length === 0, missingCanon.join(", "));
+  /* A canonical pointing at the wrong URL is worse than none: it asks Google to
+     drop this page in favour of another. Assert every indexable page points at
+     itself. */
+  const wrongCanon = indexable
+    .map((x) => ({ p: x.p, r: canonicalMatches(x.body, x.p) }))
+    .filter((x) => !x.r.ok)
+    .map((x) => `${x.p} — ${x.r.detail}`);
+  check(
+    "every indexable page is self-canonical",
+    wrongCanon.length === 0,
+    wrongCanon.join("\n          "),
+  );
+  /* The inverse of the sitemap check: a page we submit for indexing must not
+     then tell Google not to index it. */
+  const sitemapNoindex = pages
+    .filter((x) => !MUST_NOINDEX.includes(x.p) && /noindex/i.test(robots(x.body) ?? ""))
+    .map((x) => x.p);
+  check(
+    "no sitemap URL carries a noindex robots meta",
+    sitemapNoindex.length === 0,
+    sitemapNoindex.join(", "),
+  );
   const badH1 = indexable
     .filter((x) => h1s(x.body).length !== 1)
     .map((x) => `${x.p} (${h1s(x.body).length})`);
