@@ -53,7 +53,7 @@ export function GoogleReviewProof({ className = "" }: { className?: string }) {
         ))}
       </span>
       <span className="text-[14px] sm:text-[15px] font-semibold">
-        {GOOGLE_REVIEWS.rating} rating &middot; {GOOGLE_REVIEWS.count}+ Google reviews
+        {GOOGLE_REVIEWS.rating} rating &middot; {GOOGLE_REVIEWS.count} Google reviews
       </span>
     </a>
   );

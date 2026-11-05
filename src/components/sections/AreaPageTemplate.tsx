@@ -430,7 +430,7 @@ function Testimonials({ area }: { area: AreaContent }) {
                 ))}
               </span>
               <span className="text-[14px] font-semibold text-white">
-                {GOOGLE_REVIEWS.count}+ reviews
+                {GOOGLE_REVIEWS.count} reviews
               </span>
             </a>
           )}

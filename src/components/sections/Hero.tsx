@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef, type CSSProperties } from "react";
-import { Phone, Home, Building2 } from "lucide-react";
+import { Phone, Home, Building2, Star } from "lucide-react";
 import { StarBorder } from "@/components/ui/StarBorder";
 import Particles from "@/components/ui/Particles";
 import mascot from "@/assets/better-mascot.webp";
-import googleRatingCard from "@/assets/google-rating-card.webp";
 import { useTrackedPhone } from "@/hooks/use-site-options";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
@@ -365,30 +364,65 @@ export function Hero({
               </span>
             </p>
 
-            {/* Google rating badge.
-                This is a pre-rendered image that states "Google 5.0 — 50+
-                reviews", which are the placeholder figures that were never
-                replaced with real Google Business Profile data. The numbers are
-                baked into the pixels, so they cannot be gated at the text
-                level: the whole badge is hidden until the figures are verified.
-                TO RESTORE IT: confirm the real rating and count in the GBP
-                dashboard, regenerate assets/google-rating-card.webp with those
-                numbers, then set GOOGLE_REVIEWS.verified = true in
-                data/area-content.ts. */}
+            {/* Google rating badge, rendered as markup rather than the old
+                assets/google-rating-card.webp.
+                That image had "Google 5.0 — 50+ reviews" baked into its pixels,
+                which were placeholder figures. The real profile reads 4.8 from
+                53 reviews, so the image is now simply wrong, and any image with
+                numbers in it goes stale the moment a review lands. Rendering
+                from GOOGLE_REVIEWS means the badge can never disagree with the
+                data again, and it drops an image from the hero. */}
             {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0 && (
-              <div className="mt-5 sm:mt-6 mb-3 sm:mb-0">
-                <img
-                  src={googleRatingCard}
-                  alt={`Google ${GOOGLE_REVIEWS.rating} star rating — ${GOOGLE_REVIEWS.count}+ reviews`}
-                  className="w-full max-w-[300px] sm:max-w-[340px] h-auto select-none
-                           drop-shadow-[0_10px_28px_rgba(15,34,70,0.45)]"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="low"
-                  width={700}
-                  height={250}
-                />
-              </div>
+              <a
+                href={GOOGLE_REVIEWS.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 sm:mt-6 mb-3 sm:mb-0 inline-flex items-center gap-3 rounded-xl
+                           bg-white/95 px-4 py-3 shadow-[0_10px_28px_rgba(15,34,70,0.45)]
+                           transition-transform hover:scale-[1.02]"
+                aria-label={`Rated ${GOOGLE_REVIEWS.rating} out of 5 from ${GOOGLE_REVIEWS.count} Google reviews`}
+              >
+                <span
+                  className="text-[22px] font-normal leading-none"
+                  style={{
+                    fontFamily: "'Product Sans','Google Sans','Inter',sans-serif",
+                    letterSpacing: "-0.02em",
+                  }}
+                  aria-hidden="true"
+                >
+                  <span className="text-[#4285F4]">G</span>
+                  <span className="text-[#EA4335]">o</span>
+                  <span className="text-[#FBBC05]">o</span>
+                  <span className="text-[#4285F4]">g</span>
+                  <span className="text-[#34A853]">l</span>
+                  <span className="text-[#EA4335]">e</span>
+                </span>
+                <span className="flex flex-col leading-tight">
+                  <span className="flex items-center gap-1.5">
+                    <span className="text-[17px] font-black text-[#1E3A6E]">
+                      {GOOGLE_REVIEWS.rating}
+                    </span>
+                    <span className="flex gap-0.5" aria-hidden="true">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={
+                            /* Half-step ratings round down to a filled star only
+                               when the star is fully earned, so 4.8 shows four
+                               solid and one muted rather than five solid. */
+                            i < Math.floor(GOOGLE_REVIEWS.rating)
+                              ? "size-4 fill-[#FBBC05] text-[#FBBC05]"
+                              : "size-4 text-gray-300"
+                          }
+                        />
+                      ))}
+                    </span>
+                  </span>
+                  <span className="text-[12px] font-semibold text-gray-600">
+                    {GOOGLE_REVIEWS.count} Google reviews
+                  </span>
+                </span>
+              </a>
             )}
           </div>
 
