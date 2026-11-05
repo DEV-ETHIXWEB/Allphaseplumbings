@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test:chatbot": "node scripts/chatbot-tests/run.mjs"
+    "test:chatbot": "node scripts/chatbot-tests/run.mjs",
+    "qa:seo": "node scripts/seo-qa.mjs",
+    "qa:seo:local": "node scripts/seo-qa.mjs --base http://localhost:4173"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
