@@ -1,66 +1,9 @@
 import { Star } from "lucide-react";
 import Particles from "@/components/ui/Particles";
+import { GOOGLE_REVIEWS } from "@/data/area-content";
+import { GOOGLE_REVIEW_CARDS, type GoogleReviewCard } from "@/data/google-reviews";
 
-const REVIEWS = [
-  {
-    name: "Sarah M.",
-    initial: "S",
-    color: "#4285F4",
-    date: "2 weeks ago",
-    text: "All Phase Plumbing was incredible! Showed up on time, diagnosed the issue quickly, and had my water heater replaced the same day. Professional, fair pricing, and the work was top-notch.",
-  },
-  {
-    name: "James R.",
-    initial: "J",
-    color: "#EA4335",
-    date: "1 month ago",
-    text: "Best plumbing experience I've ever had. The technician was knowledgeable, explained everything clearly, and respected my home. Highly recommend All Phase to anyone in the Seattle area.",
-  },
-  {
-    name: "Linda K.",
-    initial: "L",
-    color: "#34A853",
-    date: "3 weeks ago",
-    text: "Had a major drain emergency on a Sunday, All Phase answered the call and came out within an hour. They saved us from a flooded basement. Honest, fast, and trustworthy.",
-  },
-  {
-    name: "Michael T.",
-    initial: "M",
-    color: "#FBBC05",
-    date: "2 months ago",
-    text: "Used All Phase for a full repiping job. The crew was professional, kept the worksite clean, and finished ahead of schedule. The pricing was very competitive too. Will use them again.",
-  },
-  {
-    name: "Amanda P.",
-    initial: "A",
-    color: "#4285F4",
-    date: "1 week ago",
-    text: "From scheduling to completion, the entire process was seamless. The plumber was friendly, fixed our leaking pipe perfectly, and even gave us tips to avoid future issues. 5 stars!",
-  },
-  {
-    name: "David C.",
-    initial: "D",
-    color: "#EA4335",
-    date: "1 month ago",
-    text: "All Phase Plumbing has been our go-to for years. They are reliable, fairly priced, and always do quality work. The team treats our home like their own. Cannot recommend enough.",
-  },
-  {
-    name: "Emily H.",
-    initial: "E",
-    color: "#34A853",
-    date: "3 days ago",
-    text: "Quick response on a clogged sewer line. The hydro-jetting service worked great and they sent a follow-up camera inspection at no extra cost. True professionals.",
-  },
-  {
-    name: "Robert N.",
-    initial: "R",
-    color: "#FBBC05",
-    date: "2 weeks ago",
-    text: "Installed a tankless water heater for us. Workmanship was perfect, they cleaned up after themselves, and the unit has worked flawlessly. Highly recommend All Phase Plumbing.",
-  },
-] as const;
-
-function ReviewCard({ r }: { r: (typeof REVIEWS)[number] }) {
+function ReviewCard({ r }: { r: GoogleReviewCard }) {
   return (
     <div className="shrink-0 w-[360px] bg-white rounded-2xl p-6 shadow-[0_12px_32px_rgba(0,0,0,0.18)] mx-3 flex flex-col">
       <div className="flex items-center gap-3">
@@ -75,9 +18,15 @@ function ReviewCard({ r }: { r: (typeof REVIEWS)[number] }) {
           <p className="text-[12px] text-gray-500">{r.date}</p>
         </div>
       </div>
-      <div className="flex gap-0.5 mt-3">
+      {/* The reviewer's actual star count, not a hardcoded five. */}
+      <div className="flex gap-0.5 mt-3" aria-label={`${r.rating} out of 5 stars`}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="size-4 fill-[#FBBC05] text-[#FBBC05]" />
+          <Star
+            key={i}
+            className={
+              i < r.rating ? "size-4 fill-[#FBBC05] text-[#FBBC05]" : "size-4 text-gray-300"
+            }
+          />
         ))}
       </div>
       <p className="mt-3 text-[14px] leading-relaxed text-gray-700 line-clamp-5">{r.text}</p>
@@ -86,8 +35,11 @@ function ReviewCard({ r }: { r: (typeof REVIEWS)[number] }) {
 }
 
 export function GoogleReviewsMarquee() {
-  // duplicate the list for seamless looping
-  const loop = [...REVIEWS, ...REVIEWS];
+  /* Duplicated for seamless looping. Empty while no verified reviews exist, in
+     which case the marquee strip is replaced by an honest call to action (see
+     below) rather than invented review cards. */
+  const hasReviews = GOOGLE_REVIEW_CARDS.length > 0;
+  const loop = hasReviews ? [...GOOGLE_REVIEW_CARDS, ...GOOGLE_REVIEW_CARDS] : [];
 
   return (
     <section
@@ -135,24 +87,53 @@ export function GoogleReviewsMarquee() {
         <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-white leading-tight">
           What Our Customers Are Saying
         </h2>
-        <div className="flex items-center gap-2 mt-3">
-          <div className="flex gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="size-5 fill-[#FBBC05] text-[#FBBC05]" />
-            ))}
+        {/* A five-star row here is a factual claim about the business's rating,
+            so it only renders once the figures are verified against the live
+            Google Business Profile. See GOOGLE_REVIEWS in data/area-content.ts. */}
+        {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0 && (
+          <div className="flex items-center gap-2 mt-3">
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="size-5 fill-[#FBBC05] text-[#FBBC05]" />
+              ))}
+            </div>
+            <span className="text-white/90 text-sm font-semibold">
+              {GOOGLE_REVIEWS.rating} average from {GOOGLE_REVIEWS.count}+ Google reviews
+            </span>
           </div>
-          <span className="text-white/90 text-sm font-semibold">Straight from Google</span>
-        </div>
+        )}
       </div>
 
-      {/* Marquee */}
-      <div className="relative z-20 w-full overflow-hidden google-reviews-marquee-mask">
-        <div className="flex w-max google-reviews-marquee-track">
-          {loop.map((r, i) => (
-            <ReviewCard key={i} r={r} />
-          ))}
+      {/* Marquee, or an honest pointer to the real profile when the verified
+          review list is empty. Never invented review cards. */}
+      {hasReviews ? (
+        <div className="relative z-20 w-full overflow-hidden google-reviews-marquee-mask">
+          <div className="flex w-max google-reviews-marquee-track">
+            {loop.map((r, i) => (
+              <ReviewCard key={i} r={r} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="relative z-20 flex justify-center px-4">
+          <a
+            href={GOOGLE_REVIEWS.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-2xl bg-white/95 px-7 py-5 text-[#1E3A6E] shadow-[0_12px_32px_rgba(0,0,0,0.18)] transition-transform hover:scale-[1.02]"
+          >
+            <Star className="size-6 shrink-0 fill-[#FBBC05] text-[#FBBC05]" />
+            <span className="text-left">
+              <span className="block text-[17px] font-bold leading-tight">
+                Read our reviews on Google
+              </span>
+              <span className="block text-[13px] text-gray-600">
+                Every review, in our customers' own words
+              </span>
+            </span>
+          </a>
+        </div>
+      )}
 
       <style>{`
         .google-reviews-marquee-mask {

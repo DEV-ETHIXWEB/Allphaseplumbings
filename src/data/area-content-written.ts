@@ -468,7 +468,7 @@ const AUBURN: AreaContent = {
   heroH1: "Auburn Plumber, Same-Day Repair From the Valley to Lea Hill",
   heroPromise:
     "Licensed plumbing repair across Auburn, from the older valley core to the newer Lakeland Hills and Lea Hill subdivisions.",
-  metaTitle: "Auburn WA Plumber | Same-Day Plumbing Service | All Phase Plumbing",
+  metaTitle: "Auburn WA Plumber | Same-Day Service | All Phase Plumbing",
   metaDescription:
     "Licensed Auburn plumbers for water heaters, drain cleaning, sewer repair, well and septic plumbing & 24/7 emergencies. Same-day service in Auburn, WA.",
   intro: [

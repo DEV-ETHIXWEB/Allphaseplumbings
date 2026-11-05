@@ -15,6 +15,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useSiteOptions } from "@/hooks/use-site-options";
+import { GOOGLE_REVIEWS } from "@/data/area-content";
+import { GOOGLE_REVIEW_CARDS } from "@/data/google-reviews";
 import Particles from "@/components/ui/Particles";
 import { StarBorder } from "@/components/ui/StarBorder";
 import { ServiceArea } from "@/components/sections/ServiceArea";
@@ -570,21 +572,13 @@ function LandingServices({
   );
 }
 
-/* ── Why Us / Static Reviews (New for Ads) ── */
-const STATIC_REVIEWS = [
-  {
-    name: "Sarah M.",
-    text: "Called at 2 AM for a flooded basement and they arrived within 45 minutes. Super professional, honest pricing, and saved our house from major damage.",
-  },
-  {
-    name: "John D.",
-    text: "The only plumbers I'll ever use. Showed up on time, diagnosed the sewer issue immediately, and didn't try to upsell me on things I didn't need.",
-  },
-  {
-    name: "Emily R.",
-    text: "Fast response and extremely knowledgeable. We had a completely blocked main line and they had it cleared same day. Highly recommended for emergencies.",
-  },
-];
+/* ── Why Us / Reviews (Ads landing pages) ── */
+/* This column used to hold three invented reviews with invented names, shown
+   to paid traffic. Fabricated testimonials are an FTC endorsement-rule problem
+   whether or not the page is indexed, and these pages are exactly where ad
+   spend lands, so the claim is doing real persuasive work. It now reads from
+   the same verified-review list as the rest of the site, and links to the real
+   Google profile while that list is empty. See data/google-reviews.ts. */
 
 function LandingWhyUs({ title, text }: { title: string; text: React.ReactNode }) {
   return (
@@ -606,26 +600,54 @@ function LandingWhyUs({ title, text }: { title: string; text: React.ReactNode })
             <h3 className="text-2xl font-black text-[#1E3A6E] mb-6 border-b pb-4">
               What Our Customers Say
             </h3>
-            <div className="relative overflow-hidden landing-reviews-mask h-[440px] sm:h-[480px]">
-              <div className="landing-reviews-track">
-                {[...STATIC_REVIEWS, ...STATIC_REVIEWS].map((review, i) => (
-                  <div
-                    key={i}
-                    className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 shadow-sm mb-6"
-                  >
-                    <div className="flex text-[#F5C842] mb-3">
-                      {[...Array(5)].map((_, j) => (
-                        <Star key={j} className="size-5 fill-current" />
-                      ))}
+            {GOOGLE_REVIEW_CARDS.length > 0 ? (
+              <div className="relative overflow-hidden landing-reviews-mask h-[440px] sm:h-[480px]">
+                <div className="landing-reviews-track">
+                  {[...GOOGLE_REVIEW_CARDS, ...GOOGLE_REVIEW_CARDS].map((review, i) => (
+                    <div
+                      key={i}
+                      className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 shadow-sm mb-6"
+                    >
+                      {/* The reviewer's real star count, not a hardcoded five. */}
+                      <div
+                        className="flex text-[#F5C842] mb-3"
+                        aria-label={`${review.rating} out of 5 stars`}
+                      >
+                        {[...Array(5)].map((_, j) => (
+                          <Star
+                            key={j}
+                            className={
+                              j < review.rating ? "size-5 fill-current" : "size-5 text-gray-300"
+                            }
+                          />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 italic mb-4 font-medium leading-relaxed">
+                        "{review.text}"
+                      </p>
+                      <p className="text-[#1E3A6E] font-bold">{review.name}</p>
                     </div>
-                    <p className="text-gray-700 italic mb-4 font-medium leading-relaxed">
-                      "{review.text}"
-                    </p>
-                    <p className="text-[#1E3A6E] font-bold">{review.name}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <a
+                href={GOOGLE_REVIEWS.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-xl border border-gray-100 bg-[#F8FAFC] p-6 shadow-sm transition-transform hover:scale-[1.01]"
+              >
+                <Star className="size-7 shrink-0 fill-[#F5C842] text-[#F5C842]" />
+                <span>
+                  <span className="block text-[17px] font-bold text-[#1E3A6E]">
+                    Read our reviews on Google
+                  </span>
+                  <span className="block text-sm text-gray-600">
+                    Every review, in our customers' own words
+                  </span>
+                </span>
+              </a>
+            )}
           </div>
         </div>
       </div>
