@@ -41,7 +41,7 @@ export function CouponCard({
   description,
   terms = "Residential homeowners only. One per household. Must show at time of service.",
   disclaimer = "OFFER NOT VALID WITH ANY OTHER OFFERS OR DISCOUNTS",
-  expires = "EXPIRES 10/31/2026",
+  expires = "EXPIRES 12/31/2026",
   variant = "navy",
   headlineSize,
 }: CouponCardProps) {

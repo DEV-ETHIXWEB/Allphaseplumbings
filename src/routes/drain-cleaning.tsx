@@ -93,7 +93,7 @@ export default function DrainCleaningLanding() {
       heroTitle="Drain Cleared Today Or You Don't Pay."
       heroSubtitle="Same-day drain cleaning in Seattle, Renton, Kent & Tukwila. Licensed plumbers, honest quotes, no surprises."
       promoTextFirst="Limited Time: $100 Off Drain Cleaning"
-      promoTextSecond="Expires Oct 31, 2026. Call Now!"
+      promoTextSecond="Expires Dec 31, 2026. Call Now!"
       trustBarLocation="Serving Puget Sound"
       servicesTitle="Drain & Sewer Services We Handle"
       servicesDesc="All Phase Plumbing proudly serves Seattle as a locally trusted plumbing company, delivering dependable service backed by decades of hands-on experience. We are committed to helping homeowners and businesses with fast response times, honest pricing, and quality workmanship."
