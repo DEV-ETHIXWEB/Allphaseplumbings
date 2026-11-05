@@ -11,6 +11,7 @@ import { submitLeadFromForm } from "@/lib/lead-form";
 import { ServicePicker } from "@/components/ui/ServicePicker";
 import { useServicePicker } from "@/hooks/use-service-picker";
 import { RESIDENTIAL_SERVICES, COMMERCIAL_SERVICES } from "@/data/service-options";
+import { GOOGLE_REVIEWS } from "@/data/area-content";
 
 /* PC (lg+) keeps every tagline to two lines. */
 const HERO_TAGLINES_PC: readonly (readonly string[])[] = [
@@ -364,20 +365,31 @@ export function Hero({
               </span>
             </p>
 
-            {/* Google 5-star rating badge */}
-            <div className="mt-5 sm:mt-6 mb-3 sm:mb-0">
-              <img
-                src={googleRatingCard}
-                alt="Google 5.0 star rating — 50+ reviews"
-                className="w-full max-w-[300px] sm:max-w-[340px] h-auto select-none
+            {/* Google rating badge.
+                This is a pre-rendered image that states "Google 5.0 — 50+
+                reviews", which are the placeholder figures that were never
+                replaced with real Google Business Profile data. The numbers are
+                baked into the pixels, so they cannot be gated at the text
+                level: the whole badge is hidden until the figures are verified.
+                TO RESTORE IT: confirm the real rating and count in the GBP
+                dashboard, regenerate assets/google-rating-card.webp with those
+                numbers, then set GOOGLE_REVIEWS.verified = true in
+                data/area-content.ts. */}
+            {GOOGLE_REVIEWS.verified && GOOGLE_REVIEWS.count > 0 && (
+              <div className="mt-5 sm:mt-6 mb-3 sm:mb-0">
+                <img
+                  src={googleRatingCard}
+                  alt={`Google ${GOOGLE_REVIEWS.rating} star rating — ${GOOGLE_REVIEWS.count}+ reviews`}
+                  className="w-full max-w-[300px] sm:max-w-[340px] h-auto select-none
                            drop-shadow-[0_10px_28px_rgba(15,34,70,0.45)]"
-                loading="eager"
-                decoding="async"
-                fetchPriority="low"
-                width={700}
-                height={250}
-              />
-            </div>
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="low"
+                  width={700}
+                  height={250}
+                />
+              </div>
+            )}
           </div>
 
           {/* RIGHT, mascot, bottom-aligned, animates in on landing */}
