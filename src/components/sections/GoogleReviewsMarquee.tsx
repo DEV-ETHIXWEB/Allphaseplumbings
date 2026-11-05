@@ -98,7 +98,7 @@ export function GoogleReviewsMarquee() {
               ))}
             </div>
             <span className="text-white/90 text-sm font-semibold">
-              {GOOGLE_REVIEWS.rating} average from {GOOGLE_REVIEWS.count}+ Google reviews
+              {GOOGLE_REVIEWS.rating} average from {GOOGLE_REVIEWS.count} Google reviews
             </span>
           </div>
         )}

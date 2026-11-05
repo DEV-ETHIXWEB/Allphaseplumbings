@@ -387,7 +387,7 @@ function LandingTrustBar({ location }: { location: string }) {
                   {GOOGLE_REVIEWS.rating} Stars on Google
                 </p>
                 <p className="text-gray-500 text-xs mt-1 font-medium">
-                  {GOOGLE_REVIEWS.count}+ Google reviews
+                  {GOOGLE_REVIEWS.count} Google reviews
                 </p>
               </>
             ) : (

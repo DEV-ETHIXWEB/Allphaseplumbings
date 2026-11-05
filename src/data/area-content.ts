@@ -59,9 +59,14 @@ export type AreaWhyCard = {
  * they disagree with each other and none of them is the GBP figure.
  */
 export const GOOGLE_REVIEWS = {
-  verified: false,
-  rating: 0,
-  count: 0,
+  /* Verified 6 Nov 2026 against the Google Business Profile dashboard
+     ("All Phase Plumbing", Tukwila WA, 14101 Interurban Ave S Unit 78-A).
+     The profile showed 4.8 stars from 53 reviews. Re-check periodically: the
+     count only ever goes up, and publishing a stale number is the same class
+     of problem as publishing an invented one. */
+  verified: true,
+  rating: 4.8,
+  count: 53,
   profileUrl: "https://www.google.com/maps/search/?api=1&query=All+Phase+Plumbing+Tukwila+WA",
 };
 

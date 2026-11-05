@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
 /**
  * seo-qa.mjs — post-deploy SEO/indexing QA against a live site.
  *
@@ -96,6 +97,37 @@ const CITIES = [
 /* Placeholder review content that must never appear on the live site again. */
 const FABRICATED_NAMES = ["Marcus T.", "Priya S.", "Dawn R.", "James R.", "Sarah M.", "David C."];
 const RETIRED_PHONE = /\(?206\)?[\s.-]*772[\s.-]*6077/;
+
+/**
+ * Read the verified review figures out of src/data/area-content.ts.
+ *
+ * Parsed from source rather than duplicated here so the suite cannot drift
+ * from the app: when the real rating or count changes, it is edited in exactly
+ * one place and these assertions follow. The file is TypeScript, so it cannot
+ * simply be imported from a plain node script.
+ *
+ * Falls back to unverified if the shape is not recognised, which fails closed:
+ * an unparseable constant makes the suite demand that no rating is published,
+ * rather than silently skipping the check.
+ */
+function readVerifiedReviewData() {
+  try {
+    const src = readFileSync(new URL("../src/data/area-content.ts", import.meta.url), "utf8");
+    const block = src.match(/export const GOOGLE_REVIEWS = \{([\s\S]*?)\};/);
+    if (!block) return { verified: false, rating: 0, count: 0 };
+    const field = (name, re) => {
+      const m = block[1].match(re);
+      return m ? m[1] : null;
+    };
+    return {
+      verified: field("verified", /verified:\s*(true|false)/) === "true",
+      rating: Number(field("rating", /rating:\s*([0-9.]+)/) ?? 0),
+      count: Number(field("count", /count:\s*([0-9]+)/) ?? 0),
+    };
+  } catch {
+    return { verified: false, rating: 0, count: 0 };
+  }
+}
 
 // ── tiny test harness ────────────────────────────────────────────────────────
 const results = [];
@@ -421,12 +453,52 @@ async function run() {
   };
   const sample = [...new Set([...locs.map(toPath), ...MUST_NOINDEX])];
   const pages = await mapLimit(sample, CONCURRENCY, async (p) => ({ p, ...(await head(p)) }));
-  const withRating = pages.filter((x) => /AggregateRating/i.test(x.body)).map((x) => x.p);
-  check(
-    "no page emits aggregateRating (unverified rating would risk a manual action)",
-    withRating.length === 0,
-    withRating.join(", "),
-  );
+  /* aggregateRating in JSON-LD. Unverified, it must not be published at all.
+     Verified, it must be published with exactly the figures from the Google
+     Business Profile: a stale ratingValue or reviewCount in structured data is
+     the same misrepresentation as an invented one, and it is the field Google
+     cross-checks against the profile. */
+  const reviewData = readVerifiedReviewData();
+  const ratingNodes = [];
+  for (const pg of pages) {
+    for (const block of jsonLdBlocks(pg.body)) {
+      let parsed;
+      try {
+        parsed = JSON.parse(block);
+      } catch {
+        continue;
+      }
+      const walk = (node) => {
+        if (Array.isArray(node)) return node.forEach(walk);
+        if (!node || typeof node !== "object") return;
+        if (node.aggregateRating) ratingNodes.push({ p: pg.p, ar: node.aggregateRating });
+        Object.values(node).forEach(walk);
+      };
+      walk(parsed);
+    }
+  }
+  if (!reviewData.verified) {
+    check(
+      "no page emits aggregateRating while the figures are unverified",
+      ratingNodes.length === 0,
+      [...new Set(ratingNodes.map((r) => r.p))].join(", "),
+    );
+  } else {
+    const wrong = ratingNodes
+      .filter(
+        (r) =>
+          Number(r.ar.ratingValue) !== reviewData.rating ||
+          Number(r.ar.reviewCount) !== reviewData.count,
+      )
+      .map((r) => `${r.p} — ${r.ar.ratingValue}/${r.ar.reviewCount}`);
+    check(
+      `aggregateRating is published and matches the verified ${reviewData.rating} / ${reviewData.count}`,
+      ratingNodes.length > 0 && wrong.length === 0,
+      ratingNodes.length === 0
+        ? "verified figures exist but no page publishes aggregateRating, losing the review rich result"
+        : [...new Set(wrong)].join("\n          "),
+    );
+  }
   const withFake = pages
     .filter((x) => FABRICATED_NAMES.some((n) => x.body.includes(n)))
     .map((x) => x.p);
@@ -437,20 +509,38 @@ async function run() {
      only restated in its alt text, so neither the AggregateRating check nor the
      fabricated-name check saw it. This scans rendered text AND alt attributes
      for any star-rating or review-count assertion. */
+  /* The rule keys off the single source of truth in data/area-content.ts:
+       verified=false → no rating claim may appear anywhere
+       verified=true  → every claim must match the verified figures exactly,
+                        which is what catches a stale hardcoded number left
+                        behind in some component after the real figures move. */
   const RATING_CLAIM =
-    /(\b[1-5]\.\d\s*(star|★|rating)|\b\d{1,4}\+?\s*(google\s+)?reviews?\b|\bstraight from google\b)/i;
+    /(\b[0-5]\.\d\s*(star|★|rating)|\b\d{1,4}\+?\s*(google\s+)?reviews?\b|\bstraight from google\b)/gi;
   const altText = (h) => [...h.matchAll(/\balt="([^"]*)"/gi)].map((m) => decode(m[1])).join(" | ");
-  const ratingClaims = pages
-    .map((x) => {
-      const hay = `${strip(x.body)} ${altText(x.body)}`;
-      const m = hay.match(RATING_CLAIM);
-      return m ? `${x.p} ("${m[0].trim()}")` : null;
-    })
-    .filter(Boolean);
+  const verified = readVerifiedReviewData();
+  const claimOffenders = [];
+  for (const x of pages) {
+    const hay = `${strip(x.body)} ${altText(x.body)}`;
+    for (const m of hay.matchAll(RATING_CLAIM)) {
+      const claim = m[0].trim();
+      if (!verified.verified) {
+        claimOffenders.push(`${x.p} ("${claim}") — unverified, must not appear`);
+        break;
+      }
+      const nums = (claim.match(/[0-9]+(\.[0-9]+)?/g) ?? []).map(Number);
+      if (!nums.every((n) => n === verified.rating || n === verified.count)) {
+        claimOffenders.push(
+          `${x.p} ("${claim}") — does not match verified ${verified.rating}/${verified.count}`,
+        );
+      }
+    }
+  }
   check(
-    "no star-rating or review-count claim in copy or alt text while unverified",
-    ratingClaims.length === 0,
-    ratingClaims.join("\n          "),
+    verified.verified
+      ? `every rating claim matches the verified ${verified.rating} / ${verified.count} figures`
+      : "no star-rating or review-count claim appears while unverified",
+    claimOffenders.length === 0,
+    [...new Set(claimOffenders)].join("\n          "),
   );
 
   const withOldPhone = pages.filter((x) => RETIRED_PHONE.test(strip(x.body))).map((x) => x.p);
