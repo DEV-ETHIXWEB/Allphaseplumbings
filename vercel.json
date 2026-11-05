@@ -2,6 +2,12 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "framework": null,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/hydro-jetting-bellevue-wa", "destination": "/services/drain-cleaning", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/about-us", "destination": "/about", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/((?!assets/|videos/|projects/|images/|robots\\.txt|favicon\\.svg).*)",
