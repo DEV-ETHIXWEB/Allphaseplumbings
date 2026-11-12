@@ -1045,6 +1045,174 @@ STATIC_ARTICLES.push({
   ),
 });
 
+const THANKS_IMG_DIR = "/images/blog/thanksgiving-plumbing-tips";
+
+const THANKS_CHECKS: { title: string; text: string }[] = [
+  {
+    title: "Know where the main shutoff valve is.",
+    text: "If something goes wrong, the first useful move is shutting off water to the house, not hunting for the valve while water is still running.",
+  },
+  {
+    title: "Run every sink and the tub for a minute.",
+    text: "A drain that is already slow will show it now, while there is still time to deal with it.",
+  },
+  {
+    title: "Flush each toilet once and listen.",
+    text: "Gurgling from a toilet or a nearby drain is often the first sign of a developing clog, days before it becomes a real one.",
+  },
+  {
+    title: "Run the disposal with water and a few ice cubes.",
+    text: "This clears old odors and confirms it runs smoothly under load.",
+  },
+  {
+    title: "Check under sinks for any existing drip.",
+    text: "A slow leak that is easy to ignore all year gets much harder to ignore with extra dishes and extra guests.",
+  },
+];
+
+STATIC_ARTICLES.push({
+  slug: "thanksgiving-plumbing-tips",
+  metaTitle: "Thanksgiving Plumbing Tips: Avoid Brown Friday Clogs",
+  title: "Brown Friday Is Real: Thanksgiving Plumbing Tips Before the Guests Arrive",
+  description:
+    "The day after Thanksgiving is the busiest day of the year for plumbers. Use these Thanksgiving plumbing tips to keep drains clear through the holiday.",
+  date: "November 12, 2026",
+  category: "Holiday Plumbing",
+  comments: "No Comments",
+  heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+  image: `${THANKS_IMG_DIR}/brown-friday-thanksgiving-plumbing-hero.webp`,
+  imageAlt:
+    "Illustration of the Seattle skyline at dusk for a guide to Thanksgiving plumbing tips and Brown Friday",
+  ogImage: `${THANKS_IMG_DIR}/brown-friday-thanksgiving-plumbing-og.jpg`,
+  body: (
+    <>
+      <p>
+        Thanksgiving dinner usually goes fine. It's the days around it, the extra cooking, the extra
+        guests, the extra flushes, that put more strain on a home's plumbing in 48 hours than it
+        normally sees in a month.
+      </p>
+      <p>
+        Plumbers have a name for what happens next: <strong>Brown Friday</strong>. Nationally,
+        service calls on the day after Thanksgiving run about 50 percent above an average Friday,
+        and the full four-day weekend averages a 21 percent increase over other long weekends during
+        the year, according to data reported by Roto-Rooter. Most of those calls are for the same
+        handful of avoidable problems, not anything unusual about the house itself. These
+        Thanksgiving plumbing tips cover the ones worth planning around.
+      </p>
+      <ArticleFigure
+        src={`${THANKS_IMG_DIR}/brown-friday-by-the-numbers.webp`}
+        alt="Chart: plumbing calls on the day after Thanksgiving run about 50 percent above an average Friday, and the whole weekend runs about 21 percent busier than other long weekends"
+        width={1456}
+        height={819}
+        caption="Brown Friday by the numbers, as reported by Roto-Rooter."
+      />
+
+      <h2>What Actually Causes the Brown Friday Spike</h2>
+      <p>
+        More people cooking a much bigger meal, using the same disposal and the same one or two
+        bathrooms, is a different load than a normal week, squeezed into a day or two instead of
+        spread across a month. A kitchen that handles daily cooking just fine can still back up once
+        it has to process a whole holiday meal's worth of scraps in one afternoon. It comes down to
+        three habits in the kitchen and one in the bathroom, all easy to plan around.
+      </p>
+
+      <h2>The Three Kitchen Mistakes Behind Most Holiday Clogs</h2>
+      <ul>
+        <li className="reveal-on-scroll">
+          <strong>Grease and fat poured down the drain.</strong> Bacon fat, turkey drippings, and
+          butter are liquid on the stove and solid by the time they reach the pipe. They coat the
+          inside of the line and catch everything that passes afterward, which is why one holiday
+          meal can clog a drain that has been fine all year.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "80ms" }}>
+          <strong>Fibrous and starchy scraps in the disposal.</strong> Celery strings, corn husks,
+          and squash skins wrap around the blades instead of cutting cleanly. Potato peels and
+          stuffing swell once they sit in water, turning a small amount of waste into a much bigger
+          blockage.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "160ms" }}>
+          <strong>Running the disposal without water.</strong> A disposal needs a steady flow of
+          water to carry ground waste through the line. Without it, waste packs into the trap
+          instead of moving past it, even if the disposal sounds like it is working normally.
+        </li>
+      </ul>
+      <ArticleFigure
+        src={`${THANKS_IMG_DIR}/three-kitchen-clog-mistakes.webp`}
+        alt="Three kitchen mistakes behind holiday clogs: grease down the drain, stringy and starchy scraps, and running the disposal dry"
+        width={1456}
+        height={819}
+        caption="Scrape plates into the bin, not the sink. Cold water and a running tap do the rest."
+      />
+
+      <h2>Bathroom Math: Why Toilets Clog More With Guests in the House</h2>
+      <p>
+        A house built for a family of four does not gain capacity because fifteen people are using
+        it for a weekend. More flushes in less time means less recovery between them, and guests do
+        not know which toilet runs slow or needs a gentler touch. The one rule worth posting on the
+        bathroom wall before anyone arrives: <strong>toilet paper only</strong>. Wipes, paper
+        towels, and feminine hygiene products are the most common reason a guest bathroom backs up
+        mid-visit, and none of them break down the way toilet paper does.
+      </p>
+
+      <h2>A 10-Minute Plumbing Check Before the Guests Arrive</h2>
+      <ul>
+        {THANKS_CHECKS.map((step, i) => (
+          <li
+            key={step.title}
+            className="reveal-on-scroll"
+            style={{ transitionDelay: `${i * 80}ms` }}
+          >
+            <strong>{step.title}</strong> {step.text}
+          </li>
+        ))}
+      </ul>
+      <ArticleFigure
+        src={`${THANKS_IMG_DIR}/ten-minute-plumbing-check.webp`}
+        alt="Checklist: find the main shutoff valve, run every sink and the tub, flush each toilet and listen, run the disposal with water and ice cubes, and check under sinks for drips"
+        width={1456}
+        height={819}
+        caption="A 10-minute plumbing check before the guests arrive."
+      />
+
+      <h2>If a Clog Happens Mid-Hosting</h2>
+      <p>
+        A single slow drain or a toilet that needs a second flush is usually just one clog, and a
+        plunger is still the right first move. A flange-style plunger seated fully over the drain,
+        with a few firm, steady pushes rather than fast ones, clears most single-fixture clogs.
+      </p>
+      <p>
+        Skip the chemical drain cleaner. It rarely reaches a clog sitting past the trap, does
+        nothing for a kitchen line clogged with grease, and turns a simple clog into a chemical
+        hazard for anyone who has to work on it afterward, including a plumber called in later the
+        same day.
+      </p>
+      <p>
+        It stops being a plunger problem when more than one fixture is affected at once, a toilet
+        backs up when someone runs the kitchen sink, or the same drain clogs again within a day of
+        clearing it. That pattern usually means the blockage is further down the line than a plunger
+        can reach, and it is worth having looked at before it repeats.
+      </p>
+
+      <h2>Keep Your Plumbing Ready Through the Holiday</h2>
+      <p>
+        <strong>All Phase Plumbing</strong> handles both ends of this: keeping a{" "}
+        <a href="/services/plumbing/garbage-disposals">garbage disposal</a> running cleanly through
+        a heavy holiday week, and clearing a{" "}
+        <a href="/services/plumbing/clogged-drain-repair">clogged drain</a> that has gone past what
+        a plunger can fix. Service covers <a href="/areas/tukwila">Tukwila</a>,{" "}
+        <a href="/areas/kent">Kent</a>, Seattle, Renton, Bellevue, and the rest of the King and
+        Pierce County service area.
+      </p>
+      <p>
+        If Thanksgiving weekend goes sideways at your house, our{" "}
+        <a href="/services/plumbing/emergency-plumber">24/7 emergency plumber</a> line is answered
+        through the holiday, not just during business hours. Call <TrackedPhoneLink /> for same-day
+        help, whether it is Thanksgiving Day itself or the Brown Friday rush right after it.
+      </p>
+    </>
+  ),
+});
+
 export function getStaticArticle(slug: string): StaticArticle | undefined {
   return STATIC_ARTICLES.find((a) => a.slug === slug);
 }
