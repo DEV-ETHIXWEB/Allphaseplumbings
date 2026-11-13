@@ -30,7 +30,7 @@ export const BLOG_CARDS: BlogCard[] = [
       "The day after Thanksgiving is the busiest day of the year for plumbers. Here is how to keep drains clear through the holiday…",
     date: "November 12, 2026",
     comments: "No Comments",
-    img: "/images/blog/thanksgiving-plumbing-tips/brown-friday-thanksgiving-plumbing-hero.webp",
+    img: "/images/blog/thanksgiving-plumbing-tips/brown-friday-thanksgiving-plumbing-cover.webp",
     thumb: "/images/blog/thanksgiving-plumbing-tips/brown-friday-thanksgiving-plumbing-thumb.webp",
     imgAlt: "Illustration of the Seattle skyline at dusk for Thanksgiving plumbing tips",
     services: [

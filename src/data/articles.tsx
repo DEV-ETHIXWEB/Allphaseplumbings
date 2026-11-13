@@ -1080,9 +1080,9 @@ STATIC_ARTICLES.push({
   category: "Holiday Plumbing",
   comments: "No Comments",
   heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
-  image: `${THANKS_IMG_DIR}/brown-friday-thanksgiving-plumbing-hero.webp`,
+  image: `${THANKS_IMG_DIR}/brown-friday-thanksgiving-plumbing-cover.webp`,
   imageAlt:
-    "Illustration of the Seattle skyline at dusk for a guide to Thanksgiving plumbing tips and Brown Friday",
+    "Thanksgiving plumbing guide: the worst day of the year for drains is the day after Thanksgiving, Brown Friday, with calls up 50 percent",
   ogImage: `${THANKS_IMG_DIR}/brown-friday-thanksgiving-plumbing-og.jpg`,
   body: (
     <>
