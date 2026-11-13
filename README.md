@@ -137,3 +137,5 @@ to deploy there instead.
 ## License
 
 Proprietary — © All Phase Plumbing. All rights reserved.
+
+<!-- trigger deploy: Thanksgiving blog 2026-11-13 -->
