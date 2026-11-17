@@ -1213,6 +1213,367 @@ STATIC_ARTICLES.push({
   ),
 });
 
+const SEWER_IMG_DIR = "/images/blog/sewer-backup-after-rain-seattle";
+
+STATIC_ARTICLES.push({
+  slug: "sewer-backup-after-rain-seattle",
+  metaTitle: "Sewer Backup After Rain in Seattle: Causes and Fixes",
+  title: "Why Does My Drain Back Up Every Time It Rains? A Seattle Area Guide",
+  description:
+    "Does your drain back up after heavy rain in Seattle? Learn why sewer lines struggle during storms, the warning signs to watch for, and when to call a plumber.",
+  date: "November 17, 2026",
+  category: "Drains & Sewer",
+  comments: "No Comments",
+  heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+  image: `${SEWER_IMG_DIR}/sewer-backup-after-rain-seattle-cover.webp`,
+  imageAlt:
+    "Seattle skyline in the rain with a floor drain emblem: why your drain backs up every time it rains",
+  ogImage: `${SEWER_IMG_DIR}/sewer-backup-after-rain-seattle-og.jpg`,
+  body: (
+    <>
+      <p>
+        The forecast says rain for the next three days. Nothing unusual for Seattle. Then the
+        basement floor drain starts gurgling, the downstairs toilet rises when someone runs the
+        shower, and by the time the rain lets up, there is water coming back into the house.
+      </p>
+      <p>
+        If that sounds familiar, the rain probably is not a coincidence. Heavy rainfall can expose
+        drainage problems that have been building for months or even years: older sewer lines, tree
+        roots, and overloaded drainage systems can all contribute to a backup.
+      </p>
+      <p>
+        Here is what catches many homeowners off guard: a drain backing up during a storm does not
+        automatically mean the city sewer is the problem. Sometimes the blockage is in the private
+        sewer line running from the house to the street. Other times a pipe that has been slowly
+        deteriorating finally reaches the point where it cannot keep up. The important thing is to
+        find out where the problem is before the next storm brings it back.
+      </p>
+
+      <h2>Why Rain Can Cause a Sewer Backup</h2>
+      <p>
+        Two causes are most common: pressure on the larger sewer system, and a restriction in your
+        own sewer line.
+      </p>
+      <h3>Heavy rainfall can put pressure on older sewer systems</h3>
+      <p>
+        Parts of Seattle still have combined sewer systems, which carry both wastewater and
+        stormwater. In heavy rain those systems can become overloaded, and wastewater may have
+        trouble flowing away from a property. In some situations that contributes to backups in
+        lower-level drains and fixtures. If several neighbors are affected at the same time, report
+        it to your local sewer utility as well.
+      </p>
+      <p>
+        This is not the explanation for every rain-related backup. If it keeps happening at your
+        home, check whether the private sewer line has a blockage or damage of its own.
+      </p>
+      <h3>Tree roots can block an aging sewer line</h3>
+      <p>
+        Seattle has plenty of mature trees, and their roots are always looking for moisture. Small
+        cracks or loose joints in an older sewer pipe give them a way inside. Once in, roots catch
+        debris and gradually restrict the flow. The pipe may still work most of the time, which is
+        why the problem can go unnoticed until heavy rain adds pressure. Our guide to{" "}
+        <a href="/blog/preventing-tree-root-damage-sewer-lines">preventing tree root damage in sewer
+        lines</a> explains how to catch it early.
+      </p>
+
+      <h2>How to Tell If It Is Bigger Than One Clogged Drain</h2>
+      <p>
+        A slow kitchen sink usually points to a local blockage. When several fixtures act up
+        together, the problem may be farther down the drainage system. Watch for these signs:
+      </p>
+      <ul>
+        <li className="reveal-on-scroll">
+          <strong>More than one drain is slow.</strong> If the toilet, shower, and sink all drain
+          poorly, the issue may be in the main sewer line.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "80ms" }}>
+          <strong>Drains gurgle.</strong> Air and water struggling through a restricted pipe make
+          that sound.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "160ms" }}>
+          <strong>Water comes up through a basement floor drain.</strong> Lower drains are often
+          the first place a restriction shows.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "240ms" }}>
+          <strong>You notice a sewer smell.</strong> A persistent odor inside or outside the house
+          can point to a drainage issue.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "320ms" }}>
+          <strong>The problem returns after every storm.</strong> A backup that keeps coming back
+          deserves more than another quick unclogging.
+        </li>
+      </ul>
+      <ArticleFigure
+        src={`${SEWER_IMG_DIR}/signs-bigger-than-one-clog.webp`}
+        alt="Five signs a drain problem is bigger than one clog: more than one slow drain, gurgling, water at a basement floor drain, a sewer smell, and a backup after every storm"
+        width={1456}
+        height={819}
+        caption="One symptom alone does not confirm a sewer line problem. Several together are a reason to have it checked."
+      />
+
+      <h2>Why Seattle Area Homes Can Be More Vulnerable</h2>
+      <p>
+        The age of a home, the type of sewer pipe, and the trees around the property all make a
+        difference. Older homes in Seattle, Renton, Kent, and Bellevue may have sewer lines that
+        have been in the ground for decades. Over time joints shift, materials wear down, and roots
+        find their way in. That does not mean every older home has a failing sewer line. It means
+        recurring backups should be investigated instead of treated as an ordinary clog every time.
+      </p>
+      <p>
+        Homes with basements or lower-level plumbing often see the problem first, because the
+        lowest drains are where a restricted line shows itself.
+      </p>
+
+      <h2>What a Sewer Camera Inspection Can Tell You</h2>
+      <p>
+        When a drain keeps backing up, clearing the water is only part of the job. You also need to
+        know why it happened. A sewer camera inspection lets a plumber look inside the line and
+        see what is restricting the flow. Depending on the pipe, it may show:
+      </p>
+      <ul>
+        <li>Tree roots growing into the sewer line</li>
+        <li>Buildup or debris inside the pipe</li>
+        <li>Cracks or damaged sections</li>
+        <li>A blockage that keeps returning</li>
+        <li>Areas where the pipe is deteriorating</li>
+      </ul>
+      <p>
+        A camera takes the guesswork out of the next step. Instead of assuming the line needs
+        cleaning or repair, the plumber can recommend what the pipe actually needs. Learn more
+        about our <a href="/services/sewer-services">sewer services</a>.
+      </p>
+
+      <h2>Hydro Jetting or Sewer Line Repair: Which Do You Need?</h2>
+      <p>
+        The right solution depends on what is causing the backup. Clearing a blockage and repairing
+        a damaged pipe are two different jobs.
+      </p>
+      <h3>When hydro jetting may help</h3>
+      <p>
+        Hydro jetting uses high-pressure water to remove buildup and debris from inside a pipe. It
+        may help when accumulated material or certain types of root intrusion restrict the line.
+        It is not a fix for a cracked or collapsed pipe, so the condition of the line should be
+        assessed first.
+      </p>
+      <h3>When the sewer line needs repair</h3>
+      <p>
+        If an inspection shows the pipe is cracked, collapsed, or otherwise damaged, clearing the
+        blockage may only give temporary relief. Depending on the location and severity, the line
+        may need a repair or replacement.
+      </p>
+      <ArticleFigure
+        src={`${SEWER_IMG_DIR}/hydro-jetting-or-sewer-repair.webp`}
+        alt="Hydro jetting may help when buildup, debris or some root intrusion restricts a sound pipe. The line may need repair when it is cracked, collapsed or damaged. A camera inspection shows which one you have"
+        width={1456}
+        height={819}
+        caption="A camera inspection shows which one you have, so the fix matches the problem."
+      />
+      <p>
+        For a recurring blockage, professional <a href="/services/drain-cleaning">drain cleaning</a>{" "}
+        and hydro jetting may help. If the pipe itself is damaged,{" "}
+        <a href="/services/plumbing/sewer-line-repair">sewer line repair</a> may be the next step.
+      </p>
+
+      <h2>What to Do When Your Drain Backs Up During Heavy Rain</h2>
+      <p>
+        When wastewater starts coming back into the house, the first priority is limiting the
+        damage.
+      </p>
+      <ul>
+        <li>
+          <strong>Stop using the affected fixtures.</strong> Sinks, toilets, and showers all add
+          water to the backup.
+        </li>
+        <li>
+          <strong>Skip chemical drain cleaners.</strong> They may not reach a blockage in the main
+          line, and they create extra hazards when a plumber needs to work on the drain.
+        </li>
+        <li>
+          <strong>Keep children and pets away</strong> if sewage is coming up through a floor drain,
+          and avoid direct contact with the wastewater.
+        </li>
+        <li>
+          <strong>Do not assume it fixed itself</strong> when the rain stops. The line may still be
+          partially blocked or damaged.
+        </li>
+      </ul>
+
+      <h2>When to Call a Plumber</h2>
+      <p>
+        A single slow drain may be a minor issue. A toilet that backs up when another fixture is
+        used, several drains that stop working, or sewage coming through a basement floor drain is a
+        different situation. If the same problem returns during every heavy rain, have the sewer
+        line inspected before the next storm.
+      </p>
+      <p>
+        <strong>All Phase Plumbing</strong> helps homeowners across the Seattle area with recurring
+        drain and sewer problems, including <a href="/areas/seattle">Seattle</a>,{" "}
+        <a href="/areas/renton">Renton</a>, <a href="/areas/kent">Kent</a>,{" "}
+        <a href="/areas/bellevue">Bellevue</a>, and <a href="/areas/tukwila">Tukwila</a>. For a
+        backup right now, our <a href="/services/plumbing/emergency-plumber">24/7 emergency
+        plumber</a> line is open. Call <TrackedPhoneLink /> and we will work out what is actually
+        causing it, so the next storm does not bring the same problem back.
+      </p>
+    </>
+  ),
+});
+
+const WH_IMG_DIR = "/images/blog/water-heater-replacement-cost-seattle";
+
+STATIC_ARTICLES.push({
+  slug: "water-heater-replacement-cost-seattle",
+  metaTitle: "Water Heater Replacement Cost in Seattle: What to Expect",
+  title: "How Much Does Water Heater Replacement Cost in Seattle? A Straight Answer",
+  description:
+    "What does water heater replacement cost? See typical tank and tankless price ranges, what moves the price, when to repair instead, and what a same-day job should include.",
+  date: "November 17, 2026",
+  category: "Water Heaters",
+  comments: "No Comments",
+  heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+  image: `${WH_IMG_DIR}/water-heater-replacement-cost-cover.webp`,
+  imageAlt:
+    "Water heater emblem over the Seattle skyline: what does water heater replacement really cost",
+  ogImage: `${WH_IMG_DIR}/water-heater-replacement-cost-og.jpg`,
+  body: (
+    <>
+      <p>
+        Hosting season puts more hot water through a tank in one weekend than it sees most of the
+        year, and that is often when an aging unit finally gives out. Whether yours already failed
+        or you can tell it is close, the question Seattle homeowners ask is the same: what is this
+        going to cost?
+      </p>
+      <p>
+        The honest answer depends on more than tank versus tankless. Unit size, fuel type, heater
+        location, and whether the job triggers a code upgrade can move the number by thousands of
+        dollars. Here is what drives the cost, what separates a repair from a true replacement, and
+        what a same-day job should include.
+      </p>
+
+      <h2>What a Replacement Typically Costs</h2>
+      <p>
+        National 2026 cost data from{" "}
+        <a href="https://www.fixr.com/costs/install-water-heater" rel="noopener noreferrer" target="_blank">
+          FIXR
+        </a>{" "}
+        puts an installed tank water heater at roughly $600 to $2,500, and a tankless unit at
+        roughly $1,000 to $4,000. Tankless typically costs nearly twice as much as a tank, and the
+        spread is wide, which is why ballpark numbers online vary so much. A firm price for your
+        home needs a technician to see the unit.
+      </p>
+      <p>
+        Four things move the price most: unit size, gas versus electric, whether the vent run has to
+        change, and whether the job uncovers a code issue the old installation was grandfathered
+        around. None of that shows up in a phone quote.
+      </p>
+      <ArticleFigure
+        src={`${WH_IMG_DIR}/what-moves-the-price.webp`}
+        alt="Four things that change a water heater quote: unit size, gas or electric, venting, and code issues. A same-day replacement should include removing the old unit, setting the new one, reconnecting the water lines and permitting where required"
+        width={1456}
+        height={819}
+        caption="Four things that change the quote, and what a same-day job should cover."
+      />
+
+      <h2>Repair or Replace: What Actually Decides It</h2>
+      <p>
+        Tank water heaters typically last 8 to 12 years. Age alone does not mean one has to go, but
+        these are the signs you need a new water heater rather than another repair:
+      </p>
+      <ul>
+        <li className="reveal-on-scroll">
+          <strong>Rusty brown water</strong> from the hot tap after the first few seconds, a sign
+          the tank lining may have failed.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "80ms" }}>
+          <strong>Popping, rumbling, or cracking sounds</strong> from sediment hardening at the
+          bottom of the tank.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "160ms" }}>
+          <strong>Water pooling at the base of the tank itself</strong>, not at a fitting or valve.
+          A leak from the tank body is not repairable.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "240ms" }}>
+          <strong>A pilot light or ignition system that will not stay lit</strong>, or one a
+          technician has already relit more than once this year.
+        </li>
+      </ul>
+      <ArticleFigure
+        src={`${WH_IMG_DIR}/repair-or-replace-signs.webp`}
+        alt="Signs you need a new water heater: rusty brown hot water, popping or rumbling sounds, water pooling at the tank itself, and a pilot or ignition that will not stay lit"
+        width={1456}
+        height={819}
+        caption="Age and symptom decide it together. One of these at year 6 is a different story than at year 13."
+      />
+      <p>
+        If the problem is smaller, <a href="/services/plumbing/hot-water-system-repair">hot water
+        system repair</a> may be all you need.
+      </p>
+
+      <h2>Why Tankless Costs More Upfront, and When It Still Makes Sense</h2>
+      <p>
+        Tankless costs more to install. What it buys is a longer service life, roughly 15 to 20
+        years or more against 8 to 12 for a tank, plus hot water that does not run out mid-shower
+        with a house full of guests.
+      </p>
+      <p>
+        Sizing matters. The colder the incoming water, the bigger the temperature rise a unit has to
+        produce, so a tankless heater needs to be sized for the coldest water your household sees,
+        not an average day. It is a real trade-off: more upfront cost and careful sizing, in
+        exchange for a longer-lived unit and no tank waiting to eventually leak. If your household
+        has outgrown its tank, or you are already due for a replacement, price both options side by
+        side. Our guide to{" "}
+        <a href="/blog/tankless-water-heaters-seattle-worth-upgrade">tankless water heaters in
+        Seattle</a> goes deeper.
+      </p>
+
+      <h2>What Is Included in a Same-Day Replacement</h2>
+      <p>
+        A straightforward same-day replacement should include removing the old unit, setting the new
+        one, reconnecting the water lines, and permitting where required. Ask for each of these in
+        the quote up front.
+      </p>
+      <p>
+        What adds to that baseline: a vent that no longer meets code, a gas line that needs
+        resizing, an electrical connection for a power-vent or hybrid unit, or a heater tucked
+        somewhere hard to reach, like a cramped crawl space. None of that is an upsell. It is the
+        difference between a quote for the unit and a quote for the actual job.
+      </p>
+
+      <h2>A Short Checklist Before You Get a Quote</h2>
+      <ul>
+        <li>
+          <strong>Tank or tankless,</strong> and if tank, roughly what size (check the old unit's
+          nameplate)
+        </li>
+        <li>
+          <strong>Gas or electric</strong>
+        </li>
+        <li>
+          <strong>Where the unit sits,</strong> and how easy it is to reach
+        </li>
+        <li>
+          <strong>Any venting or code issue</strong> already flagged on the current setup
+        </li>
+        <li>
+          <strong>Whether same-day replacement matters,</strong> or a scheduled appointment works
+        </li>
+      </ul>
+      <p>
+        Answering those up front turns a ballpark number into an accurate one. It is usually the
+        difference between a quote that holds and one that changes once a technician sees the unit.
+      </p>
+
+      <h2>Water Heater Replacement with All Phase Plumbing</h2>
+      <p>
+        <strong>All Phase Plumbing</strong> repairs, replaces, and installs tank and tankless water
+        heaters across Seattle and the surrounding service area, with most jobs done the same day.
+        See <a href="/services/water-heaters">water heater installation and repair</a> for tank
+        units, or <a href="/services/plumbing/tankless-water-heaters">tankless water heaters</a> for
+        a tankless-specific quote. For same-day service, call <TrackedPhoneLink />.
+      </p>
+    </>
+  ),
+});
+
 export function getStaticArticle(slug: string): StaticArticle | undefined {
   return STATIC_ARTICLES.find((a) => a.slug === slug);
 }
