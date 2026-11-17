@@ -24,6 +24,39 @@ export type BlogCard = {
 
 export const BLOG_CARDS: BlogCard[] = [
   {
+    slug: "sewer-backup-after-rain-seattle",
+    title: "Why Does My Drain Back Up Every Time It Rains? A Seattle Area Guide",
+    excerpt:
+      "Heavy rain can expose sewer line problems that have been building for months. Here is why it happens, the signs to watch for, and when to call a plumber…",
+    date: "November 17, 2026",
+    comments: "No Comments",
+    img: "/images/blog/sewer-backup-after-rain-seattle/sewer-backup-after-rain-seattle-cover.webp",
+    thumb: "/images/blog/sewer-backup-after-rain-seattle/sewer-backup-after-rain-seattle-thumb.webp",
+    imgAlt: "Seattle skyline in the rain with a floor drain emblem",
+    services: [
+      "/services/sewer-services",
+      "/services/drain-cleaning",
+      "/services/plumbing/sewer-line-repair",
+      "/services/plumbing/clogged-drain-repair",
+    ],
+  },
+  {
+    slug: "water-heater-replacement-cost-seattle",
+    title: "How Much Does Water Heater Replacement Cost in Seattle? A Straight Answer",
+    excerpt:
+      "What moves the price of a water heater replacement, how to tell repair from replace, and what a same-day job should include…",
+    date: "November 17, 2026",
+    comments: "No Comments",
+    img: "/images/blog/water-heater-replacement-cost-seattle/water-heater-replacement-cost-cover.webp",
+    thumb: "/images/blog/water-heater-replacement-cost-seattle/water-heater-replacement-cost-thumb.webp",
+    imgAlt: "Water heater emblem over the Seattle skyline",
+    services: [
+      "/services/water-heaters",
+      "/services/plumbing/tankless-water-heaters",
+      "/services/plumbing/hot-water-system-repair",
+    ],
+  },
+  {
     slug: "thanksgiving-plumbing-tips",
     title: "Brown Friday Is Real: Thanksgiving Plumbing Tips Before the Guests Arrive",
     excerpt:
