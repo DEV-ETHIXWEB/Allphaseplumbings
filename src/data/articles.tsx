@@ -1574,6 +1574,230 @@ STATIC_ARTICLES.push({
   ),
 });
 
+const LEAK_IMG_DIR = "/images/blog/signs-hidden-water-leak";
+
+STATIC_ARTICLES.push({
+  slug: "signs-hidden-water-leak",
+  title: "9 Signs of a Hidden Water Leak in Your Home",
+  description:
+    "Learn 9 signs of a hidden water leak, how to check your water meter, and when to call All Phase Plumbing in Greater Seattle.",
+  date: "November 23, 2026",
+  category: "Leak Detection",
+  comments: "No Comments",
+  heroGradient: "linear-gradient(135deg, #1E3A6E 0%, #2d5fa8 100%)",
+  image: `${LEAK_IMG_DIR}/hidden-water-leak-cover.webp`,
+  imageAlt:
+    "Seattle skyline with a water drop and magnifying glass emblem: 9 signs of a hidden water leak at home",
+  ogImage: `${LEAK_IMG_DIR}/hidden-water-leak-og.jpg`,
+  body: (
+    <>
+      <p>
+        Your water bill jumps, but your routine has not changed. There is no dripping faucet or
+        puddle to explain it. A hidden water leak may be out of sight behind a wall, beneath
+        flooring, in a crawlspace, or under a concrete slab.
+      </p>
+      <p>
+        The{" "}
+        <a href="https://www.epa.gov/watersense/statistics-and-facts" rel="noopener noreferrer" target="_blank">
+          EPA estimates household leaks waste about 9,400 gallons of water per family each year
+        </a>
+        .
+      </p>
+
+      <h2>9 Warning Signs of a Hidden Water Leak</h2>
+      <ArticleFigure
+        src={`${LEAK_IMG_DIR}/nine-warning-signs.webp`}
+        alt="Nine warning signs of a hidden water leak: unexplained water use, a moving water meter, running-water sounds, wall or ceiling stains, peeling paint, warped flooring, musty odors or mold, warm floor patches, and reduced water pressure"
+        width={1456}
+        height={814}
+        caption="Nine clues worth checking. One on its own does not confirm a leak."
+      />
+      <p>One symptom does not confirm a leak.</p>
+      <ul>
+        <li className="reveal-on-scroll">
+          <strong>Unexplained water use:</strong> Compare water volume on recent bills, not just the
+          dollar amount.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "60ms" }}>
+          <strong>A moving water meter:</strong> If its flow indicator moves while fixtures,
+          appliances, and irrigation are off, water may still be flowing.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "120ms" }}>
+          <strong>Running-water sounds:</strong> Listen near bathrooms, kitchens, utility rooms, and
+          walls with plumbing.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "180ms" }}>
+          <strong>Wall or ceiling stains:</strong> New or spreading discoloration can indicate
+          moisture behind the surface.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "240ms" }}>
+          <strong>Peeling paint or swollen trim:</strong> Bubbling paint, lifting wallpaper, or
+          swollen baseboards may indicate dampness.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "300ms" }}>
+          <strong>Warped or soft flooring:</strong> Buckling wood, lifted laminate, or damp carpet
+          can point to nearby moisture.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "360ms" }}>
+          <strong>Musty odors or mold:</strong> An earthy smell or growth in a normally dry area
+          suggests excess moisture, though plumbing is not the only possible cause.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "420ms" }}>
+          <strong>Warm floor patches:</strong> An unusually warm area can signal a hot-water line
+          leak beneath a concrete slab.
+        </li>
+        <li className="reveal-on-scroll" style={{ transitionDelay: "480ms" }}>
+          <strong>Reduced water pressure:</strong> A leak can lower pressure, but a clogged fixture,
+          closed valve, or supply issue can too. Treat it as a clue, not proof.
+        </li>
+      </ul>
+
+      <h2>How to Check for a Leak With Your Water Meter</h2>
+      <ArticleFigure
+        src={`${LEAK_IMG_DIR}/water-meter-leak-test.webp`}
+        alt="How to perform a 30-minute water meter leak test: turn off all water, record your meter reading, then check again after 30 minutes. If the numbers or dial changed, you may have a hidden leak"
+        width={1456}
+        height={813}
+        caption="Three steps and half an hour. If the reading moves with everything off, water is going somewhere."
+      />
+      <p>
+        For homes served by Seattle Public Utilities (SPU), the utility recommends a 30-minute meter
+        test. Other providers may use a different process.
+      </p>
+      <ol>
+        <li>Turn off faucets, appliances, and irrigation. Make sure nobody uses water.</li>
+        <li>
+          Find your meter, often in a sidewalk or parking-strip box. Record its reading or
+          flow-dial position.
+        </li>
+        <li>Wait 30 minutes without using water, then check again.</li>
+      </ol>
+      <p>
+        The readings should be unchanged. If the dial moves, SPU says a leak may be present. If you
+        can safely reach your home's main shut-off valve, close it and check again. If the meter
+        stops, the leak is likely inside. If it continues, the leak may be in the underground pipe
+        between the meter and building shut-off. Do not force a stuck valve or operate the meter
+        shut-off without utility guidance.
+      </p>
+      <p>
+        See{" "}
+        <a href="https://www.seattle.gov/utilities/your-services/water/metering/detect-leaks" rel="noopener noreferrer" target="_blank">
+          SPU's leak-check instructions
+        </a>
+        .
+      </p>
+
+      <h2>Check These Accessible Areas First</h2>
+      <p>Inspect these accessible areas before assuming a pipe is hidden.</p>
+      <ul>
+        <li>
+          <strong>Toilets:</strong> Add a few drops of{" "}
+          <a href="https://www.epa.gov/watersense/fix-leak-week" rel="noopener noreferrer" target="_blank">
+            food coloring
+          </a>{" "}
+          to the tank and wait 10 minutes without flushing. If color appears in the bowl, water may
+          be passing the flapper. Flush afterward. See our{" "}
+          <a href="/services/plumbing/toilets">toilet repair service</a> for persistent problems.
+        </li>
+        <li>
+          <strong>Under sinks:</strong> Look for drips, damp cabinet floors, corrosion, or moisture
+          around supply lines.
+        </li>
+        <li>
+          <strong>Water heaters and appliances:</strong> Check visible connections and the floor
+          around the water heater, washing machine, and dishwasher. Do not remove covers or touch
+          electrical parts.
+        </li>
+        <li>
+          <strong>Outdoor taps and irrigation:</strong> Look for dripping hose connections, broken
+          sprinkler heads, or soil that stays wet when the system is off.
+        </li>
+      </ul>
+      <p>
+        The{" "}
+        <a href="https://www.epa.gov/watersense/home-maintenance" rel="noopener noreferrer" target="_blank">
+          EPA's home maintenance guidance
+        </a>{" "}
+        recommends checking fixtures and comparing water use over time.
+      </p>
+      <ArticleFigure
+        src={`${LEAK_IMG_DIR}/places-to-check-for-leaks.webp`}
+        alt="Four places to check for a possible water leak: toilets, under-sink cabinets, water heaters and appliances, and outdoor taps and irrigation, each with a quick inspection tip"
+        width={1456}
+        height={813}
+        caption="Start with what you can see. Most leaks show up at one of these four first."
+      />
+
+      <h2>Why Your Water Bill May Be High Without a Hidden Leak</h2>
+      <p>
+        More laundry, longer showers, extra household members, seasonal irrigation, or a running
+        toilet can increase water use. Compare the current billing period with the same period
+        last year, and check whether the meter reading is actual or estimated.
+      </p>
+      <p>
+        SPU notes an earlier estimated reading can make a later bill appear higher when actual
+        usage is recorded. If your meter test does not suggest a leak, ask your provider to review
+        the reading and billing period. See its{" "}
+        <a href="https://www.seattle.gov/utilities/your-services/accounts-and-payments/bills-and-payments/my-bill-seems-too-high" rel="noopener noreferrer" target="_blank">
+          high-bill guidance
+        </a>
+        .
+      </p>
+
+      <h2>When Should You Call a Plumber?</h2>
+      <p>
+        Arrange an inspection if the meter keeps moving when water is off, dampness returns, or you
+        hear running water without finding its source. Spreading stains, soft flooring, and warm
+        floor patches also deserve attention.
+      </p>
+      <p>
+        All Phase Plumbing provides{" "}
+        <a href="/services/plumbing/leak-detection">leak detection services</a> for suspected leaks
+        in walls, floors, crawlspaces, and underground lines. For signs of a leak beneath a
+        concrete foundation, see our{" "}
+        <a href="/services/plumbing/slab-leak-repair">slab leak detection and repair service</a>.
+      </p>
+      <p>
+        If a pipe bursts or water floods your home, shut off the main valve if safe and accessible.
+        Stay away from electrical equipment near standing water and request urgent plumbing help.
+      </p>
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <p>
+        <strong>Q: Can a hidden water leak increase my water bill?</strong>
+        <br />
+        A: Yes. Water escaping from a pipe, toilet, or connection can pass through the meter even
+        without a visible puddle. The EPA estimates household leaks waste about 9,400 gallons per
+        family each year.
+      </p>
+      <p>
+        <strong>Q: How can I tell if a pipe is leaking inside a wall?</strong>
+        <br />
+        A: Look for stains, bubbling paint, swollen trim, damp areas, musty odors, or unexplained
+        running-water sounds. A meter test can show whether water is flowing, but it cannot locate
+        the leak.
+      </p>
+      <p>
+        <strong>Q: Does homeowners insurance cover hidden water leaks?</strong>
+        <br />
+        A: Coverage depends on your policy and the cause. Washington's{" "}
+        <a href="https://www.insurance.wa.gov/insurance-resources/home-insurance/how-home-insurance-works/leaks-water-damage-and-mold" rel="noopener noreferrer" target="_blank">
+          Office of the Insurance Commissioner
+        </a>{" "}
+        explains that insurers often treat sudden, accidental water damage differently from gradual
+        leaks. Review your policy and ask your insurer what applies.
+      </p>
+
+      <h2>Need Help Finding a Hidden Water Leak?</h2>
+      <p>
+        Unexplained water use or moisture is worth checking. Call <TrackedPhoneLink /> or{" "}
+        <a href="/services/plumbing/leak-detection">book leak detection service online</a> to
+        request service in the Greater Seattle area.
+      </p>
+    </>
+  ),
+});
+
 export function getStaticArticle(slug: string): StaticArticle | undefined {
   return STATIC_ARTICLES.find((a) => a.slug === slug);
 }
