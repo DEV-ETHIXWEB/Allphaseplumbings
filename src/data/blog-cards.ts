@@ -24,6 +24,22 @@ export type BlogCard = {
 
 export const BLOG_CARDS: BlogCard[] = [
   {
+    slug: "signs-hidden-water-leak",
+    title: "9 Signs of a Hidden Water Leak in Your Home",
+    excerpt:
+      "A higher water bill with no drip in sight? The warning signs of a hidden leak, a 30-minute meter test, and when to call a plumber…",
+    date: "November 23, 2026",
+    comments: "No Comments",
+    img: "/images/blog/signs-hidden-water-leak/hidden-water-leak-cover.webp",
+    thumb: "/images/blog/signs-hidden-water-leak/hidden-water-leak-thumb.webp",
+    imgAlt: "Seattle skyline with a water drop and magnifying glass emblem",
+    services: [
+      "/services/plumbing/leak-detection",
+      "/services/plumbing/slab-leak-repair",
+      "/services/plumbing/toilets",
+    ],
+  },
+  {
     slug: "sewer-backup-after-rain-seattle",
     title: "Why Does My Drain Back Up Every Time It Rains? A Seattle Area Guide",
     excerpt:
