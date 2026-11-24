@@ -10,6 +10,9 @@ type Props = {
   className?: string;
   /** Extra classes for the wrapper, e.g. "relative" layout tweaks. */
   wrapperClassName?: string;
+  /** Form field name, so the value is included in FormData. */
+  name?: string;
+  placeholder?: string;
   children?: React.ReactNode;
 };
 
@@ -19,7 +22,15 @@ type Props = {
  * is still accepted. The form then tells the visitor a team member will call
  * to confirm service, so nothing is lost.
  */
-export function ZipCombobox({ value, onChange, className, wrapperClassName, children }: Props) {
+export function ZipCombobox({
+  value,
+  onChange,
+  className,
+  wrapperClassName,
+  name = "zip",
+  placeholder = "ZIP CODE*",
+  children,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,7 +60,8 @@ export function ZipCombobox({ value, onChange, className, wrapperClassName, chil
         autoComplete="postal-code"
         maxLength={5}
         pattern="\d{5}"
-        placeholder="ZIP CODE*"
+        name={name}
+        placeholder={placeholder}
         required
         value={value}
         role="combobox"

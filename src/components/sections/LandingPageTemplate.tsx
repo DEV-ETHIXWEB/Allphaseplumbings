@@ -23,6 +23,8 @@ import { ServiceArea } from "@/components/sections/ServiceArea";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ZipCombobox } from "@/components/ui/ZipCombobox";
+import { isServedZip } from "@/lib/chatbot/service-area";
 import { ServicePicker } from "@/components/ui/ServicePicker";
 import { useServicePicker } from "@/hooks/use-service-picker";
 import { RESIDENTIAL_SERVICES } from "@/data/service-options";
@@ -147,6 +149,7 @@ function LeadForm({
   className?: string;
 }) {
   const [sent, setSent] = useState(false);
+  const [zip, setZip] = useState("");
   const captcha = useRecaptchaGate();
   const servicePicker = useServicePicker();
   return (
@@ -188,9 +191,14 @@ function LeadForm({
             const services = servicePicker.resolve({ required: false });
             if (!services) return;
             if (await captcha.verify()) {
+              const outOfArea = !isServedZip(zip);
               await submitLeadFromForm(form, {
                 source: `Landing Page — ${title}`,
                 service: services,
+                zip,
+                areaNote: outOfArea
+                  ? "ZIP not on our served list: office to confirm service"
+                  : undefined,
               });
               setSent(true);
               servicePicker.reset();
@@ -213,11 +221,10 @@ function LeadForm({
               required
               className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all"
             />
-            <input
-              type="text"
+            <ZipCombobox
               name="zip"
-              placeholder="ZIP CODE*"
-              required
+              value={zip}
+              onChange={setZip}
               className="w-full rounded bg-white/5 border border-white/20 px-4 py-3.5 text-[15px] font-semibold text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F5C842] focus:bg-white/10 transition-all"
             />
             <input
