@@ -10,6 +10,8 @@ import type { ZipLocation } from "@/lib/service-area-geo";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ZipCombobox } from "@/components/ui/ZipCombobox";
+import { isServedZip } from "@/lib/chatbot/service-area";
 import { useTrackedPhone } from "@/hooks/use-site-options";
 import { ServicePicker } from "@/components/ui/ServicePicker";
 import { useServicePicker } from "@/hooks/use-service-picker";
@@ -288,6 +290,7 @@ function ContactFormBox({
 }) {
   const [smsOptIn, setSmsOptIn] = useState(false);
   const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [sentOutOfArea, setSentOutOfArea] = useState(false);
   const servicePicker = useServicePicker();
   const captcha = useRecaptchaGate();
 
@@ -321,12 +324,17 @@ function ContactFormBox({
               const services = servicePicker.resolve();
               if (!services) return;
               if (await captcha.verify()) {
+                const outOfArea = !isServedZip(zip);
                 await submitLeadFromForm(form, {
                   source: "Contact Page",
                   zip,
                   service: services,
                   smsOptIn,
+                  areaNote: outOfArea
+                    ? "ZIP not on our served list: office to confirm service"
+                    : undefined,
                 });
+                setSentOutOfArea(outOfArea);
                 setStatus("sent");
                 servicePicker.reset();
               }
@@ -353,17 +361,10 @@ function ContactFormBox({
 
             {/* ZIP + Phone row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={5}
-                  pattern="\d{5}"
-                  placeholder="ZIP CODE*"
-                  required
-                  value={zip}
-                  onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
-                  className={`${inputBase}
+              <ZipCombobox
+                value={zip}
+                onChange={setZip}
+                className={`${inputBase}
                     ${
                       zipStatus === "ok"
                         ? "!border-emerald-400 !bg-emerald-500/10"
@@ -373,7 +374,7 @@ function ContactFormBox({
                             ? "!border-red-400 !bg-red-500/10"
                             : ""
                     }`}
-                />
+              >
                 {zipStatus === "loading" && (
                   <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-white/60 animate-spin" />
                 )}
@@ -387,7 +388,7 @@ function ContactFormBox({
                     !
                   </span>
                 )}
-              </div>
+              </ZipCombobox>
               <input type="tel" name="phone" placeholder="PHONE*" required className={inputBase} />
             </div>
 
@@ -453,7 +454,9 @@ function ContactFormBox({
               </button>
               {status === "sent" && (
                 <p className="text-[15px] font-bold text-white text-center bg-white/10 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/20 animate-in fade-in slide-in-from-bottom-2 duration-400">
-                  ✓ Thanks, we'll be in touch within the hour.
+                  {sentOutOfArea
+                    ? "✓ Thanks, we'll call you back shortly to confirm we can serve your area."
+                    : "✓ Thanks, we'll be in touch within the hour."}
                 </p>
               )}
             </div>

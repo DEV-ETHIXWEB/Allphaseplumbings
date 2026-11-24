@@ -235,3 +235,20 @@ export const HEADLINE_CITIES = [
   "Redmond",
   "Bothell",
 ];
+
+/**
+ * Every ZIP we serve, sorted. Used by the contact form's ZIP dropdown so a
+ * visitor can pick a served ZIP instead of typing it. Seattle is the whole
+ * 981xx block; everything else comes from CORE_ZIPS above, so the dropdown
+ * and classifyZip() always agree.
+ */
+export function servedZipList(): string[] {
+  const seattle: string[] = [];
+  for (let n = 98101; n <= 98199; n++) seattle.push(String(n));
+  return Array.from(new Set([...seattle, ...CORE_ZIPS])).sort();
+}
+
+/** True when a 5-digit ZIP is inside our served area per classifyZip(). */
+export function isServedZip(zip: string): boolean {
+  return classifyZip(zip) === "in";
+}
