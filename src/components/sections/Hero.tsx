@@ -7,6 +7,8 @@ import { useTrackedPhone } from "@/hooks/use-site-options";
 import { Recaptcha } from "@/components/ui/Recaptcha";
 import { useRecaptchaGate } from "@/hooks/use-recaptcha-gate";
 import { submitLeadFromForm } from "@/lib/lead-form";
+import { ZipCombobox } from "@/components/ui/ZipCombobox";
+import { isServedZip } from "@/lib/chatbot/service-area";
 import { ServicePicker } from "@/components/ui/ServicePicker";
 import { useServicePicker } from "@/hooks/use-service-picker";
 import { RESIDENTIAL_SERVICES, COMMERCIAL_SERVICES } from "@/data/service-options";
@@ -182,6 +184,7 @@ export function Hero({
   const opts = useTrackedPhone();
   const [serviceType, setServiceType] = useState<"residential" | "commercial">("residential");
   const [smsOptIn, setSmsOptIn] = useState(false);
+  const [zip, setZip] = useState("");
   const [mascotIn, setMascotIn] = useState(false);
   const [sent, setSent] = useState(false);
   const captcha = useRecaptchaGate();
@@ -541,11 +544,16 @@ export function Hero({
                     const services = servicePicker.resolve();
                     if (!services) return;
                     if (await captcha.verify()) {
+                      const outOfArea = !isServedZip(zip);
                       await submitLeadFromForm(form, {
                         source: "Homepage Hero",
                         serviceType,
                         service: services,
                         smsOptIn,
+                        zip,
+                        areaNote: outOfArea
+                          ? "ZIP not on our served list: office to confirm service"
+                          : undefined,
                       });
                       setSent(true);
                       servicePicker.reset();
@@ -577,12 +585,10 @@ export function Hero({
                       className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                     />
 
-                    <input
-                      type="text"
+                    <ZipCombobox
                       name="zip"
-                      placeholder="ZIP CODE*"
-                      required
-                      maxLength={10}
+                      value={zip}
+                      onChange={setZip}
                       className="rounded-lg border-2 border-[#1E3A6E] bg-white px-3.5 py-2.5 sm:px-4 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#1E3A6E] placeholder:text-gray-400 placeholder:font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A6E] transition-shadow"
                     />
                   </div>

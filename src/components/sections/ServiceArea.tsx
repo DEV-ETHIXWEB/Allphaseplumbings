@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import Particles from "@/components/ui/Particles";
 import { enableTwoFingerPan } from "@/lib/leaflet-two-finger-pan";
 import { useZipGeocode } from "@/hooks/use-zip-geocode";
+import { ZipCombobox } from "@/components/ui/ZipCombobox";
+import { isServedZip } from "@/lib/chatbot/service-area";
 import type { ZipLocation } from "@/lib/service-area-geo";
 
 /* ── Leaflet dynamic import (avoids SSR issues) ───────────────────────────── */
@@ -273,19 +275,15 @@ function ZipAvailabilityCheck({
 
       <div className="mt-4">
         <div className="relative">
-          <input
-            type="text"
-            inputMode="numeric"
-            maxLength={5}
-            pattern="\d{5}"
-            placeholder="ENTER ZIP CODE*"
+          <ZipCombobox
             value={zip}
-            onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
+            onChange={setZip}
+            placeholder="ENTER ZIP CODE*"
             className={`w-full rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm px-4 py-3.5 text-[14px] sm:text-[15px] font-semibold text-white placeholder:text-white/45 focus:outline-none focus:border-[#F5C842] focus:bg-white/15 transition-all duration-200
               ${status === "ok" ? "!border-emerald-400 !bg-emerald-500/10" : ""}
               ${status === "out" ? "!border-amber-400 !bg-amber-500/10" : ""}
               ${status === "error" ? "!border-red-400 !bg-red-500/10" : ""}`}
-          />
+          >
           {status === "loading" && (
             <Loader2 className="absolute right-3.5 top-1/2 -translate-y-1/2 size-5 text-white/60 animate-spin" />
           )}
@@ -295,6 +293,7 @@ function ZipAvailabilityCheck({
               strokeWidth={3}
             />
           )}
+          </ZipCombobox>
         </div>
       </div>
 
