@@ -5,6 +5,7 @@ import mascot from "@/assets/better-mascot.webp";
 import { slugify } from "@/data/area-content";
 import { isCommercialPath } from "@/lib/page-type";
 import { useTrackedPhone } from "@/hooks/use-site-options";
+import { PoweredBy } from "./PoweredBy";
 
 const CITIES = [
   "Seattle",
@@ -171,6 +172,11 @@ export function Footer() {
           © {new Date().getFullYear()} All Phase Plumbing · All Rights Reserved · Tukwila, WA ·
           Lic. #ALLPHPS793PE
         </p>
+      </div>
+
+      {/* ── Studio signature ── */}
+      <div className="relative z-10 bg-[#0f2246] border-t border-white/[0.06] py-4 flex justify-center">
+        <PoweredBy tone="light" />
       </div>
     </footer>
   );

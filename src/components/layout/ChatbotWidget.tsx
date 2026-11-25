@@ -9,6 +9,7 @@ import { useServicePicker } from "@/hooks/use-service-picker";
 import { RESIDENTIAL_SERVICES } from "@/data/service-options";
 import { ChatEngine, type EngineState } from "@/lib/chatbot/engine";
 import type { BotMessage, ChatAction, LeadRequest, Turn } from "@/lib/chatbot/types";
+import { PoweredBy } from "./PoweredBy";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * All Phase Chatbot Widget
@@ -577,6 +578,9 @@ export function ChatbotWidget() {
               <Send className="size-5" />
             </button>
           </form>
+          <div className="flex justify-center border-t border-[#1E3A6E]/10 bg-white pb-3 pt-2.5">
+            <PoweredBy tone="dark" size="sm" />
+          </div>
         </div>
       )}
 
